@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scheda Didattica — Python</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0e8;
+    --ink: #1a1a1a;
+    --accent: #d45f00;
+    --accent2: #2563a8;
+    --code-bg: #1e1e2e;
+    --code-fg: #cdd6f4;
+    --rule: #c8bfb0;
+    --card-bg: #fffdf8;
+    --tag-bg: #d45f00;
+    --green: #2a7a4b;
+  }
+ 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+ 
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+ 
+  /* HEADER */
+  .header {
+    border-top: 4px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding: 2rem 0 1.5rem;
+    margin-bottom: 3rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 1rem;
+  }
+ 
+  .header-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+ 
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+ 
+  .header h1 span { color: var(--accent); }
+ 
+  .header-meta {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: #888;
+    line-height: 1.8;
+  }
+ 
+  /* SECTION */
+  .section {
+    margin-bottom: 3rem;
+    animation: fadeUp 0.5s ease both;
+  }
+ 
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+  .section:nth-child(4) { animation-delay: 0.2s; }
+  .section:nth-child(5) { animation-delay: 0.25s; }
+ 
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+ 
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+ 
+  .section-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.1rem 0.5rem;
+    letter-spacing: 0.05em;
+  }
+ 
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+ 
+  .section-body { color: #333; }
+  .section-body p { margin-bottom: 0.9rem; }
+ 
+  /* TABLE */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: 0.92rem;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+  }
+ 
+  .comparison-table thead tr {
+    background: var(--ink);
+    color: var(--bg);
+  }
+ 
+  .comparison-table thead th {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.7rem 1rem;
+    text-align: left;
+  }
+ 
+  .comparison-table tbody tr {
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.15s;
+  }
+ 
+  .comparison-table tbody tr:hover { background: #f0ebe0; }
+ 
+  .comparison-table tbody td {
+    padding: 0.75rem 1rem;
+    vertical-align: top;
+    font-family: 'Lora', serif;
+    line-height: 1.5;
+  }
+ 
+  .comparison-table tbody td:first-child {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--accent2);
+    white-space: nowrap;
+  }
+ 
+  /* VAR CARDS */
+  .var-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+ 
+  @media (max-width: 580px) {
+    .var-grid { grid-template-columns: 1fr; }
+    .header { grid-template-columns: 1fr; }
+    .header-meta { text-align: left; }
+  }
+ 
+  .var-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--accent2);
+    padding: 1.25rem;
+  }
+ 
+  .var-card.string { border-top-color: var(--green); }
+ 
+  .var-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    color: var(--accent2);
+  }
+ 
+  .var-card.string .var-card-title { color: var(--green); }
+ 
+  .var-card p { font-size: 0.9rem; margin-bottom: 0.75rem; }
+ 
+  /* BULLET LIST */
+  .item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+  }
+ 
+  .item-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.92rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+  }
+ 
+  .item-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+ 
+  /* CODE */
+  .code-block {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.65;
+    padding: 1.1rem 1.25rem;
+    border-radius: 0;
+    margin: 0.75rem 0;
+    overflow-x: auto;
+    position: relative;
+  }
+ 
+  .code-block::before {
+    content: 'python';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6c7086;
+  }
+ 
+  .code-inline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.83em;
+    background: #e8e2d8;
+    padding: 0.1em 0.35em;
+    color: var(--accent);
+  }
+ 
+  .py-kw  { color: #cba6f7; }
+  .py-str { color: #a6e3a1; }
+  .py-num { color: #fab387; }
+  .py-fn  { color: #89dceb; }
+  .py-cm  { color: #6c7086; font-style: italic; }
+  .py-var { color: #cdd6f4; }
+  .py-op  { color: #89b4fa; }
+ 
+  /* CALLOUT */
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--card-bg);
+    padding: 0.9rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #444;
+  }
+ 
+  .callout strong { font-style: normal; color: var(--ink); }
+ 
+  /* INDENTATION BOX */
+  .indent-rule {
+    background: #fff8f0;
+    border: 1px solid #f0c080;
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.25rem;
+    margin: 1.1rem 0;
+    font-size: 0.88rem;
+    color: #333;
+  }
+  .indent-rule .rule-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .indent-rule ul { list-style: none; padding: 0; }
+  .indent-rule ul li {
+    padding-left: 1.1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+  }
+  .indent-rule ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+ 
+  /* ANNOTATED CODE */
+  .code-annotated {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0;
+    margin: 0.75rem 0;
+    border: 1px solid #333;
+  }
+  .code-annotated .code-block {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+  }
+  .code-line-wrap {
+    background: var(--code-bg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.85;
+    padding: 1.1rem 1.25rem;
+    position: relative;
+  }
+  .code-line-wrap::before {
+    content: 'python';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6c7086;
+  }
+  .code-line { display: flex; align-items: baseline; gap: 0; }
+  .ln { color: #45475a; font-size: 0.72rem; min-width: 1.8rem; user-select: none; }
+  .ind {
+    display: inline-block;
+    background: rgba(203,166,247,0.12);
+    border-left: 2px solid #cba6f7;
+    width: 2em; /* 4 spaces */
+    margin-right: 0;
+    flex-shrink: 0;
+  }
+  .code-annotations {
+    background: #13131f;
+    padding: 1.1rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 0.2rem;
+    border-left: 1px solid #313244;
+    min-width: 160px;
+    max-width: 190px;
+  }
+  .ann {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: #6c7086;
+    line-height: 1.4;
+    padding: 0.15rem 0;
+  }
+  .ann.highlight {
+    color: #fab387;
+    background: rgba(250,179,135,0.08);
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+  }
+ 
+  /* LIBRARY GRID */
+  .lib-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+ 
+  @media (max-width: 600px) {
+    .lib-grid { grid-template-columns: 1fr; }
+  }
+ 
+  .lib-card {
+    border: 1px solid var(--rule);
+    background: var(--card-bg);
+    padding: 1rem;
+  }
+ 
+  .lib-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--accent2);
+    margin-bottom: 0.35rem;
+  }
+ 
+  .lib-desc { font-size: 0.85rem; line-height: 1.5; color: #555; }
+ 
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: #999;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+ 
+  em { font-style: italic; }
+  strong { font-weight: 600; }
+</style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand" style="font-size: 1.1rem; line-height: 1.2;">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="informatica.html">Informatica</a>
+      <a href="Pyton.html" class="active">Python 1</a>
+      <a href="Pyton2.html">Python 2</a>
+    </div>
+  </nav>
+
+<div class="page">
+ 
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="header-label">Scheda Didattica · Informatica - Prof. Belardi Nicolino </div>
+      <h1>Introduzione a<br><span>Python</span></h1>
+    </div>
+    <div class="header-meta">
+     
+    </div>
+  </div>
+ 
+  <!-- 1. COS'È PYTHON -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Cos'è Python e la differenza con C++</span>
+    </div>
+    <div class="section-body">
+      <p>Python è un linguaggio <em>"amichevole"</em>. È progettato per permetterti di scrivere programmi velocemente, concentrandoti sull'idea e non su regole tecniche troppo complicate.</p>
+ 
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Caratteristica</th>
+            <th>Python</th>
+            <th>C++</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Semplicità</td>
+            <td>Molto alta. Si scrive poco codice.</td>
+            <td>Più complesso. Serve molto codice.</td>
+          </tr>
+          <tr>
+            <td>Rigidità</td>
+            <td>Flessibile: "capisce" da solo molte cose.</td>
+            <td>Rigido: devi spiegare ogni minimo dettaglio al computer.</td>
+          </tr>
+          <tr>
+            <td>Velocità</td>
+            <td>Leggermente più lento nell'esecuzione.</td>
+            <td>Velocissimo, usato per videogiochi pesanti.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+ 
+  <!-- 2. VARIABILI -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Dichiarazione delle Variabili</span>
+    </div>
+    <div class="section-body">
+      <p>Immagina una variabile come una <strong>scatola con un'etichetta sopra</strong>. Dentro la scatola puoi mettere un dato (un numero, una parola).</p>
+      <p>In Python, non devi dire al computer che tipo di scatola vuoi; basta darle un nome e metterci dentro qualcosa.</p>
+ 
+      <div class="var-grid">
+        <div class="var-card">
+          <div class="var-card-title">Variabile Numerica</div>
+          <p>Serve per fare calcoli. Non servono virgolette.</p>
+          <ul class="item-list">
+            <li><strong>Esempio:</strong> <span class="code-inline">mele = 5</span></li>
+            <li>Abbiamo creato una scatola chiamata <span class="code-inline">mele</span> e ci abbiamo messo il numero 5.</li>
+          </ul>
+        </div>
+        <div class="var-card string">
+          <div class="var-card-title">Variabile Stringa</div>
+          <p>La "stringa" è una sequenza di caratteri (testo). Per far capire a Python che è testo e non un comando, si usano le virgolette <span class="code-inline">" "</span>.</p>
+          <ul class="item-list">
+            <li><strong>Esempio:</strong> <span class="code-inline">nome_frutto = "Mela Rossa"</span></li>
+            <li>Abbiamo messo il testo "Mela Rossa" nella scatola <span class="code-inline">nome_frutto</span>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- 3. ASSEGNAZIONE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">L'Assegnazione: Cos'è e come si fa?</span>
+    </div>
+    <div class="section-body">
+      <p>Assegnare significa letteralmente <strong>"mettere un valore dentro una variabile"</strong>. Si usa il simbolo uguale <span class="code-inline">=</span>.</p>
+ 
+      <p><strong>Assegnazione Numerica:</strong></p>
+      <div class="code-block"><span class="py-var">prezzo</span> <span class="py-op">=</span> <span class="py-num">10</span></div>
+      <div class="callout"><strong>Cosa succede?</strong> Il computer riserva uno spazio e memorizza il numero 10.</div>
+ 
+      <p><strong>Assegnazione Stringa:</strong></p>
+      <div class="code-block"><span class="py-var">saluto</span> <span class="py-op">=</span> <span class="py-str">"Ciao a tutti!"</span></div>
+      <div class="callout"><strong>Cosa succede?</strong> Il computer memorizza la frase. Senza le virgolette, Python cercherebbe di capire se <span class="code-inline">Ciao</span> è un comando, andando in errore.</div>
+    </div>
+  </div>
+ 
+  <!-- 4. CONDIZIONALE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">La Condizionale: Cos'è?</span>
+    </div>
+    <div class="section-body">
+      <p>Una condizionale è un <strong>bivio</strong>. Permette al programma di prendere decisioni: <em>"Se succede questo, fai così; altrimenti, fai cosà"</em>. In Python si usa la parola <span class="code-inline">if</span> (che in inglese significa "se").</p>
+ 
+      <!-- INDENTATION RULE BOX -->
+      <div class="indent-rule">
+        <div class="rule-title">⚠ Regola fondamentale: l'indentazione in Python</div>
+        Python è <strong>molto preciso con gli spazi</strong>. A differenza di altri linguaggi, gli spazi non sono decorativi: <strong>sono parte della grammatica del codice</strong>.
+        <ul style="margin-top:0.5rem;">
+          <li>Dopo <span class="code-inline">if ...: </span> e <span class="code-inline">else:</span> il codice interno deve essere rientrato di <strong>4 spazi</strong> (o 1 Tab).</li>
+          <li>Se dimentichi i 4 spazi, Python va in <strong>errore</strong> e il programma non parte.</li>
+          <li>Tutti i comandi allo <strong>stesso livello</strong> devono avere lo stesso rientro.</li>
+        </ul>
+      </div>
+ 
+      <p><strong>Esempio Concreto</strong> — controllare se hai abbastanza soldi per un gelato:</p>
+ 
+      <!-- ANNOTATED CODE BLOCK -->
+      <div class="code-annotated">
+        <div class="code-line-wrap">
+          <div class="code-line"><span class="ln">1</span><span><span class="py-var">budget</span> <span class="py-op">=</span> <span class="py-num">5</span></span></div>
+          <div class="code-line"><span class="ln">2</span><span><span class="py-var">prezzo_gelato</span> <span class="py-op">=</span> <span class="py-num">3</span></span></div>
+          <div class="code-line"><span class="ln">3</span><span>&nbsp;</span></div>
+          <div class="code-line"><span class="ln">4</span><span><span class="py-kw">if</span> <span class="py-var">budget</span> <span class="py-op">&gt;=</span> <span class="py-var">prezzo_gelato</span>:</span></div>
+          <div class="code-line"><span class="ln">5</span><span class="ind"></span><span><span class="py-fn">print</span>(<span class="py-str">"Puoi comprare il gelato!"</span>)</span></div>
+          <div class="code-line"><span class="ln">6</span><span><span class="py-kw">else</span>:</span></div>
+          <div class="code-line"><span class="ln">7</span><span class="ind"></span><span><span class="py-fn">print</span>(<span class="py-str">"Spiacente, ti servono più soldi."</span>)</span></div>
+        </div>
+        <div class="code-annotations">
+          <div class="ann">variabile numerica</div>
+          <div class="ann">variabile numerica</div>
+          <div class="ann">—</div>
+          <div class="ann">condizione: >= significa<br>"maggiore o uguale"</div>
+          <div class="ann highlight">← 4 spazi di rientro<br>obbligatori!</div>
+          <div class="ann">altrimenti...</div>
+          <div class="ann highlight">← 4 spazi di rientro<br>obbligatori!</div>
+        </div>
+      </div>
+ 
+      <ul class="item-list" style="margin-top:0.75rem;">
+        <li>Il simbolo <span class="code-inline">&gt;=</span> significa <strong>"maggiore o uguale"</strong>.</li>
+        <li>Se la condizione è <strong>vera</strong>, il computer esegue il comando rientrato sotto <span class="code-inline">if</span>.</li>
+        <li>Se è <strong>falsa</strong>, salta a <span class="code-inline">else</span> ("altrimenti") ed esegue il suo blocco rientrato.</li>
+        <li>Le righe 5 e 7 <strong>iniziano con 4 spazi</strong>: è così che Python capisce quali istruzioni appartengono all'<span class="code-inline">if</span> e quali all'<span class="code-inline">else</span>.</li>
+      </ul>
+    </div>
+  </div>
+ 
+  <!-- 5. LIBRERIE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Una nota sulle Librerie</span>
+    </div>
+    <div class="section-body">
+      <p>Pensa alle librerie come a dei <strong>"kit di attrezzi" aggiuntivi</strong>. Esistono librerie per tutto:</p>
+ 
+      <div class="lib-grid">
+        <div class="lib-card">
+          <div class="lib-name">Pandas</div>
+          <div class="lib-desc">Per gestire tabelle di dati (come Excel).</div>
+        </div>
+        <div class="lib-card">
+          <div class="lib-name">Matplotlib</div>
+          <div class="lib-desc">Per creare grafici e disegni.</div>
+        </div>
+        <div class="lib-card">
+          <div class="lib-name">TensorFlow</div>
+          <div class="lib-desc">Per creare l'Intelligenza Artificiale.</div>
+        </div>
+      </div>
+ 
+      <div class="callout" style="margin-top:1.25rem;">Le variabili che abbiamo creato (numeri e stringhe) sono i <strong>mattoncini base</strong> che queste librerie usano per fare cose incredibili.</div>
+    </div>
+  </div>
+ 
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Scheda Didattica - Ad uso scolastico - © 2026 - Prof. Belardi Nicolino </span>
+    <span>
+  </div>
+ 
+</div>
+</body>
+</html>

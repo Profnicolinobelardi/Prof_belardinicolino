@@ -1,0 +1,179 @@
+﻿
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { font-family: var(--font-sans); padding: 14px; color: var(--color-text-primary); }
+
+.scheda { border-radius: 12px; overflow: hidden; border: 3px solid #e65100; }
+.scheda-header { display: flex; align-items: center; gap: 10px; padding: 9px 14px; background: #e65100; color: #fff; font-size: 13px; font-weight: 500; }
+.icona { font-size: 16px; width: 30px; height: 30px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.header-dx { margin-left: auto; font-size: 9px; opacity: 0.75; font-weight: 400; white-space: nowrap; }
+.scheda-body { background: #fff3e0; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+
+.regola { background: #fff; border-radius: 10px; overflow: hidden; border-left: 5px solid #e65100; }
+.reg-header { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: #fff8f0; font-size: 13px; font-weight: 500; color: #e65100; }
+.reg-body { padding: 8px 14px 10px; font-size: 13px; line-height: 1.8; }
+
+.formula-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 3px 0; }
+.f { font-size: 15px; font-weight: 500; color: #e65100; }
+.arrow { color: #888; font-size: 13px; }
+.esempio { display: inline-flex; align-items: center; gap: 4px; background: #fff3e0; border-radius: 5px; padding: 2px 8px; font-size: 12px; color: #bf360c; margin-left: 4px; }
+.esempio2 { display: inline-flex; align-items: center; gap: 4px; background: #e8f5e9; border-radius: 5px; padding: 2px 8px; font-size: 12px; color: #1b5e20; margin-left: 4px; }
+
+.sep { height: 1px; background: #ffe0b2; margin: 2px 0; }
+
+.due-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+.ex-box { background: #fff3e0; border-radius: 7px; padding: 8px 10px; font-size: 12px; line-height: 1.8; text-align: center; }
+.ex-box .titolo { font-size: 10px; font-weight: 500; color: #888; text-transform: uppercase; margin-bottom: 4px; }
+.ex-box .grande { font-size: 16px; font-weight: 500; color: #e65100; }
+
+.frac-inline { display: inline-flex; flex-direction: column; align-items: center; font-size: 0.82em; vertical-align: middle; line-height: 1.2; }
+.frac-inline .n { border-bottom: 1.2px solid currentColor; padding: 0 3px; }
+.frac-inline .d { padding: 0 3px; }
+
+.nota { background: #fff8e1; border: 1.5px solid #ffcc02; border-radius: 7px; padding: 7px 12px; font-size: 12px; line-height: 1.7; }
+
+.formula-box { background: #1565c0; color: #fff; border-radius: 8px; padding: 9px 14px; font-size: 14px; font-weight: 500; text-align: center; line-height: 1.9; }
+
+.ricorda { background: #fff9c4; border: 2px solid #f9a825; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.7; display: flex; gap: 8px; }
+
+sup { font-size: 0.65em; vertical-align: super; }
+.frac-big { display: inline-flex; flex-direction: column; align-items: center; font-size: 1em; vertical-align: middle; line-height: 1.3; }
+.frac-big .n { border-bottom: 1.5px solid currentColor; padding: 0 4px; }
+.frac-big .d { padding: 0 4px; }
+</style>
+
+<div class="wrap">
+<div class="scheda">
+  <div class="scheda-header">
+    <div class="icona">ðŸ“</div>
+    SCHEDA 3 â€” Le regole delle potenze
+    <span class="header-dx">Scheda di matematica · Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+
+    <!-- REGOLA 1 -->
+    <div class="regola">
+      <div class="reg-header"><span style="font-size:18px;">âœ–ï¸</span> Moltiplico â€” stessa base</div>
+      <div class="reg-body">
+        <div class="formula-row"><span class="f">b<sup>m</sup> Ã— b<sup>n</sup> = b<sup>m+n</sup></span><span class="arrow">â†’</span><b>sommo gli esponenti</b><span class="esempio">5⁴ Ã— 5³ = 5⁷</span></div>
+      </div>
+    </div>
+
+    <!-- REGOLA 2 -->
+    <div class="regola">
+      <div class="reg-header"><span style="font-size:18px;">âž—</span> Divido â€” stessa base</div>
+      <div class="reg-body">
+        <div class="formula-row"><span class="f">b<sup>m</sup> ÷ b<sup>n</sup> = b<sup>mâˆ’n</sup></span><span class="arrow">â†’</span><b>sottraggo gli esponenti</b><span class="esempio">9⁴ ÷ 9² = 9²</span></div>
+      </div>
+    </div>
+
+    <!-- REGOLA 3 -->
+    <div class="regola">
+      <div class="reg-header"><span style="font-size:18px;">ðŸ”</span> Potenza di potenza</div>
+      <div class="reg-body">
+        <div class="formula-row"><span class="f">(b<sup>m</sup>)<sup>n</sup> = b<sup>m·n</sup></span><span class="arrow">â†’</span><b>moltiplico gli esponenti</b><span class="esempio">(3³)² = 3⁶ = 729</span></div>
+      </div>
+    </div>
+
+    <!-- REGOLA 4 -->
+    <div class="regola">
+      <div class="reg-header"><span style="font-size:18px;">1ï¸âƒ£</span> Esponente zero</div>
+      <div class="reg-body">
+        <div class="formula-row"><span class="f">b⁰ = 1</span><span class="arrow">â†’</span><b>qualsiasi numero elevato a 0 dà sempre 1</b><span class="esempio">9⁰ = 1</span><span class="esempio">100⁰ = 1</span></div>
+      </div>
+    </div>
+
+    <!-- REGOLA 5 â€” ESPONENTE NEGATIVO -->
+    <div class="regola">
+      <div class="reg-header"><span style="font-size:18px;">ðŸ”„</span> Esponente negativo â€” cambio segno e ribalto la frazione</div>
+      <div class="reg-body">
+        <div style="font-size:12px;color:#555;margin-bottom:8px;">Quando l'esponente è negativo, <b>cambio il suo segno</b> e <b>ribÐ°Ð»Ñ‚Ð¾ la frazione</b> (metto ciò che era sopra sotto e viceversa).</div>
+
+        <div class="due-col">
+          <div class="ex-box">
+            <div class="titolo">Esempio 1</div>
+            <div class="grande">4<sup>1</sup> = <span class="frac-big"><span class="n">1</span><span class="d">4<sup>âˆ’1</sup></span></span></div>
+            <div style="font-size:11px;color:#777;margin-top:4px;">4 intero â†’ diventa 1 su 4<sup>âˆ’1</sup></div>
+          </div>
+          <div class="ex-box">
+            <div class="titolo">Esempio 2</div>
+            <div class="grande"><span class="frac-big"><span class="n">1</span><span class="d">4</span></span> = 4<sup>âˆ’1</sup></div>
+            <div style="font-size:11px;color:#777;margin-top:4px;">la frazione 1/4 â†’ ribaltata = 4<sup>âˆ’1</sup></div>
+          </div>
+        </div>
+
+        <div class="sep" style="margin:8px 0;"></div>
+
+        <div class="nota">
+          <b>Regola generale:</b><br>
+          <span style="font-size:15px;font-weight:500;color:#e65100;">b<sup>âˆ’n</sup> = <span class="frac-inline" style="font-size:1em;"><span class="n">1</span><span class="d">b<sup>n</sup></span></span></span> &nbsp;&nbsp; e &nbsp;&nbsp; <span style="font-size:15px;font-weight:500;color:#e65100;"><span class="frac-inline" style="font-size:1em;"><span class="n">a</span><span class="d">b</span></span><sup>âˆ’n</sup> = <span class="frac-inline" style="font-size:1em;"><span class="n">b</span><span class="d">a</span></span><sup>n</sup></span><br>
+          <span style="font-size:11px;color:#777;">â†’ Cambio il segno dell'esponente e ribÐ°Ð»Ñ‚Ð¾ (numeratore e denominatore si scambiano)</span>
+        </div>
+
+        <div class="sep" style="margin:8px 0;"></div>
+
+        <div style="font-size:12px;font-weight:500;color:#555;margin-bottom:4px;">Esempio con espressione algebrica:</div>
+        <div style="background:#f3e5f5;border-radius:7px;padding:9px 12px;font-size:13px;line-height:2;">
+          <div class="formula-row">
+            Parto da: &nbsp;<span style="font-size:16px;font-weight:500;color:#6a1b9a;"><span class="frac-big"><span class="n"><span class="frac-inline"><span class="n">sen x</span><span class="d">cos x</span></span></span><span class="d">x</span></span></span>
+          </div>
+          <div class="formula-row">
+            <span class="arrow">â†’</span> Dividere per x = moltiplicare per 1/x:
+          </div>
+          <div class="formula-row">
+            <span style="font-size:16px;font-weight:500;color:#6a1b9a;"><span class="frac-big"><span class="n">sen x</span><span class="d">cos x</span></span> · <span class="frac-big"><span class="n">1</span><span class="d">x</span></span></span>
+            <span class="arrow">=</span>
+            <span style="font-size:16px;font-weight:500;color:#6a1b9a;"><span class="frac-big"><span class="n">sen x</span><span class="d">cos x · x</span></span></span>
+          </div>
+          <div style="font-size:11px;color:#777;margin-top:4px;">â†’ Ribaltare la frazione al denominatore = moltiplicare per il suo reciproco</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REGOLA 6 â€” RADICE â†’ ESPONENTE -->
+    <div class="regola">
+      <div class="reg-header"><span style="font-size:18px;">âˆš</span> Radice â†’ esponente frazionario</div>
+      <div class="reg-body">
+        <div style="font-size:12px;color:#555;margin-bottom:8px;">Una radice si può sempre trasformare in una potenza con <b>esponente frazionario</b>.</div>
+
+        <div class="formula-box">
+          <sup>n</sup>âˆš(b<sup>c</sup>) = b<sup>c/n</sup><br>
+          <span style="font-size:12px;font-weight:400;color:#bbdefb;">esponente della base (c) diviso indice della radice (n)</span>
+        </div>
+
+        <div class="due-col" style="margin-top:8px;">
+          <div class="ex-box">
+            <div class="titolo">Esempio 1</div>
+            <div class="grande">âˆ›(a²) = a<sup>2/3</sup></div>
+            <div style="font-size:11px;color:#777;margin-top:4px;">indice=3, esponente=2 â†’ 2/3</div>
+          </div>
+          <div class="ex-box">
+            <div class="titolo">Esempio 2</div>
+            <div class="grande">âˆš(a³) = a<sup>3/2</sup></div>
+            <div style="font-size:11px;color:#777;margin-top:4px;">indice=2, esponente=3 â†’ 3/2</div>
+          </div>
+        </div>
+
+        <div class="nota" style="margin-top:8px;">
+          <b>Come si legge:</b> prendo l'esponente della base (quello dentro la radice) e lo divido per l'indice della radice (il numerino piccolo davanti al simbolo âˆš).<br>
+          <span style="font-size:11px;color:#777;">Es: ⁴âˆš(b⁵) â†’ b<sup>5/4</sup> &nbsp;·&nbsp; ⁵âˆš(b) = ⁵âˆš(b¹) â†’ b<sup>1/5</sup></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RICORDA -->
+    <div class="ricorda">
+      <span style="font-size:18px;flex-shrink:0;">ðŸ’¡</span>
+      <div>
+        <b>Ã— stessa base</b> â†’ somma esponenti &nbsp;·&nbsp;
+        <b>÷ stessa base</b> â†’ sottrai esponenti &nbsp;·&nbsp;
+        <b>esponente 0</b> â†’ sempre 1 &nbsp;·&nbsp;
+        <b>esponente âˆ’</b> â†’ cambia segno e ribalto &nbsp;·&nbsp;
+        <b>âˆš radice</b> â†’ esponente frazionario c/n
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+

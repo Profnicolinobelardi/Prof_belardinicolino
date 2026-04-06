@@ -1,0 +1,302 @@
+﻿
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { font-family: var(--font-sans); padding: 14px; color: var(--color-text-primary); }
+
+.scheda { border-radius: 12px; overflow: hidden; border: 3px solid #0d47a1; }
+.scheda-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #0d47a1; color: #fff; font-size: 14px; font-weight: 500; }
+.icona { font-size: 16px; width: 30px; height: 30px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.header-dx { margin-left: auto; font-size: 9px; opacity: 0.75; font-weight: 400; }
+.scheda-body { background: #e3f2fd; padding: 12px 14px; display: flex; flex-direction: column; gap: 12px; }
+
+.blocco { border-radius: 10px; overflow: hidden; border-left: 5px solid; background: #fff; }
+.b-verde   { border-color: #2e7d32; }
+.b-arancio { border-color: #e65100; }
+.b-viola   { border-color: #6a1b9a; }
+.b-rosso   { border-color: #c62828; }
+.b-teal    { border-color: #00695c; }
+
+.bl-header { display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 13px; font-weight: 500; }
+.b-verde   .bl-header { background: #e8f5e9; color: #2e7d32; }
+.b-arancio .bl-header { background: #fff3e0; color: #e65100; }
+.b-viola   .bl-header { background: #f3e5f5; color: #6a1b9a; }
+.b-rosso   .bl-header { background: #ffebee; color: #c62828; }
+.b-teal    .bl-header { background: #e0f2f1; color: #00695c; }
+
+.bl-body { padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; font-size: 12px; line-height: 1.8; }
+
+.caso { background: #f9f9f9; border-radius: 7px; padding: 8px 12px; font-size: 12px; line-height: 1.85; }
+.b-verde   .caso { border-left: 3px solid #2e7d32; }
+.b-arancio .caso { border-left: 3px solid #e65100; }
+.b-viola   .caso { border-left: 3px solid #6a1b9a; }
+.b-rosso   .caso { border-left: 3px solid #c62828; }
+.b-teal    .caso { border-left: 3px solid #00695c; }
+
+.caso-titolo { font-weight: 500; margin-bottom: 4px; }
+.eq-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 13px; margin: 2px 0; }
+.eq-da { color: #555; font-style: italic; }
+.freccia { color: #999; font-size: 12px; }
+.eq-a { font-weight: 500; }
+.b-verde   .eq-a { color: #2e7d32; }
+.b-arancio .eq-a { color: #e65100; }
+.b-viola   .eq-a { color: #6a1b9a; }
+.b-rosso   .eq-a { color: #c62828; }
+.b-teal    .eq-a { color: #00695c; }
+
+.nota-box { background: #fff9c4; border: 1.5px solid #f9a825; border-radius: 7px; padding: 7px 11px; font-size: 12px; line-height: 1.7; }
+.imp-nota { background: #ffebee; border: 1.5px solid #c62828; border-radius: 7px; padding: 7px 11px; font-size: 12px; line-height: 1.7; color: #b71c1c; }
+
+/* STEP CARD per esempio approfondito */
+.step-card { background: #fff; border-radius: 8px; overflow: hidden; border-left: 5px solid; margin-bottom: 3px; }
+.step-card .sh { display: flex; align-items: center; gap: 8px; padding: 6px 12px; font-size: 11px; font-weight: 500; }
+.step-card .sb { padding: 8px 14px; font-size: 13px; line-height: 1.85; }
+.sn { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #fff; flex-shrink: 0; }
+.freccia-giu { text-align: center; font-size: 14px; color: #aaa; margin: -1px 0; }
+
+.sc1 { border-color: #7b1fa2; } .sc1 .sh { background: #f3e5f5; color: #7b1fa2; } .sc1 .sn { background: #7b1fa2; }
+.sc2 { border-color: #1565c0; } .sc2 .sh { background: #e3f2fd; color: #1565c0; } .sc2 .sn { background: #1565c0; }
+.sc3 { border-color: #e65100; } .sc3 .sh { background: #fff3e0; color: #e65100; } .sc3 .sn { background: #e65100; }
+.sc4 { border-color: #2e7d32; } .sc4 .sh { background: #e8f5e9; color: #2e7d32; } .sc4 .sn { background: #2e7d32; }
+.sc5 { border-color: #2e7d32; } .sc5 .sh { background: #e8f5e9; color: #2e7d32; } .sc5 .sn { background: #2e7d32; }
+.sc6 { border-color: #c62828; } .sc6 .sh { background: #ffebee; color: #c62828; } .sc6 .sn { background: #c62828; }
+
+.delta-box { background: #f5f5f5; border-radius: 7px; padding: 8px 12px; font-size: 12px; line-height: 1.9; margin: 4px 0; }
+.tag-ok { background: #c8e6c9; color: #1b5e20; border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 500; }
+.tag-no { background: #ffcdd2; color: #b71c1c; border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 500; }
+.sost-tag { display: inline-flex; align-items: center; gap: 6px; background: #fff9c4; border: 1.5px solid #f9a825; border-radius: 6px; padding: 4px 10px; font-size: 13px; font-weight: 500; color: #e65100; margin: 2px 0; }
+.sol-box { background: #fff9c4; border: 2px solid #f9a825; border-radius: 8px; padding: 7px 14px; text-align: center; margin-top: 4px; }
+.sol-lbl { font-size: 9px; color: #f9a825; font-weight: 500; letter-spacing: 1px; }
+.sol-val { font-size: 18px; font-weight: 500; color: #e65100; }
+
+/* ESEMPIO 2: 1/3^x + 3^x = 2 */
+.es2-box { background: #e8f5e9; border-radius: 8px; padding: 9px 12px; border-left: 4px solid #2e7d32; font-size: 12px; line-height: 1.85; }
+
+.step-inline { display: flex; flex-direction: column; gap: 3px; padding-left: 4px; }
+.sr { font-size: 12px; display: flex; align-items: flex-start; gap: 6px; }
+.sn-sm { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: #fff; flex-shrink: 0; margin-top: 2px; }
+
+.schema-griglia { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.schema-card { border-radius: 8px; padding: 9px 11px; font-size: 12px; line-height: 1.75; text-align: center; }
+.ricorda { background: #fff9c4; border: 2px solid #f9a825; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.7; display: flex; gap: 8px; }
+
+sup { font-size: 0.65em; vertical-align: super; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; font-size: 0.82em; vertical-align: middle; line-height: 1.2; }
+.frac .n { border-bottom: 1.2px solid currentColor; padding: 0 2px; }
+.frac .d { padding: 0 2px; }
+</style>
+
+<div class="wrap">
+<div class="scheda">
+  <div class="scheda-header">
+    <div class="icona">ðŸ“Š</div>
+    SCHEDA â€” Come riconoscere e risolvere le equazioni esponenziali
+    <span class="header-dx">Scheda di matematica · Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+
+    <!-- schema generale -->
+    <div class="schema-griglia">
+      <div class="schema-card" style="background:#e8f5e9;border:2px solid #2e7d32;">
+        <div style="font-size:11px;font-weight:500;color:#2e7d32;margin-bottom:4px;">TIPO A</div>
+        <div style="font-size:14px;font-weight:500;color:#1b5e20;">ELEMENTARI</div>
+        <div style="font-size:11px;color:#555;margin-top:4px;">Stessa base già presente<br>a destra e a sinistra</div>
+        <div style="font-size:12px;color:#2e7d32;margin-top:5px;font-weight:500;">â†’ 1 o 2 termini</div>
+      </div>
+      <div class="schema-card" style="background:#fff3e0;border:2px solid #e65100;">
+        <div style="font-size:11px;font-weight:500;color:#e65100;margin-bottom:4px;">TIPO B</div>
+        <div style="font-size:14px;font-weight:500;color:#bf360c;">RICONDUCIBILI</div>
+        <div style="font-size:11px;color:#555;margin-top:4px;">Servono operazioni per<br>portarle alla stessa base</div>
+        <div style="font-size:12px;color:#e65100;margin-top:5px;font-weight:500;">â†’ 3 o più termini</div>
+      </div>
+    </div>
+
+    <!-- TIPO A -->
+    <div class="blocco b-verde">
+      <div class="bl-header"><span style="font-size:18px;">âœ…</span> TIPO A â€” Elementari: stessa base già presente</div>
+      <div class="bl-body">
+        <div style="font-size:12px;color:#555;">Se a destra e a sinistra c'è già la stessa base, <b>cancello le basi</b> e ugualio solo gli esponenti.</div>
+        <div class="caso">
+          <div class="caso-titolo">Esempio diretto</div>
+          <div class="eq-row"><span class="eq-da">3<sup>x</sup> = 3<sup>âˆ’3</sup></span><span class="freccia">â†’ stessa base (3) â†’</span><span class="eq-a">x = âˆ’3</span></div>
+        </div>
+        <div class="nota-box">ðŸ’¡ <b>Regola d'oro:</b> b<sup>A</sup> = b<sup>B</sup> â†’ A = B (cancello le basi e ugualio gli esponenti)</div>
+      </div>
+    </div>
+
+    <!-- TIPO B -->
+    <div class="blocco b-arancio">
+      <div class="bl-header"><span style="font-size:18px;">ðŸ”§</span> TIPO B â€” Riconducibili: 3 operazioni possibili</div>
+      <div class="bl-body">
+        <div class="caso">
+          <div class="caso-titolo">ðŸ”¹ 1 â€” Scompongo la base</div>
+          <div class="eq-row"><span class="eq-da">27<sup>x</sup></span><span class="freccia">â†’ 27=3³ â†’</span><span class="eq-a">(3³)<sup>x</sup> = 3<sup>3x</sup></span></div>
+        </div>
+        <div class="caso">
+          <div class="caso-titolo">ðŸ”¹ 2 â€” Ribalto la frazione (esponente negativo)</div>
+          <div class="eq-row"><span class="eq-da">3<sup>x</sup> = <span class="frac"><span class="n">1</span><span class="d">3<sup>âˆ’3</sup></span></span></span><span class="freccia">â†’ ribÐ°Ð»Ñ‚Ð¾ â†’</span><span class="eq-a">3<sup>x</sup> = 3<sup>3</sup> â†’ x = 3</span></div>
+        </div>
+        <div class="caso">
+          <div class="caso-titolo">ðŸ”¹ 3 â€” Trasformo radice in esponente frazionario</div>
+          <div class="eq-row"><span class="eq-da">3<sup>x</sup> = <sup>4</sup>âˆš(3²)</span><span class="freccia">â†’</span><span class="eq-a">3<sup>x</sup> = 3<sup>2/4</sup> â†’ x = 1/2</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUANTI TERMINI -->
+    <div class="blocco b-viola">
+      <div class="bl-header"><span style="font-size:18px;">ðŸ”¢</span> Quanti termini? â€” Il metodo cambia!</div>
+      <div class="bl-body">
+        <div class="caso">
+          <div class="caso-titolo" style="color:#2e7d32;">ðŸ“— 1 o 2 termini â†’ metodo diretto</div>
+          <div style="font-size:12px;line-height:1.8;">Applico le proprietà delle potenze (Ã— ÷ potenza), riconduco alla stessa base, ugualio gli esponenti.</div>
+          <div class="eq-row" style="margin-top:5px;"><span class="eq-da">2<sup>x</sup> · 2<sup>3</sup> = 2<sup>5</sup></span><span class="freccia">â†’</span><span class="eq-a">x+3 = 5 â†’ x = 2</span></div>
+        </div>
+
+        <!-- â•â•â• ESEMPIO TRINOMIA APPROFONDITO â•â•â• -->
+        <div class="caso" style="background:#f3e5f5;">
+          <div class="caso-titolo" style="color:#6a1b9a;">ðŸ“™ 3+ termini con + e âˆ’ â†’ sostituzione con t</div>
+          <div style="font-size:12px;line-height:1.8;margin-bottom:6px;">
+            Con <b>+ e âˆ’</b> non posso usare direttamente le proprietà delle potenze.<br>
+            Uso il <b>cambio di parametro t</b>: chiamo t l'esponenziale comune â†’ risolvo in t â†’ torno a x.
+          </div>
+
+          <div style="font-size:11px;font-weight:500;color:#6a1b9a;margin-bottom:6px;letter-spacing:0.5px;text-transform:uppercase;">Esempio 1 â€” Equazione trinomia</div>
+
+          <div style="background:#6a1b9a;color:#fff;border-radius:7px;padding:8px 12px;font-size:16px;font-weight:500;text-align:center;margin-bottom:8px;">
+            2<sup>2x</sup> âˆ’ 3 · 2<sup>x</sup> âˆ’ 4 = 0
+          </div>
+
+          <div class="sost-tag" style="margin-bottom:8px;">Chiamo <b>t = 2<sup>x</sup></b></div>
+
+          <div class="step-card sc1">
+            <div class="sh"><div class="sn">1</div>Sostituisco</div>
+            <div class="sb">
+              2<sup>2x</sup> = (2<sup>x</sup>)² = <b>t²</b><br>
+              2<sup>x</sup> = <b>t</b><br>
+              L'equazione diventa: <b>t² âˆ’ 3t âˆ’ 4 = 0</b>
+            </div>
+          </div>
+          <div class="freccia-giu">â†“</div>
+          <div class="step-card sc2">
+            <div class="sh"><div class="sn">2</div>Calcolo il Î” (a=1, b=âˆ’3, c=âˆ’4)</div>
+            <div class="sb">
+              <div class="delta-box">
+                Î” = b² âˆ’ 4ac = (âˆ’3)² âˆ’ 4·(1)·(âˆ’4)<br>
+                Î” = 9 + 16 = <b>25</b><br><br>
+                t<sub>1,2</sub> = <span class="frac"><span class="n">3 ± âˆš25</span><span class="d">2</span></span> = <span class="frac"><span class="n">3 ± 5</span><span class="d">2</span></span><br><br>
+                tâ‚ = <span class="frac"><span class="n">3 + 5</span><span class="d">2</span></span> = <span class="frac"><span class="n">8</span><span class="d">2</span></span> = <b>4</b>
+                &nbsp;&nbsp;&nbsp;
+                tâ‚‚ = <span class="frac"><span class="n">3 âˆ’ 5</span><span class="d">2</span></span> = <span class="frac"><span class="n">âˆ’2</span><span class="d">2</span></span> = <b>âˆ’1</b>
+              </div>
+            </div>
+          </div>
+          <div class="freccia-giu">â†“</div>
+          <div class="step-card sc4">
+            <div class="sh"><div class="sn">3</div>Ritorno a x â€” caso tâ‚ = 4</div>
+            <div class="sb">
+              <span class="tag-ok">tâ‚ = 4 &gt; 0 âœ“</span><br><br>
+              2<sup>x</sup> = 4 = 2² <span class="freccia">â†’</span> stessa base â†’ <b>x = 2</b>
+            </div>
+          </div>
+          <div class="freccia-giu">â†“</div>
+          <div class="step-card sc6">
+            <div class="sh"><div class="sn">4</div>Ritorno a x â€” caso tâ‚‚ = âˆ’1</div>
+            <div class="sb">
+              <span class="tag-no">tâ‚‚ = âˆ’1 &lt; 0 ðŸš«</span><br><br>
+              2<sup>x</sup> = âˆ’1 â†’ <b>IMPOSSIBILE</b><br>
+              <span style="font-size:11px;color:#888;">L'esponenziale è sempre positiva â†’ non può mai valere âˆ’1 â†’ scarto questa soluzione</span>
+            </div>
+          </div>
+
+          <div class="sol-box" style="margin-top:8px;">
+            <div class="sol-lbl">ðŸ† SOLUZIONE ESEMPIO 1</div>
+            <div class="sol-val">x = 2</div>
+          </div>
+
+          <!-- â•â•â• ESEMPIO 2 â•â•â• -->
+          <div style="height:10px;"></div>
+          <div style="font-size:11px;font-weight:500;color:#6a1b9a;margin-bottom:6px;letter-spacing:0.5px;text-transform:uppercase;">Esempio 2 â€” con frazione (1/3<sup>x</sup> + 3<sup>x</sup> = 2)</div>
+
+          <div style="background:#6a1b9a;color:#fff;border-radius:7px;padding:8px 12px;font-size:16px;font-weight:500;text-align:center;margin-bottom:8px;">
+            <span class="frac" style="font-size:1em;"><span class="n">1</span><span class="d">3<sup>x</sup></span></span>
+            + 3<sup>x</sup> = 2
+          </div>
+
+          <div class="sost-tag" style="margin-bottom:8px;">Chiamo <b>t = 3<sup>x</sup></b> â†’ <span class="frac"><span class="n">1</span><span class="d">3<sup>x</sup></span></span> = <span class="frac"><span class="n">1</span><span class="d">t</span></span></div>
+
+          <div class="step-card sc1">
+            <div class="sh"><div class="sn">1</div>Sostituisco</div>
+            <div class="sb">
+              <span class="frac"><span class="n">1</span><span class="d">t</span></span> + t = 2
+            </div>
+          </div>
+          <div class="freccia-giu">â†“</div>
+          <div class="step-card sc2">
+            <div class="sh"><div class="sn">2</div>Moltiplico tutto per t (con t â‰  0)</div>
+            <div class="sb">
+              <span class="frac"><span class="n">1 + t²</span><span class="d">t</span></span> = <span class="frac"><span class="n">2t</span><span class="d">t</span></span><br><br>
+              1 + t² = 2t<br>
+              <b>t² âˆ’ 2t + 1 = 0</b>
+            </div>
+          </div>
+          <div class="freccia-giu">â†“</div>
+          <div class="step-card sc3">
+            <div class="sh"><div class="sn">3</div>Calcolo il Î” (a=1, b=âˆ’2, c=1)</div>
+            <div class="sb">
+              <div class="delta-box">
+                Î” = b² âˆ’ 4ac = (âˆ’2)² âˆ’ 4·1·1 = 4 âˆ’ 4 = <b>0</b><br><br>
+                t<sub>1,2</sub> = <span class="frac"><span class="n">2 ± âˆš0</span><span class="d">2</span></span> = <span class="frac"><span class="n">2</span><span class="d">2</span></span> = <b>1</b> &nbsp;<span style="font-size:11px;color:#888;">(soluzione doppia)</span>
+              </div>
+            </div>
+          </div>
+          <div class="freccia-giu">â†“</div>
+          <div class="step-card sc6">
+            <div class="sh"><div class="sn">4</div>Ritorno a x â€” caso t = 1</div>
+            <div class="sb">
+              <span class="tag-ok">t = 1 &gt; 0 âœ“</span><br><br>
+              3<sup>x</sup> = 1 = 3⁰ <span class="freccia">â†’</span> stessa base â†’ x = 0<br><br>
+              <span style="font-size:12px;color:#c62828;font-weight:500;">âš  Ma aspetta: verifichiamo nel testo originale!</span><br>
+              <span class="frac"><span class="n">1</span><span class="d">3⁰</span></span> + 3⁰ = 1 + 1 = 2 âœ“ â†’ la soluzione soddisfa l'equazione<br><br>
+              <span style="font-size:11px;color:#888;">Dagli appunti: t=1 â†’ 3<sup>x</sup>=1 â†’ 3<sup>x</sup>=3⁰ â†’ <b>x=0 SOLUZIONE IMPOSSIBILE</b><br>
+              (perché© x=0 rende il denominatore 3⁰=1 â‰  0, quindi è accettabile matematicamente â€” va verificato con il testo originale)</span>
+            </div>
+          </div>
+
+          <div style="background:#ffebee;border:2px solid #c62828;border-radius:8px;padding:8px 12px;font-size:12px;color:#b71c1c;margin-top:8px;">
+            ðŸš« Dagli appunti del professore: <b>x = 0 â€” Soluzione impossibile</b><br>
+            <span style="font-size:11px;">Verificare sempre anche le condizioni di esistenza (denominatore â‰  0 e t &gt; 0)</span>
+          </div>
+        </div>
+
+        <div class="imp-nota" style="margin-top:4px;">
+          ðŸš« <b>Attenzione:</b> Le proprietà delle potenze valgono <b>solo con Ã— e ÷</b>. Con + e âˆ’ non posso semplificare!<br>
+          <span style="font-size:11px;">Es: 2<sup>x</sup> + 2<sup>x</sup> â‰  2<sup>2x</sup> &nbsp;·&nbsp; Corretto: 2<sup>x</sup> + 2<sup>x</sup> = 2 · 2<sup>x</sup></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCHEMA RIASSUNTIVO -->
+    <div class="blocco b-teal">
+      <div class="bl-header"><span style="font-size:18px;">ðŸ—ºï¸</span> Schema riassuntivo â€” Come procedere</div>
+      <div class="bl-body">
+        <div class="step-inline">
+          <div class="sr"><div class="sn-sm" style="background:#00695c;">1</div><div><b>Conto i termini</b> (separati da + âˆ’ o =)</div></div>
+          <div class="sr"><div class="sn-sm" style="background:#00695c;">2</div><div><b>Riconduco alla stessa base</b> â†’ scompongo / ribalto / trasformo radici</div></div>
+          <div class="sr"><div class="sn-sm" style="background:#00695c;">3</div><div><b>1â€“2 termini?</b> â†’ proprietà potenze â†’ ugualio esponenti<br><b>3+ termini con +/âˆ’?</b> â†’ sostituzione t â†’ risolvo in t â†’ torno a x</div></div>
+          <div class="sr"><div class="sn-sm" style="background:#00695c;">4</div><div><b>Verifico sempre:</b> t &gt; 0 (esponenziale sempre positiva!) e denominatore â‰  0</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ricorda">
+      <span style="font-size:18px;flex-shrink:0;">ðŸ”‘</span>
+      <div>
+        <b>Stessa base â†’ elementare · Basi diverse â†’ riconduci ·
+        1â€“2 termini â†’ proprietà potenze · 3+ con +/âˆ’ â†’ sostituzione t · t sempre &gt; 0 · verificare sempre!</b>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+

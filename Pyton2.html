@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python — Scheda introduttiva</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Nunito:wght@400;600;700;800&display=swap');
+
+    :root {
+      --py-yellow: #f7c948;
+      --py-blue: #4b8bbe;
+      --py-dark: #1e1e2e;
+      --py-surface: #2a2a3e;
+      --code-bg: #1a1a2e;
+      --code-green: #69db7c;
+      --code-orange: #ffa94d;
+      --code-blue: #74c0fc;
+      --code-pink: #f783ac;
+      --code-comment: #7c7c9a;
+    }
+
+    body {
+      background-color: var(--py-dark);
+      margin: 0;
+      padding: 0;
+    }
+
+    .scheda {
+      font-family: 'Nunito', sans-serif;
+      color: #fff;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1e1e2e 0%, #2a2a4e 100%);
+      border-radius: 16px;
+      padding: 2rem 2rem 1.5rem;
+      margin-bottom: 2rem;
+      border: 0.5px solid #3a3a5e;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(247,201,72,0.18) 0%, transparent 70%);
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1rem;
+    }
+
+    .py-badge {
+      background: var(--py-yellow);
+      color: #1a1a2e;
+      font-weight: 800;
+      font-size: 22px;
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      letter-spacing: -1px;
+      flex-shrink: 0;
+    }
+
+    .header h1 {
+      color: #f0efff;
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0 0 4px;
+    }
+
+    .header .subtitle {
+      color: #9999bb;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .header-desc {
+      color: #c8c8e8;
+      font-size: 14px;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .section {
+      background: #2a2a3e;
+      border: 0.5px solid #3a3a5e;
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .section-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .icon-intro { background: rgba(75,139,190,0.15); }
+    .icon-var { background: rgba(247,201,72,0.15); }
+    .icon-assign { background: rgba(105,219,124,0.15); }
+    .icon-cond { background: rgba(247,131,172,0.15); }
+    .icon-lib { background: rgba(180,142,255,0.15); }
+
+    .section h2 {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 0;
+      color: #fff;
+    }
+
+    .section p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #c8c8e8;
+      margin: 0 0 0.9rem;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    .code-block {
+      background: var(--code-bg);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin: 0.8rem 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      border: 0.5px solid #3a3a5e;
+      overflow-x: auto;
+    }
+
+    .code-block .label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #5a5a7a;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .c-kw  { color: var(--code-pink); }
+    .c-str { color: var(--code-orange); }
+    .c-num { color: var(--code-green); }
+    .c-var { color: var(--code-blue); }
+    .c-op  { color: #c7c7ff; }
+    .c-fn  { color: #ffd43b; }
+    .c-cmt { color: var(--code-comment); font-style: italic; }
+    .c-out { color: #aaffcc; }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 0.8rem 0;
+    }
+
+    .compare-card {
+      background: var(--code-bg);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      border: 0.5px solid #3a3a5e;
+    }
+
+    .compare-card .lang-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .badge-cpp { background: rgba(75,139,190,0.25); color: #74c0fc; }
+    .badge-py  { background: rgba(247,201,72,0.25); color: #f7c948; }
+
+    .compare-card pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      margin: 0;
+      line-height: 1.75;
+      color: #c8c8e8;
+      white-space: pre-wrap;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0.7rem 0;
+    }
+
+    .pill {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .pill-num { background: rgba(105,219,124,0.15); color: #69db7c; border: 0.5px solid rgba(105,219,124,0.3); }
+    .pill-str { background: rgba(255,169,77,0.15); color: #ffa94d; border: 0.5px solid rgba(255,169,77,0.3); }
+
+    .callout {
+      background: #1e1e2e;
+      border-left: 3px solid var(--py-yellow);
+      border-radius: 0 8px 8px 0;
+      padding: 0.75rem 1rem;
+      margin: 0.8rem 0;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #c8c8e8;
+    }
+
+    .callout strong { color: #fff; font-weight: 700; }
+
+    .diff-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin: 0.4rem 0;
+      font-size: 13.5px;
+      color: #c8c8e8;
+      line-height: 1.6;
+    }
+
+    .diff-icon { flex-shrink: 0; margin-top: 2px; }
+    .diff-plus { color: #69db7c; }
+    .diff-arrow { color: var(--py-yellow); }
+
+    .lib-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+      gap: 8px;
+      margin: 0.8rem 0;
+    }
+
+    .lib-card {
+      background: #1e1e2e;
+      border-radius: 10px;
+      padding: 0.85rem;
+      border: 0.5px solid #3a3a5e;
+      text-align: center;
+    }
+
+    .lib-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--code-blue);
+      margin-bottom: 4px;
+    }
+
+    .lib-desc {
+      font-size: 12px;
+      color: #c8c8e8;
+      line-height: 1.4;
+    }
+
+    .output-line {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 0.5px solid #3a3a5e;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand" style="font-size: 1.1rem; line-height: 1.2;">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="informatica.html">Informatica</a>
+      <a href="Pyton.html">Python 1</a>
+      <a href="Pyton2.html" class="active">Python 2</a>
+    </div>
+  </nav>
+
+<div class="scheda">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-row">
+      <div class="py-badge">Py</div>
+      <div>
+        <h1>Python — Scheda introduttiva</h1>
+        <p class="subtitle">Appunti di informatica - Prof. Belardi Nicolino</p>
+      </div>
+    </div>
+    <p class="header-desc">
+      Python è un linguaggio di programmazione semplice da leggere e scrivere, nato nel 1991. 
+      Viene usato per analisi dati, siti web, intelligenza artificiale e molto altro. 
+      A differenza di C++, non serve dichiarare subito "che tipo" di dato usi: Python ci pensa da solo.
+    </p>
+  </div>
+
+  <!-- SEZIONE 1: Differenze con C++ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-intro">⚖️</div>
+      <h2>Python vs C++ — le differenze principali</h2>
+    </div>
+    <p>In C++ è obbligatorio indicare in anticipo il tipo di ogni variabile e rispettare una sintassi molto rigida. Python è più flessibile: si occupa da solo di capire che tipo di dato stai usando, e la sua scrittura è più vicina al linguaggio comune.</p>
+
+    <div class="compare-grid">
+      <div class="compare-card">
+        <div class="lang-badge badge-cpp">C++</div>
+        <pre><span style="color:#9999bb">// Variabile numero intero</span>
+<span style="color:#74c0fc">int</span> eta = <span style="color:#69db7c">25</span>;
+<span style="color:#9999bb">// Variabile testo</span>
+<span style="color:#74c0fc">string</span> nome = <span style="color:#ffa94d">"Marco"</span>;
+<span style="color:#74c0fc">cout</span> << nome;</pre>
+      </div>
+      <div class="compare-card">
+        <div class="lang-badge badge-py">Python</div>
+        <pre><span style="color:#9999bb"># Variabile numero intero</span>
+<span style="color:#74c0fc">eta</span> = <span style="color:#69db7c">25</span>
+<span style="color:#9999bb"># Variabile testo</span>
+<span style="color:#74c0fc">nome</span> = <span style="color:#ffa94d">"Marco"</span>
+<span style="color:#ffd43b">print</span>(nome)</pre>
+      </div>
+    </div>
+
+    <div class="diff-row"><span class="diff-icon diff-plus">✔</span><span>In Python <strong>non si scrive il tipo</strong> (int, string…): viene dedotto automaticamente.</span></div>
+    <div class="diff-row"><span class="diff-icon diff-plus">✔</span><span>Non servono i <strong>punto e virgola</strong> (;) alla fine di ogni riga.</span></div>
+    <div class="diff-row"><span class="diff-icon diff-plus">✔</span><span>Non servono le <strong>parentesi graffe</strong> {}: Python usa l'<strong>indentazione</strong> (gli spazi) per strutturare il codice.</span></div>
+    <div class="diff-row"><span class="diff-icon diff-plus">✔</span><span>Il codice gira <strong>riga per riga</strong>, senza bisogno di compilare prima.</span></div>
+  </div>
+
+  <!-- SEZIONE 2: Dichiarazione variabili -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-var">📦</div>
+      <h2>Dichiarazione di variabili</h2>
+    </div>
+    <p>Una <strong>variabile</strong> è come una scatola con un'etichetta: dentro ci metti un dato, e la richiami usando il suo nome. In Python basta scegliere il nome e assegnarle un valore — nessuna altra formalità.</p>
+
+    <div class="callout">
+      <strong>Due tipi fondamentali da conoscere:</strong> i numeri e le stringhe (testo).
+    </div>
+
+    <div class="pill-row">
+      <span class="pill pill-num">🔢 Numerica</span>
+      <span class="pill pill-str">🔤 Stringa (testo)</span>
+    </div>
+
+    <div class="code-block">
+      <div class="label">Variabili numeriche — numeri interi e decimali</div>
+      <span class="c-var">eta</span> <span class="c-op">=</span> <span class="c-num">25</span>            <span class="c-cmt"># numero intero (25 anni)</span><br>
+      <span class="c-var">altezza</span> <span class="c-op">=</span> <span class="c-num">1.75</span>        <span class="c-cmt"># numero decimale (1,75 metri)</span><br>
+      <span class="c-var">punteggio</span> <span class="c-op">=</span> <span class="c-num">100</span>        <span class="c-cmt"># numero intero (punteggio di gioco)</span>
+    </div>
+
+    <div class="code-block">
+      <div class="label">Variabili stringa — testo tra virgolette</div>
+      <span class="c-var">nome</span> <span class="c-op">=</span> <span class="c-str">"Giulia"</span>        <span class="c-cmt"># testo tra virgolette doppie</span><br>
+      <span class="c-var">citta</span> <span class="c-op">=</span> <span class="c-str">'Roma'</span>          <span class="c-cmt"># va bene anche con virgolette singole</span><br>
+      <span class="c-var">messaggio</span> <span class="c-op">=</span> <span class="c-str">"Ciao, mondo!"</span> <span class="c-cmt"># testo con spazio e punteggiatura</span>
+    </div>
+
+    <p>La differenza visiva è semplice: i numeri si scrivono <em>senza</em> virgolette, il testo si scrive <em>con</em> virgolette. Se scrivi <code style="font-family:monospace;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px">eta = "25"</code>, Python lo tratterà come testo, non come numero — e non potrai farci calcoli!</p>
+  </div>
+
+  <!-- SEZIONE 3: Assegnazione -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-assign">🔗</div>
+      <h2>Assegnazione — cosa significa e come funziona</h2>
+    </div>
+    <p><strong>Assegnare</strong> significa collegare un nome (la variabile) a un valore. Lo fa il simbolo <code style="font-family:monospace;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px">=</code>. Attenzione: non è il simbolo di "uguale" in matematica — qui significa "metti questo valore in questa scatola".</p>
+
+    <div class="code-block">
+      <div class="label">Assegnazione numerica — esempi pratici</div>
+      <span class="c-var">prezzo</span> <span class="c-op">=</span> <span class="c-num">9.99</span>             <span class="c-cmt"># nella scatola "prezzo" metto 9.99</span><br>
+      <span class="c-var">quantita</span> <span class="c-op">=</span> <span class="c-num">3</span>               <span class="c-cmt"># nella scatola "quantita" metto 3</span><br>
+      <span class="c-var">totale</span> <span class="c-op">=</span> <span class="c-var">prezzo</span> <span class="c-op">*</span> <span class="c-var">quantita</span>  <span class="c-cmt"># totale = 9.99 × 3 = 29.97</span><br>
+      <span class="c-fn">print</span>(<span class="c-var">totale</span>)                  <span class="c-cmt"># stampa il risultato</span><br>
+      <div class="output-line"><span class="c-out">▶ 29.97</span></div>
+    </div>
+
+    <div class="code-block">
+      <div class="label">Assegnazione stringa — esempi pratici</div>
+      <span class="c-var">nome</span> <span class="c-op">=</span> <span class="c-str">"Luca"</span><br>
+      <span class="c-var">cognome</span> <span class="c-op">=</span> <span class="c-str">"Rossi"</span><br>
+      <span class="c-var">nome_completo</span> <span class="c-op">=</span> <span class="c-var">nome</span> <span class="c-op">+</span> <span class="c-str">" "</span> <span class="c-op">+</span> <span class="c-var">cognome</span>  <span class="c-cmt"># unisce le stringhe</span><br>
+      <span class="c-fn">print</span>(<span class="c-var">nome_completo</span>)<br>
+      <div class="output-line"><span class="c-out">▶ Luca Rossi</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>Nota:</strong> il valore di una variabile può cambiare nel tempo — puoi sovrascriverla quando vuoi. <code style="font-family:monospace">eta = 25</code> e poi più avanti <code style="font-family:monospace">eta = 26</code>: ora "eta" vale 26.
+    </div>
+  </div>
+
+  <!-- SEZIONE 4: Condizionale -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-cond">🔀</div>
+      <h2>La condizionale — prendere decisioni nel codice</h2>
+    </div>
+    <p>Un condizionale dice al programma: <em>"Se succede questa cosa, fai quest'altra cosa; altrimenti fai quest'altra ancora"</em>. È come un bivio su una strada. In Python si usa <code style="font-family:monospace;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px">if</code> / <code style="font-family:monospace;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px">elif</code> / <code style="font-family:monospace;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px">else</code>.</p>
+
+    <div class="code-block">
+      <div class="label">Esempio numerico — verifica l'età</div>
+      <span class="c-var">eta</span> <span class="c-op">=</span> <span class="c-num">17</span><br><br>
+      <span class="c-kw">if</span> <span class="c-var">eta</span> <span class="c-op">&gt;=</span> <span class="c-num">18</span><span class="c-op">:</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-fn">print</span>(<span class="c-str">"Sei maggiorenne"</span>)<br>
+      <span class="c-kw">elif</span> <span class="c-var">eta</span> <span class="c-op">&gt;=</span> <span class="c-num">14</span><span class="c-op">:</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-fn">print</span>(<span class="c-str">"Sei adolescente"</span>)<br>
+      <span class="c-kw">else</span><span class="c-op">:</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-fn">print</span>(<span class="c-str">"Sei bambino"</span>)<br>
+      <div class="output-line"><span class="c-out">▶ Sei adolescente</span></div>
+    </div>
+
+    <div class="code-block">
+      <div class="label">Esempio stringa — saluto personalizzato</div>
+      <span class="c-var">nome</span> <span class="c-op">=</span> <span class="c-str">"Admin"</span><br><br>
+      <span class="c-kw">if</span> <span class="c-var">nome</span> <span class="c-op">==</span> <span class="c-str">"Admin"</span><span class="c-op">:</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-fn">print</span>(<span class="c-str">"Benvenuto, amministratore!"</span>)<br>
+      <span class="c-kw">else</span><span class="c-op">:</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-fn">print</span>(<span class="c-str">"Ciao, "</span> <span class="c-op">+</span> <span class="c-var">nome</span>)<br>
+      <div class="output-line"><span class="c-out">▶ Benvenuto, amministratore!</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>Attenzione all'indentazione!</strong> Le righe dentro un <code style="font-family:monospace">if</code> devono essere spostate a destra (di solito 4 spazi). È obbligatorio in Python: senza, il programma non capisce cosa fa parte della condizione.
+    </div>
+  </div>
+
+  <!-- SEZIONE 5: Librerie -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon icon-lib">📚</div>
+      <h2>Le librerie — strumenti già pronti da usare</h2>
+    </div>
+    <p>Una <strong>libreria</strong> è un insieme di funzionalità già scritte da altri che puoi "importare" nel tuo programma. È come prendere in prestito una cassetta degli attrezzi specializzata invece di costruire tutto da zero. Si usa la parola chiave <code style="font-family:monospace;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px">import</code>.</p>
+
+    <div class="code-block">
+      <div class="label">Esempio — usare la libreria math</div>
+      <span class="c-kw">import</span> <span class="c-var">math</span>                      <span class="c-cmt"># importo la libreria</span><br>
+      <span class="c-var">risultato</span> <span class="c-op">=</span> <span class="c-var">math</span>.<span class="c-fn">sqrt</span>(<span class="c-num">16</span>)    <span class="c-cmt"># calcola la radice quadrata</span><br>
+      <span class="c-fn">print</span>(<span class="c-var">risultato</span>)<br>
+      <div class="output-line"><span class="c-out">▶ 4.0</span></div>
+    </div>
+
+    <p>Ecco alcune librerie molto usate che studieremo:</p>
+
+    <div class="lib-grid">
+      <div class="lib-card">
+        <div class="lib-name">math</div>
+        <div class="lib-desc">Calcoli matematici: radici, potenze, trigonometria</div>
+      </div>
+      <div class="lib-card">
+        <div class="lib-name">random</div>
+        <div class="lib-desc">Genera numeri casuali e scelte random</div>
+      </div>
+      <div class="lib-card">
+        <div class="lib-name">datetime</div>
+        <div class="lib-desc">Gestisce date, ore e calcoli nel tempo</div>
+      </div>
+      <div class="lib-card">
+        <div class="lib-name">os</div>
+        <div class="lib-desc">Interagisce con file e cartelle del computer</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Scheda didattica realizzata per uso scolastico.</strong>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

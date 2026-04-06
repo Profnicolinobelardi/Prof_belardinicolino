@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eq. 2Ã‚° Grado</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand" style="font-size: 1.1rem; line-height: 1.2;">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="matematica.html">Matematica</a>
+      <a href="schede_complete_esponenziali.html">Funzioni Esponenziali</a>
+      <a href="esercizi_hub.html">Esercizi</a>
+      <a href="equazioni_secondo_grado_mappa.html" class="active">Eq. 2&deg; Grado</a>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="content-wrapper">
+      
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: transparent; }
+  .mappa { font-family: var(--font-sans); padding: 16px; }
+  .titolo-box {
+    background: #c0392b;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    border: 2px solid #922b21;
+  }
+  .container {
+    border: 2px solid #922b21;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+  }
+  .riga {
+    display: grid;
+    grid-template-columns: 130px 1fr 1fr;
+    border-bottom: 2px solid #ccc;
+    min-height: 90px;
+  }
+  .riga:last-child { border-bottom: none; }
+  .riga.complete { background: #fff9c4; }
+  .riga.pure     { background: #fce4ec; }
+  .riga.spurie   { background: #fff9c4; }
+  .riga.monomie  { background: #fce4ec; }
+
+  .col-label {
+    padding: 14px 12px;
+    border-right: 2px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+  }
+  .tipo { font-size: 15px; font-weight: 500; }
+  .complete .tipo { color: #c0392b; }
+  .pure .tipo     { color: #c0392b; }
+  .spurie .tipo   { color: #c0392b; }
+  .monomie .tipo  { color: #c0392b; }
+  .quando { font-size: 11px; color: #555; margin-top: 4px; line-height: 1.5; }
+  .quando b { color: #333; }
+
+  .col-forma, .col-esempi {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+  }
+  .col-forma { border-right: 2px solid #ccc; }
+
+  .formula { font-size: 14px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+  .col-label-header, .col-center-header, .col-right-header {
+    background: #922b21;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* colori lettere formula */
+  .ca { color: #7b1fa2; font-style: italic; font-weight:500; }
+  .cb { color: #1565c0; font-style: italic; font-weight:500; }
+  .cc { color: #2e7d32; font-style: italic; font-weight:500; }
+  .cx { color: #e65100; font-style: italic; }
+  .cop { color: #555; }
+  .czero { color: #333; font-weight: 500; }
+
+  .strikethrough {
+    position: relative;
+    display: inline-block;
+  }
+  .strikethrough::after {
+    content: '';
+    position: absolute;
+    left: -3px; right: -3px;
+    top: 50%; transform: translateY(-50%);
+    height: 2px;
+    background: #c0392b;
+    border-radius: 1px;
+  }
+  .strikethrough2 {
+    position: relative;
+    display: inline-block;
+  }
+  .strikethrough2::before {
+    content: '';
+    position: absolute;
+    left: -3px; right: -3px;
+    top: 40%; transform: rotate(30deg);
+    height: 2px;
+    background: #c0392b;
+  }
+  .strikethrough2::after {
+    content: '';
+    position: absolute;
+    left: -3px; right: -3px;
+    top: 40%; transform: rotate(-30deg);
+    height: 2px;
+    background: #c0392b;
+  }
+  .arrow { font-size: 20px; color: #f9a825; margin: 0 4px; }
+  .esempio-label { font-size: 11px; color: #888; font-style: italic; margin-bottom: 2px; }
+  sup { font-size: 0.7em; }
+</style>
+
+<div class="mappa">
+  <div class="titolo-box">SI DIFFERENZIANO IN:</div>
+  <div class="container">
+
+    <!-- COMPLETE -->
+    <div class="riga complete">
+      <div class="col-label">
+        <div class="tipo">COMPLETE</div>
+      </div>
+      <div class="col-forma">
+        <div class="formula">
+          <span class="ca">a</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="cb">b</span><span class="cx">x</span>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="cc">c</span>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+        <div style="margin-top: 8px; font-size: 12px; background: #fff9c4; border: 1px solid #f9a825; border-radius: 6px; padding: 6px;">
+          <div style="font-weight: bold; color: #c0392b; margin-bottom: 2px;">Formula Risolutiva:</div>
+          <div style="display: flex; align-items: center; justify-content: center; font-size: 14px;">
+            <span class="cx">x</span><sub style="font-size: 9px;">1,2</sub> &nbsp;=&nbsp; 
+            <div style="display: flex; flex-direction: column; align-items: center; margin-left: 5px;">
+              <span style="border-bottom: 1px solid #333; padding: 0 4px;">&minus;<span class="cb">b</span> &plusmn; &radic;(<span class="cb">b</span><sup>2</sup> &minus; 4<span class="ca">a</span><span class="cc">c</span>)</span>
+              <span style="padding: 0 4px;">2<span class="ca">a</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-esempi">
+        <div class="esempio-label">tutti i termini presenti</div>
+        <div class="formula">
+          <span class="ca">2</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="cb">5</span><span class="cx">x</span>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="cc">3</span>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PURE -->
+    <div class="riga pure">
+      <div class="col-label">
+        <div class="tipo">PURE</div>
+        <div class="quando">Quando <b>b = 0</b></div>
+      </div>
+      <div class="col-forma">
+        <div class="formula">
+          <span class="ca">a</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="strikethrough"><span class="cb">b</span><span class="cx">x</span></span>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="cc">c</span>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+        <div style="font-size:11px;color:#888;margin-top:2px;">il termine bx si annulla</div>
+      </div>
+      <div class="col-esempi">
+        <div class="formula">
+          <span class="arrow">âŸ¹</span>
+          <span class="ca">a</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="cc">c</span>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+        <div class="formula" style="margin-top:4px;">
+          <span class="ca">3</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="cc">2</span>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPURIE -->
+    <div class="riga spurie">
+      <div class="col-label">
+        <div class="tipo">SPURIE</div>
+        <div class="quando">Quando <b>c = 0</b></div>
+      </div>
+      <div class="col-forma">
+        <div class="formula">
+          <span class="ca">a</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="cb">b</span><span class="cx">x</span>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="strikethrough2"><span class="cc">c</span></span>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+        <div style="font-size:11px;color:#888;margin-top:2px;">il termine c si annulla</div>
+      </div>
+      <div class="col-esempi">
+        <div class="formula">
+          <span class="arrow">âŸ¹</span>
+          <span class="ca">a</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="cb">b</span><span class="cx">x</span>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+        <div class="formula" style="margin-top:4px;">
+          <span class="ca">2</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="cb">3</span><span class="cx">x</span>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONOMIE -->
+    <div class="riga monomie">
+      <div class="col-label">
+        <div class="tipo">MONOMIE</div>
+        <div class="quando">Quando<br><b>b = 0</b><br><b>c = 0</b></div>
+      </div>
+      <div class="col-forma">
+        <div class="formula">
+          <span class="ca">a</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="strikethrough"><span class="cb">b</span><span class="cx">x</span></span>
+          <span class="cop">&nbsp;+&nbsp;</span>
+          <span class="strikethrough2"><span class="cc">c</span></span>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+        <div style="font-size:11px;color:#888;margin-top:2px;">solo il termine ax² rimane</div>
+      </div>
+      <div class="col-esempi">
+        <div class="formula">
+          <span class="arrow">âŸ¹</span>
+          <span class="ca">a</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+        <div class="formula" style="margin-top:4px;">
+          <span class="ca">3</span><span class="cx">x</span><sup>2</sup>
+          <span class="cop">&nbsp;=&nbsp;</span>
+          <span class="czero">0</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    </div>
+  </div>
+</body>
+</html>
+

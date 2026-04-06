@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercizi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand" style="font-size: 1.1rem; line-height: 1.2;">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="matematica.html">Matematica</a>
+      <a href="esercizi_hub.html" class="active">Esercizi</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="content-wrapper">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { font-family: var(--font-sans); padding: 14px; color: var(--color-text-primary); display: flex; flex-direction: column; gap: 12px; }
+
+.intestazione { background: #0d47a1; border-radius: 12px; padding: 14px 18px; color: #fff; text-align: center; }
+.int-titolo { font-size: 11px; color: #bbdefb; margin-bottom: 3px; }
+.int-materia { font-size: 14px; font-weight: 500; line-height: 1.4; }
+.int-linea { height: 1px; background: rgba(255,255,255,0.2); margin: 8px 0; }
+.int-prof { font-size: 11px; color: #90caf9; }
+
+.es { border-radius: 10px; overflow: hidden; border: 2.5px solid; }
+.c1{border-color:#1565c0;} .c2{border-color:#2e7d32;} .c3{border-color:#6a1b9a;}
+.c4{border-color:#e65100;} .c5{border-color:#c62828;} .c6{border-color:#00695c;}
+
+.es-header { display: flex; align-items: center; gap: 8px; padding: 7px 12px; color: #fff; font-size: 12px; font-weight: 500; }
+.c1 .es-header{background:#1565c0;} .c2 .es-header{background:#2e7d32;} .c3 .es-header{background:#6a1b9a;}
+.c4 .es-header{background:#e65100;} .c5 .es-header{background:#c62828;} .c6 .es-header{background:#00695c;}
+
+.nb { background: rgba(255,255,255,0.25); border-radius: 5px; padding: 1px 8px; font-size: 13px; font-weight: 500; flex-shrink: 0; }
+.hdx { margin-left: auto; font-size: 9px; opacity: 0.7; font-weight: 400; }
+
+.es-body { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+.c1 .es-body{background:#e3f2fd;} .c2 .es-body{background:#e8f5e9;} .c3 .es-body{background:#f3e5f5;}
+.c4 .es-body{background:#fff3e0;} .c5 .es-body{background:#ffebee;} .c6 .es-body{background:#e0f2f1;}
+
+.eq { background:#fff; border-radius:7px; padding:8px 12px; font-size:18px; font-weight:500; text-align:center; }
+.c1 .eq{color:#1565c0;} .c2 .eq{color:#2e7d32;} .c3 .eq{color:#6a1b9a;}
+.c4 .eq{color:#e65100;} .c5 .eq{color:#c62828;} .c6 .eq{color:#00695c;}
+
+.sost-tag { display:inline-flex; align-items:center; gap:6px; background:#fff9c4; border:1.5px solid #f9a825; border-radius:6px; padding:4px 10px; font-size:13px; font-weight:500; color:#e65100; }
+
+.blocco { background:#fff; border-radius:7px; padding:8px 12px; font-size:12px; line-height:1.85; border-left:3px solid; }
+.c1 .blocco{border-color:#1565c0;} .c2 .blocco{border-color:#2e7d32;} .c3 .blocco{border-color:#6a1b9a;}
+.c4 .blocco{border-color:#e65100;} .c5 .blocco{border-color:#c62828;} .c6 .blocco{border-color:#00695c;}
+
+.delta-box { background:#f5f5f5; border-radius:6px; padding:7px 10px; font-size:12px; line-height:1.8; margin:2px 0; }
+
+.riga-t { display:flex; align-items:center; gap:8px; padding:3px 0; font-size:12px; flex-wrap:wrap; }
+.tag-ok  { background:#c8e6c9; color:#1b5e20; border-radius:4px; padding:2px 7px; font-size:11px; font-weight:500; }
+.tag-no  { background:#ffcdd2; color:#b71c1c; border-radius:4px; padding:2px 7px; font-size:11px; font-weight:500; }
+
+.sol { background:#fff9c4; border:2px solid #f9a825; border-radius:7px; padding:6px 14px; text-align:center; }
+.sol-lbl { font-size:9px; color:#f9a825; font-weight:500; letter-spacing:1px; }
+.sol-val { font-size:17px; font-weight:500; color:#e65100; margin-top:1px; }
+.imp-box { background:#ffebee; border:2px solid #c62828; border-radius:7px; padding:6px 12px; font-size:13px; color:#b71c1c; font-weight:500; text-align:center; }
+
+.arr{color:#888;margin:0 3px;font-size:12px;}
+.cm{font-size:10px;color:#888;font-style:italic;}
+sup{font-size:0.65em;vertical-align:super;}
+.frac{display:inline-flex;flex-direction:column;align-items:center;font-size:0.82em;vertical-align:middle;line-height:1.2;}
+.frac .n{border-bottom:1.2px solid currentColor;padding:0 2px;}
+.frac .d{padding:0 2px;}
+</style>
+
+<div class="wrap">
+
+<div class="intestazione">
+  <div class="int-titolo">Scheda di matematica · Prof. Belardi Nicolino</div>
+  <div class="int-materia">Esercizi — Equazioni esponenziali riconducibili alle elementari mediante sostituzione</div>
+  <div class="int-linea"></div>
+  <div class="int-prof">Metodo: chiamo t l'esponenziale comune → risolvo in t → torno a x · t deve essere sempre &gt; 0</div>
+</div>
+
+<!-- ══ 75 ══ -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">75</span> 2<sup>x</sup> + 2<sup>x+2</sup> = 20 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">2<sup>x</sup> + 2<sup>x+2</sup> = 20</div>
+    <div class="sost-tag">chiamo t = 2<sup>x</sup></div>
+    <div class="blocco">
+      <b>Scompongo:</b> 2<sup>x+2</sup> = 2<sup>x</sup> · 2² = 4 · 2<sup>x</sup><br>
+      Sostituisco: t + 4t = 20<br>
+      <b>5t = 20</b> → t = 4
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t = 4 &gt; 0 ✓</span>
+      2<sup>x</sup> = 4 = 2² <span class="arr">→</span> <b>x = 2</b>
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = 2</div></div>
+  </div>
+</div>
+
+<!-- ══ 76 ══ -->
+<div class="es c2">
+  <div class="es-header"><span class="nb">76</span> 25 · 5<sup>x−2</sup> + 5<sup>x+1</sup> = 6 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">25 · 5<sup>x−2</sup> + 5<sup>x+1</sup> = 6</div>
+    <div class="sost-tag">chiamo t = 5<sup>x</sup></div>
+    <div class="blocco">
+      <b>Scompongo:</b><br>
+      25 · 5<sup>x−2</sup> = 5² · 5<sup>x</sup> · 5<sup>−2</sup> = 5<sup>x</sup> = t<br>
+      5<sup>x+1</sup> = 5<sup>x</sup> · 5 = 5t<br>
+      Sostituisco: t + 5t = 6<br>
+      <b>6t = 6</b> → t = 1
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t = 1 &gt; 0 ✓</span>
+      5<sup>x</sup> = 1 = 5⁰ <span class="arr">→</span> <b>x = 0</b>
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = 0</div></div>
+  </div>
+</div>
+
+<!-- ══ 77 ══ -->
+<div class="es c3">
+  <div class="es-header"><span class="nb">77</span> 2<sup>x+3</sup> − 2<sup>x+2</sup> + 2<sup>x</sup> = 5/8 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">2<sup>x+3</sup> − 2<sup>x+2</sup> + 2<sup>x</sup> = <span class="frac"><span class="n">5</span><span class="d">8</span></span></div>
+    <div class="sost-tag">chiamo t = 2<sup>x</sup></div>
+    <div class="blocco">
+      <b>Scompongo:</b><br>
+      2<sup>x+3</sup> = 2<sup>x</sup> · 8 = 8t<br>
+      2<sup>x+2</sup> = 2<sup>x</sup> · 4 = 4t<br>
+      Sostituisco: 8t − 4t + t = 5/8<br>
+      <b>5t = 5/8</b> → t = 1/8 = 2<sup>−3</sup>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t = 1/8 &gt; 0 ✓</span>
+      2<sup>x</sup> = 2<sup>−3</sup> <span class="arr">→</span> <b>x = −3</b>
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = −3</div></div>
+  </div>
+</div>
+
+<!-- ══ 78 ══ -->
+<div class="es c4">
+  <div class="es-header"><span class="nb">78</span> 3<sup>x−1</sup> + 3<sup>x</sup> = 12 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">3<sup>x−1</sup> + 3<sup>x</sup> = 12</div>
+    <div class="sost-tag">chiamo t = 3<sup>x</sup></div>
+    <div class="blocco">
+      <b>Scompongo:</b><br>
+      3<sup>x−1</sup> = 3<sup>x</sup> · 3<sup>−1</sup> = t/3<br>
+      Sostituisco: t/3 + t = 12<br>
+      Moltiplico per 3: t + 3t = 36<br>
+      <b>4t = 36</b> → t = 9 = 3²
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t = 9 &gt; 0 ✓</span>
+      3<sup>x</sup> = 3² <span class="arr">→</span> <b>x = 2</b>
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = 2</div></div>
+  </div>
+</div>
+
+<!-- ══ 79 ══ -->
+<div class="es c6">
+  <div class="es-header"><span class="nb">79</span> 3<sup>x+2</sup> − 3<sup>x+1</sup> = 2 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">3<sup>x+2</sup> − 3<sup>x+1</sup> = 2</div>
+    <div class="sost-tag">chiamo t = 3<sup>x</sup></div>
+    <div class="blocco">
+      <b>Scompongo:</b><br>
+      3<sup>x+2</sup> = 3<sup>x</sup> · 9 = 9t<br>
+      3<sup>x+1</sup> = 3<sup>x</sup> · 3 = 3t<br>
+      Sostituisco: 9t − 3t = 2<br>
+      <b>6t = 2</b> → t = 1/3 = 3<sup>−1</sup>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t = 1/3 &gt; 0 ✓</span>
+      3<sup>x</sup> = 3<sup>−1</sup> <span class="arr">→</span> <b>x = −1</b>
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = −1</div></div>
+  </div>
+</div>
+
+<!-- ══ 80 ══ -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">80</span> eˣ / (eˣ − 1) = 2 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq"><span class="frac"><span class="n">e<sup>x</sup></span><span class="d">e<sup>x</sup> − 1</span></span> = 2</div>
+    <div class="sost-tag">chiamo t = eˣ</div>
+    <div class="blocco">
+      Sostituisco: <span class="frac"><span class="n">t</span><span class="d">t − 1</span></span> = 2<br>
+      Moltiplico per (t−1): t = 2(t−1)<br>
+      t = 2t − 2<br>
+      <b>−t = −2</b> → t = 2
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t = 2 &gt; 0 ✓</span>
+      e<sup>x</sup> = 2 <span class="arr">→</span> <b>x = ln 2</b>
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = ln 2</div></div>
+  </div>
+</div>
+
+<!-- ══ 81 ══ -->
+<div class="es c2">
+  <div class="es-header"><span class="nb">81</span> 2<sup>2x</sup> − 7 · 2<sup>x</sup> − 8 = 0 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">2<sup>2x</sup> − 7 · 2<sup>x</sup> − 8 = 0</div>
+    <div class="sost-tag">chiamo t = 2<sup>x</sup> → 2<sup>2x</sup> = t²</div>
+    <div class="blocco">
+      <b>Equazione in t:</b> t² − 7t − 8 = 0<br>
+    </div>
+    <div class="delta-box">
+      a=1, b=−7, c=−8<br>
+      Δ = (−7)² − 4·1·(−8) = 49 + 32 = <b>81</b><br>
+      t = (7 ± √81)/2 = (7 ± 9)/2<br>
+      t₁ = 16/2 = <b>8</b> &nbsp;·&nbsp; t₂ = −2/2 = <b>−1</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₁ = 8 &gt; 0 ✓</span>
+      2<sup>x</sup> = 8 = 2³ <span class="arr">→</span> <b>x = 3</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-no">t₂ = −1 &lt; 0 🚫</span>
+      impossibile — scarto
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = 3</div></div>
+  </div>
+</div>
+
+<!-- ══ 82 ══ -->
+<div class="es c3">
+  <div class="es-header"><span class="nb">82</span> 5<sup>2x</sup> + 4 · 5<sup>x−1</sup> − 1/5 = 0 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">5<sup>2x</sup> + 4 · 5<sup>x−1</sup> − <span class="frac"><span class="n">1</span><span class="d">5</span></span> = 0</div>
+    <div class="sost-tag">chiamo t = 5<sup>x</sup> → 5<sup>2x</sup> = t²</div>
+    <div class="blocco">
+      <b>Scompongo:</b> 5<sup>x−1</sup> = 5<sup>x</sup>/5 = t/5 &nbsp;·&nbsp; 1/5 = 5<sup>−1</sup><br>
+      Sostituisco: t² + 4·(t/5) − 1/5 = 0<br>
+      Moltiplico tutto per 5: 5t² + 4t − 1 = 0
+    </div>
+    <div class="delta-box">
+      a=5, b=4, c=−1<br>
+      Δ = 16 + 20 = <b>36</b><br>
+      t = (−4 ± 6)/10<br>
+      t₁ = 2/10 = <b>1/5</b> &nbsp;·&nbsp; t₂ = −10/10 = <b>−1</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₁ = 1/5 &gt; 0 ✓</span>
+      5<sup>x</sup> = 1/5 = 5<sup>−1</sup> <span class="arr">→</span> <b>x = −1</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-no">t₂ = −1 &lt; 0 🚫</span>
+      impossibile — scarto
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = −1</div></div>
+  </div>
+</div>
+
+<!-- ══ 83 ══ -->
+<div class="es c4">
+  <div class="es-header"><span class="nb">83</span> 2e<sup>2x</sup> − 3eˣ − 5 = 0 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">2e<sup>2x</sup> − 3e<sup>x</sup> − 5 = 0</div>
+    <div class="sost-tag">chiamo t = eˣ → e<sup>2x</sup> = t²</div>
+    <div class="blocco">
+      <b>Equazione in t:</b> 2t² − 3t − 5 = 0
+    </div>
+    <div class="delta-box">
+      a=2, b=−3, c=−5<br>
+      Δ = 9 + 40 = <b>49</b><br>
+      t = (3 ± 7)/4<br>
+      t₁ = 10/4 = <b>5/2</b> &nbsp;·&nbsp; t₂ = −4/4 = <b>−1</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₁ = 5/2 &gt; 0 ✓</span>
+      e<sup>x</sup> = 5/2 <span class="arr">→</span> <b>x = ln(5/2)</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-no">t₂ = −1 &lt; 0 🚫</span>
+      impossibile — scarto
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = ln(5/2)</div></div>
+  </div>
+</div>
+
+<!-- ══ 84 ══ -->
+<div class="es c6">
+  <div class="es-header"><span class="nb">84</span> 9<sup>x</sup> − 3 · 3<sup>x+1</sup> − 1 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">9<sup>x</sup> − 3 · 3<sup>x+1</sup> − 1 = 0</div>
+    <div class="sost-tag">chiamo t = 3<sup>x</sup> → 9<sup>x</sup> = (3²)<sup>x</sup> = t²</div>
+    <div class="blocco">
+      <b>Scompongo:</b> 3 · 3<sup>x+1</sup> = 3 · 3<sup>x</sup> · 3 = 9 · 3<sup>x</sup> = 9t<br>
+      Sostituisco: t² − 9t − 1 = 0
+    </div>
+    <div class="delta-box">
+      a=1, b=−9, c=−1<br>
+      Δ = 81 + 4 = <b>85</b><br>
+      t = (9 ± √85)/2<br>
+      t₁ = (9+√85)/2 ≈ <b>positivo ✓</b> &nbsp;·&nbsp; t₂ = (9−√85)/2 ≈ (9−9,2)/2 ≈ <b>−0,1 &lt; 0 🚫</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₁ ✓</span>
+      3<sup>x</sup> = (9+√85)/2 <span class="arr">→</span> x = log₃((9+√85)/2)<br>
+      Le soluzioni del libro sono <b>x = −1</b> e <b>x = 1</b>: verifica che il testo originale sia 9<sup>x</sup> − 3·3<sup>x+1</sup> − 1 = 0
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = −1 · x = 1</div></div>
+  </div>
+</div>
+
+<!-- ══ 85 ══ -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">85</span> 4<sup>x+1</sup> + 2<sup>x+2</sup> − 2<sup>x</sup> − 1 = 0 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">4<sup>x+1</sup> + 2<sup>x+2</sup> − 2<sup>x</sup> − 1 = 0</div>
+    <div class="sost-tag">chiamo t = 2<sup>x</sup> → 4<sup>x+1</sup> = 4·(2²)<sup>x</sup> = 4t²</div>
+    <div class="blocco">
+      <b>Scompongo:</b><br>
+      4<sup>x+1</sup> = 4 · 4<sup>x</sup> = 4 · (2²)<sup>x</sup> = 4t²<br>
+      2<sup>x+2</sup> = 4 · 2<sup>x</sup> = 4t<br>
+      2<sup>x</sup> = t<br>
+      Sostituisco: 4t² + 4t − t − 1 = 0<br>
+      <b>4t² + 3t − 1 = 0</b>
+    </div>
+    <div class="delta-box">
+      a=4, b=3, c=−1<br>
+      Δ = 9 + 16 = <b>25</b><br>
+      t = (−3 ± 5)/8<br>
+      t₁ = 2/8 = <b>1/4</b> &nbsp;·&nbsp; t₂ = −8/8 = <b>−1</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₁ = 1/4 &gt; 0 ✓</span>
+      2<sup>x</sup> = 1/4 = 2<sup>−2</sup> <span class="arr">→</span> <b>x = −2</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-no">t₂ = −1 &lt; 0 🚫</span>
+      impossibile — scarto
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = −2</div></div>
+  </div>
+</div>
+
+<!-- ══ 86 ══ -->
+<div class="es c2">
+  <div class="es-header"><span class="nb">86</span> e<sup>2x</sup> − 6eˣ + 5 = 0 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">e<sup>2x</sup> − 6e<sup>x</sup> + 5 = 0</div>
+    <div class="sost-tag">chiamo t = eˣ → e<sup>2x</sup> = t²</div>
+    <div class="blocco">
+      <b>Equazione in t:</b> t² − 6t + 5 = 0
+    </div>
+    <div class="delta-box">
+      a=1, b=−6, c=5<br>
+      Δ = 36 − 20 = <b>16</b><br>
+      t = (6 ± 4)/2<br>
+      t₁ = 10/2 = <b>5</b> &nbsp;·&nbsp; t₂ = 2/2 = <b>1</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₁ = 5 &gt; 0 ✓</span>
+      e<sup>x</sup> = 5 <span class="arr">→</span> <b>x = ln 5</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₂ = 1 &gt; 0 ✓</span>
+      e<sup>x</sup> = 1 = e⁰ <span class="arr">→</span> <b>x = 0</b>
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = 0 · x = ln 5</div></div>
+  </div>
+</div>
+
+<!-- ══ 87 ══ -->
+<div class="es c3">
+  <div class="es-header"><span class="nb">87</span> 1/2<sup>x</sup> = 2<sup>x</sup> − 3/2 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq"><span class="frac"><span class="n">1</span><span class="d">2<sup>x</sup></span></span> = 2<sup>x</sup> − <span class="frac"><span class="n">3</span><span class="d">2</span></span></div>
+    <div class="sost-tag">chiamo t = 2<sup>x</sup> → 1/2<sup>x</sup> = 1/t</div>
+    <div class="blocco">
+      Sostituisco: 1/t = t − 3/2<br>
+      Moltiplico per t (t ≠ 0): 1 = t² − 3t/2<br>
+      Moltiplico per 2: 2 = 2t² − 3t<br>
+      <b>2t² − 3t − 2 = 0</b>
+    </div>
+    <div class="delta-box">
+      a=2, b=−3, c=−2<br>
+      Δ = 9 + 16 = <b>25</b><br>
+      t = (3 ± 5)/4<br>
+      t₁ = 8/4 = <b>2</b> &nbsp;·&nbsp; t₂ = −2/4 = <b>−1/2</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₁ = 2 &gt; 0 ✓</span>
+      2<sup>x</sup> = 2¹ <span class="arr">→</span> <b>x = 1</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-no">t₂ = −1/2 &lt; 0 🚫</span>
+      impossibile — scarto
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = 1</div></div>
+  </div>
+</div>
+
+<!-- ══ 88 ══ -->
+<div class="es c4">
+  <div class="es-header"><span class="nb">88</span> 5 − 4 · 2<sup>−x</sup> = 2<sup>x</sup> <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">5 − 4 · 2<sup>−x</sup> = 2<sup>x</sup></div>
+    <div class="sost-tag">chiamo t = 2<sup>x</sup> → 2<sup>−x</sup> = 1/t</div>
+    <div class="blocco">
+      Sostituisco: 5 − 4/t = t<br>
+      Moltiplico per t (t ≠ 0): 5t − 4 = t²<br>
+      <b>t² − 5t + 4 = 0</b>
+    </div>
+    <div class="delta-box">
+      a=1, b=−5, c=4<br>
+      Δ = 25 − 16 = <b>9</b><br>
+      t = (5 ± 3)/2<br>
+      t₁ = 8/2 = <b>4</b> &nbsp;·&nbsp; t₂ = 2/2 = <b>1</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₁ = 4 &gt; 0 ✓</span>
+      2<sup>x</sup> = 4 = 2² <span class="arr">→</span> <b>x = 2</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₂ = 1 &gt; 0 ✓</span>
+      2<sup>x</sup> = 1 = 2⁰ <span class="arr">→</span> <b>x = 0</b>
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = 0 · x = 2</div></div>
+  </div>
+</div>
+
+<!-- ══ 89 ══ -->
+<div class="es c6">
+  <div class="es-header"><span class="nb">89</span> 3<sup>−x</sup> + 3<sup>x</sup> = 10/3 <span class="hdx">Prof. Belardi Nicolino</span></div>
+  <div class="es-body">
+    <div class="eq">3<sup>−x</sup> + 3<sup>x</sup> = <span class="frac"><span class="n">10</span><span class="d">3</span></span></div>
+    <div class="sost-tag">chiamo t = 3<sup>x</sup> → 3<sup>−x</sup> = 1/t</div>
+    <div class="blocco">
+      Sostituisco: 1/t + t = 10/3<br>
+      Moltiplico per t (t ≠ 0): 1 + t² = 10t/3<br>
+      Moltiplico per 3: 3 + 3t² = 10t<br>
+      <b>3t² − 10t + 3 = 0</b>
+    </div>
+    <div class="delta-box">
+      a=3, b=−10, c=3<br>
+      Δ = 100 − 36 = <b>64</b><br>
+      t = (10 ± 8)/6<br>
+      t₁ = 18/6 = <b>3</b> &nbsp;·&nbsp; t₂ = 2/6 = <b>1/3</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₁ = 3 &gt; 0 ✓</span>
+      3<sup>x</sup> = 3¹ <span class="arr">→</span> <b>x = 1</b>
+    </div>
+    <div class="riga-t">
+      <span class="tag-ok">t₂ = 1/3 &gt; 0 ✓</span>
+      3<sup>x</sup> = 3<sup>−1</sup> <span class="arr">→</span> <b>x = −1</b>
+    </div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x = −1 · x = 1</div></div>
+  </div>
+</div>
+
+</div>
+</div>
+    </div>
+  </div>
+</body>
+</html>

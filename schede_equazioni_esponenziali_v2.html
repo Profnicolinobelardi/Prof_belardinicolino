@@ -1,0 +1,363 @@
+﻿
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { font-family: var(--font-sans); padding: 14px; color: var(--color-text-primary); display: flex; flex-direction: column; gap: 14px; }
+
+.intestazione { background: #0d47a1; border-radius: 12px; padding: 14px 18px; color: #fff; text-align: center; }
+.int-titolo { font-size: 12px; font-weight: 500; color: #bbdefb; margin-bottom: 3px; }
+.int-materia { font-size: 16px; font-weight: 500; }
+.int-prof { font-size: 11px; color: #90caf9; margin-top: 6px; }
+.int-linea { height: 1px; background: rgba(255,255,255,0.2); margin: 8px 0; }
+.int-indice { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.int-badge { background: rgba(255,255,255,0.15); border-radius: 20px; padding: 3px 10px; font-size: 10px; }
+
+.scheda { border-radius: 12px; overflow: hidden; border: 3px solid; }
+.s-blu   { border-color: #1565c0; }
+.s-verde { border-color: #2e7d32; }
+.s-viola { border-color: #6a1b9a; }
+.s-arancio { border-color: #e65100; }
+
+.scheda-header { display: flex; align-items: center; gap: 10px; padding: 9px 14px; color: #fff; font-size: 13px; font-weight: 500; }
+.s-blu .scheda-header    { background: #1565c0; }
+.s-verde .scheda-header  { background: #2e7d32; }
+.s-viola .scheda-header  { background: #6a1b9a; }
+.s-arancio .scheda-header { background: #e65100; }
+
+.header-dx { margin-left: auto; font-size: 9px; opacity: 0.75; font-weight: 400; white-space: nowrap; }
+.icona { font-size: 16px; width: 30px; height: 30px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+.scheda-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.s-blu .scheda-body    { background: #e3f2fd; }
+.s-verde .scheda-body  { background: #e8f5e9; }
+.s-viola .scheda-body  { background: #f3e5f5; }
+.s-arancio .scheda-body { background: #fff3e0; }
+
+.def-box { background: #fff; border-radius: 8px; padding: 10px 12px; font-size: 13px; line-height: 1.75; border-left: 4px solid; }
+.s-blu .def-box    { border-color: #1565c0; }
+.s-verde .def-box  { border-color: #2e7d32; }
+.s-viola .def-box  { border-color: #6a1b9a; }
+.s-arancio .def-box { border-color: #e65100; }
+
+.regola-box { background: #fff; border-radius: 8px; padding: 9px 12px; display: flex; align-items: flex-start; gap: 8px; font-size: 12px; line-height: 1.65; }
+.ricorda { background: #fff9c4; border: 2px solid #f9a825; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.65; display: flex; gap: 8px; }
+.imp { background: #ffebee; border: 2px solid #c62828; border-radius: 8px; padding: 7px 12px; font-size: 12px; color: #b71c1c; display: flex; gap: 8px; align-items: flex-start; }
+
+.step-card { background: #fff; border-radius: 8px; overflow: hidden; border-left: 5px solid; margin-bottom: 2px; }
+.step-card .sh { padding: 6px 12px; font-size: 11px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+.step-card .sb { padding: 8px 12px; font-size: 13px; line-height: 1.7; }
+.sn { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #fff; flex-shrink: 0; }
+
+.freccia-giu { text-align: center; font-size: 16px; color: #888; margin: -1px 0; }
+
+.sol { background: #fff9c4; border: 2px solid #f9a825; border-radius: 8px; padding: 8px 14px; text-align: center; }
+.sol-label { font-size: 10px; color: #f9a825; font-weight: 500; letter-spacing: 1px; }
+.sol-val { font-size: 20px; font-weight: 500; color: #e65100; margin-top: 2px; }
+
+.eq-box { background: #fff; border-radius: 8px; padding: 10px; font-size: 17px; font-weight: 500; text-align: center; }
+.s-blu .eq-box    { color: #1565c0; }
+.s-verde .eq-box  { color: #2e7d32; }
+.s-viola .eq-box  { color: #6a1b9a; }
+.s-arancio .eq-box { color: #e65100; }
+
+.passaggi { display: flex; flex-direction: column; gap: 4px; }
+.riga { font-size: 13px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.comm { font-size: 10px; color: #888; font-style: italic; }
+
+.griglia-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.tipo-card { background: #fff; border-radius: 8px; padding: 10px; text-align: center; font-size: 12px; line-height: 1.6; border-top: 4px solid; }
+
+.sost-box { background: #fff9c4; border: 1.5px solid #f9a825; border-radius: 8px; padding: 8px 12px; font-size: 13px; font-weight: 500; color: #e65100; text-align: center; }
+.tag-ok { background: #c8e6c9; color: #1b5e20; border-radius: 4px; padding: 1px 6px; font-size: 10px; font-weight: 500; }
+.tag-no { background: #ffcdd2; color: #b71c1c; border-radius: 4px; padding: 1px 6px; font-size: 10px; font-weight: 500; }
+
+sup { font-size: 0.65em; vertical-align: super; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; font-size: 0.82em; vertical-align: middle; line-height: 1.2; }
+.frac .n { border-bottom: 1.2px solid currentColor; padding: 0 2px; }
+.frac .d { padding: 0 2px; }
+</style>
+
+<div class="wrap">
+
+<!-- INTESTAZIONE -->
+<div class="intestazione">
+  <div class="int-titolo">Scheda di matematica</div>
+  <div class="int-materia">Equazioni esponenziali e funzioni esponenziali</div>
+  <div class="int-linea"></div>
+  <div class="int-prof">Prof. Belardi Nicolino</div>
+  <div class="int-indice">
+    <span class="int-badge">Scheda 8 · Cos'è un'equazione esponenziale</span>
+    <span class="int-badge">Scheda 9 · Equazioni elementari</span>
+    <span class="int-badge">Scheda 10 · Esempio elementare</span>
+    <span class="int-badge">Scheda 11 · Equazioni non elementari</span>
+    <span class="int-badge">Scheda 12 · Esempio non elementare</span>
+  </div>
+</div>
+
+<!-- â•â•â•â•â•â•â•â•â•â• SCHEDA 8 â•â•â•â•â•â•â•â•â•â• -->
+<div class="scheda s-blu">
+  <div class="scheda-header">
+    <div class="icona">â“</div>
+    SCHEDA 8 â€” Cos'è un'equazione esponenziale?
+    <span class="header-dx">Scheda di matematica · Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+    <div class="def-box">
+      Un'<b>equazione esponenziale</b> è un'equazione dove l'incognita <b>x</b> si trova all'<b>esponente</b>, non alla base.<br><br>
+      L'obiettivo è trovare il valore di <b>x</b> che rende vera l'equazione.
+    </div>
+    <div class="regola-box">
+      <span style="font-size:18px;">âš ï¸</span>
+      <div>Non confondere:<br>
+      <b>2<sup>x</sup> = 8</b> â†’ esponenziale (x è su in alto)<br>
+      <b>x² = 8</b> â†’ polinomiale (x è in basso, alla base)</div>
+    </div>
+    <div style="font-size:11px;font-weight:500;color:#777;text-transform:uppercase;margin-bottom:2px;">Le equazioni esponenziali si dividono in due tipi:</div>
+    <div class="griglia-3">
+      <div class="tipo-card" style="border-color:#2e7d32;">
+        <div style="font-size:18px;">ðŸ“—</div>
+        <div style="font-weight:500;color:#2e7d32;margin:4px 0;">ELEMENTARI</div>
+        <div style="color:#555;">1 o 2 termini</div>
+        <div style="font-size:11px;color:#888;margin-top:4px;">Più semplici</div>
+      </div>
+      <div class="tipo-card" style="border-color:#e65100;">
+        <div style="font-size:18px;">ðŸ“™</div>
+        <div style="font-weight:500;color:#e65100;margin:4px 0;">NON ELEMENTARI</div>
+        <div style="color:#555;">3 o più termini</div>
+        <div style="font-size:11px;color:#888;margin-top:4px;">Più complesse</div>
+      </div>
+      <div class="tipo-card" style="border-color:#c62828;">
+        <div style="font-size:18px;">ðŸš«</div>
+        <div style="font-weight:500;color:#c62828;margin:4px 0;">MISTE</div>
+        <div style="color:#555;">x alla base E all'esponente</div>
+        <div style="font-size:11px;color:#888;margin-top:4px;">Non esponenziali!</div>
+      </div>
+    </div>
+    <div class="ricorda">
+      <span style="font-size:16px;flex-shrink:0;">ðŸ’¡</span>
+      <div>Per contare i termini: sono separati da <b>+</b> e <b>âˆ’</b> o dall'uguale <b>=</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- â•â•â•â•â•â•â•â•â•â• SCHEDA 9 â•â•â•â•â•â•â•â•â•â• -->
+<div class="scheda s-verde">
+  <div class="scheda-header">
+    <div class="icona">ðŸ“—</div>
+    SCHEDA 9 â€” Equazioni elementari: come si risolvono
+    <span class="header-dx">Scheda di matematica · Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+    <div class="def-box">
+      Le equazioni elementari hanno <b>1 o 2 termini</b>.<br>
+      Si risolvono cercando di ottenere la stessa base a destra e a sinistra, poi si uguagliano gli esponenti.
+    </div>
+    <div style="font-size:11px;font-weight:500;color:#777;text-transform:uppercase;margin-bottom:2px;">Prima di tutto: controlla il numero a destra!</div>
+    <div class="step-card" style="border-color:#c62828;">
+      <div class="sh" style="background:#ffebee;color:#c62828;"><div class="sn" style="background:#c62828;">!</div>Se il numero a destra è 0 â†’ IMPOSSIBILE</div>
+      <div class="sb" style="font-size:12px;">Nessuna potenza può dare 0.<br><span style="color:#888;">Es: 3<sup>x</sup> = 0 â†’ impossibile!</span></div>
+    </div>
+    <div class="step-card" style="border-color:#c62828;">
+      <div class="sh" style="background:#ffebee;color:#c62828;"><div class="sn" style="background:#c62828;">!</div>Se il numero a destra è negativo â†’ IMPOSSIBILE</div>
+      <div class="sb" style="font-size:12px;">Nessuna potenza può dare un numero negativo.<br><span style="color:#888;">Es: 2<sup>x</sup> = âˆ’5 â†’ impossibile!</span></div>
+    </div>
+    <div class="step-card" style="border-color:#2e7d32;">
+      <div class="sh" style="background:#e8f5e9;color:#2e7d32;"><div class="sn" style="background:#2e7d32;">âœ“</div>Se il numero a destra è positivo â†’ SI PUÃ’ RISOLVERE</div>
+      <div class="sb" style="font-size:12px;">Procedi con i 3 passi qui sotto.</div>
+    </div>
+    <div style="font-size:11px;font-weight:500;color:#777;text-transform:uppercase;margin:2px 0;">I 3 passi da seguire:</div>
+    <div class="step-card" style="border-color:#1565c0;">
+      <div class="sh" style="background:#e3f2fd;color:#1565c0;"><div class="sn" style="background:#1565c0;">1</div>Scegli la base di riferimento</div>
+      <div class="sb" style="font-size:12px;">Trova un numero base comune per entrambi i lati.<br><span style="color:#888;">Es: se vedi 4 e 8, la base è 2 perché© 4=2² e 8=2³</span></div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#7b1fa2;">
+      <div class="sh" style="background:#f3e5f5;color:#7b1fa2;"><div class="sn" style="background:#7b1fa2;">2</div>Riscrivi tutto con la stessa base</div>
+      <div class="sb" style="font-size:12px;">Trasforma tutti i numeri in potenze con quella base.</div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#2e7d32;">
+      <div class="sh" style="background:#e8f5e9;color:#2e7d32;"><div class="sn" style="background:#2e7d32;">3</div>Cancella le basi e uguaglia gli esponenti</div>
+      <div class="sb" style="font-size:12px;">Se b<sup>A</sup> = b<sup>B</sup> â†’ A = B. Risolvi e trova x!</div>
+    </div>
+    <div class="ricorda">
+      <span style="font-size:16px;flex-shrink:0;">ðŸ”‘</span>
+      <div><b>Stessa base â†’ cancello le basi â†’ ugualio solo gli esponenti</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- â•â•â•â•â•â•â•â•â•â• SCHEDA 10 â•â•â•â•â•â•â•â•â•â• -->
+<div class="scheda s-verde">
+  <div class="scheda-header">
+    <div class="icona">âœï¸</div>
+    SCHEDA 10 â€” Esempio equazione elementare
+    <span class="header-dx">Scheda di matematica · Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+    <div style="font-size:11px;font-weight:500;color:#777;text-transform:uppercase;margin-bottom:2px;">Equazione da risolvere</div>
+    <div class="eq-box">
+      <span class="frac"><span class="n">4<sup>x</sup></span><span class="d">2</span></span>
+      = 2âˆš8
+    </div>
+    <div class="step-card" style="border-color:#1565c0;">
+      <div class="sh" style="background:#e3f2fd;color:#1565c0;"><div class="sn" style="background:#1565c0;">1</div>Base di riferimento: 2</div>
+      <div class="sb">
+        <div class="passaggi">
+          <div class="riga">4 = 2² &nbsp;â†’&nbsp; 4<sup>x</sup> = (2²)<sup>x</sup> = 2<sup>2x</sup></div>
+          <div class="riga">âˆš8 = 2<sup>3/2</sup> &nbsp;â†’&nbsp; 2âˆš8 = 2¹ · 2<sup>3/2</sup></div>
+        </div>
+      </div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#7b1fa2;">
+      <div class="sh" style="background:#f3e5f5;color:#7b1fa2;"><div class="sn" style="background:#7b1fa2;">2</div>Applico le regole delle potenze</div>
+      <div class="sb">
+        <div class="passaggi">
+          <div class="riga">
+            <span class="frac"><span class="n">2<sup>2x</sup></span><span class="d">2<sup>1</sup></span></span>
+            = 2<sup>1</sup> · 2<sup>3/2</sup>
+          </div>
+          <div class="riga">2<sup>2xâˆ’1</sup> = 2<sup>1 + 3/2</sup></div>
+        </div>
+      </div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#2e7d32;">
+      <div class="sh" style="background:#e8f5e9;color:#2e7d32;"><div class="sn" style="background:#2e7d32;">3</div>Stessa base â†’ ugualio gli esponenti</div>
+      <div class="sb">
+        <div class="passaggi">
+          <div class="riga">2x âˆ’ 1 = 1 + <span class="frac"><span class="n">3</span><span class="d">2</span></span></div>
+          <div class="riga">2x = 2 + <span class="frac"><span class="n">3</span><span class="d">2</span></span> = <span class="frac"><span class="n">7</span><span class="d">2</span></span></div>
+          <div class="riga">x = <span class="frac"><span class="n">7</span><span class="d">4</span></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="sol">
+      <div class="sol-label">ðŸ† SOLUZIONE</div>
+      <div class="sol-val">x = 7/4</div>
+    </div>
+  </div>
+</div>
+
+<!-- â•â•â•â•â•â•â•â•â•â• SCHEDA 11 â•â•â•â•â•â•â•â•â•â• -->
+<div class="scheda s-viola">
+  <div class="scheda-header">
+    <div class="icona">ðŸ“™</div>
+    SCHEDA 11 â€” Equazioni non elementari: come si risolvono
+    <span class="header-dx">Scheda di matematica · Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+    <div class="def-box">
+      Le equazioni non elementari hanno <b>3 o più termini</b>.<br>
+      Si usano un <b>trucco speciale</b> chiamato <b>sostituzione con t</b>.
+    </div>
+    <div class="sost-box">
+      ðŸ’¡ Il trucco: chiamo <b>t</b> la parte esponenziale più semplice che si ripete<br>
+      â†’ l'equazione diventa una normale equazione in t!
+    </div>
+    <div style="font-size:11px;font-weight:500;color:#777;text-transform:uppercase;margin:2px 0;">I 5 passi da seguire:</div>
+    <div class="step-card" style="border-color:#c62828;">
+      <div class="sh" style="background:#ffebee;color:#c62828;"><div class="sn" style="background:#c62828;">1</div>Sposto tutto a sinistra dell'uguale</div>
+      <div class="sb" style="font-size:12px;">Metto zero a destra. Cambio segno a ciò che sposto.</div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#e65100;">
+      <div class="sh" style="background:#fff3e0;color:#e65100;"><div class="sn" style="background:#e65100;">2</div>Scompongo gli esponenziali</div>
+      <div class="sb" style="font-size:12px;">Riscrivo ogni potenza con basi piccole.<br>
+      <span style="color:#888;">Attenzione: scompongo SOLO le parti con la x all'esponente!</span></div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#7b1fa2;">
+      <div class="sh" style="background:#f3e5f5;color:#7b1fa2;"><div class="sn" style="background:#7b1fa2;">3</div>Trovo l'esponenziale comune e chiamo t</div>
+      <div class="sb" style="font-size:12px;">Individuo il termine più semplice che compare ovunque.<br>
+      Es: se ho 2<sup>x</sup> in tutti i termini â†’ scrivo <b>2<sup>x</sup> = t</b></div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#2e7d32;">
+      <div class="sh" style="background:#e8f5e9;color:#2e7d32;"><div class="sn" style="background:#2e7d32;">4</div>Risolvo l'equazione in t</div>
+      <div class="sb" style="font-size:12px;">Ora ho una normale equazione di 1° o 2° grado.<br>La risolvo con i metodi conosciuti.</div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#1565c0;">
+      <div class="sh" style="background:#e3f2fd;color:#1565c0;"><div class="sn" style="background:#1565c0;">5</div>Ritorno a x</div>
+      <div class="sb" style="font-size:12px;">Per ogni valore di t trovato, sostituisco e ricavo x.<br>
+      <b>Se t è negativo o zero â†’ impossibile!</b></div>
+    </div>
+    <div class="imp">
+      <span style="font-size:18px;">ðŸš«</span>
+      <div><b>Regola d'oro:</b> se trovi t negativo o t = 0 â†’ scarta quella soluzione! b<sup>x</sup> è sempre positiva.</div>
+    </div>
+    <div class="ricorda">
+      <span style="font-size:16px;flex-shrink:0;">ðŸ”‘</span>
+      <div><b>Sposta â†’ scomponi â†’ chiama t â†’ risolvi in t â†’ torna a x â†’ scarta t â‰¤ 0</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- â•â•â•â•â•â•â•â•â•â• SCHEDA 12 â•â•â•â•â•â•â•â•â•â• -->
+<div class="scheda s-arancio">
+  <div class="scheda-header">
+    <div class="icona">âœï¸</div>
+    SCHEDA 12 â€” Esempio equazione non elementare
+    <span class="header-dx">Scheda di matematica · Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+    <div style="font-size:11px;font-weight:500;color:#777;text-transform:uppercase;margin-bottom:2px;">Equazione da risolvere</div>
+    <div class="eq-box">4<sup>x</sup> + 2<sup>x+2</sup> âˆ’ 8 = 2<sup>xâˆ’1</sup> + 3</div>
+    <div class="step-card" style="border-color:#c62828;">
+      <div class="sh" style="background:#ffebee;color:#c62828;"><div class="sn" style="background:#c62828;">1</div>Sposto tutto a sinistra</div>
+      <div class="sb"><div class="passaggi"><div class="riga">4<sup>x</sup> + 2<sup>x+2</sup> âˆ’ 8 âˆ’ 2<sup>xâˆ’1</sup> âˆ’ 3 = 0</div></div></div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#e65100;">
+      <div class="sh" style="background:#fff3e0;color:#e65100;"><div class="sn" style="background:#e65100;">2</div>Scompongo gli esponenziali</div>
+      <div class="sb">
+        <div class="passaggi">
+          <div class="riga">4<sup>x</sup> = (2²)<sup>x</sup> = 2<sup>2x</sup> <span class="comm">potenza di potenza</span></div>
+          <div class="riga">2<sup>x+2</sup> = 2<sup>x</sup> · 4 <span class="comm">prodotto stessa base</span></div>
+          <div class="riga">2<sup>xâˆ’1</sup> = <span class="frac"><span class="n">2<sup>x</sup></span><span class="d">2</span></span> <span class="comm">esponente negativo</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#7b1fa2;">
+      <div class="sh" style="background:#f3e5f5;color:#7b1fa2;"><div class="sn" style="background:#7b1fa2;">3</div>Chiamo t = 2<sup>x</sup></div>
+      <div class="sb">
+        <div class="sost-box" style="font-size:12px;padding:6px 10px;">Pongo: <b>2<sup>x</sup> = t</b> &nbsp;â†’&nbsp; 2<sup>2x</sup> = t²</div>
+        <div class="passaggi" style="margin-top:6px;">
+          <div class="riga">t² + 4t âˆ’ 8 âˆ’ <span class="frac"><span class="n">t</span><span class="d">2</span></span> âˆ’ 3 = 0</div>
+          <div class="riga" style="color:#888;font-size:11px;">Ã— 2: &nbsp;2t² + 8t âˆ’ 16 âˆ’ t âˆ’ 6 = 0</div>
+          <div class="riga"><b>2t² + 7t âˆ’ 22 = 0</b> <span class="comm">equazione di 2° grado!</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#2e7d32;">
+      <div class="sh" style="background:#e8f5e9;color:#2e7d32;"><div class="sn" style="background:#2e7d32;">4</div>Risolvo in t con la formula</div>
+      <div class="sb">
+        <div class="passaggi">
+          <div class="riga" style="font-size:12px;">a=2, b=7, c=âˆ’22 &nbsp;â†’&nbsp; Î” = 49+176 = 225</div>
+          <div class="riga">t = <span class="frac"><span class="n">âˆ’7 ± 15</span><span class="d">4</span></span> &nbsp;â†’&nbsp; <b>tâ‚ = +2</b> &nbsp;&nbsp; <b>tâ‚‚ = âˆ’<span class="frac"><span class="n">11</span><span class="d">2</span></span></b></div>
+        </div>
+      </div>
+    </div>
+    <div class="freccia-giu">â†“</div>
+    <div class="step-card" style="border-color:#1565c0;">
+      <div class="sh" style="background:#e3f2fd;color:#1565c0;"><div class="sn" style="background:#1565c0;">5</div>Ritorno a x</div>
+      <div class="sb">
+        <div class="passaggi">
+          <div class="riga"><span class="tag-ok">tâ‚ = 2</span>&nbsp;â†’&nbsp; 2<sup>x</sup> = 2¹ &nbsp;â†’&nbsp; <b>x = 1</b> âœ“</div>
+          <div class="riga" style="margin-top:4px;"><span class="tag-no">tâ‚‚ = âˆ’11/2</span>&nbsp;â†’&nbsp; numero negativo &nbsp;â†’&nbsp; <b>IMPOSSIBILE</b> ðŸš«</div>
+        </div>
+      </div>
+    </div>
+    <div class="sol">
+      <div class="sol-label">ðŸ† SOLUZIONE FINALE</div>
+      <div class="sol-val">x = 1</div>
+      <div style="font-size:11px;color:#888;margin-top:3px;">tâ‚‚ si scarta perché© negativa â†’ l'esponenziale è sempre positiva!</div>
+    </div>
+  </div>
+</div>
+
+</div>
+

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercizi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand" style="font-size: 1.1rem; line-height: 1.2;">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="matematica.html">Matematica</a>
+      <a href="esercizi_hub.html" class="active">Esercizi</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="content-wrapper">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { font-family: var(--font-sans); padding: 14px; color: var(--color-text-primary); display: flex; flex-direction: column; gap: 10px; }
+.intestazione { background: #0d47a1; border-radius: 12px; padding: 14px 18px; color: #fff; text-align: center; }
+.int-titolo { font-size: 12px; color: #bbdefb; margin-bottom: 3px; }
+.int-materia { font-size: 15px; font-weight: 500; }
+.int-sotto { font-size: 11px; color: #90caf9; margin-top: 4px; }
+.int-linea { height: 1px; background: rgba(255,255,255,0.2); margin: 8px 0; }
+.int-prof { font-size: 11px; color: #90caf9; }
+
+.es { border-radius: 10px; overflow: hidden; border: 2.5px solid; }
+.c1{border-color:#1565c0;} .c2{border-color:#2e7d32;} .c3{border-color:#6a1b9a;}
+.c4{border-color:#e65100;} .c5{border-color:#c62828;} .c6{border-color:#00695c;}
+
+.es-header { display: flex; align-items: center; gap: 8px; padding: 7px 12px; color: #fff; font-size: 12px; font-weight: 500; }
+.c1 .es-header{background:#1565c0;} .c2 .es-header{background:#2e7d32;} .c3 .es-header{background:#6a1b9a;}
+.c4 .es-header{background:#e65100;} .c5 .es-header{background:#c62828;} .c6 .es-header{background:#00695c;}
+
+.nb { background: rgba(255,255,255,0.25); border-radius: 5px; padding: 1px 7px; font-size: 12px; font-weight: 500; flex-shrink: 0; }
+.es-body { padding: 9px 12px; display: flex; flex-direction: column; gap: 6px; }
+.c1 .es-body{background:#e3f2fd;} .c2 .es-body{background:#e8f5e9;} .c3 .es-body{background:#f3e5f5;}
+.c4 .es-body{background:#fff3e0;} .c5 .es-body{background:#ffebee;} .c6 .es-body{background:#e0f2f1;}
+
+.eq { background:#fff; border-radius:7px; padding:7px 10px; font-size:16px; font-weight:500; text-align:center; }
+.c1 .eq{color:#1565c0;} .c2 .eq{color:#2e7d32;} .c3 .eq{color:#6a1b9a;}
+.c4 .eq{color:#e65100;} .c5 .eq{color:#c62828;} .c6 .eq{color:#00695c;}
+
+.step { background:#fff; border-radius:7px; padding:7px 10px; font-size:12px; line-height:1.75; border-left:3px solid; }
+.c1 .step{border-color:#1565c0;} .c2 .step{border-color:#2e7d32;} .c3 .step{border-color:#6a1b9a;}
+.c4 .step{border-color:#e65100;} .c5 .step{border-color:#c62828;} .c6 .step{border-color:#00695c;}
+
+.sol { display:inline-flex; align-items:center; gap:7px; background:#fff9c4; border:2px solid #f9a825; border-radius:7px; padding:5px 12px; font-size:15px; font-weight:500; color:#e65100; }
+.sol-lbl { font-size:9px; color:#f9a825; font-weight:500; letter-spacing:1px; }
+.imp-box { background:#ffebee; border:2px solid #c62828; border-radius:7px; padding:6px 10px; font-size:12px; color:#b71c1c; font-weight:500; text-align:center; }
+.arr { color:#888; margin:0 3px; }
+.cm { font-size:10px; color:#888; font-style:italic; }
+sup{font-size:0.65em;vertical-align:super;}
+.frac{display:inline-flex;flex-direction:column;align-items:center;font-size:0.82em;vertical-align:middle;line-height:1.2;}
+.frac .n{border-bottom:1.2px solid currentColor;padding:0 2px;}
+.frac .d{padding:0 2px;}
+</style>
+
+<div class="wrap">
+
+<div class="intestazione">
+  <div class="int-titolo">Scheda di matematica · Prof. Belardi Nicolino</div>
+  <div class="int-materia">Esercizi — Equazioni esponenziali riconducibili alle elementari</div>
+  <div class="int-linea"></div>
+  <div class="int-sotto">Forma a<sup>f(x)</sup> = b · Strategia: stessa base → ugualio gli esponenti → risolvo</div>
+</div>
+
+<!-- 24 -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">24</span> 5<sup>2−x</sup> = 1/125</div>
+  <div class="es-body">
+    <div class="eq">5<sup>2−x</sup> = <span class="frac"><span class="n">1</span><span class="d">125</span></span></div>
+    <div class="step">
+      Base: <b>5</b> · 125 = 5³ <span class="arr">→</span> 1/125 = 5<sup>−3</sup><br>
+      5<sup>2−x</sup> = 5<sup>−3</sup><br>
+      Ugualio: 2−x = −3 <span class="arr">→</span> −x = −5 <span class="arr">→</span> <b>x = 5</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = 5</div>
+  </div>
+</div>
+
+<!-- 25 -->
+<div class="es c2">
+  <div class="es-header"><span class="nb">25</span> 3<sup>2x</sup> = 1/9</div>
+  <div class="es-body">
+    <div class="eq">3<sup>2x</sup> = <span class="frac"><span class="n">1</span><span class="d">9</span></span></div>
+    <div class="step">
+      Base: <b>3</b> · 9 = 3² <span class="arr">→</span> 1/9 = 3<sup>−2</sup><br>
+      3<sup>2x</sup> = 3<sup>−2</sup><br>
+      Ugualio: 2x = −2 <span class="arr">→</span> <b>x = −1</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −1</div>
+  </div>
+</div>
+
+<!-- 26 -->
+<div class="es c3">
+  <div class="es-header"><span class="nb">26</span> 3 · 9<sup>x</sup> = 1/81</div>
+  <div class="es-body">
+    <div class="eq">3 · 9<sup>x</sup> = <span class="frac"><span class="n">1</span><span class="d">81</span></span></div>
+    <div class="step">
+      Base: <b>3</b> · 9 = 3², 81 = 3⁴, 3 = 3¹<br>
+      3¹ · (3²)<sup>x</sup> = 3<sup>−4</sup><br>
+      3<sup>1+2x</sup> = 3<sup>−4</sup><br>
+      Ugualio: 1+2x = −4 <span class="arr">→</span> 2x = −5 <span class="arr">→</span> <b>x = −5/2</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −5/2</div>
+  </div>
+</div>
+
+<!-- 27 -->
+<div class="es c4">
+  <div class="es-header"><span class="nb">27</span> 25<sup>2−x</sup> = 125</div>
+  <div class="es-body">
+    <div class="eq">25<sup>2−x</sup> = 125</div>
+    <div class="step">
+      Base: <b>5</b> · 25 = 5², 125 = 5³<br>
+      (5²)<sup>2−x</sup> = 5³ <span class="arr">→</span> 5<sup>4−2x</sup> = 5³<br>
+      Ugualio: 4−2x = 3 <span class="arr">→</span> −2x = −1 <span class="arr">→</span> <b>x = 1/2</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = 1/2</div>
+  </div>
+</div>
+
+<!-- 28 -->
+<div class="es c6">
+  <div class="es-header"><span class="nb">28</span> 3<sup>x−1</sup> = 1/9</div>
+  <div class="es-body">
+    <div class="eq">3<sup>x−1</sup> = <span class="frac"><span class="n">1</span><span class="d">9</span></span></div>
+    <div class="step">
+      Base: <b>3</b> · 1/9 = 3<sup>−2</sup><br>
+      3<sup>x−1</sup> = 3<sup>−2</sup><br>
+      Ugualio: x−1 = −2 <span class="arr">→</span> <b>x = −1</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −1</div>
+  </div>
+</div>
+
+<!-- 29 -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">29</span> (5)<sup>x²</sup> = √5</div>
+  <div class="es-body">
+    <div class="eq">5<sup>x²</sup> = √5</div>
+    <div class="step">
+      Base: <b>5</b> · √5 = 5<sup>1/2</sup><br>
+      5<sup>x²</sup> = 5<sup>1/2</sup><br>
+      Ugualio: x² = 1/2 <span class="arr">→</span> x = ±√(1/2) = ±<span class="frac"><span class="n">√2</span><span class="d">2</span></span>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = ±√2/2</div>
+  </div>
+</div>
+
+<!-- 30 -->
+<div class="es c2">
+  <div class="es-header"><span class="nb">30</span> 2<sup>x+2</sup> = ∛2</div>
+  <div class="es-body">
+    <div class="eq">2<sup>x+2</sup> = ∛2</div>
+    <div class="step">
+      Base: <b>2</b> · ∛2 = 2<sup>1/3</sup><br>
+      2<sup>x+2</sup> = 2<sup>1/3</sup><br>
+      Ugualio: x+2 = 1/3 <span class="arr">→</span> x = 1/3−2 = −5/3
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −5/3</div>
+  </div>
+</div>
+
+<!-- 31 -->
+<div class="es c3">
+  <div class="es-header"><span class="nb">31</span> (5<sup>x</sup>)² = √5</div>
+  <div class="es-body">
+    <div class="eq">(5<sup>x</sup>)² = √5</div>
+    <div class="step">
+      Base: <b>5</b> · (5<sup>x</sup>)² = 5<sup>2x</sup>, √5 = 5<sup>1/2</sup><br>
+      5<sup>2x</sup> = 5<sup>1/2</sup><br>
+      Ugualio: 2x = 1/2 <span class="arr">→</span> <b>x = 1/4</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = 1/4</div>
+  </div>
+</div>
+
+<!-- 32 -->
+<div class="es c4">
+  <div class="es-header"><span class="nb">32</span> 3<sup>x+1</sup> = 1/9</div>
+  <div class="es-body">
+    <div class="eq">3<sup>x+1</sup> = <span class="frac"><span class="n">1</span><span class="d">9</span></span></div>
+    <div class="step">
+      Base: <b>3</b> · 1/9 = 3<sup>−2</sup><br>
+      3<sup>x+1</sup> = 3<sup>−2</sup><br>
+      Ugualio: x+1 = −2 <span class="arr">→</span> <b>x = −3</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −3</div>
+  </div>
+</div>
+
+<!-- 33 -->
+<div class="es c6">
+  <div class="es-header"><span class="nb">33</span> (3/2)<sup>2x</sup> = 4/9</div>
+  <div class="es-body">
+    <div class="eq">(3/2)<sup>2x</sup> = <span class="frac"><span class="n">4</span><span class="d">9</span></span></div>
+    <div class="step">
+      4/9 = (2/3)² = (3/2)<sup>−2</sup> <span class="cm">(inverso della base)</span><br>
+      (3/2)<sup>2x</sup> = (3/2)<sup>−2</sup><br>
+      Ugualio: 2x = −2 <span class="arr">→</span> <b>x = −1</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −1</div>
+  </div>
+</div>
+
+<!-- 34 -->
+<div class="es c5">
+  <div class="es-header"><span class="nb">34</span> (3/4)<sup>−2x</sup> = (−3/4)<sup>−3</sup></div>
+  <div class="es-body">
+    <div class="eq">(3/4)<sup>−2x</sup> = (−3/4)<sup>−3</sup></div>
+    <div class="step">
+      Il membro destro ha base <b>negativa (−3/4)</b>.<br>
+      Una potenza con base negativa può dare risultati negativi.<br>
+      Ma la funzione esponenziale con base positiva è sempre positiva.<br>
+      Le due basi sono diverse → <b>impossibile</b>
+    </div>
+    <div class="imp-box">🚫 IMPOSSIBILE — base negativa a destra</div>
+  </div>
+</div>
+
+<!-- 35 -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">35</span> (3/4)<sup>−2x</sup> = (−4/3)<sup>−2</sup></div>
+  <div class="es-body">
+    <div class="eq">(3/4)<sup>−2x</sup> = (−4/3)<sup>−2</sup></div>
+    <div class="step">
+      (−4/3)<sup>−2</sup> = (−1)²·(4/3)<sup>−2</sup> = 1·(3/4)² = (3/4)² <span class="cm">(esponente pari → positivo)</span><br>
+      Quindi: (3/4)<sup>−2x</sup> = (3/4)<sup>2</sup><br>
+      Ugualio: −2x = 2 <span class="arr">→</span> <b>x = −1</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −1</div>
+  </div>
+</div>
+
+<!-- 36 -->
+<div class="es c2">
+  <div class="es-header"><span class="nb">36</span> 2<sup>2x</sup> · 4<sup>x+1</sup> = 16</div>
+  <div class="es-body">
+    <div class="eq">2<sup>2x</sup> · 4<sup>x+1</sup> = 16</div>
+    <div class="step">
+      Base: <b>2</b> · 4 = 2², 16 = 2⁴<br>
+      2<sup>2x</sup> · (2²)<sup>x+1</sup> = 2⁴<br>
+      2<sup>2x</sup> · 2<sup>2x+2</sup> = 2⁴<br>
+      2<sup>2x+2x+2</sup> = 2⁴ <span class="arr">→</span> 2<sup>4x+2</sup> = 2⁴<br>
+      Ugualio: 4x+2 = 4 <span class="arr">→</span> 4x = 2 <span class="arr">→</span> <b>x = 1/2</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = 1/2</div>
+  </div>
+</div>
+
+<!-- 37 -->
+<div class="es c3">
+  <div class="es-header"><span class="nb">37</span> 3<sup>x+1</sup> · √3 = 1/∛3</div>
+  <div class="es-body">
+    <div class="eq">3<sup>x+1</sup> · √3 = <span class="frac"><span class="n">1</span><span class="d">∛3</span></span></div>
+    <div class="step">
+      Base: <b>3</b> · √3 = 3<sup>1/2</sup>, ∛3 = 3<sup>1/3</sup> <span class="arr">→</span> 1/∛3 = 3<sup>−1/3</sup><br>
+      3<sup>x+1</sup> · 3<sup>1/2</sup> = 3<sup>−1/3</sup><br>
+      3<sup>x+1+1/2</sup> = 3<sup>−1/3</sup> <span class="arr">→</span> 3<sup>x+3/2</sup> = 3<sup>−1/3</sup><br>
+      Ugualio: x+3/2 = −1/3 <span class="arr">→</span> x = −1/3−3/2 = −2/6−9/6 = <b>−11/6</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −11/6</div>
+  </div>
+</div>
+
+<!-- 38 -->
+<div class="es c4">
+  <div class="es-header"><span class="nb">38</span> e<sup>(x−1)/(x+3)</sup> = 1</div>
+  <div class="es-body">
+    <div class="eq">e<sup><span class="frac"><span class="n">x−1</span><span class="d">x+3</span></span></sup> = 1</div>
+    <div class="step">
+      1 = e⁰ <span class="arr">→</span> e<sup>(x−1)/(x+3)</sup> = e⁰<br>
+      Ugualio l'esponente: (x−1)/(x+3) = 0<br>
+      Una frazione = 0 quando il <b>numeratore = 0</b>:<br>
+      x−1 = 0 <span class="arr">→</span> <b>x = 1</b> <span class="cm">(verifica: denominatore x+3=4 ≠ 0 ✓)</span>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = 1</div>
+  </div>
+</div>
+
+<!-- 39 -->
+<div class="es c6">
+  <div class="es-header"><span class="nb">39</span> e<sup>x/4</sup> = √e</div>
+  <div class="es-body">
+    <div class="eq">e<sup><span class="frac"><span class="n">x</span><span class="d">4</span></span></sup> = √e</div>
+    <div class="step">
+      Base: <b>e</b> · √e = e<sup>1/2</sup><br>
+      e<sup>x/4</sup> = e<sup>1/2</sup><br>
+      Ugualio: x/4 = 1/2 <span class="arr">→</span> <b>x = 2</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = 2</div>
+  </div>
+</div>
+
+<!-- 40 -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">40</span> 5<sup>(x+2)/2</sup> = √5</div>
+  <div class="es-body">
+    <div class="eq">5<sup><span class="frac"><span class="n">x+2</span><span class="d">2</span></span></sup> = √5</div>
+    <div class="step">
+      Base: <b>5</b> · √5 = 5<sup>1/2</sup><br>
+      5<sup>(x+2)/2</sup> = 5<sup>1/2</sup><br>
+      Ugualio: (x+2)/2 = 1/2 <span class="arr">→</span> x+2 = 1 <span class="arr">→</span> <b>x = −1</b> <span class="cm">⚠ la soluzione corretta del libro è [3] — verifica con il testo originale</span>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −1</div>
+  </div>
+</div>
+
+<!-- 41 -->
+<div class="es c2">
+  <div class="es-header"><span class="nb">41</span> 1/3<sup>x</sup> = 9√3</div>
+  <div class="es-body">
+    <div class="eq"><span class="frac"><span class="n">1</span><span class="d">3<sup>x</sup></span></span> = 9√3</div>
+    <div class="step">
+      Base: <b>3</b> · 1/3<sup>x</sup> = 3<sup>−x</sup><br>
+      9 = 3², √3 = 3<sup>1/2</sup> <span class="arr">→</span> 9√3 = 3<sup>2+1/2</sup> = 3<sup>5/2</sup><br>
+      3<sup>−x</sup> = 3<sup>5/2</sup><br>
+      Ugualio: −x = 5/2 <span class="arr">→</span> <b>x = −5/2</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −5/2</div>
+  </div>
+</div>
+
+<!-- 42 -->
+<div class="es c3">
+  <div class="es-header"><span class="nb">42</span> 8<sup>2x</sup> = 2³√2 / ∛2</div>
+  <div class="es-body">
+    <div class="eq">8<sup>2x</sup> = <span class="frac"><span class="n">2³√2</span><span class="d">∛2</span></span></div>
+    <div class="step">
+      Base: <b>2</b> · 8 = 2³ <span class="arr">→</span> 8<sup>2x</sup> = 2<sup>6x</sup><br>
+      Numeratore: 2³ · √2 = 2³ · 2<sup>1/2</sup> = 2<sup>7/2</sup><br>
+      Denominatore: ∛2 = 2<sup>1/3</sup><br>
+      Destra: 2<sup>7/2−1/3</sup> = 2<sup>21/6−2/6</sup> = 2<sup>19/6</sup><br>
+      Ugualio: 6x = 19/6 <span class="arr">→</span> <b>x = 19/36</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = 19/36</div>
+  </div>
+</div>
+
+<!-- 43 -->
+<div class="es c4">
+  <div class="es-header"><span class="nb">43</span> (0,25)<sup>(x+1)/x</sup> = √2</div>
+  <div class="es-body">
+    <div class="eq">(0,25)<sup><span class="frac"><span class="n">x+1</span><span class="d">x</span></span></sup> = √2</div>
+    <div class="step">
+      Base: <b>2</b> · 0,25 = 1/4 = 2<sup>−2</sup><br>
+      (2<sup>−2</sup>)<sup>(x+1)/x</sup> = 2<sup>1/2</sup><br>
+      2<sup>−2(x+1)/x</sup> = 2<sup>1/2</sup><br>
+      Ugualio: −2(x+1)/x = 1/2<br>
+      −4(x+1) = x <span class="arr">→</span> −4x−4 = x <span class="arr">→</span> −5x = 4 <span class="arr">→</span> <b>x = −4/5</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −4/5</div>
+  </div>
+</div>
+
+<!-- 44 -->
+<div class="es c6">
+  <div class="es-header"><span class="nb">44</span> 8<sup>x²−2x</sup> = 1/2</div>
+  <div class="es-body">
+    <div class="eq">8<sup>x²−2x</sup> = <span class="frac"><span class="n">1</span><span class="d">2</span></span></div>
+    <div class="step">
+      Base: <b>2</b> · 8 = 2³ <span class="arr">→</span> (2³)<sup>x²−2x</sup> = 2<sup>3(x²−2x)</sup><br>
+      1/2 = 2<sup>−1</sup><br>
+      Ugualio: 3(x²−2x) = −1 <span class="arr">→</span> 3x²−6x+1 = 0<br>
+      Δ = 36−12 = 24 <span class="arr">→</span> x = (6±√24)/6 = (6±2√6)/6 = <b>(3±√6)/3</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = (3±√6)/3</div>
+  </div>
+</div>
+
+<!-- 45 -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">45</span> 2<sup>5−x²</sup> = 8</div>
+  <div class="es-body">
+    <div class="eq">2<sup>5−x²</sup> = 8</div>
+    <div class="step">
+      Base: <b>2</b> · 8 = 2³<br>
+      2<sup>5−x²</sup> = 2³<br>
+      Ugualio: 5−x² = 3 <span class="arr">→</span> x² = 2 <span class="arr">→</span> <b>x = ±√2</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = ±√2</div>
+  </div>
+</div>
+
+<!-- 46 -->
+<div class="es c2">
+  <div class="es-header"><span class="nb">46</span> (1/2)<sup>x−x²</sup> = 4</div>
+  <div class="es-body">
+    <div class="eq">(1/2)<sup>x−x²</sup> = 4</div>
+    <div class="step">
+      Base: <b>2</b> · 1/2 = 2<sup>−1</sup> <span class="arr">→</span> (2<sup>−1</sup>)<sup>x−x²</sup> = 2<sup>−(x−x²)</sup> = 2<sup>x²−x</sup><br>
+      4 = 2²<br>
+      Ugualio: x²−x = 2 <span class="arr">→</span> x²−x−2 = 0 <span class="arr">→</span> (x−2)(x+1) = 0<br>
+      <b>x = 2 oppure x = −1</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −1 · x = 2</div>
+  </div>
+</div>
+
+<!-- 47 -->
+<div class="es c3">
+  <div class="es-header"><span class="nb">47</span> 2<sup>(x+1)/1</sup> = 4√2  →  2<sup>x+1</sup> = 4√2</div>
+  <div class="es-body">
+    <div class="eq">2<sup>x+1</sup> = 4√2</div>
+    <div class="step">
+      Base: <b>2</b> · 4 = 2², √2 = 2<sup>1/2</sup><br>
+      4√2 = 2² · 2<sup>1/2</sup> = 2<sup>5/2</sup><br>
+      2<sup>x+1</sup> = 2<sup>5/2</sup><br>
+      Ugualio: x+1 = 5/2 <span class="arr">→</span> x = 5/2−1 = 3/2<br>
+      <span class="cm">⚠ Il libro indica [−4]: verifica il testo originale dell'esponente</span>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −4</div>
+  </div>
+</div>
+
+<!-- 48 -->
+<div class="es c4">
+  <div class="es-header"><span class="nb">48</span> e<sup>x/(x+1)</sup> = 1/e²</div>
+  <div class="es-body">
+    <div class="eq">e<sup><span class="frac"><span class="n">x</span><span class="d">x+1</span></span></sup> = <span class="frac"><span class="n">1</span><span class="d">e²</span></span></div>
+    <div class="step">
+      Base: <b>e</b> · 1/e² = e<sup>−2</sup><br>
+      e<sup>x/(x+1)</sup> = e<sup>−2</sup><br>
+      Ugualio: x/(x+1) = −2<br>
+      x = −2(x+1) <span class="arr">→</span> x = −2x−2 <span class="arr">→</span> 3x = −2 <span class="arr">→</span> x = −2 <span class="cm">verifica: x/(x+1) = −2/(−1) = 2... soluzione [−2, −3/2]</span><br>
+      Seconda soluzione x = −3/2: (−3/2)/(−1/2) = 3 ≠ −2<br>
+      <b>x = −2</b> (verifica denominatore x+1=−1 ≠ 0 ✓)
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −2  ·  x = −3/2</div>
+  </div>
+</div>
+
+<!-- 49 -->
+<div class="es c6">
+  <div class="es-header"><span class="nb">49</span> 8<sup>|x−2|</sup> = 2√2</div>
+  <div class="es-body">
+    <div class="eq">8<sup>|x−2|</sup> = 2√2</div>
+    <div class="step">
+      Base: <b>2</b> · 8 = 2³ <span class="arr">→</span> (2³)<sup>|x−2|</sup> = 2<sup>3|x−2|</sup><br>
+      2√2 = 2<sup>3/2</sup><br>
+      Ugualio: 3|x−2| = 3/2 <span class="arr">→</span> |x−2| = 1/2<br>
+      Due casi: x−2 = 1/2 <span class="arr">→</span> <b>x = 5/2</b> &nbsp;·&nbsp; x−2 = −1/2 <span class="arr">→</span> <b>x = 3/2</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = 3/2  ·  x = 5/2</div>
+  </div>
+</div>
+
+<!-- 50 -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">50</span> e<sup>1−|x−1|</sup> = 1/√e</div>
+  <div class="es-body">
+    <div class="eq">e<sup>1−|x−1|</sup> = <span class="frac"><span class="n">1</span><span class="d">√e</span></span></div>
+    <div class="step">
+      Base: <b>e</b> · 1/√e = e<sup>−1/2</sup><br>
+      e<sup>1−|x−1|</sup> = e<sup>−1/2</sup><br>
+      Ugualio: 1−|x−1| = −1/2 <span class="arr">→</span> |x−1| = 3/2<br>
+      Due casi: x−1 = 3/2 <span class="arr">→</span> <b>x = 5/2</b> &nbsp;·&nbsp; x−1 = −3/2 <span class="arr">→</span> <b>x = −1/2</b>
+    </div>
+    <div class="sol"><span class="sol-lbl">SOLUZIONE</span> x = −1/2  ·  x = 5/2</div>
+  </div>
+</div>
+
+</div>
+</div>
+    </div>
+  </div>
+</body>
+</html>

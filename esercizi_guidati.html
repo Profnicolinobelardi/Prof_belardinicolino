@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratorio Guidato</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* STILI ESCLUSIVI PER IL LABORATORIO GUIDATO */
+    .lab-header { text-align: center; margin-bottom: 2.5rem; margin-top: 1rem; }
+    .lab-header h1 { font-size: 2.5rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+    .lab-header p { color: var(--text-secondary); max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
+
+    .split-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 2rem; align-items: start; }
+    @media (max-width: 900px) { .split-layout { grid-template-columns: 1fr; } }
+
+    .box-guida, .box-pratica {
+      background: var(--card-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border); border-radius: 16px; padding: 2rem;
+      box-shadow: var(--glass-shadow); display: flex; flex-direction: column; gap: 1rem;
+    }
+    
+    .box-guida { border-top: 4px solid #a78bfa; }
+    .box-pratica { border-top: 4px solid #60a5fa; }
+
+    .box-title { font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .box-guida .box-title { color: #a78bfa; }
+    .box-pratica .box-title { color: #60a5fa; }
+
+    .eq-display {
+      background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 1.5rem;
+      font-size: 2rem; font-family: 'Times New Roman', serif; font-style: italic;
+      text-align: center; color: #fff; font-weight: 600; letter-spacing: 2px;
+    }
+
+    /* Color Coding Pedagogico */
+    .base { color: #60a5fa; font-weight: bold; }    /* Blu */
+    .espo { color: #f87171; font-weight: bold; }    /* Rosso */
+
+    .step-list { display: flex; flex-direction: column; gap: 0.8rem; font-size: 1.1rem; }
+    .step-item { padding: 0.8rem 1rem; background: rgba(0,0,0,0.2); border-left: 3px solid; border-radius: 0 8px 8px 0; line-height: 1.5; }
+    .box-guida .step-item { border-color: #a78bfa; }
+    .box-pratica .step-item { border-color: #60a5fa; display: none; animation: slideIn 0.4s ease forwards; }
+
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+
+    .btn-aiuto {
+      background: rgba(96, 165, 250, 0.2); border: 1px solid #60a5fa; color: #fff;
+      padding: 1rem 1.5rem; border-radius: 12px; font-size: 1.1rem; font-weight: 600;
+      cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 1rem;
+    }
+    .btn-aiuto:hover { background: rgba(96, 165, 250, 0.4); transform: translateY(-2px); }
+    .btn-aiuto:disabled { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: #888; cursor: not-allowed; transform: none; }
+
+    .soluzione-box {
+      background: rgba(52, 211, 153, 0.15); border: 2px solid #34d399; border-radius: 12px;
+      padding: 1.5rem; text-align: center; color: #fff; font-size: 1.5rem; font-weight: 700;
+      margin-top: 1rem; display: none; animation: slideIn 0.5s ease;
+    }
+
+    .nav-controls { display: flex; justify-content: space-between; margin-top: 3rem; gap: 1rem; }
+    .nav-btn {
+      background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: #fff;
+      padding: 0.8rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: 0.3s;
+    }
+    .nav-btn:hover:not(:disabled) { background: rgba(255,255,255,0.2); }
+    .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .progress-dots { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: 2rem; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: 0.3s; }
+    .dot.active { background: #60a5fa; box-shadow: 0 0 10px #60a5fa; transform: scale(1.3); }
+
+    /* Fix per frazioni in html testuale */
+    .frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; line-height: 1.2; font-size: 0.85em; }
+    .frac .n { border-bottom: 2px solid currentColor; padding: 0 4px; }
+    .frac .d { padding: 0 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR GLOBALE -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand" style="font-size: 1.1rem; line-height: 1.2;">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="matematica.html">Matematica</a>
+      <a href="esercizi_hub.html" class="active">Esercizi</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="lab-header">
+      <h1>Laboratorio Guidato</h1>
+      <p>Osserva attentamente l'<b>Esempio Guida</b> a sinistra. È la "bussola" per risolvere l'esercizio a destra! Quando hai bisogno, richiedi un aiuto progressivo.</p>
+    </div>
+
+    <!-- AREA ESERCIZIO DINAMICA -->
+    <div class="split-layout" id="app-container">
+      <!-- Riquadro 1: Esempio Guida (Generato da JS) -->
+      <div class="box-guida">
+        <div class="box-title">📘 Esempio Guida</div>
+        <div class="eq-display" id="guida-eq"></div>
+        <div class="step-list" id="guida-steps"></div>
+      </div>
+
+      <!-- Riquadro 2: Tocca a te (Generato da JS) -->
+      <div class="box-pratica">
+        <div class="box-title">🎯 Tocca a te!</div>
+        <div class="eq-display" id="pratica-eq"></div>
+        <div class="step-list" id="pratica-hints"></div>
+        
+        <button class="btn-aiuto" id="btn-hint" onclick="mostraAiuto()">
+          <span>💡 Mostra un suggerimento</span>
+        </button>
+
+        <div class="soluzione-box" id="soluzione-box">
+          Soluzione: <span id="soluzione-text"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controlli Navigazione -->
+    <div class="nav-controls">
+      <button class="nav-btn" id="btn-prev" onclick="cambiaEsercizio(-1)">&#8592; Precedente</button>
+      <button class="nav-btn" id="btn-next" onclick="cambiaEsercizio(1)">Prossimo &#8594;</button>
+    </div>
+    <div class="progress-dots" id="dots-container"></div>
+  </div>
+
+  <script>
+    // DATABASE ESERCIZI (Adult/Professional content, difficoltà progressiva)
+    const esercizi = [
+      {
+        guida_eq: `<span class="base">2</span><sup class="espo">x</sup> = 8`,
+        guida_steps: [
+          `<b>Obiettivo:</b> Ottenere la stessa base. Scomponiamo l'8.`,
+          `Sappiamo che 8 = <span class="base">2</span>&middot;<span class="base">2</span>&middot;<span class="base">2</span> = <span class="base">2</span><sup class="espo">3</sup>`,
+          `Sostituiamo nell'equazione: <span class="base">2</span><sup class="espo">x</sup> = <span class="base">2</span><sup class="espo">3</sup>`,
+          `Avendo le stesse basi, possiamo eguagliare direttamente gli esponenti: <b><span class="espo">x</span> = <span class="espo">3</span></b>`
+        ],
+        pratica_eq: `<span class="base">3</span><sup class="espo">x</sup> = 27`,
+        pratica_hints: [
+          `<b>Obiettivo:</b> Devi far comparire la base <span class="base">3</span> anche a destra. Prova a scomporre il numero 27.`,
+          `Scomposizione: Quante volte devi moltiplicare il 3 per ottenere 27? (3 &middot; 3 = 9... 9 &middot; 3 = 27). Quindi 27 = <span class="base">3</span><sup class="espo">3</sup>.`,
+          `Riscrivi l'equazione: <span class="base">3</span><sup class="espo">x</sup> = <span class="base">3</span><sup class="espo">3</sup>.`,
+          `Perfetto! Le basi sono identiche (3). Rimuovile e guarda solo gli esponenti.`
+        ],
+        soluzione: `<span class="espo">x</span> = 3`
+      },
+      {
+        guida_eq: `<span class="base">2</span><sup class="espo">x</sup> = <span class="frac"><span class="n">1</span><span class="d">4</span></span>`,
+        guida_steps: [
+          `<b>Regola della frazione:</b> Quando abbiamo 1 fratto qualcosa, l'esponente diventa negativo.`,
+          `Scomponiamo il 4: sappiamo che 4 = <span class="base">2</span><sup class="espo">2</sup>. Quindi <span class="frac"><span class="n">1</span><span class="d">4</span></span> = <span class="frac"><span class="n">1</span><span class="d"><span class="base">2</span><sup class="espo">2</sup></span></span>.`,
+          `Portiamo la potenza sopra mettendo il meno: <span class="base">2</span><sup class="espo">-2</sup>.`,
+          `Equazione: <span class="base">2</span><sup class="espo">x</sup> = <span class="base">2</span><sup class="espo">-2</sup> &#8594; <b><span class="espo">x</span> = <span class="espo">-2</span></b>`
+        ],
+        pratica_eq: `<span class="base">5</span><sup class="espo">x</sup> = <span class="frac"><span class="n">1</span><span class="d">25</span></span>`,
+        pratica_hints: [
+          `<b>Aiuto 1:</b> Osserva l'Esempio Guida. Il trucco per "capovolgere" una frazione è usare l'esponente negativo.`,
+          `<b>Aiuto 2:</b> Concentrati sul 25. Come puoi scriverlo usando la base <span class="base">5</span>? (Risposta: 25 = <span class="base">5</span><sup class="espo">2</sup>).`,
+          `<b>Aiuto 3:</b> Ora hai la frazione <span class="frac"><span class="n">1</span><span class="d"><span class="base">5</span><sup class="espo">2</sup></span></span>. Capovolgila cambiando di segno suo esponente: diventa <span class="base">5</span><sup class="espo">-2</sup>.`,
+          `<b>Fase Finale:</b> Scrivi <span class="base">5</span><sup class="espo">x</sup> = <span class="base">5</span><sup class="espo">-2</sup> ed eguaglia gli esponenti rossi.`
+        ],
+        soluzione: `<span class="espo">x</span> = -2`
+      },
+      {
+        guida_eq: `<span class="base">2</span><sup class="espo">2x-1</sup> = 8`,
+        guida_steps: [
+          `L'esponente ora è un polinomio intero: (2x - 1).`,
+          `Trasformiamo sempre il termine a destra: 8 = <span class="base">2</span><sup class="espo">3</sup>.`,
+          `Otteniamo: <span class="base">2</span><sup class="espo">2x-1</sup> = <span class="base">2</span><sup class="espo">3</sup>.`,
+          `Eguagliamo: <span class="espo">2x - 1</span> = <span class="espo">3</span>. È un'equazione di primo grado!<br>2x = 3 + 1 &#8594; 2x = 4 &#8594; <b>x = 2</b>`
+        ],
+        pratica_eq: `<span class="base">3</span><sup class="espo">2x+1</sup> = 27`,
+        pratica_hints: [
+          `<b>Aiuto 1:</b> Niente panico per l'esponente lungo. Pensa solo a trasformare il 27 nella base <span class="base">3</span>.`,
+          `<b>Aiuto 2:</b> 27 = <span class="base">3</span>&middot;<span class="base">3</span>&middot;<span class="base">3</span>, ovvero <span class="base">3</span><sup class="espo">3</sup>.`,
+          `<b>Aiuto 3:</b> Sostituisci: <span class="base">3</span><sup class="espo">2x+1</sup> = <span class="base">3</span><sup class="espo">3</sup>. Elimina le basi blu.`,
+          `<b>Fase Finale:</b> Risolvi l'equazione rossa: <span class="espo">2x + 1 = 3</span>. Sposta l'1 a destra e dividi per 2.`
+        ],
+        soluzione: `<span class="espo">x</span> = 1`
+      },
+      {
+        guida_eq: `<span class="base">7</span><sup class="espo">x</sup> = &radic;7`,
+        guida_steps: [
+          `La radice quadrata si trasforma sempre in una frazione: &radic;a = a<sup class="espo">1/2</sup>.`,
+          `Quindi &radic;7 equivale a <span class="base">7</span><sup class="espo">1/2</sup>.`,
+          `Riscriviamo: <span class="base">7</span><sup class="espo">x</sup> = <span class="base">7</span><sup class="espo">1/2</sup>.`,
+          `Eguagliamo gli esponenti: <b><span class="espo">x</span> = <span class="espo">1/2</span></b>`
+        ],
+        pratica_eq: `<span class="base">11</span><sup class="espo">x</sup> = &radic;11`,
+        pratica_hints: [
+          `<b>Aiuto 1:</b> Togli la radice trasformandola in potenza. Cerca nell'Esempio Guida l'esponente della "radice quadrata".`,
+          `<b>Aiuto 2:</b> L'esponente è la frazione <span class="espo">1/2</span>. Quindi &radic;11 diventa <span class="base">11</span><sup class="espo">1/2</sup>.`,
+          `<b>Aiuto 3:</b> Riscrivi il tutto come: <span class="base">11</span><sup class="espo">x</sup> = <span class="base">11</span><sup class="espo">1/2</sup>.`,
+          `<b>Fase Finale:</b> Togli le basi uguali. Cosa rimane dell'esponente?`
+        ],
+        soluzione: `<span class="espo">x</span> = 1/2`
+      }
+    ];
+
+    let indiceCorrente = 0;
+    let hintTracciati = 0;
+
+    const elGuidaEq = document.getElementById("guida-eq");
+    const elGuidaSteps = document.getElementById("guida-steps");
+    const elPraticaEq = document.getElementById("pratica-eq");
+    const elPraticaHints = document.getElementById("pratica-hints");
+    const elBtnHint = document.getElementById("btn-hint");
+    const elSolBox = document.getElementById("soluzione-box");
+    const elSolText = document.getElementById("soluzione-text");
+    const elBtnPrev = document.getElementById("btn-prev");
+    const elBtnNext = document.getElementById("btn-next");
+    const elDots = document.getElementById("dots-container");
+
+    function init() {
+      // Create dots
+      for(let i=0; i<esercizi.length; i++) {
+        let d = document.createElement("div");
+        d.className = "dot";
+        d.id = "dot-" + i;
+        elDots.appendChild(d);
+      }
+      caricaEsercizio(0);
+    }
+
+    function caricaEsercizio(indice) {
+      if(indice < 0 || indice >= esercizi.length) return;
+      indiceCorrente = indice;
+      hintTracciati = 0;
+      
+      const es = esercizi[indice];
+      
+      // Load Guida
+      elGuidaEq.innerHTML = es.guida_eq;
+      elGuidaSteps.innerHTML = "";
+      es.guida_steps.forEach(st => {
+        let d = document.createElement("div");
+        d.className = "step-item"; d.innerHTML = st;
+        elGuidaSteps.appendChild(d);
+      });
+
+      // Load Pratica
+      elPraticaEq.innerHTML = es.pratica_eq;
+      elPraticaHints.innerHTML = "";
+      es.pratica_hints.forEach((st, i) => {
+        let d = document.createElement("div");
+        d.className = "step-item"; d.innerHTML = st;
+        d.id = "hint-" + i;
+        elPraticaHints.appendChild(d);
+      });
+
+      // Reset bottoni e status
+      elSolBox.style.display = "none";
+      elBtnHint.style.display = "inline-flex";
+      elBtnHint.disabled = false;
+      elSolText.innerHTML = es.soluzione;
+      
+      // Update Controls
+      elBtnPrev.disabled = (indiceCorrente === 0);
+      elBtnNext.disabled = (indiceCorrente === esercizi.length - 1);
+      
+      // Update Dots
+      document.querySelectorAll(".dot").forEach(d => d.classList.remove("active"));
+      document.getElementById("dot-"+indiceCorrente).classList.add("active");
+    }
+
+    function mostraAiuto() {
+      const es = esercizi[indiceCorrente];
+      if(hintTracciati < es.pratica_hints.length) {
+        document.getElementById("hint-" + hintTracciati).style.display = "block";
+        hintTracciati++;
+        
+        if(hintTracciati === es.pratica_hints.length) {
+          // Ultimo hint premuto
+          elBtnHint.innerHTML = "<span>🎉 Mostra Soluzione Finale</span>";
+          elBtnHint.style.borderColor = "#34d399";
+          elBtnHint.style.color = "#34d399";
+        }
+      } else {
+        // Mostra soluzione finale
+        elBtnHint.style.display = "none"; // Nascondi bottone
+        elSolBox.style.display = "block"; // Mostra box finale
+        // Reset bottone colore per prox esercizio
+        elBtnHint.innerHTML = "<span>💡 Mostra un suggerimento</span>";
+        elBtnHint.style.borderColor = "";
+        elBtnHint.style.color = "";
+      }
+    }
+
+    function cambiaEsercizio(dir) {
+      caricaEsercizio(indiceCorrente + dir);
+      elBtnHint.innerHTML = "<span>💡 Mostra un suggerimento</span>";
+      elBtnHint.style.borderColor = "";
+      elBtnHint.style.color = "";
+    }
+
+    // Start
+    init();
+  </script>
+
+</body>
+</html>

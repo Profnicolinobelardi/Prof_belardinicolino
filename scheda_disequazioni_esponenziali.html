@@ -1,0 +1,485 @@
+﻿
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { font-family: var(--font-sans); padding: 14px; color: var(--color-text-primary); display: flex; flex-direction: column; gap: 12px; }
+
+.scheda { border-radius: 12px; overflow: hidden; border: 3px solid #4a148c; }
+.scheda-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: #4a148c; color: #fff; font-size: 14px; font-weight: 500; }
+.icona { font-size: 16px; width: 30px; height: 30px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.header-dx { margin-left: auto; font-size: 9px; opacity: 0.75; font-weight: 400; }
+.scheda-body { background: #f3e5f5; padding: 12px 14px; display: flex; flex-direction: column; gap: 12px; }
+
+.blocco { border-radius: 10px; overflow: hidden; border-left: 5px solid; background: #fff; }
+.b-viola  { border-color: #6a1b9a; }
+.b-verde  { border-color: #2e7d32; }
+.b-rosso  { border-color: #c62828; }
+.b-blu    { border-color: #1565c0; }
+.b-arancio{ border-color: #e65100; }
+.b-teal   { border-color: #00695c; }
+
+.bl-header { display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 13px; font-weight: 500; }
+.b-viola  .bl-header { background: #f3e5f5; color: #6a1b9a; }
+.b-verde  .bl-header { background: #e8f5e9; color: #2e7d32; }
+.b-rosso  .bl-header { background: #ffebee; color: #c62828; }
+.b-blu    .bl-header { background: #e3f2fd; color: #1565c0; }
+.b-arancio.bl-header { background: #fff3e0; color: #e65100; }
+.b-teal   .bl-header { background: #e0f2f1; color: #00695c; }
+
+.bl-body { padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; font-size: 12px; line-height: 1.8; }
+
+/* regola base */
+.due-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.regola-card { border-radius: 9px; padding: 11px 13px; font-size: 12px; line-height: 1.8; }
+.rc-cres { background: #e8f5e9; border: 2px solid #2e7d32; }
+.rc-decr { background: #ffebee; border: 2px solid #c62828; }
+.rc-titolo { font-size: 13px; font-weight: 500; margin-bottom: 5px; }
+.rc-cres .rc-titolo { color: #2e7d32; }
+.rc-decr .rc-titolo { color: #c62828; }
+.formula-box { border-radius: 7px; padding: 7px 10px; font-size: 14px; font-weight: 500; text-align: center; margin: 5px 0; }
+.rc-cres .formula-box { background: #c8e6c9; color: #1b5e20; }
+.rc-decr .formula-box { background: #ffcdd2; color: #b71c1c; }
+
+/* step card */
+.step-card { background: #f9f9f9; border-radius: 8px; overflow: hidden; border-left: 4px solid; margin-bottom: 3px; }
+.step-card .sh { display: flex; align-items: center; gap: 8px; padding: 6px 12px; font-size: 11px; font-weight: 500; }
+.step-card .sb { padding: 7px 13px 8px; font-size: 12px; line-height: 1.85; }
+.sn { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: #fff; flex-shrink: 0; }
+.freccia-giu { text-align: center; font-size: 14px; color: #bbb; margin: -1px 0; }
+
+/* colori step per ogni esercizio */
+.sc-v { border-color: #6a1b9a; } .sc-v .sh { background: #f3e5f5; color: #6a1b9a; } .sc-v .sn { background: #6a1b9a; }
+.sc-g { border-color: #2e7d32; } .sc-g .sh { background: #e8f5e9; color: #2e7d32; } .sc-g .sn { background: #2e7d32; }
+.sc-b { border-color: #1565c0; } .sc-b .sh { background: #e3f2fd; color: #1565c0; } .sc-b .sn { background: #1565c0; }
+.sc-r { border-color: #c62828; } .sc-r .sh { background: #ffebee; color: #c62828; } .sc-r .sn { background: #c62828; }
+.sc-o { border-color: #e65100; } .sc-o .sh { background: #fff3e0; color: #e65100; } .sc-o .sn { background: #e65100; }
+.sc-t { border-color: #00695c; } .sc-t .sh { background: #e0f2f1; color: #00695c; } .sc-t .sn { background: #00695c; }
+
+.eq-display { background: #4a148c; color: #fff; border-radius: 8px; padding: 8px 14px; font-size: 17px; font-weight: 500; text-align: center; margin-bottom: 6px; }
+
+.sol-box { border-radius: 8px; padding: 9px 14px; margin-top: 6px; }
+.sol-finale { background: #fff9c4; border: 2.5px solid #f9a825; border-radius: 8px; padding: 8px 14px; margin-top: 6px; }
+.sol-lbl { font-size: 9px; color: #f9a825; font-weight: 500; letter-spacing: 1px; }
+.sol-val { font-size: 16px; font-weight: 500; color: #e65100; margin-top: 2px; }
+
+/* retta dei segni */
+.retta-wrap { background: #f9f9f9; border-radius: 8px; padding: 10px 14px; }
+.retta-lbl { font-size: 10px; font-weight: 500; color: #777; text-transform: uppercase; margin-bottom: 8px; }
+
+.nota-box { background: #fff9c4; border: 1.5px solid #f9a825; border-radius: 7px; padding: 7px 11px; font-size: 12px; line-height: 1.7; }
+.ricorda { background: #fff9c4; border: 2px solid #f9a825; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.7; display: flex; gap: 8px; }
+.tag-ok { background: #c8e6c9; color: #1b5e20; border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 500; }
+.tag-no { background: #ffcdd2; color: #b71c1c; border-radius: 4px; padding: 2px 7px; font-size: 11px; font-weight: 500; }
+.tag-inv { background: #fff3e0; color: #e65100; border-radius: 5px; padding: 3px 9px; font-size: 12px; font-weight: 500; }
+
+sup { font-size: 0.65em; vertical-align: super; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; font-size: 0.85em; vertical-align: middle; line-height: 1.2; }
+.frac .n { border-bottom: 1.2px solid currentColor; padding: 0 3px; }
+.frac .d { padding: 0 3px; }
+.arr { color: #888; margin: 0 4px; font-size: 12px; }
+.cm { font-size: 10px; color: #888; font-style: italic; }
+
+canvas { display: block; }
+</style>
+
+<div class="wrap">
+<div class="scheda">
+  <div class="scheda-header">
+    <div class="icona">ðŸ“</div>
+    SCHEDA â€” Disequazioni esponenziali
+    <span class="header-dx">Scheda di matematica · Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+
+    <!-- â•â• 1. DEFINIZIONE â•â• -->
+    <div class="blocco b-viola">
+      <div class="bl-header"><span style="font-size:18px;">ðŸ“–</span> 1 â€” Definizione</div>
+      <div class="bl-body">
+        <div style="font-size:13px;line-height:1.8;">
+          Una <b>disequazione esponenziale</b> è una disequazione dove l'incognita <b>x</b> compare all'esponente.<br>
+          La forma a cui vogliamo sempre arrivare è:
+        </div>
+        <div style="background:#6a1b9a;color:#fff;border-radius:8px;padding:9px;font-size:18px;font-weight:500;text-align:center;">
+          a<sup>f(x)</sup> &gt; a<sup>g(x)</sup>
+        </div>
+        <div style="font-size:12px;color:#555;text-align:center;">(il simbolo &gt; può essere &lt;, â‰¥, â‰¤)</div>
+        <div class="nota-box">
+          ðŸ’¡ Una volta ricondotta a questa forma, <b>elimino le basi</b> e lavoro solo sugli esponenti.<br>
+          <b>Attenzione:</b> il verso della disequazione può cambiare in base al valore della base!
+        </div>
+      </div>
+    </div>
+
+    <!-- â•â• 2. REGOLA FONDAMENTALE â•â• -->
+    <div class="blocco b-viola">
+      <div class="bl-header"><span style="font-size:18px;">âš–ï¸</span> 2 â€” La regola fondamentale: il ruolo della base</div>
+      <div class="bl-body">
+        <div class="due-col">
+          <div class="regola-card rc-cres">
+            <div class="rc-titolo">ðŸ“ˆ Base &gt; 1 â€” funzione CRESCENTE</div>
+            <div class="formula-box">a &gt; 1 â†’ verso INVARIATO</div>
+            <div style="font-size:12px;line-height:1.7;">
+              a<sup>f(x)</sup> &gt; a<sup>g(x)</sup><br>
+              <span style="color:#2e7d32;font-weight:500;">âŸ¹ f(x) &gt; g(x)</span><br><br>
+              <b>Esempio:</b> 2<sup>x</sup> &gt; 2³<br>
+              <span style="color:#2e7d32;font-weight:500;">âŸ¹ x &gt; 3</span><br>
+              Soluzione: x âˆˆ (3, +âˆž)
+            </div>
+          </div>
+          <div class="regola-card rc-decr">
+            <div class="rc-titolo">ðŸ“‰ 0 &lt; Base &lt; 1 â€” funzione DECRESCENTE</div>
+            <div class="formula-box">0&lt;a&lt;1 â†’ verso INVERTITO</div>
+            <div style="font-size:12px;line-height:1.7;">
+              a<sup>f(x)</sup> &gt; a<sup>g(x)</sup><br>
+              <span style="color:#c62828;font-weight:500;">âŸ¹ f(x) &lt; g(x)</span><br><br>
+              <b>Esempio:</b> (1/2)<sup>x</sup> &gt; (1/2)³<br>
+              <span style="color:#c62828;font-weight:500;">âŸ¹ x &lt; 3</span><br>
+              Soluzione: x âˆˆ (âˆ’âˆž, 3)
+            </div>
+          </div>
+        </div>
+
+        <!-- notazione intervalli -->
+        <div class="blocco b-blu" style="margin-top:4px;">
+          <div class="bl-header" style="padding:7px 12px;font-size:12px;"><span style="font-size:16px;">ðŸ“</span> Come scrivere la soluzione â€” notazione con intervalli</div>
+          <div class="bl-body" style="gap:5px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div style="background:#e3f2fd;border-radius:7px;padding:8px 10px;font-size:12px;line-height:1.75;">
+                <div style="font-weight:500;color:#1565c0;margin-bottom:3px;">Estremo ESCLUSO â†’ parentesi tonda ( )</div>
+                Simboli: <b>&gt;</b> oppure <b>&lt;</b><br>
+                Il pallino sulla retta è <b>vuoto â—‹</b><br>
+                Es: x &gt; 3 â†’ x âˆˆ <b>(3, +âˆž)</b>
+              </div>
+              <div style="background:#e8f5e9;border-radius:7px;padding:8px 10px;font-size:12px;line-height:1.75;">
+                <div style="font-weight:500;color:#2e7d32;margin-bottom:3px;">Estremo INCLUSO â†’ parentesi quadra [ ]</div>
+                Simboli: <b>â‰¥</b> oppure <b>â‰¤</b><br>
+                Il pallino sulla retta è <b>pieno â—</b><br>
+                Es: x â‰¥ 3 â†’ x âˆˆ <b>[3, +âˆž)</b>
+              </div>
+            </div>
+            <div class="nota-box" style="font-size:11px;">
+              âš ï¸ ±âˆž ha sempre parentesi tonda â€” l'infinito non si raggiunge mai!<br>
+              Es: x &lt; 5 â†’ (âˆ’âˆž, 5) &nbsp;·&nbsp; x â‰¤ 5 â†’ (âˆ’âˆž, 5] &nbsp;·&nbsp; x &gt; 2 â†’ (2, +âˆž) &nbsp;·&nbsp; x â‰¥ 2 â†’ [2, +âˆž)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- â•â• ESERCIZI â•â• -->
+
+    <!-- ES 1: (3/4)^x >= 16/9 -->
+    <div class="blocco b-verde">
+      <div class="bl-header"><span style="font-size:18px;">âœï¸</span> Esempio 1 â€” (3/4)<sup>x</sup> â‰¥ 16/9</div>
+      <div class="bl-body">
+        <div class="eq-display">(3/4)<sup>x</sup> â‰¥ 16/9</div>
+
+        <div class="step-card sc-v">
+          <div class="sh"><div class="sn">1</div>Riscrivo il secondo membro con la stessa base</div>
+          <div class="sb">
+            16/9 = (4/3)² = (3/4)<sup>âˆ’2</sup><br>
+            <span class="cm">â† ribÐ°Ð»to la frazione: 4/3 è l'inverso di 3/4, quindi (3/4)⁻²</span>
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-b">
+          <div class="sh"><div class="sn">2</div>Equazione con stessa base (3/4)</div>
+          <div class="sb">
+            (3/4)<sup>x</sup> â‰¥ (3/4)<sup>âˆ’2</sup>
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-r">
+          <div class="sh"><div class="sn">3</div>Applico la regola della base</div>
+          <div class="sb">
+            La base è <b>3/4</b> â†’ 0 &lt; 3/4 &lt; 1 â†’ funzione <b>DECRESCENTE</b><br>
+            <span class="tag-inv">âš ï¸ Il verso SI INVERTE!</span><br><br>
+            x â‰¥ âˆ’2 &nbsp;<span class="arr">â†’</span>&nbsp; <b>x â‰¤ âˆ’2</b>
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-g">
+          <div class="sh"><div class="sn">4</div>Studio del segno â€” retta numerica</div>
+          <div class="sb">
+            <canvas id="retta1" width="360" height="50" style="width:100%;height:50px;"></canvas>
+            <div style="font-size:11px;color:#555;margin-top:4px;">
+              â— pieno in âˆ’2 perché© il simbolo è â‰¤ (estremo incluso)
+            </div>
+          </div>
+        </div>
+
+        <div class="sol-finale">
+          <div class="sol-lbl">ðŸ† SOLUZIONE</div>
+          <div class="sol-val">x â‰¤ âˆ’2 &nbsp;â†’&nbsp; x âˆˆ (âˆ’âˆž, âˆ’2]</div>
+          <div style="font-size:11px;color:#777;margin-top:3px;">Parentesi quadra in âˆ’2 (incluso, simbolo â‰¤) · parentesi tonda in âˆ’âˆž (infinito mai raggiunto)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ES 2: (5/7)^x > (5/7)^(1/2) -->
+    <div class="blocco b-arancio">
+      <div class="bl-header"><span style="font-size:18px;">âœï¸</span> Esempio 2 â€” (5/7)<sup>x</sup> &gt; (5/7)<sup>1/2</sup></div>
+      <div class="bl-body">
+        <div class="eq-display">(5/7)<sup>x</sup> &gt; (5/7)<sup>1/2</sup></div>
+
+        <div class="step-card sc-o">
+          <div class="sh"><div class="sn">1</div>Stessa base già pronta!</div>
+          <div class="sb">
+            Base = <b>5/7</b> â€” già la stessa a sinistra e destra.<br>
+            Posso passare direttamente agli esponenti.
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-r">
+          <div class="sh"><div class="sn">2</div>Applico la regola della base</div>
+          <div class="sb">
+            La base è <b>5/7</b> â†’ 0 &lt; 5/7 &lt; 1 â†’ funzione <b>DECRESCENTE</b><br>
+            <span class="tag-inv">âš ï¸ Il verso SI INVERTE!</span><br><br>
+            x &gt; 1/2 &nbsp;<span class="arr">â†’</span>&nbsp; <b>x &lt; 1/2</b>
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-g">
+          <div class="sh"><div class="sn">3</div>Studio del segno â€” retta numerica</div>
+          <div class="sb">
+            <canvas id="retta2" width="360" height="50" style="width:100%;height:50px;"></canvas>
+            <div style="font-size:11px;color:#555;margin-top:4px;">
+              â—‹ vuoto in 1/2 perché© il simbolo è &lt; (estremo escluso)
+            </div>
+          </div>
+        </div>
+
+        <div class="sol-finale">
+          <div class="sol-lbl">ðŸ† SOLUZIONE</div>
+          <div class="sol-val">x &lt; 1/2 &nbsp;â†’&nbsp; x âˆˆ (âˆ’âˆž, 1/2)</div>
+          <div style="font-size:11px;color:#777;margin-top:3px;">Parentesi tonde: 1/2 escluso (simbolo &lt;) e âˆ’âˆž mai raggiunto</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ES 3: 2^x / (2^3x * 2^4) - 8 <= 0 -->
+    <div class="blocco b-blu">
+      <div class="bl-header"><span style="font-size:18px;">âœï¸</span> Esempio 3 â€” 2<sup>x</sup> / (2<sup>3x</sup> · 2⁴) âˆ’ 8 â‰¤ 0</div>
+      <div class="bl-body">
+        <div class="eq-display">2<sup>x</sup> / (2<sup>3x</sup> · 2⁴) âˆ’ 8 â‰¤ 0</div>
+
+        <div class="step-card sc-b">
+          <div class="sh"><div class="sn">1</div>Semplificare il primo membro</div>
+          <div class="sb">
+            <span class="frac"><span class="n">2<sup>x</sup></span><span class="d">2<sup>3x</sup> · 2⁴</span></span>
+            = <span class="frac"><span class="n">2<sup>x</sup></span><span class="d">2<sup>3x+4</sup></span></span>
+            = 2<sup>xâˆ’(3x+4)</sup> = 2<sup>xâˆ’3xâˆ’4</sup> = 2<sup>âˆ’2xâˆ’4</sup><br>
+            <span class="cm">â† quoziente stessa base â†’ sottraggo gli esponenti</span>
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-v">
+          <div class="sh"><div class="sn">2</div>Riscrivo l'equazione</div>
+          <div class="sb">
+            2<sup>âˆ’2xâˆ’4</sup> âˆ’ 8 â‰¤ 0<br>
+            2<sup>âˆ’2xâˆ’4</sup> â‰¤ 8<br>
+            8 = 2³ â†’ <b>2<sup>âˆ’2xâˆ’4</sup> â‰¤ 2³</b>
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-g">
+          <div class="sh"><div class="sn">3</div>Applico la regola della base</div>
+          <div class="sb">
+            La base è <b>2</b> â†’ 2 &gt; 1 â†’ funzione <b>CRESCENTE</b><br>
+            <span class="tag-ok">âœ“ Il verso NON cambia</span><br><br>
+            âˆ’2x âˆ’ 4 â‰¤ 3<br>
+            âˆ’2x â‰¤ 7<br>
+            <span style="color:#c62828;font-weight:500;">Divido per âˆ’2 â†’ il verso SI INVERTE (divisione per negativo!)</span><br>
+            <b>x â‰¥ âˆ’7/2</b>
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-t">
+          <div class="sh"><div class="sn">4</div>Studio del segno â€” retta numerica</div>
+          <div class="sb">
+            <canvas id="retta3" width="360" height="50" style="width:100%;height:50px;"></canvas>
+            <div style="font-size:11px;color:#555;margin-top:4px;">
+              â— pieno in âˆ’7/2 perché© il simbolo è â‰¥ (estremo incluso)
+            </div>
+          </div>
+        </div>
+
+        <div class="sol-finale">
+          <div class="sol-lbl">ðŸ† SOLUZIONE</div>
+          <div class="sol-val">x â‰¥ âˆ’7/2 &nbsp;â†’&nbsp; x âˆˆ [âˆ’7/2, +âˆž)</div>
+          <div style="font-size:11px;color:#777;margin-top:3px;">Parentesi quadra in âˆ’7/2 (incluso, simbolo â‰¥) · parentesi tonda in +âˆž</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ES 4: 7^x >= sqrt(7^(x-1)) -->
+    <div class="blocco b-teal">
+      <div class="bl-header"><span style="font-size:18px;">âœï¸</span> Esempio 4 â€” 7<sup>x</sup> â‰¥ âˆš(7<sup>xâˆ’1</sup>)</div>
+      <div class="bl-body">
+        <div class="eq-display">7<sup>x</sup> â‰¥ âˆš(7<sup>xâˆ’1</sup>)</div>
+
+        <div class="step-card sc-t">
+          <div class="sh"><div class="sn">1</div>Trasformo la radice in esponente frazionario</div>
+          <div class="sb">
+            âˆš(7<sup>xâˆ’1</sup>) = (7<sup>xâˆ’1</sup>)<sup>1/2</sup> = 7<sup>(xâˆ’1)/2</sup><br>
+            <span class="cm">â† radice quadrata = esponente 1/2</span>
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-v">
+          <div class="sh"><div class="sn">2</div>Stessa base â€” riscrivo</div>
+          <div class="sb">
+            7<sup>x</sup> â‰¥ 7<sup>(xâˆ’1)/2</sup>
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-g">
+          <div class="sh"><div class="sn">3</div>Applico la regola della base</div>
+          <div class="sb">
+            La base è <b>7</b> â†’ 7 &gt; 1 â†’ funzione <b>CRESCENTE</b><br>
+            <span class="tag-ok">âœ“ Il verso NON cambia</span><br><br>
+            x â‰¥ (xâˆ’1)/2<br>
+            Moltiplico tutto per 2: &nbsp; 2x â‰¥ x âˆ’ 1<br>
+            2x âˆ’ x â‰¥ âˆ’1<br>
+            <b>x â‰¥ âˆ’1</b>
+          </div>
+        </div>
+        <div class="freccia-giu">â†“</div>
+        <div class="step-card sc-b">
+          <div class="sh"><div class="sn">4</div>Studio del segno â€” retta numerica</div>
+          <div class="sb">
+            <canvas id="retta4" width="360" height="50" style="width:100%;height:50px;"></canvas>
+            <div style="font-size:11px;color:#555;margin-top:4px;">
+              â— pieno in âˆ’1 perché© il simbolo è â‰¥ (estremo incluso)
+            </div>
+          </div>
+        </div>
+
+        <div class="sol-finale">
+          <div class="sol-lbl">ðŸ† SOLUZIONE</div>
+          <div class="sol-val">x â‰¥ âˆ’1 &nbsp;â†’&nbsp; x âˆˆ [âˆ’1, +âˆž)</div>
+          <div style="font-size:11px;color:#777;margin-top:3px;">Parentesi quadra in âˆ’1 (incluso, simbolo â‰¥) · parentesi tonda in +âˆž</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RICORDA -->
+    <div class="ricorda">
+      <span style="font-size:18px;flex-shrink:0;">ðŸ”‘</span>
+      <div>
+        <b>Base &gt; 1</b> â†’ crescente â†’ verso invariato &nbsp;·&nbsp;
+        <b>0 &lt; Base &lt; 1</b> â†’ decrescente â†’ verso invertito &nbsp;·&nbsp;
+        <b>â‰¥ o â‰¤</b> â†’ [ ] estremo incluso &nbsp;·&nbsp;
+        <b>&gt; o &lt;</b> â†’ ( ) estremo escluso &nbsp;·&nbsp;
+        <b>±âˆž</b> â†’ sempre ( )
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+function drawRetta(id, punto, label, verso, incluso, colore) {
+  const canvas = document.getElementById(id);
+  if (!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth || 360;
+  const H = 50;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const lineCol = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)';
+  const textCol = isDark ? '#ccc' : '#444';
+
+  const y = H / 2;
+  const xStart = 30, xEnd = W - 30;
+  const xPunto = W / 2;
+
+  ctx.strokeStyle = lineCol;
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(xStart, y);
+  ctx.lineTo(xEnd, y);
+  ctx.stroke();
+
+  ctx.fillStyle = lineCol;
+  ctx.beginPath();
+  ctx.moveTo(xEnd, y);
+  ctx.lineTo(xEnd - 8, y - 4);
+  ctx.lineTo(xEnd - 8, y + 4);
+  ctx.fill();
+
+  ctx.strokeStyle = lineCol;
+  ctx.lineWidth = 0.8;
+  ctx.beginPath();
+  ctx.moveTo(xPunto, y - 6);
+  ctx.lineTo(xPunto, y + 6);
+  ctx.stroke();
+
+  ctx.font = `11px sans-serif`;
+  ctx.fillStyle = textCol;
+  ctx.textAlign = 'center';
+  ctx.fillText(label, xPunto, y + 17);
+
+  ctx.beginPath();
+  ctx.arc(xPunto, y, 5, 0, Math.PI * 2);
+  if (incluso) {
+    ctx.fillStyle = colore;
+    ctx.fill();
+  } else {
+    ctx.strokeStyle = colore;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.fillStyle = isDark ? '#222' : '#fff';
+    ctx.fill();
+    ctx.strokeStyle = colore;
+    ctx.stroke();
+  }
+
+  const solCol = colore + '55';
+  ctx.fillStyle = colore + '33';
+  if (verso === 'dx') {
+    ctx.fillRect(xPunto, y - 5, xEnd - 20 - xPunto, 10);
+    ctx.fillStyle = colore;
+    ctx.font = 'bold 13px sans-serif';
+    ctx.fillText('â–¶â–¶â–¶', xPunto + (xEnd - xPunto) / 2, y + 4);
+  } else {
+    ctx.fillRect(xStart + 20, y - 5, xPunto - xStart - 20, 10);
+    ctx.fillStyle = colore;
+    ctx.font = 'bold 13px sans-serif';
+    ctx.fillText('â—€â—€â—€', xStart + (xPunto - xStart) / 2, y + 4);
+  }
+
+  ctx.fillStyle = textCol;
+  ctx.font = '10px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('âˆ’âˆž', xStart, y + 4);
+  ctx.textAlign = 'right';
+  ctx.fillText('+âˆž', xEnd - 2, y + 4);
+
+  if (verso === 'sx') {
+    ctx.fillStyle = colore;
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('x ' + (incluso ? 'â‰¤' : '<') + ' ' + label, xPunto + 12, y - 10);
+  } else {
+    ctx.fillStyle = colore;
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('x ' + (incluso ? 'â‰¥' : '>') + ' ' + label, xPunto - 12, y - 10);
+  }
+}
+
+window.addEventListener('load', () => {
+  drawRetta('retta1', -2, 'âˆ’2', 'sx', true,  '#c62828');
+  drawRetta('retta2', 0.5,'1/2','sx', false, '#e65100');
+  drawRetta('retta3', 0,  'âˆ’7/2','dx',true,  '#1565c0');
+  drawRetta('retta4', 0,  'âˆ’1', 'dx', true,  '#00695c');
+});
+</script>
+

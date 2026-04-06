@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercizi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand" style="font-size: 1.1rem; line-height: 1.2;">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="matematica.html">Matematica</a>
+      <a href="esercizi_hub.html" class="active">Esercizi</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="content-wrapper">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { font-family: var(--font-sans); padding: 14px; color: var(--color-text-primary); display: flex; flex-direction: column; gap: 14px; }
+
+.intestazione { background: #0d47a1; border-radius: 12px; padding: 14px 18px; color: #fff; text-align: center; }
+.int-titolo { font-size: 12px; color: #bbdefb; margin-bottom: 3px; }
+.int-materia { font-size: 16px; font-weight: 500; }
+.int-sotto { font-size: 12px; color: #90caf9; margin-top: 4px; }
+.int-linea { height: 1px; background: rgba(255,255,255,0.2); margin: 8px 0; }
+.int-prof { font-size: 11px; color: #90caf9; }
+
+.es { border-radius: 12px; overflow: hidden; border: 3px solid; margin-bottom: 4px; }
+.es-blu    { border-color: #1565c0; }
+.es-verde  { border-color: #2e7d32; }
+.es-viola  { border-color: #6a1b9a; }
+.es-arancio{ border-color: #e65100; }
+.es-rosso  { border-color: #c62828; }
+
+.es-header { display: flex; align-items: center; gap: 10px; padding: 8px 14px; color: #fff; font-size: 13px; font-weight: 500; }
+.es-blu .es-header    { background: #1565c0; }
+.es-verde .es-header  { background: #2e7d32; }
+.es-viola .es-header  { background: #6a1b9a; }
+.es-arancio .es-header{ background: #e65100; }
+.es-rosso .es-header  { background: #c62828; }
+
+.num-badge { background: rgba(255,255,255,0.25); border-radius: 6px; padding: 2px 8px; font-size: 13px; font-weight: 500; flex-shrink: 0; }
+
+.es-body { padding: 10px 14px; display: flex; flex-direction: column; gap: 8px; }
+.es-blu .es-body    { background: #e3f2fd; }
+.es-verde .es-body  { background: #e8f5e9; }
+.es-viola .es-body  { background: #f3e5f5; }
+.es-arancio .es-body{ background: #fff3e0; }
+.es-rosso .es-body  { background: #ffebee; }
+
+.eq-display { background: #fff; border-radius: 8px; padding: 8px 12px; font-size: 18px; font-weight: 500; text-align: center; }
+.es-blu .eq-display    { color: #1565c0; }
+.es-verde .eq-display  { color: #2e7d32; }
+.es-viola .eq-display  { color: #6a1b9a; }
+.es-arancio .eq-display{ color: #e65100; }
+.es-rosso .eq-display  { color: #c62828; }
+
+.step { background: #fff; border-radius: 8px; padding: 8px 12px; font-size: 12px; line-height: 1.7; border-left: 4px solid; }
+.es-blu .step    { border-color: #1565c0; }
+.es-verde .step  { border-color: #2e7d32; }
+.es-viola .step  { border-color: #6a1b9a; }
+.es-arancio .step{ border-color: #e65100; }
+.es-rosso .step  { border-color: #c62828; }
+
+.freccia { color: #888; font-size: 13px; margin: 0 4px; }
+.comm { font-size: 10px; color: #888; font-style: italic; }
+
+.sol { display: inline-flex; align-items: center; gap: 8px; background: #fff9c4; border: 2px solid #f9a825; border-radius: 8px; padding: 6px 14px; font-size: 17px; font-weight: 500; color: #e65100; margin-top: 2px; }
+.sol-label { font-size: 10px; color: #f9a825; font-weight: 500; letter-spacing: 1px; }
+.imp-box { background: #ffebee; border: 2px solid #c62828; border-radius: 8px; padding: 7px 12px; font-size: 13px; color: #b71c1c; font-weight: 500; text-align: center; }
+
+sup { font-size: 0.65em; vertical-align: super; }
+sub { font-size: 0.65em; vertical-align: sub; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; font-size: 0.82em; vertical-align: middle; line-height: 1.2; }
+.frac .n { border-bottom: 1.2px solid currentColor; padding: 0 2px; }
+.frac .d { padding: 0 2px; }
+</style>
+
+<div class="wrap">
+
+<div class="intestazione">
+  <div class="int-titolo">Scheda di matematica · Prof. Belardi Nicolino</div>
+  <div class="int-materia">Esercizi — Equazioni esponenziali elementari</div>
+  <div class="int-linea"></div>
+  <div class="int-sotto">Per ogni esercizio: trova la base comune → riscrivi → uguaglia gli esponenti</div>
+</div>
+
+<!-- ES 6 -->
+<div class="es es-blu">
+  <div class="es-header"><span class="num-badge">6</span> 3<sup>x</sup> = 1</div>
+  <div class="es-body">
+    <div class="eq-display">3<sup>x</sup> = 1</div>
+    <div class="step">
+      <b>Base di riferimento: 3</b><br>
+      1 = 3⁰ <span class="freccia">→</span> posso scrivere: 3<sup>x</sup> = 3<sup>0</sup><br>
+      Stessa base <span class="freccia">→</span> ugualio gli esponenti: <b>x = 0</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = 0</div>
+  </div>
+</div>
+
+<!-- ES 7 -->
+<div class="es es-verde">
+  <div class="es-header"><span class="num-badge">7</span> 5<sup>x</sup> = 25</div>
+  <div class="es-body">
+    <div class="eq-display">5<sup>x</sup> = 25</div>
+    <div class="step">
+      <b>Base di riferimento: 5</b><br>
+      25 = 5² <span class="freccia">→</span> 5<sup>x</sup> = 5<sup>2</sup><br>
+      Stessa base <span class="freccia">→</span> <b>x = 2</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = 2</div>
+  </div>
+</div>
+
+<!-- ES 8 -->
+<div class="es es-viola">
+  <div class="es-header"><span class="num-badge">8</span> 9<sup>x</sup> = 27</div>
+  <div class="es-body">
+    <div class="eq-display">9<sup>x</sup> = 27</div>
+    <div class="step">
+      <b>Base di riferimento: 3</b><br>
+      9 = 3² <span class="freccia">→</span> 9<sup>x</sup> = (3²)<sup>x</sup> = 3<sup>2x</sup><br>
+      27 = 3³<br>
+      Quindi: 3<sup>2x</sup> = 3<sup>3</sup><br>
+      Ugualio: 2x = 3 <span class="freccia">→</span> <b>x = 3/2</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = 3/2</div>
+  </div>
+</div>
+
+<!-- ES 9 -->
+<div class="es es-rosso">
+  <div class="es-header"><span class="num-badge">9</span> 8<sup>x</sup> = −3</div>
+  <div class="es-body">
+    <div class="eq-display">8<sup>x</sup> = −3</div>
+    <div class="step">
+      Il numero a destra è <b>negativo (−3)</b>.<br>
+      Nessuna potenza può dare un numero negativo!<br>
+      L'esponenziale è sempre positiva → <b>impossibile</b>
+    </div>
+    <div class="imp-box">🚫 IMPOSSIBILE — nessun valore di x funziona</div>
+  </div>
+</div>
+
+<!-- ES 10 -->
+<div class="es es-blu">
+  <div class="es-header"><span class="num-badge">10</span> 3<sup>x</sup> = 1/3</div>
+  <div class="es-body">
+    <div class="eq-display">3<sup>x</sup> = <span class="frac"><span class="n">1</span><span class="d">3</span></span></div>
+    <div class="step">
+      <b>Base di riferimento: 3</b><br>
+      <span class="frac"><span class="n">1</span><span class="d">3</span></span> = 3<sup>−1</sup> <span class="comm">(esponente negativo = vai sotto la frazione)</span><br>
+      Quindi: 3<sup>x</sup> = 3<sup>−1</sup><br>
+      Ugualio: <b>x = −1</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = −1</div>
+  </div>
+</div>
+
+<!-- ES 11 -->
+<div class="es es-verde">
+  <div class="es-header"><span class="num-badge">11</span> 7<sup>x</sup> = 9</div>
+  <div class="es-body">
+    <div class="eq-display">7<sup>x</sup> = 9</div>
+    <div class="step">
+      9 non è una potenza di 7 → non possiamo ricondurre alla stessa base con numeri interi.<br>
+      In questo caso la soluzione si esprime con il <b>logaritmo</b>:<br>
+      7<sup>x</sup> = 9 <span class="freccia">→</span> <b>x = log₇ 9</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = log₇ 9</div>
+  </div>
+</div>
+
+<!-- ES 12 -->
+<div class="es es-viola">
+  <div class="es-header"><span class="num-badge">12</span> 2<sup>x</sup> = √2 / 64</div>
+  <div class="es-body">
+    <div class="eq-display">2<sup>x</sup> = <span class="frac"><span class="n">√2</span><span class="d">64</span></span></div>
+    <div class="step">
+      <b>Base di riferimento: 2</b><br>
+      √2 = 2<sup>1/2</sup> &nbsp;·&nbsp; 64 = 2<sup>6</sup><br>
+      <span class="frac"><span class="n">√2</span><span class="d">64</span></span> = <span class="frac"><span class="n">2<sup>1/2</sup></span><span class="d">2<sup>6</sup></span></span> = 2<sup>1/2 − 6</sup> = 2<sup>−11/2</sup><br>
+      Quindi: 2<sup>x</sup> = 2<sup>−11/2</sup><br>
+      Ugualio: <b>x = −11/2</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = −11/2</div>
+  </div>
+</div>
+
+<!-- ES 13 -->
+<div class="es es-arancio">
+  <div class="es-header"><span class="num-badge">13</span> 8<sup>−x</sup> = 2</div>
+  <div class="es-body">
+    <div class="eq-display">8<sup>−x</sup> = 2</div>
+    <div class="step">
+      <b>Base di riferimento: 2</b><br>
+      8 = 2³ <span class="freccia">→</span> 8<sup>−x</sup> = (2³)<sup>−x</sup> = 2<sup>−3x</sup><br>
+      2 = 2<sup>1</sup><br>
+      Quindi: 2<sup>−3x</sup> = 2<sup>1</sup><br>
+      Ugualio: −3x = 1 <span class="freccia">→</span> x = −1/3
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = −1/3</div>
+  </div>
+</div>
+
+<!-- ES 14 -->
+<div class="es es-blu">
+  <div class="es-header"><span class="num-badge">14</span> (3/4)<sup>x</sup> = 1</div>
+  <div class="es-body">
+    <div class="eq-display">(3/4)<sup>x</sup> = 1</div>
+    <div class="step">
+      Qualsiasi numero elevato a 0 dà 1.<br>
+      (3/4)⁰ = 1 <span class="freccia">→</span> <b>x = 0</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = 0</div>
+  </div>
+</div>
+
+<!-- ES 15 -->
+<div class="es es-verde">
+  <div class="es-header"><span class="num-badge">15</span> 3<sup>x</sup> = 1/27</div>
+  <div class="es-body">
+    <div class="eq-display">3<sup>x</sup> = <span class="frac"><span class="n">1</span><span class="d">27</span></span></div>
+    <div class="step">
+      <b>Base di riferimento: 3</b><br>
+      27 = 3³ <span class="freccia">→</span> <span class="frac"><span class="n">1</span><span class="d">27</span></span> = 3<sup>−3</sup><br>
+      Quindi: 3<sup>x</sup> = 3<sup>−3</sup><br>
+      Ugualio: <b>x = −3</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = −3</div>
+  </div>
+</div>
+
+<!-- ES 16 -->
+<div class="es es-rosso">
+  <div class="es-header"><span class="num-badge">16</span> 4<sup>x</sup> = −2</div>
+  <div class="es-body">
+    <div class="eq-display">4<sup>x</sup> = −2</div>
+    <div class="step">
+      Il numero a destra è <b>negativo (−2)</b>.<br>
+      L'esponenziale è sempre positiva → impossibile!
+    </div>
+    <div class="imp-box">🚫 IMPOSSIBILE</div>
+  </div>
+</div>
+
+<!-- ES 17 -->
+<div class="es es-viola">
+  <div class="es-header"><span class="num-badge">17</span> eˣ = 4</div>
+  <div class="es-body">
+    <div class="eq-display">e<sup>x</sup> = 4</div>
+    <div class="step">
+      La base è <b>e</b> (numero di Nepero ≈ 2,718).<br>
+      4 non è una potenza intera di e → si usa il <b>logaritmo naturale (ln)</b>:<br>
+      e<sup>x</sup> = 4 <span class="freccia">→</span> <b>x = ln 4</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = ln 4</div>
+  </div>
+</div>
+
+<!-- ES 18 -->
+<div class="es es-arancio">
+  <div class="es-header"><span class="num-badge">18</span> (1/3)<sup>x</sup> = 9</div>
+  <div class="es-body">
+    <div class="eq-display">(1/3)<sup>x</sup> = 9</div>
+    <div class="step">
+      <b>Base di riferimento: 3</b><br>
+      1/3 = 3<sup>−1</sup> <span class="freccia">→</span> (1/3)<sup>x</sup> = (3<sup>−1</sup>)<sup>x</sup> = 3<sup>−x</sup><br>
+      9 = 3²<br>
+      Quindi: 3<sup>−x</sup> = 3<sup>2</sup><br>
+      Ugualio: −x = 2 <span class="freccia">→</span> <b>x = −2</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = −2</div>
+  </div>
+</div>
+
+<!-- ES 19 -->
+<div class="es es-blu">
+  <div class="es-header"><span class="num-badge">19</span> (√2)<sup>x</sup> = 32</div>
+  <div class="es-body">
+    <div class="eq-display">(√2)<sup>x</sup> = 32</div>
+    <div class="step">
+      <b>Base di riferimento: 2</b><br>
+      √2 = 2<sup>1/2</sup> <span class="freccia">→</span> (2<sup>1/2</sup>)<sup>x</sup> = 2<sup>x/2</sup><br>
+      32 = 2<sup>5</sup><br>
+      Quindi: 2<sup>x/2</sup> = 2<sup>5</sup><br>
+      Ugualio: x/2 = 5 <span class="freccia">→</span> <b>x = 10</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = 10</div>
+  </div>
+</div>
+
+<!-- ES 20 -->
+<div class="es es-verde">
+  <div class="es-header"><span class="num-badge">20</span> 4<sup>x</sup> = 2√2</div>
+  <div class="es-body">
+    <div class="eq-display">4<sup>x</sup> = 2√2</div>
+    <div class="step">
+      <b>Base di riferimento: 2</b><br>
+      4 = 2² <span class="freccia">→</span> (2²)<sup>x</sup> = 2<sup>2x</sup><br>
+      2√2 = 2<sup>1</sup> · 2<sup>1/2</sup> = 2<sup>3/2</sup><br>
+      Quindi: 2<sup>2x</sup> = 2<sup>3/2</sup><br>
+      Ugualio: 2x = 3/2 <span class="freccia">→</span> <b>x = 3/4</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = 3/4</div>
+  </div>
+</div>
+
+<!-- ES 21 -->
+<div class="es es-viola">
+  <div class="es-header"><span class="num-badge">21</span> 9<sup>x</sup> = 1/√3</div>
+  <div class="es-body">
+    <div class="eq-display">9<sup>x</sup> = <span class="frac"><span class="n">1</span><span class="d">√3</span></span></div>
+    <div class="step">
+      <b>Base di riferimento: 3</b><br>
+      9 = 3² <span class="freccia">→</span> (3²)<sup>x</sup> = 3<sup>2x</sup><br>
+      <span class="frac"><span class="n">1</span><span class="d">√3</span></span> = <span class="frac"><span class="n">1</span><span class="d">3<sup>1/2</sup></span></span> = 3<sup>−1/2</sup><br>
+      Quindi: 3<sup>2x</sup> = 3<sup>−1/2</sup><br>
+      Ugualio: 2x = −1/2 <span class="freccia">→</span> <b>x = −1/4</b>
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = −1/4</div>
+  </div>
+</div>
+
+<!-- ES 22 -->
+<div class="es es-rosso">
+  <div class="es-header"><span class="num-badge">22</span> π<sup>x</sup> = 1 − π</div>
+  <div class="es-body">
+    <div class="eq-display">π<sup>x</sup> = 1 − π</div>
+    <div class="step">
+      π ≈ 3,14 <span class="freccia">→</span> 1 − π ≈ 1 − 3,14 = <b>−2,14</b><br>
+      Il numero a destra è <b>negativo</b>.<br>
+      L'esponenziale è sempre positiva → impossibile!
+    </div>
+    <div class="imp-box">🚫 IMPOSSIBILE — 1−π è negativo</div>
+  </div>
+</div>
+
+<!-- ES 23 -->
+<div class="es es-arancio">
+  <div class="es-header"><span class="num-badge">23</span> (0,25)<sup>x</sup> = √2</div>
+  <div class="es-body">
+    <div class="eq-display">(0,25)<sup>x</sup> = √2</div>
+    <div class="step">
+      <b>Base di riferimento: 2</b><br>
+      0,25 = 1/4 = 1/2² = 2<sup>−2</sup><br>
+      (2<sup>−2</sup>)<sup>x</sup> = 2<sup>−2x</sup><br>
+      √2 = 2<sup>1/2</sup><br>
+      Quindi: 2<sup>−2x</sup> = 2<sup>1/2</sup><br>
+      Ugualio: −2x = 1/2 <span class="freccia">→</span> x = −1/4
+    </div>
+    <div class="sol"><span class="sol-label">SOLUZIONE</span> x = −1/4</div>
+  </div>
+</div>
+
+</div>
+</div>
+    </div>
+  </div>
+</body>
+</html>
