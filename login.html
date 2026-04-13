@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accesso Area Riservata | Prof. Belardi</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .login-container {
+      max-width: 420px;
+      margin: 10vh auto;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .login-container h2 {
+      text-align: center;
+      color: #ef4444;
+      margin-bottom: 0.2rem;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .input-group label {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .login-input {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 14px;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s;
+    }
+    .login-input:focus {
+      border-color: #ef4444;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .login-btn-submit {
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 5px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .login-btn-submit:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+    }
+    .login-btn-submit:active {
+      transform: translateY(0);
+    }
+    #error-msg {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      text-align: center;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+    <div class="nav-links">
+      <a href="index.html">🏠 Torna al Portale</a>
+    </div>
+  </nav>
+
+  <div class="login-container">
+    <h2>🔑 Accesso Docenti</h2>
+    <p style="text-align:center; color: var(--text-secondary); font-size:0.95rem; line-height: 1.2;">Inserisci le tue credenziali per sbloccare i documenti riservati.</p>
+    
+    <div id="error-msg">⚠️ Credenziali errate riprova.</div>
+    
+    <div class="input-group">
+      <label>Nome Utente</label>
+      <input type="text" id="username" class="login-input" placeholder="es. docente">
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="password" class="login-input" placeholder="••••••••">
+    </div>
+
+    <button onclick="checkLogin()" class="login-btn-submit">Sblocca Area Riservata</button>
+  </div>
+
+  <script>
+    // Supporto per loggarsi sfiorando "Invio" sulla tastiera
+    document.addEventListener("keydown", function(e) {
+      if(e.key === "Enter") {
+        checkLogin();
+      }
+    });
+
+    // Funzione crittografica per nascondere la password al codice sorgente visibile
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function checkLogin() {
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      const errorMsg = document.getElementById('error-msg');
+      
+      // Converte la password in una stringa indecifrabile per controllare senza svelarla
+      const hashedPass = await sha256(pass);
+      const hashAtteso = "b45f30ffcb1a6e5d7526c56f5a401acf879d13792085dd4af21ca4b2b6dd43e0"; // Volta2026 criptata
+      const userAtteso = "ZG9jZW50ZQ=="; // Utente "docente" codificato
+      
+      // Controllo Credenziali Obfuscato
+      if (btoa(user) === userAtteso && hashedPass === hashAtteso) {
+        sessionStorage.setItem('auth', '1');
+        window.location.href = "area_docenti_7a9f.html"; // Anche il nome del file è oscurato!
+      } else {
+        errorMsg.style.display = 'block';
+        // Nascondi dopo 3 secondi
+        setTimeout(() => errorMsg.style.display = 'none', 3000);
+      }
+    }
+  </script>
+</body>
+</html>
