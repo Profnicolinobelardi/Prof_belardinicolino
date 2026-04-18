@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Logaritmi | Prof. Belardi Nicolino</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Stili per la navigazione a schede */
+    .tabs-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+      justify-content: center;
+      position: sticky;
+      top: 80px;
+      z-index: 100;
+      padding: 10px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .tab-btn {
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #e2e8f0;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .tab-btn:hover { background: rgba(255, 255, 255, 0.1); }
+    
+    .tab-btn.active {
+      background: #f59e0b;
+      border-color: #f59e0b;
+      color: #000;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Stili originali salvaguardati */
+    .wrap { font-family: var(--font-sans, sans-serif); color: #1e293b; display: flex; flex-direction: column; gap: 14px; }
+    .scheda { border-radius: 12px; overflow: hidden; border: 3px solid; background: #fff; }
+    .s1 { border-color: #1565c0; } .s2 { border-color: #2e7d32; } .s3 { border-color: #6a1b9a; }
+    .s4 { border-color: #e65100; } .s5 { border-color: #c62828; } .s6 { border-color: #00796b; }
+
+    .scheda-header { display: flex; align-items: center; gap: 10px; padding: 10px 15px; color: #fff; font-size: 14px; font-weight: 500; }
+    .s1 .scheda-header { background: #1565c0; } .s2 .scheda-header { background: #2e7d32; }
+    .s3 .scheda-header { background: #6a1b9a; } .s4 .scheda-header { background: #e65100; }
+    .s5 .scheda-header { background: #c62828; } .s6 .scheda-header { background: #00796b; }
+
+    .icona { font-size: 17px; width: 32px; height: 32px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .hdx { margin-left: auto; font-size: 9px; opacity: 0.7; font-weight: 400; white-space: nowrap; }
+    .scheda-body { padding: 13px 15px; display: flex; flex-direction: column; gap: 11px; }
+
+    .def-box { background: #fff; border-radius: 9px; padding: 11px 13px; font-size: 13px; line-height: 1.8; border-left: 4px solid; color: #334155; }
+    .s1 .def-box { border-color: #1565c0; } .s2 .def-box { border-color: #2e7d32; }
+    .s3 .def-box { border-color: #6a1b9a; } .s4 .def-box { border-color: #e65100; }
+    .s5 .def-box { border-color: #c62828; } .s6 .def-box { border-color: #00796b; }
+
+    .formula-grande { border-radius: 9px; padding: 11px 14px; font-size: 20px; font-weight: 500; text-align: center; color: #fff; margin: 10px 0; }
+    .s1 .formula-grande { background: #1565c0; } .s2 .formula-grande { background: #2e7d32; }
+    .s3 .formula-grande { background: #6a1b9a; } .s4 .formula-grande { background: #e65100; }
+
+    .nota { background: #fff9c4; border: 1.5px solid #f9a825; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.75; display: flex; gap: 9px; }
+    .nota-rossa { background: #ffebee; border: 1.5px solid #c62828; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.75; color: #b71c1c; }
+    .nota-viola { background: #f3e5f5; border: 1.5px solid #6a1b9a; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.75; color: #4a148c; }
+    
+    .sezione-titolo { font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: #888; margin-bottom: 2px; }
+    .tre-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .due-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    .mini-card { border-radius: 8px; padding: 10px 11px; font-size: 12px; line-height: 1.75; text-align: center; }
+    .mc-blu { background: #e3f2fd; border: 1.5px solid #1565c0; color: #0d47a1; }
+    .mc-verde { background: #e8f5e9; border: 1.5px solid #2e7d32; color: #1b5e20; }
+    .mc-viola { background: #f3e5f5; border: 1.5px solid #6a1b9a; color: #4a148c; }
+    
+    .grafico-box { background: #fff; border-radius: 9px; padding: 12px; border: 1px solid #e2e8f0; }
+    .grafico-label { font-size: 10px; font-weight: 500; color: #888; text-transform: uppercase; margin-bottom: 8px; text-align: center; }
+    
+    .prop-row { background: #fff; border-radius: 9px; padding: 10px 13px; font-size: 13px; line-height: 1.8; border-left: 4px solid #6a1b9a; }
+    .prop-formula { font-size: 16px; font-weight: 500; color: #4a148c; margin: 4px 0 2px; }
+    
+    .eq-box { background: #fff; border-radius: 9px; padding: 10px 13px; font-size: 13px; line-height: 1.85; border-left: 4px solid #e65100; }
+    .eq-display { font-size: 18px; font-weight: 500; color: #e65100; text-align: center; padding: 8px; background: #fff3e0; border-radius: 7px; margin: 5px 0; }
+    .sol-inline { font-size: 15px; font-weight: 500; color: #2e7d32; }
+
+    .step-card { background: #fff; border-radius: 8px; overflow: hidden; border-left: 4px solid; margin-bottom: 3px; }
+    .step-card .sh { display: flex; align-items: center; gap: 8px; padding: 6px 12px; font-size: 11px; font-weight: 500; }
+    .step-card .sb { padding: 7px 13px 9px; font-size: 12px; line-height: 1.85; }
+    .sn { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #fff; flex-shrink: 0; }
+    .sc-blu { border-color: #1565c0; } .sc-blu .sh { background: #e3f2fd; color: #1565c0; } .sc-blu .sn { background: #1565c0; }
+    .sc-ver { border-color: #2e7d32; } .sc-ver .sh { background: #e8f5e9; color: #2e7d32; } .sc-ver .sn { background: #2e7d32; }
+    .sc-ros { border-color: #c62828; } .sc-ros .sh { background: #ffebee; color: #c62828; } .sc-ros .sn { background: #c62828; }
+
+    .video-banner { background: #f8fafc; border-radius: 12px; padding: 25px; border-left: 6px solid #00796b; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .video-title { font-size: 14px; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px; }
+    .video-content { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px; }
+    .video-btn { display: inline-flex; align-items: center; gap: 12px; background: #ff0000; color: #fff; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 16px; transition: all 0.3s; box-shadow: 0 5px 15px rgba(255,0,0,0.3); }
+    .video-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,0,0,0.4); background: #e60000; color: #fff; }
+
+    .ricorda { background: #fff9c4; border: 2px solid #f9a825; border-radius: 9px; padding: 10px 13px; font-size: 12px; line-height: 1.75; display: flex; gap: 9px; margin-top: 10px; }
+
+    sub, sup { font-size: 0.7em; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div style="display:flex; align-items:center;">
+      <a href="index.html" class="nav-brand">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+      <button onclick="window.location.href='login.html'" style="margin-left:15px; background:rgba(239,68,68,0.2); border:1px solid #ef4444; color:#fff; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.85rem; font-weight:600; display:inline-flex; align-items:center; transition:all 0.3s;" onmouseover="this.style.background='#ef4444'" onmouseout="this.style.background='rgba(239,68,68,0.2)'">&#128273; Area Docenti</button>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="matematica.html">Matematica</a>
+      <a href="#" class="active">Logaritmi</a>
+    </div>
+  </nav>
+
+  <div class="container" style="max-width: 1000px;">
+    
+    <!-- VIDEO TUTORIAL CONSIGLIATI (IN ALTO) -->
+    <div class="video-banner">
+      <div class="video-title">Video Tutorial Consigliati</div>
+      <div class="video-content">
+        <p style="font-size: 15px; color: #334155; font-weight: 500;">Segui questa playlist completa per approfondire ogni aspetto dei logaritmi con spiegazioni passo-passo:</p>
+        <a href="https://www.youtube.com/playlist?list=PLMuQM6TG2JrxcuD1bG-pJeFqm88WaWddH" target="_blank" class="video-btn">
+          <span>▶</span> Guarda la Playlist Tutorial
+        </a>
+      </div>
+    </div>
+
+    <!-- Navigazione a Schede -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="openTab('s1', this)">1. Definizione e C.E.</button>
+      <button class="tab-btn" onclick="openTab('s2', this)">2. Grafici e Proprietà</button>
+      <button class="tab-btn" onclick="openTab('s3', this)">3. Proprietà dei Logaritmi</button>
+      <button class="tab-btn" onclick="openTab('s4', this)">4. Equazioni</button>
+      <button class="tab-btn" onclick="openTab('s5', this)">5. Disequazioni</button>
+      <button class="tab-btn" onclick="openTab('s6', this)">6. Esercizi</button>
+    </div>
+
+    <div class="wrap">
+      
+      <!-- SCHEDA 1 - IDENTICA ALL'ORIGINALE -->
+      <div id="s1" class="tab-content active">
+        <div class="scheda s1">
+          <div class="scheda-header"><div class="icona">📖</div>SCHEDA 1 — Definizione e Condizioni di Esistenza<span class="hdx">Prof. Belardi Nicolino</span></div>
+          <div class="scheda-body" style="background: #e3f2fd;">
+            <div class="def-box">Il <b>logaritmo</b> è l'operazione matematica che ci permette di trovare l'<b>esponente</b> a cui elevare una <b>base</b> per ottenere un determinato numero (chiamato <b>argomento</b>).</div>
+            <div class="formula-grande">log<sub>a</sub> b = x &nbsp;⟺&nbsp; a<sup>x</sup> = b</div>
+            <div class="nota"><span>💡</span><div><b>A parole:</b> il logaritmo in base <i>a</i> di <i>b</i> è l'esponente (<i>x</i>) che devo dare alla base (<i>a</i>) per ottenere l'argomento (<i>b</i>).</div></div>
+            <div class="sezione-titolo">Condizioni di Esistenza (C.E.)</div>
+            <div class="due-col">
+              <div class="mini-card mc-blu"><b>Base <i>a</i></b><br>Deve essere <b>positiva</b> e <b>diversa da 1</b><br><br>a &gt; 1 &nbsp; oppure &nbsp; 0 &lt; a &lt; 1<br><br><span style="font-size:11px;color:#777;">Non può essere 0, 1 o negativa</span></div>
+              <div class="mini-card mc-verde"><b>Argomento <i>b</i></b><br>Deve essere <b>sempre positivo</b><br><br>b &gt; 0<br><br><span style="font-size:11px;color:#777;">Non esiste log di 0 o di un numero negativo</span></div>
+            </div>
+            <div class="sezione-titolo">Il Logaritmo Naturale (ln)</div>
+            <div class="def-box"><b>ln b = log<sub>e</sub> b</b><br><br>La scritta <b>ln</b> sta per <i>logaritmo naturale</i> (o logaritmo neperiano). Quando si usa ln, la base è il <b>numero di Nepero (<i>e</i>)</b>.<br><br>Il numero di Nepero è una costante matematica irrazionale: <b>e ≈ 2,71828…</b><br>È famoso come il Pi greco (π). Usare la base <i>e</i> semplifica enormemente formule e calcoli nello studio delle funzioni.</div>
+            <div class="sezione-titolo">Il logaritmo come operazione inversa</div>
+            <div class="def-box" style="margin-bottom:4px;">Logaritmo, potenza e radice legano tre elementi: <b>base, esponente, risultato</b>.<br>A seconda dell'elemento incognito si usa un'operazione diversa.</div>
+            <div class="tre-col">
+              <div class="mini-card mc-blu"><b>Potenza</b><br>Cerco il Risultato<br>Conosco: base e esponente<br><br>2³ = 8</div>
+              <div class="mini-card mc-verde"><b>Radice</b><br>Cerco la Base<br>Conosco: esponente e risultato<br><br>∛8 = 2</div>
+              <div class="mini-card mc-viola"><b>Logaritmo</b><br>Cerco l'Esponente<br>Conosco: base e risultato<br><br>log₂ 8 = 3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHEDA 2 - IDENTICA ALL'ORIGINALE (usando gif) -->
+      <div id="s2" class="tab-content">
+        <div class="scheda s2">
+          <div class="scheda-header"><div class="icona">📊</div>SCHEDA 2 — Grafico e Proprietà Analitiche<span class="hdx">Prof. Belardi Nicolino</span></div>
+          <div class="scheda-body" style="background: #e8f5e9;">
+            <div class="sezione-titolo">Caso 1 — Base maggiore di 1 (a > 1)</div>
+            <div class="grafico-box">
+              <div class="grafico-label">Grafico 1 — y = log<sub>a</sub> x con a > 1 · simmetrica a y = aˣ rispetto a y = x</div>
+              <img src="grafico1.gif" alt="Grafico a > 1" style="width:100%; max-width:600px; display:block; margin:auto; border-radius: 8px;">
+            </div>
+            <div class="step-card sc-blu"><div class="sh"><div class="sn">●</div>Passaggio per il punto (1 ; 0)</div><div class="sb">Il grafico interseca l'asse x nel punto (1, 0).<br>Questo accade perché qualsiasi numero elevato a 0 dà 1 → a⁰ = 1.<br>Quindi l'esponente che bisogna dare ad <i>a</i> per ottenere 1 è sempre 0.<br><b>In formule: log<sub>a</sub> 1 = 0</b></div></div>
+            <div class="step-card sc-ver"><div class="sh"><div class="sn">●</div>Asintoto verticale</div><div class="sb">La curva scende verso il basso avvicinandosi all'asse y, ma <b>senza mai toccarlo</b>.<br>L'asse y (equazione x = 0) fa da "muro invisibile" → è l'<b>asintoto verticale</b>.<br>Il motivo è nelle C.E.: l'argomento del logaritmo deve essere sempre > 0.<br>La funzione non esiste per x = 0 né per x negativo → il grafico "vive" solo nella metà destra del piano.</div></div>
+            <div class="step-card sc-blu"><div class="sh"><div class="sn">●</div>Funzione inversa e simmetria</div><div class="sb">La funzione logaritmica e la funzione esponenziale sono <b>l'una l'inversa dell'altra</b>.<br><br>Il grafico di y = log<sub>a</sub> x e il grafico di y = aˣ sono <b>simmetrici</b> rispetto alla bisettrice del primo e terzo quadrante (retta y = x).</div></div>
+            <div class="sezione-titolo" style="margin-top:4px;">Caso 2 — Base compresa tra 0 e 1 (0 < a < 1)</div>
+            <div class="grafico-box">
+              <div class="grafico-label">Grafico 2 — y = log<sub>a</sub> x con 0 < a < 1 · funzione decrescente</div>
+              <img src="grafico2.gif" alt="Grafico 0 < a < 1" style="width:100%; max-width:600px; display:block; margin:auto; border-radius: 8px;">
+            </div>
+            <div class="step-card sc-ver"><div class="sh"><div class="sn">●</div>Funzione decrescente</div><div class="sb">Quando 0 < a < 1, la funzione logaritmica è <b>decrescente</b>: all'aumentare di x, y diminuisce.</div></div>
+            <div class="step-card sc-blu"><div class="sh"><div class="sn">●</div>Simmetria anche in questo caso</div><div class="sb">Il grafico della funzione esponenziale decrescente (in verde) e quello della funzione logaritmica decrescente (in blu) sono perfettamente <b>speculari</b> rispetto alla retta bisettrice y = x.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHEDA 3 - IDENTICA ALL'ORIGINALE -->
+      <div id="s3" class="tab-content">
+        <div class="scheda s3">
+          <div class="scheda-header"><div class="icona">📐</div>SCHEDA 3 — Proprietà dei Logaritmi<span class="hdx">Prof. Belardi Nicolino</span></div>
+          <div class="scheda-body" style="background: #f3e5f5;">
+            <div class="nota-viola">⚠️ <b>Tutte le proprietà sono valide solo se sono rispettate le C.E.</b>: basi positive e diverse da 1, argomenti strettamente positivi.</div>
+            <div class="prop-row"><div class="sezione-titolo">Proprietà 1 — Logaritmo di un prodotto</div><div class="prop-formula">log<sub>a</sub> b + log<sub>a</sub> c = log<sub>a</sub> (b · c)</div><div style="font-size:12px;color:#555;">La <b>somma</b> di due logaritmi con la stessa base è uguale a un unico logaritmo che ha per argomento il <b>prodotto</b> degli argomenti.</div></div>
+            <div class="prop-row"><div class="sezione-titolo">Proprietà 2 — Logaritmo di un quoziente</div><div class="prop-formula">log<sub>a</sub> b − log<sub>a</sub> c = log<sub>a</sub> (b/c)</div><div style="font-size:12px;color:#555;">La <b>differenza</b> tra due logaritmi con la stessa base è uguale a un unico logaritmo che ha per argomento il <b>quoziente</b> degli argomenti.</div></div>
+            <div class="prop-row"><div class="sezione-titolo">Proprietà 3 — Logaritmo di una potenza</div><div class="prop-formula">log<sub>a</sub> (b<sup>c</sup>) = c · log<sub>a</sub> b</div><div style="font-size:12px;color:#555;">Se l'argomento è elevato a un esponente, questo esponente può essere "portato fuori" e <b>moltiplicato</b> per il logaritmo. Utilissima per eliminare frazioni e radici dagli argomenti.</div>
+              <div style="background:#fff;border-radius:6px;padding:7px 10px;margin-top:6px;font-size:12px;box-shadow: 0 1px 3px rgba(0,0,0,0.05);"><b>Esempio 1 (con frazioni):</b><br>log₂ (1/x) = log₂ (x<sup>−1</sup>) = −1 · log₂ x = <b>−log₂ x</b><br><br><b>Esempio 2 (con radici):</b><br>log₂ ∛(x²) = log₂ (x<sup>2/3</sup>) = <b>(2/3) · log₂ x</b></div>
+            </div>
+            <div class="prop-row"><div class="sezione-titolo">Proprietà 4 — Trasformare un numero in un logaritmo</div><div class="prop-formula">n = log<sub>a</sub> (a<sup>n</sup>)</div><div style="font-size:12px;color:#555;">Qualsiasi numero può essere riscritto come logaritmo scegliendo una base a piacere. La regola è: inserire come argomento la <b>base scelta elevata a quel numero</b>.</div>
+              <div style="background:#fff;border-radius:6px;padding:7px 10px;margin-top:6px;font-size:12px;box-shadow: 0 1px 3px rgba(0,0,0,0.05);"><b>Esempio:</b> il numero 5 scritto come logaritmo in base 2: 5 = log₂ (2⁵)<br><b>Con il logaritmo naturale:</b> 5 = ln(e⁵)</div>
+            </div>
+            <div class="sezione-titolo">Identità Fondamentale — Trasformare un numero in una potenza</div>
+            <div class="tre-col">
+              <div class="mini-card mc-blu"><b>Base 2</b><br>5 = 2<sup>log₂ 5</sup></div>
+              <div class="mini-card mc-verde"><b>Base 3</b><br>5 = 3<sup>log₃ 5</sup></div>
+              <div class="mini-card mc-viola"><b>Base e</b><br>5 = e<sup>ln 5</sup></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHEDA 4 - IDENTICA ALL'ORIGINALE -->
+      <div id="s4" class="tab-content">
+        <div class="scheda s4">
+          <div class="scheda-header"><div class="icona">✏️</div>SCHEDA 4 — Equazioni Logaritmiche<span class="hdx">Prof. Belardi Nicolino</span></div>
+          <div class="scheda-body" style="background: #fff3e0;">
+            <div class="def-box">La strategia principale è usare le proprietà per arrivare alla forma: <b>log<sub>a</sub> f(x) = log<sub>a</sub> g(x)</b>. Una volta ottenuto lo stesso logaritmo con la stessa base → si "tolgono" i logaritmi e si uguagliano gli argomenti: <b>f(x) = g(x)</b></div>
+            <div class="sezione-titolo">Equazioni Elementari — si usa direttamente la definizione</div>
+            <div class="eq-box"><div style="font-size:11px;color:#888;">Esempio 1</div><div class="eq-display">log₂ x = 4</div>x = 2⁴ = <b>16</b></div>
+            <div class="eq-box"><div style="font-size:11px;color:#888;">Esempio 2</div><div class="eq-display">log<sub>1/2</sub> x = −1</div>x = (1/2)<sup>−1</sup> = <b>2</b></div>
+            <div class="eq-box"><div style="font-size:11px;color:#888;">Esempio 3</div><div class="eq-display">log₉ 81 = x</div>9<sup>x</sup> = 81 → <b>x = 2</b></div>
+            <div class="sezione-titolo">Equazioni da ricondurre alla forma base — si usano le proprietà</div>
+            <div class="eq-box"><div style="font-size:11px;color:#888;">Esempio 4</div><div class="eq-display">log₂ (x+1) − log₂ 3 = 0</div>log₂ (x+1) = log₂ 3 → x + 1 = 3 → <b>x = 2</b></div>
+            <div class="eq-box"><div style="font-size:11px;color:#888;">Esempio 5</div><div class="eq-display">log₃ x + log₃ 5 = log₃ (x−4)</div>log₃ (5x) = log₃ (x−4) → 5x = x − 4 → <b>x = −1</b></div>
+            <div class="nota-rossa">🚫 <b>Verifica delle C.E. — Esempio 5:</b> x = −1 renderebbe gli argomenti negativi → <b>non accettabile</b>. L'equazione è <b>impossibile</b>. <b>Ricordare sempre di verificare le C.E. alla fine!</b></div>
+            <div class="sezione-titolo">Esempi di utilizzo — trasformare i numeri</div>
+            <div class="eq-box"><div style="font-size:11px;color:#888;">Esempio A</div><div class="eq-display">log₄ x = 32</div>log₄ x = log₄ (4<sup>32</sup>) → <b>x = 4<sup>32</sup></b></div>
+            <div class="eq-box"><div style="font-size:11px;color:#888;">Esempio B — log₇ x = 0 (due metodi)</div><div class="eq-display">log₇ x = 0</div>1) 7⁰ = 1 → <b>x = 1</b><br>2) log₇ x = log₇ (7⁰) → <b>x = 1</b></div>
+            <div class="ricorda"><span style="font-size:18px;">🔑</span><div><b>Schema da seguire:</b> usa le proprietà → log<sub>a</sub> f(x) = log<sub>a</sub> g(x) → uguaglia gli argomenti → <b>verifica sempre le C.E.!</b></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHEDA 5 - INTEGRATIVA -->
+      <div id="s5" class="tab-content">
+        <div class="scheda s5">
+          <div class="scheda-header"><div class="icona">⚖️</div>SCHEDA 5 — Disequazioni Logaritmiche<span class="hdx">Prof. Belardi Nicolino</span></div>
+          <div class="scheda-body">
+            <div class="due-col">
+              <div class="mini-card mc-verde"><b>Caso a > 1</b><br>Il verso <b>si mantiene</b><br>f(x) > g(x)</div>
+              <div class="mini-card mc-rossa" style="background:#ffebee; border: 1.5px solid #c62828; color:#b71c1c;"><b>Caso 0 < a < 1</b><br>Il verso <b>si inverte</b><br>f(x) < g(x)</div>
+            </div>
+            <div class="nota-rossa">⚠️ <b>C.E.:</b> Argomenti sempre > 0.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHEDA 6 - ESERCIZI -->
+      <div id="s6" class="tab-content">
+        <div class="scheda s6">
+          <div class="scheda-header"><div class="icona">✍️</div>SCHEDA 6 — Esercizi di Consolidamento<span class="hdx">Prof. Belardi Nicolino</span></div>
+          <div class="scheda-body">
+            <div class="def-box">
+              1) log₅ (x + 10) = 2<br>
+              2) 2 · log x = log 4<br>
+              3) log₂(x - 1) + log₂(x + 1) = log₂ 3
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function openTab(tabId, btn) {
+      const contents = document.getElementsByClassName('tab-content');
+      for (let i = 0; i < contents.length; i++) contents[i].classList.remove('active');
+      const btns = document.getElementsByClassName('tab-btn');
+      for (let i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({ top: 400, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

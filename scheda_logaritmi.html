@@ -1,0 +1,613 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { font-family: var(--font-sans); padding: 14px; color: var(--color-text-primary); display: flex; flex-direction: column; gap: 14px; }
+
+.intestazione { background: #1a237e; border-radius: 12px; padding: 14px 18px; color: #fff; text-align: center; }
+.int-titolo { font-size: 11px; color: #c5cae9; margin-bottom: 3px; }
+.int-materia { font-size: 18px; font-weight: 500; letter-spacing: 0.5px; }
+.int-linea { height: 1px; background: rgba(255,255,255,0.2); margin: 8px 0; }
+.int-prof { font-size: 11px; color: #9fa8da; }
+.int-indice { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 8px; }
+.int-badge { background: rgba(255,255,255,0.15); border-radius: 20px; padding: 3px 10px; font-size: 10px; }
+
+/* SCHEDA */
+.scheda { border-radius: 12px; overflow: hidden; border: 3px solid; }
+.s1 { border-color: #1565c0; }
+.s2 { border-color: #2e7d32; }
+.s3 { border-color: #6a1b9a; }
+.s4 { border-color: #e65100; }
+
+.scheda-header { display: flex; align-items: center; gap: 10px; padding: 10px 15px; color: #fff; font-size: 14px; font-weight: 500; }
+.s1 .scheda-header { background: #1565c0; }
+.s2 .scheda-header { background: #2e7d32; }
+.s3 .scheda-header { background: #6a1b9a; }
+.s4 .scheda-header { background: #e65100; }
+
+.icona { font-size: 17px; width: 32px; height: 32px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hdx { margin-left: auto; font-size: 9px; opacity: 0.7; font-weight: 400; white-space: nowrap; }
+
+.scheda-body { padding: 13px 15px; display: flex; flex-direction: column; gap: 11px; }
+.s1 .scheda-body { background: #e3f2fd; }
+.s2 .scheda-body { background: #e8f5e9; }
+.s3 .scheda-body { background: #f3e5f5; }
+.s4 .scheda-body { background: #fff3e0; }
+
+/* blocchi interni */
+.def-box { background: #fff; border-radius: 9px; padding: 11px 13px; font-size: 13px; line-height: 1.8; border-left: 4px solid; }
+.s1 .def-box { border-color: #1565c0; }
+.s2 .def-box { border-color: #2e7d32; }
+.s3 .def-box { border-color: #6a1b9a; }
+.s4 .def-box { border-color: #e65100; }
+
+.formula-grande { border-radius: 9px; padding: 11px 14px; font-size: 20px; font-weight: 500; text-align: center; color: #fff; }
+.s1 .formula-grande { background: #1565c0; }
+.s2 .formula-grande { background: #2e7d32; }
+.s3 .formula-grande { background: #6a1b9a; }
+.s4 .formula-grande { background: #e65100; }
+
+.nota { background: #fff9c4; border: 1.5px solid #f9a825; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.75; display: flex; gap: 9px; }
+.nota-rossa { background: #ffebee; border: 1.5px solid #c62828; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.75; color: #b71c1c; }
+.nota-verde { background: #e8f5e9; border: 1.5px solid #2e7d32; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.75; color: #1b5e20; }
+.nota-viola { background: #f3e5f5; border: 1.5px solid #6a1b9a; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.75; color: #4a148c; }
+
+.sezione-titolo { font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: #888; margin-bottom: 2px; }
+
+.tre-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.due-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.mini-card { border-radius: 8px; padding: 10px 11px; font-size: 12px; line-height: 1.75; text-align: center; }
+.mc-blu    { background: #e3f2fd; border: 1.5px solid #1565c0; color: #0d47a1; }
+.mc-verde  { background: #e8f5e9; border: 1.5px solid #2e7d32; color: #1b5e20; }
+.mc-viola  { background: #f3e5f5; border: 1.5px solid #6a1b9a; color: #4a148c; }
+.mc-arancio{ background: #fff3e0; border: 1.5px solid #e65100; color: #bf360c; }
+
+.step-card { background: #fff; border-radius: 8px; overflow: hidden; border-left: 4px solid; margin-bottom: 3px; }
+.step-card .sh { display: flex; align-items: center; gap: 8px; padding: 6px 12px; font-size: 11px; font-weight: 500; }
+.step-card .sb { padding: 7px 13px 9px; font-size: 12px; line-height: 1.85; }
+.sn { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #fff; flex-shrink: 0; }
+.sc-blu { border-color: #1565c0; } .sc-blu .sh { background: #e3f2fd; color: #1565c0; } .sc-blu .sn { background: #1565c0; }
+.sc-ver { border-color: #2e7d32; } .sc-ver .sh { background: #e8f5e9; color: #2e7d32; } .sc-ver .sn { background: #2e7d32; }
+.sc-vio { border-color: #6a1b9a; } .sc-vio .sh { background: #f3e5f5; color: #6a1b9a; } .sc-vio .sn { background: #6a1b9a; }
+.sc-ros { border-color: #c62828; } .sc-ros .sh { background: #ffebee; color: #c62828; } .sc-ros .sn { background: #c62828; }
+.sc-ora { border-color: #e65100; } .sc-ora .sh { background: #fff3e0; color: #e65100; } .sc-ora .sn { background: #e65100; }
+
+/* grafico SVG canvas */
+.grafico-box { background: #fff; border-radius: 9px; padding: 12px; border: 1px solid var(--color-border-tertiary); }
+.grafico-label { font-size: 10px; font-weight: 500; color: #888; text-transform: uppercase; margin-bottom: 8px; }
+
+/* proprieta logaritmi */
+.prop-row { background: #fff; border-radius: 9px; padding: 10px 13px; font-size: 13px; line-height: 1.8; border-left: 4px solid #6a1b9a; }
+.prop-formula { font-size: 16px; font-weight: 500; color: #4a148c; margin: 4px 0 2px; }
+
+/* equazioni */
+.eq-box { background: #fff; border-radius: 9px; padding: 10px 13px; font-size: 13px; line-height: 1.85; border-left: 4px solid #e65100; }
+.eq-display { font-size: 18px; font-weight: 500; color: #e65100; text-align: center; padding: 8px; background: #fff3e0; border-radius: 7px; margin: 5px 0; }
+.sol-inline { font-size: 15px; font-weight: 500; color: #2e7d32; }
+
+sup { font-size: 0.65em; vertical-align: super; }
+sub { font-size: 0.65em; vertical-align: sub; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; font-size: 0.82em; vertical-align: middle; line-height: 1.2; }
+.frac .n { border-bottom: 1.2px solid currentColor; padding: 0 2px; }
+.frac .d { padding: 0 2px; }
+.arr { color: #888; margin: 0 4px; }
+canvas { display: block; }
+
+.ricorda { background: #fff9c4; border: 2px solid #f9a825; border-radius: 9px; padding: 10px 13px; font-size: 12px; line-height: 1.75; display: flex; gap: 9px; }
+</style>
+
+<div class="wrap">
+
+<!-- INTESTAZIONE -->
+<div class="intestazione">
+  <div class="int-titolo">Scheda di matematica · Prof. Belardi Nicolino</div>
+  <div class="int-materia">I LOGARITMI</div>
+  <div class="int-linea"></div>
+  <div class="int-indice">
+    <span class="int-badge">Scheda 1 · Definizione e C.E.</span>
+    <span class="int-badge">Scheda 2 · Grafici e proprietà analitiche</span>
+    <span class="int-badge">Scheda 3 · Proprietà dei logaritmi</span>
+    <span class="int-badge">Scheda 4 · Equazioni logaritmiche</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- SCHEDA 1 — DEFINIZIONE -->
+<!-- ════════════════════════════════════════ -->
+<div class="scheda s1">
+  <div class="scheda-header">
+    <div class="icona">📖</div>
+    SCHEDA 1 — Definizione e Condizioni di Esistenza
+    <span class="hdx">Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+
+    <div class="def-box">
+      Il <b>logaritmo</b> è l'operazione matematica che ci permette di trovare l'<b>esponente</b> a cui elevare una <b>base</b> per ottenere un determinato numero (chiamato <b>argomento</b>).
+    </div>
+
+    <div class="formula-grande">
+      log<sub>a</sub> b = x &nbsp;⟺&nbsp; a<sup>x</sup> = b
+    </div>
+
+    <div class="nota">
+      <span style="font-size:18px;flex-shrink:0;">💡</span>
+      <div><b>A parole:</b> il logaritmo in base <i>a</i> di <i>b</i> è l'esponente (<i>x</i>) che devo dare alla base (<i>a</i>) per ottenere l'argomento (<i>b</i>).</div>
+    </div>
+
+    <!-- CE -->
+    <div class="sezione-titolo">Condizioni di Esistenza (C.E.)</div>
+    <div class="due-col">
+      <div class="mini-card mc-blu">
+        <div style="font-size:13px;font-weight:500;margin-bottom:4px;">Base <i>a</i></div>
+        Deve essere <b>positiva</b> e <b>diversa da 1</b><br><br>
+        a &gt; 1 &nbsp; oppure &nbsp; 0 &lt; a &lt; 1<br><br>
+        <span style="font-size:11px;color:#777;">Non può essere 0, 1 o negativa</span>
+      </div>
+      <div class="mini-card mc-verde">
+        <div style="font-size:13px;font-weight:500;margin-bottom:4px;">Argomento <i>b</i></div>
+        Deve essere <b>sempre positivo</b><br><br>
+        b &gt; 0<br><br>
+        <span style="font-size:11px;color:#777;">Non esiste log di 0 o di un numero negativo</span>
+      </div>
+    </div>
+
+    <!-- ln -->
+    <div class="sezione-titolo">Il Logaritmo Naturale (ln)</div>
+    <div class="def-box">
+      <b>ln b = log<sub>e</sub> b</b><br><br>
+      La scritta <b>ln</b> sta per <i>logaritmo naturale</i> (o logaritmo neperiano). Quando si usa ln, la base è il <b>numero di Nepero (<i>e</i>)</b>.<br><br>
+      Il numero di Nepero è una costante matematica irrazionale: <b>e ≈ 2,71828…</b><br>
+      È famoso come il Pi greco (π). Usare la base <i>e</i> semplifica enormemente formule e calcoli nello studio delle funzioni.
+    </div>
+
+    <!-- operazione inversa -->
+    <div class="sezione-titolo">Il logaritmo come operazione inversa</div>
+    <div class="def-box" style="margin-bottom:4px;">
+      Logaritmo, potenza e radice legano tre elementi: <b>base, esponente, risultato</b>.<br>
+      A seconda dell'elemento incognito si usa un'operazione diversa.
+    </div>
+    <div class="tre-col">
+      <div class="mini-card mc-blu">
+        <div style="font-weight:500;margin-bottom:4px;">Cerco il Risultato</div>
+        Conosco: base e esponente<br><br>
+        <b>Potenza</b><br>
+        2³ = 8
+      </div>
+      <div class="mini-card mc-verde">
+        <div style="font-weight:500;margin-bottom:4px;">Cerco la Base</div>
+        Conosco: esponente e risultato<br><br>
+        <b>Radice</b><br>
+        ∛8 = 2
+      </div>
+      <div class="mini-card mc-viola">
+        <div style="font-weight:500;margin-bottom:4px;">Cerco l'Esponente</div>
+        Conosco: base e risultato<br><br>
+        <b>Logaritmo</b><br>
+        log₂ 8 = 3
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- SCHEDA 2 — GRAFICI -->
+<!-- ════════════════════════════════════════ -->
+<div class="scheda s2">
+  <div class="scheda-header">
+    <div class="icona">📊</div>
+    SCHEDA 2 — Grafico e Proprietà Analitiche
+    <span class="hdx">Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+
+    <!-- GRAFICO 1: a > 1 -->
+    <div class="sezione-titolo">Caso 1 — Base maggiore di 1 (a &gt; 1)</div>
+
+    <div class="grafico-box">
+      <div class="grafico-label">Grafico 1 — y = log<sub>a</sub> x con a &gt; 1 &nbsp;·&nbsp; simmetrica a y = aˣ rispetto a y = x</div>
+      <canvas id="grafico1" width="500" height="260" style="width:100%;height:260px;"></canvas>
+    </div>
+
+    <div class="step-card sc-blu">
+      <div class="sh"><div class="sn">●</div>Passaggio per il punto (1 ; 0)</div>
+      <div class="sb">
+        Il grafico interseca l'asse x nel punto (1, 0).<br>
+        Questo accade perché qualsiasi numero elevato a 0 dà 1 → a⁰ = 1.<br>
+        Quindi l'esponente che bisogna dare ad <i>a</i> per ottenere 1 è sempre 0.<br>
+        <b>In formule: log<sub>a</sub> 1 = 0</b>
+      </div>
+    </div>
+
+    <div class="step-card sc-ver">
+      <div class="sh"><div class="sn">●</div>Asintoto verticale</div>
+      <div class="sb">
+        La curva scende verso il basso avvicinandosi all'asse y, ma <b>senza mai toccarlo</b>.<br>
+        L'asse y (equazione x = 0) fa da "muro invisibile" → è l'<b>asintoto verticale</b>.<br>
+        Il motivo è nelle C.E.: l'argomento del logaritmo deve essere sempre &gt; 0.<br>
+        La funzione non esiste per x = 0 né per x negativo → il grafico "vive" solo nella metà destra del piano.
+      </div>
+    </div>
+
+    <div class="step-card sc-blu">
+      <div class="sh"><div class="sn">●</div>Funzione inversa e simmetria</div>
+      <div class="sb">
+        La funzione logaritmica e la funzione esponenziale sono <b>l'una l'inversa dell'altra</b>.<br><br>
+        Il grafico di y = log<sub>a</sub> x e il grafico di y = aˣ sono <b>simmetrici</b> rispetto alla bisettrice del primo e terzo quadrante (retta y = x).
+      </div>
+    </div>
+
+    <!-- GRAFICO 2: 0 < a < 1 -->
+    <div class="sezione-titolo" style="margin-top:4px;">Caso 2 — Base compresa tra 0 e 1 (0 &lt; a &lt; 1)</div>
+
+    <div class="grafico-box">
+      <div class="grafico-label">Grafico 2 — y = log<sub>a</sub> x con 0 &lt; a &lt; 1 &nbsp;·&nbsp; funzione decrescente</div>
+      <canvas id="grafico2" width="500" height="260" style="width:100%;height:260px;"></canvas>
+    </div>
+
+    <div class="step-card sc-ver">
+      <div class="sh"><div class="sn">●</div>Funzione decrescente</div>
+      <div class="sb">
+        Quando 0 &lt; a &lt; 1, la funzione logaritmica è <b>decrescente</b>: all'aumentare di x, y diminuisce.
+      </div>
+    </div>
+
+    <div class="step-card sc-blu">
+      <div class="sh"><div class="sn">●</div>Simmetria anche in questo caso</div>
+      <div class="sb">
+        Il grafico della funzione esponenziale decrescente (in verde) e quello della funzione logaritmica decrescente (in blu) sono perfettamente <b>speculari</b> rispetto alla retta bisettrice y = x.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- SCHEDA 3 — PROPRIETÀ -->
+<!-- ════════════════════════════════════════ -->
+<div class="scheda s3">
+  <div class="scheda-header">
+    <div class="icona">📐</div>
+    SCHEDA 3 — Proprietà dei Logaritmi
+    <span class="hdx">Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+
+    <div class="nota-viola">
+      ⚠️ <b>Tutte le proprietà sono valide solo se sono rispettate le C.E.</b>: basi positive e diverse da 1, argomenti strettamente positivi.
+    </div>
+
+    <!-- prop 1 -->
+    <div class="prop-row">
+      <div style="font-size:11px;font-weight:500;color:#888;text-transform:uppercase;margin-bottom:4px;">Proprietà 1 — Logaritmo di un prodotto</div>
+      <div class="prop-formula">log<sub>a</sub> b + log<sub>a</sub> c = log<sub>a</sub> (b · c)</div>
+      <div style="font-size:12px;color:#555;line-height:1.7;">La <b>somma</b> di due logaritmi con la stessa base è uguale a un unico logaritmo che ha per argomento il <b>prodotto</b> degli argomenti.</div>
+    </div>
+
+    <!-- prop 2 -->
+    <div class="prop-row">
+      <div style="font-size:11px;font-weight:500;color:#888;text-transform:uppercase;margin-bottom:4px;">Proprietà 2 — Logaritmo di un quoziente</div>
+      <div class="prop-formula">log<sub>a</sub> b − log<sub>a</sub> c = log<sub>a</sub> (b/c)</div>
+      <div style="font-size:12px;color:#555;line-height:1.7;">La <b>differenza</b> tra due logaritmi con la stessa base è uguale a un unico logaritmo che ha per argomento il <b>quoziente</b> degli argomenti.</div>
+    </div>
+
+    <!-- prop 3 -->
+    <div class="prop-row">
+      <div style="font-size:11px;font-weight:500;color:#888;text-transform:uppercase;margin-bottom:4px;">Proprietà 3 — Logaritmo di una potenza</div>
+      <div class="prop-formula">log<sub>a</sub> (b<sup>c</sup>) = c · log<sub>a</sub> b</div>
+      <div style="font-size:12px;color:#555;line-height:1.7;">Se l'argomento è elevato a un esponente, questo esponente può essere "portato fuori" e <b>moltiplicato</b> per il logaritmo. Utilissima per eliminare frazioni e radici dagli argomenti.</div>
+      <div style="background:#f3e5f5;border-radius:6px;padding:7px 10px;margin-top:6px;font-size:12px;line-height:1.8;">
+        <b>Esempio 1 (con frazioni):</b><br>
+        log₂ (1/x) = log₂ (x<sup>−1</sup>) = −1 · log₂ x = <b>−log₂ x</b><br><br>
+        <b>Esempio 2 (con radici):</b><br>
+        log₂ ∛(x²) = log₂ (x<sup>2/3</sup>) = <b>(2/3) · log₂ x</b>
+      </div>
+    </div>
+
+    <!-- prop 4 -->
+    <div class="prop-row">
+      <div style="font-size:11px;font-weight:500;color:#888;text-transform:uppercase;margin-bottom:4px;">Proprietà 4 — Trasformare un numero in un logaritmo</div>
+      <div class="prop-formula">n = log<sub>a</sub> (a<sup>n</sup>)</div>
+      <div style="font-size:12px;color:#555;line-height:1.7;">Qualsiasi numero può essere riscritto come logaritmo scegliendo una base a piacere. La regola è: inserire come argomento la <b>base scelta elevata a quel numero</b>.</div>
+      <div style="background:#f3e5f5;border-radius:6px;padding:7px 10px;margin-top:6px;font-size:12px;line-height:1.8;">
+        <b>Esempio:</b> il numero 5 scritto come logaritmo in base 2:<br>
+        5 = log₂ (2⁵)<br><br>
+        <b>Con il logaritmo naturale:</b><br>
+        5 = ln(e⁵)
+      </div>
+    </div>
+
+    <!-- identità fondamentale -->
+    <div class="sezione-titolo">Identità Fondamentale — Trasformare un numero in una potenza</div>
+    <div class="def-box">
+      Qualsiasi numero positivo può essere riscritto come <b>potenza</b>, dove l'esponente è un logaritmo:
+    </div>
+    <div class="tre-col">
+      <div class="mini-card mc-blu">
+        <div style="font-weight:500;margin-bottom:4px;">Base 2</div>
+        5 = 2<sup>log₂ 5</sup>
+      </div>
+      <div class="mini-card mc-verde">
+        <div style="font-weight:500;margin-bottom:4px;">Base 3</div>
+        5 = 3<sup>log₃ 5</sup>
+      </div>
+      <div class="mini-card mc-viola">
+        <div style="font-weight:500;margin-bottom:4px;">Base e (naturale)</div>
+        5 = e<sup>ln 5</sup>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- SCHEDA 4 — EQUAZIONI LOGARITMICHE -->
+<!-- ════════════════════════════════════════ -->
+<div class="scheda s4">
+  <div class="scheda-header">
+    <div class="icona">✏️</div>
+    SCHEDA 4 — Equazioni Logaritmiche
+    <span class="hdx">Prof. Belardi Nicolino</span>
+  </div>
+  <div class="scheda-body">
+
+    <div class="def-box">
+      La strategia principale è usare le proprietà dei logaritmi per arrivare alla forma:<br><br>
+      <span style="font-size:16px;font-weight:500;color:#e65100;">log<sub>a</sub> f(x) = log<sub>a</sub> g(x)</span><br><br>
+      Una volta ottenuto lo stesso logaritmo con la stessa base da entrambe le parti → si "tolgono" i logaritmi e si uguagliano gli argomenti: <b>f(x) = g(x)</b>
+    </div>
+
+    <!-- elementari -->
+    <div class="sezione-titolo">Equazioni Elementari — si usa direttamente la definizione</div>
+
+    <div class="eq-box">
+      <div style="font-size:11px;font-weight:500;color:#888;margin-bottom:4px;">Esempio 1</div>
+      <div class="eq-display">log₂ x = 4</div>
+      Applicando la definizione: la base (2) elevata al risultato (4) dà l'argomento (x)<br>
+      <span class="sol-inline">x = 2⁴ = 16</span>
+    </div>
+
+    <div class="eq-box">
+      <div style="font-size:11px;font-weight:500;color:#888;margin-bottom:4px;">Esempio 2</div>
+      <div class="eq-display">log<sub>1/2</sub> x = −1</div>
+      Applicando la definizione:<br>
+      <span class="sol-inline">x = (1/2)<sup>−1</sup> = 2</span>
+    </div>
+
+    <div class="eq-box">
+      <div style="font-size:11px;font-weight:500;color:#888;margin-bottom:4px;">Esempio 3</div>
+      <div class="eq-display">log₉ 81 = x</div>
+      "Qual è l'esponente da dare a 9 per avere 81?"<br>
+      9<sup>x</sup> = 81 → <span class="sol-inline">x = 2</span>
+    </div>
+
+    <!-- ricondurre alla forma base -->
+    <div class="sezione-titolo" style="margin-top:4px;">Equazioni da ricondurre alla forma base — si usano le proprietà</div>
+
+    <div class="eq-box">
+      <div style="font-size:11px;font-weight:500;color:#888;margin-bottom:4px;">Esempio 4</div>
+      <div class="eq-display">log₂ (x+1) − log₂ 3 = 0</div>
+      Sposto log₂ 3 a destra per avere un log per lato:<br>
+      log₂ (x+1) = log₂ 3<br>
+      Stessa base → ugualio gli argomenti:<br>
+      x + 1 = 3 → <span class="sol-inline">x = 2</span>
+    </div>
+
+    <div class="eq-box">
+      <div style="font-size:11px;font-weight:500;color:#888;margin-bottom:4px;">Esempio 5</div>
+      <div class="eq-display">log₃ x + log₃ 5 = log₃ (x−4)</div>
+      Tre logaritmi → riduco a due applicando la proprietà del prodotto a sinistra:<br>
+      log₃ (5x) = log₃ (x−4)<br>
+      Stessa base → ugualio gli argomenti:<br>
+      5x = x − 4 → 4x = −4 → <span class="sol-inline" style="color:#c62828;">x = −1</span>
+    </div>
+
+    <div class="nota-rossa">
+      🚫 <b>Verifica delle C.E. — Esempio 5:</b><br>
+      Sostituendo x = −1 nell'equazione di partenza otterremmo log₃(−1) e log₃(−5).<br>
+      Il logaritmo di un numero negativo <b>non esiste</b> → la soluzione x = −1 <b>non è accettabile</b>.<br>
+      L'equazione risulta <b>impossibile</b>.<br><br>
+      <b>Ricordare sempre di verificare le C.E. alla fine!</b>
+    </div>
+
+    <!-- esempi con numeri -->
+    <div class="sezione-titolo" style="margin-top:4px;">Esempi di utilizzo nelle equazioni — trasformare i numeri</div>
+
+    <div class="eq-box">
+      <div style="font-size:11px;font-weight:500;color:#888;margin-bottom:4px;">Esempio A</div>
+      <div class="eq-display">log₄ x = 32</div>
+      Trasformo 32 in un logaritmo in base 4:<br>
+      log₄ x = log₄ (4<sup>32</sup>)<br>
+      Ugualio gli argomenti: <span class="sol-inline">x = 4<sup>32</sup></span>
+    </div>
+
+    <div class="eq-box">
+      <div style="font-size:11px;font-weight:500;color:#888;margin-bottom:4px;">Esempio B — log₇ x = 0 (due metodi)</div>
+      <div class="eq-display">log₇ x = 0</div>
+      <b>Metodo 1 — Usando la definizione:</b><br>
+      "Qual è l'esponente da dare a 7 per avere x? → 0"<br>
+      7⁰ = 1 → <span class="sol-inline">x = 1</span><br><br>
+      <b>Metodo 2 — Trasformando il numero in logaritmo:</b><br>
+      log₇ x = log₇ (7⁰)<br>
+      Ugualio gli argomenti: x = 7⁰ → <span class="sol-inline">x = 1</span>
+    </div>
+
+    <div class="ricorda">
+      <span style="font-size:18px;flex-shrink:0;">🔑</span>
+      <div>
+        <b>Schema da seguire:</b> usa le proprietà per arrivare a log<sub>a</sub> f(x) = log<sub>a</sub> g(x) → ugualio gli argomenti → <b>verifica sempre le C.E.</b> alla fine!
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<script>
+function setupCanvas(id) {
+  const c = document.getElementById(id);
+  const dpr = window.devicePixelRatio || 1;
+  const W = c.offsetWidth || 500;
+  const H = c.offsetHeight || 260;
+  c.width = W * dpr; c.height = H * dpr;
+  c.style.width = W+'px'; c.style.height = H+'px';
+  const ctx = c.getContext('2d');
+  ctx.scale(dpr, dpr);
+  return {ctx, W, H};
+}
+
+function drawAxes(ctx, W, H, ox, oy) {
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const axC = isDark ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.55)';
+  const gridC = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  const txtC = isDark ? '#aaa' : '#555';
+
+  // griglia
+  ctx.strokeStyle = gridC; ctx.lineWidth = 0.5;
+  for(let x=0; x<W; x+=40) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+  for(let y=0; y<H; y+=40) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+  // assi
+  ctx.strokeStyle = axC; ctx.lineWidth = 1.8; ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(0,oy); ctx.lineTo(W,oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox,0); ctx.lineTo(ox,H); ctx.stroke();
+
+  // frecce
+  ctx.fillStyle = axC;
+  ctx.beginPath(); ctx.moveTo(W,oy); ctx.lineTo(W-8,oy-4); ctx.lineTo(W-8,oy+4); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(ox,0); ctx.lineTo(ox-4,8); ctx.lineTo(ox+4,8); ctx.fill();
+
+  // etichette
+  ctx.font = '11px sans-serif'; ctx.fillStyle = txtC;
+  ctx.fillText('x', W-10, oy-8);
+  ctx.fillText('y', ox+6, 12);
+  ctx.fillText('0', ox-14, oy+13);
+  ctx.fillText('1', ox+38, oy+13);
+  ctx.fillText('1', ox-14, oy-38);
+}
+
+// GRAFICO 1: a > 1, funzione crescente
+window.addEventListener('load', () => {
+
+  // --- GRAFICO 1 ---
+  const {ctx:c1, W:W1, H:H1} = setupCanvas('grafico1');
+  const ox1 = 80, oy1 = 180;
+  const sc1 = 40;
+  drawAxes(c1, W1, H1, ox1, oy1);
+
+  // bisettrice y=x (rossa tratteggiata)
+  c1.strokeStyle = '#c62828'; c1.lineWidth = 1.2; c1.setLineDash([5,4]);
+  c1.beginPath(); c1.moveTo(ox1-oy1, 0); c1.lineTo(ox1+(H1-oy1), H1-(H1-oy1)); c1.stroke();
+  c1.setLineDash([]);
+  c1.font = '11px sans-serif'; c1.fillStyle = '#c62828';
+  c1.fillText('y = x', W1-50, 20);
+
+  // y = 2^x (verde)
+  c1.strokeStyle = '#2e7d32'; c1.lineWidth = 2.5;
+  c1.beginPath();
+  let first1 = true;
+  for(let px=0; px<W1; px+=2) {
+    const xv = (px - ox1) / sc1;
+    const yv = Math.pow(2, xv);
+    const py = oy1 - yv * sc1;
+    if(py < -10 || py > H1+10) { first1=true; continue; }
+    if(first1) { c1.moveTo(px,py); first1=false; } else c1.lineTo(px,py);
+  }
+  c1.stroke();
+  c1.font = '11px sans-serif'; c1.fillStyle = '#2e7d32';
+  c1.fillText('y = 2ˣ', ox1+15, 20);
+
+  // y = log2(x) (blu)
+  c1.strokeStyle = '#1565c0'; c1.lineWidth = 2.5;
+  c1.beginPath();
+  let first2 = true;
+  for(let px=1; px<W1; px+=2) {
+    const xv = (px - ox1) / sc1;
+    if(xv <= 0) { first2=true; continue; }
+    const yv = Math.log2(xv);
+    const py = oy1 - yv * sc1;
+    if(py < -10 || py > H1+10) { first2=true; continue; }
+    if(first2) { c1.moveTo(px,py); first2=false; } else c1.lineTo(px,py);
+  }
+  c1.stroke();
+  c1.font = '11px sans-serif'; c1.fillStyle = '#1565c0';
+  c1.fillText('y = log₂ x', W1-90, H1-10);
+
+  // punto (1,0)
+  c1.beginPath(); c1.arc(ox1+sc1, oy1, 5, 0, Math.PI*2);
+  c1.fillStyle = '#e65100'; c1.fill();
+  c1.font = 'bold 10px sans-serif'; c1.fillStyle = '#e65100';
+  c1.fillText('(1, 0)', ox1+sc1+6, oy1-8);
+
+  // asintoto verticale tratteggiato
+  c1.strokeStyle = '#888'; c1.lineWidth = 1; c1.setLineDash([4,3]);
+  c1.beginPath(); c1.moveTo(ox1,0); c1.lineTo(ox1,H1); c1.stroke();
+  c1.setLineDash([]);
+  c1.font = '10px sans-serif'; c1.fillStyle = '#888';
+  c1.fillText('asintoto', ox1+3, H1-5);
+
+  // --- GRAFICO 2 ---
+  const {ctx:c2, W:W2, H:H2} = setupCanvas('grafico2');
+  const ox2 = 120, oy2 = 130;
+  const sc2 = 40;
+  drawAxes(c2, W2, H2, ox2, oy2);
+
+  // bisettrice y=x (rossa tratteggiata)
+  c2.strokeStyle = '#c62828'; c2.lineWidth = 1.2; c2.setLineDash([5,4]);
+  c2.beginPath(); c2.moveTo(0, oy2+ox2); c2.lineTo(W2, oy2-(W2-ox2)); c2.stroke();
+  c2.setLineDash([]);
+  c2.font = '11px sans-serif'; c2.fillStyle = '#c62828';
+  c2.fillText('y = x', W2-40, 15);
+
+  // y = (0.5)^x (verde)
+  c2.strokeStyle = '#2e7d32'; c2.lineWidth = 2.5;
+  c2.beginPath();
+  let f3 = true;
+  for(let px=0; px<W2; px+=2) {
+    const xv = (px - ox2) / sc2;
+    const yv = Math.pow(0.5, xv);
+    const py = oy2 - yv * sc2;
+    if(py < -10 || py > H2+10) { f3=true; continue; }
+    if(f3) { c2.moveTo(px,py); f3=false; } else c2.lineTo(px,py);
+  }
+  c2.stroke();
+  c2.font = '11px sans-serif'; c2.fillStyle = '#2e7d32';
+  c2.fillText('y = aˣ (0<a<1)', 10, 20);
+
+  // y = log0.5(x) = -log2(x) (blu)
+  c2.strokeStyle = '#1565c0'; c2.lineWidth = 2.5;
+  c2.beginPath();
+  let f4 = true;
+  for(let px=1; px<W2; px+=2) {
+    const xv = (px - ox2) / sc2;
+    if(xv <= 0) { f4=true; continue; }
+    const yv = -Math.log2(xv);
+    const py = oy2 - yv * sc2;
+    if(py < -10 || py > H2+10) { f4=true; continue; }
+    if(f4) { c2.moveTo(px,py); f4=false; } else c2.lineTo(px,py);
+  }
+  c2.stroke();
+  c2.font = '11px sans-serif'; c2.fillStyle = '#1565c0';
+  c2.fillText('y = log_a x', W2-90, H2-8);
+
+  // badge 0<a<1
+  const isDark2 = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  c2.fillStyle = '#fff9c4'; c2.strokeStyle = '#f9a825'; c2.lineWidth = 1.5;
+  c2.roundRect ? c2.roundRect(W2-130,40,120,24,5) : null;
+  c2.fillRect(W2-130,40,120,24);
+  c2.strokeRect(W2-130,40,120,24);
+  c2.font = 'bold 11px sans-serif'; c2.fillStyle = '#e65100';
+  c2.fillText('0 < a < 1', W2-75, 56);
+
+  // punto (1,0)
+  c2.beginPath(); c2.arc(ox2+sc2, oy2, 5, 0, Math.PI*2);
+  c2.fillStyle = '#e65100'; c2.fill();
+
+  // asintoto
+  c2.strokeStyle = '#888'; c2.lineWidth = 1; c2.setLineDash([4,3]);
+  c2.beginPath(); c2.moveTo(ox2,0); c2.lineTo(ox2,H2); c2.stroke();
+  c2.setLineDash([]);
+});
+</script>
