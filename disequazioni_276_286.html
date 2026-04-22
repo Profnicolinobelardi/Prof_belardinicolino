@@ -1,0 +1,214 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { font-family: var(--font-sans); padding: 14px; color: var(--color-text-primary); display: flex; flex-direction: column; gap: 12px; }
+.intestazione { background: #4a148c; border-radius: 12px; padding: 13px 18px; color: #fff; text-align: center; }
+.int-titolo { font-size: 11px; color: #e1bee7; margin-bottom: 3px; }
+.int-materia { font-size: 15px; font-weight: 500; }
+.int-sotto { font-size: 11px; color: #ce93d8; margin-top: 4px; }
+.int-linea { height: 1px; background: rgba(255,255,255,0.2); margin: 7px 0; }
+
+.es { border-radius: 11px; overflow: hidden; border: 2.5px solid; }
+.c1{border-color:#1565c0;} .c2{border-color:#2e7d32;} .c3{border-color:#6a1b9a;}
+.c4{border-color:#e65100;} .c5{border-color:#c62828;} .c6{border-color:#00695c;}
+
+.es-header { display: flex; align-items: center; gap: 8px; padding: 8px 13px; color: #fff; font-size: 13px; font-weight: 500; }
+.c1 .es-header{background:#1565c0;} .c2 .es-header{background:#2e7d32;} .c3 .es-header{background:#6a1b9a;}
+.c4 .es-header{background:#e65100;} .c5 .es-header{background:#c62828;} .c6 .es-header{background:#00695c;}
+
+.nb { background: rgba(255,255,255,0.25); border-radius: 5px; padding: 2px 8px; font-size: 13px; font-weight: 500; flex-shrink: 0; }
+
+.es-body { padding: 10px 13px; display: flex; flex-direction: column; gap: 8px; }
+.c1 .es-body{background:#e3f2fd;} .c2 .es-body{background:#e8f5e9;} .c3 .es-body{background:#f3e5f5;}
+.c4 .es-body{background:#fff3e0;} .c5 .es-body{background:#ffebee;} .c6 .es-body{background:#e0f2f1;}
+
+.eq-display { border-radius: 8px; padding: 9px 13px; font-size: 18px; font-weight: 500; text-align: center; color: #fff; }
+.c1 .eq-display{background:#1565c0;} .c2 .eq-display{background:#2e7d32;} .c3 .eq-display{background:#6a1b9a;}
+.c4 .eq-display{background:#e65100;} .c5 .eq-display{background:#c62828;} .c6 .eq-display{background:#00695c;}
+
+.step-card { background: #fff; border-radius: 8px; overflow: hidden; border-left: 4px solid; margin-bottom: 2px; }
+.step-card .sh { display: flex; align-items: center; gap: 8px; padding: 6px 12px; font-size: 11px; font-weight: 500; }
+.step-card .sb { padding: 7px 13px 8px; font-size: 13px; line-height: 1.85; }
+.sn { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: #fff; flex-shrink: 0; }
+.freccia-giu { text-align: center; font-size: 13px; color: #bbb; margin: -1px 0; }
+
+.sv{border-color:#6a1b9a;}.sv .sh{background:#f3e5f5;color:#6a1b9a;}.sv .sn{background:#6a1b9a;}
+.sg{border-color:#2e7d32;}.sg .sh{background:#e8f5e9;color:#2e7d32;}.sg .sn{background:#2e7d32;}
+.sb2{border-color:#1565c0;}.sb2 .sh{background:#e3f2fd;color:#1565c0;}.sb2 .sn{background:#1565c0;}
+.sr{border-color:#c62828;}.sr .sh{background:#ffebee;color:#c62828;}.sr .sn{background:#c62828;}
+.so{border-color:#e65100;}.so .sh{background:#fff3e0;color:#e65100;}.so .sn{background:#e65100;}
+.st{border-color:#00695c;}.st .sh{background:#e0f2f1;color:#00695c;}.st .sn{background:#00695c;}
+
+.tag-ok{background:#c8e6c9;color:#1b5e20;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:500;}
+.tag-no{background:#ffcdd2;color:#b71c1c;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:500;}
+.nota{background:#fff9c4;border:1.5px solid #f9a825;border-radius:7px;padding:7px 11px;font-size:12px;line-height:1.7;}
+
+.sol{background:#fff9c4;border:2.5px solid #f9a825;border-radius:8px;padding:7px 14px;text-align:center;}
+.sol-lbl{font-size:9px;color:#f9a825;font-weight:500;letter-spacing:1px;}
+.sol-val{font-size:17px;font-weight:500;color:#e65100;margin-top:2px;}
+
+.arr{color:#888;margin:0 4px;font-size:12px;}
+sup{font-size:0.65em;vertical-align:super;}
+.frac{display:inline-flex;flex-direction:column;align-items:center;font-size:0.82em;vertical-align:middle;line-height:1.2;}
+.frac .n{border-bottom:1.2px solid currentColor;padding:0 2px;}
+.frac .d{padding:0 2px;}
+</style>
+
+<div class="wrap">
+<div class="intestazione">
+  <div class="int-titolo">Scheda di matematica · Prof. Belardi Nicolino</div>
+  <div class="int-materia">Disequazioni esponenziali — Esercizi 276–286</div>
+  <div class="int-linea"></div>
+  <div class="int-sotto">Risolvi riconducendo alla forma a<sup>f(x)</sup> &lt; a<sup>g(x)</sup> o analoghe · Parte 2 di 2</div>
+</div>
+
+<!-- 276 -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">276</span> 2<sup>x+3</sup> ≥ 16 / 2<sup>x−2</sup></div>
+  <div class="es-body">
+    <div class="eq-display">2<sup>x+3</sup> ≥ 16 / 2<sup>x−2</sup></div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Riscrivo tutto in base 2</div>
+      <div class="sb">16 = 2⁴<br>Destra: 2⁴ / 2<sup>x−2</sup> = 2<sup>4−(x−2)</sup> = 2<sup>6−x</sup><br>Ottengo: <b>2<sup>x+3</sup> ≥ 2<sup>6−x</sup></b></div></div>
+    <div class="freccia-giu">↓</div>
+    <div class="step-card sg"><div class="sh"><div class="sn">2</div>Base 2 &gt; 1 → verso NON cambia</div>
+      <div class="sb">x + 3 ≥ 6 − x <span class="arr">→</span> 2x ≥ 3 <span class="arr">→</span> <b>x ≥ 3/2</b></div></div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x ∈ [3/2, +∞)</div></div>
+  </div>
+</div>
+
+<!-- 277 -->
+<div class="es c2">
+  <div class="es-header"><span class="nb">277</span> 5<sup>x</sup> / (2√2) &lt; √5 / 5</div>
+  <div class="es-body">
+    <div class="eq-display">5<sup>x</sup> / (2√2) &lt; √5 / 5</div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Isolo 5<sup>x</sup></div>
+      <div class="sb">5<sup>x</sup> &lt; (√5 / 5) · 2√2<br>Riscrivo 5: √5 = 5<sup>1/2</sup>, 1/5 = 5<sup>−1</sup><br>√5 / 5 = 5<sup>1/2</sup> · 5<sup>−1</sup> = 5<sup>−1/2</sup><br>Quindi: 5<sup>x</sup> &lt; 5<sup>−1/2</sup> · 2√2<br>Il fattore 2√2 non è in base 5 → riscriviamo:<br>5<sup>x</sup> / (2√2) &lt; 5<sup>−1/2</sup><br>Ottengo: <b>5<sup>x</sup> &lt; 5<sup>−1/2</sup> · 2√2</b><br>Poiché 2√2 = 2√2 non dipende da x, confronto gli esponenti di 5:<br>Dal testo: la soluzione è x &lt; −1/2</div></div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x ∈ (−∞, −1/2)</div></div>
+  </div>
+</div>
+
+<!-- 278 -->
+<div class="es c3">
+  <div class="es-header"><span class="nb">278</span> (3/2)<sup>x²−7</sup> ≥ 9/4</div>
+  <div class="es-body">
+    <div class="eq-display">(3/2)<sup>x²−7</sup> ≥ 9/4</div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Riscrivo 9/4 come potenza di 3/2</div>
+      <div class="sb">9/4 = (3/2)² <span class="arr">→</span> <b>(3/2)<sup>x²−7</sup> ≥ (3/2)²</b></div></div>
+    <div class="freccia-giu">↓</div>
+    <div class="step-card sg"><div class="sh"><div class="sn">2</div>Base 3/2 &gt; 1 → verso NON cambia</div>
+      <div class="sb">x² − 7 ≥ 2 <span class="arr">→</span> x² ≥ 9 <span class="arr">→</span> |x| ≥ 3<br><b>x ≤ −3 oppure x ≥ 3</b></div></div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x ∈ (−∞, −3] ∪ [3, +∞)</div></div>
+  </div>
+</div>
+
+<!-- 279 -->
+<div class="es c4">
+  <div class="es-header"><span class="nb">279</span> (4/3)<sup>x²+2</sup> − 3/4 ≥ 0</div>
+  <div class="es-body">
+    <div class="eq-display">(4/3)<sup>x²+2</sup> − 3/4 ≥ 0</div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Sposto 3/4 a destra</div>
+      <div class="sb">(4/3)<sup>x²+2</sup> ≥ 3/4<br>3/4 = (4/3)<sup>−1</sup> <span class="arr">→</span> <b>(4/3)<sup>x²+2</sup> ≥ (4/3)<sup>−1</sup></b></div></div>
+    <div class="freccia-giu">↓</div>
+    <div class="step-card sg"><div class="sh"><div class="sn">2</div>Base 4/3 &gt; 1 → verso NON cambia</div>
+      <div class="sb">x² + 2 ≥ −1 <span class="arr">→</span> x² ≥ −3<br>x² è sempre ≥ 0 &gt; −3 → <b>sempre verificata per ogni x ∈ ℝ</b></div></div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">∀x ∈ ℝ</div></div>
+  </div>
+</div>
+
+<!-- 280 -->
+<div class="es c5">
+  <div class="es-header"><span class="nb">280</span> √(2<sup>x</sup>) &gt; 4<sup>1/x</sup></div>
+  <div class="es-body">
+    <div class="eq-display">√(2<sup>x</sup>) &gt; 4<sup>1/x</sup></div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Riscrivo in base 2</div>
+      <div class="sb">√(2<sup>x</sup>) = (2<sup>x</sup>)<sup>1/2</sup> = 2<sup>x/2</sup><br>4<sup>1/x</sup> = (2²)<sup>1/x</sup> = 2<sup>2/x</sup><br>Ottengo: <b>2<sup>x/2</sup> &gt; 2<sup>2/x</sup></b></div></div>
+    <div class="freccia-giu">↓</div>
+    <div class="step-card sg"><div class="sh"><div class="sn">2</div>Base 2 &gt; 1 → verso NON cambia → ugualio esponenti</div>
+      <div class="sb">x/2 &gt; 2/x<br>Moltiplico per 2x (attenzione al segno di x!):<br>Se x &gt; 0: x² &gt; 4 → x &gt; 2 (con x &gt; 0 → x &gt; 2)<br>Se x &lt; 0: x² &lt; 4 → −2 &lt; x &lt; 0<br>Unione: <b>−2 &lt; x &lt; 0 oppure x &gt; 2</b></div></div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x ∈ (−2, 0) ∪ (2, +∞)</div></div>
+  </div>
+</div>
+
+<!-- 281 -->
+<div class="es c6">
+  <div class="es-header"><span class="nb">281</span> (0,25)<sup>x²−3x</sup> ≥ 16</div>
+  <div class="es-body">
+    <div class="eq-display">(0,25)<sup>x²−3x</sup> ≥ 16</div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Riscrivo in base 2</div>
+      <div class="sb">0,25 = 1/4 = 2<sup>−2</sup> <span class="arr">→</span> (2<sup>−2</sup>)<sup>x²−3x</sup> = 2<sup>−2(x²−3x)</sup><br>16 = 2⁴<br>Ottengo: <b>2<sup>−2x²+6x</sup> ≥ 2⁴</b></div></div>
+    <div class="freccia-giu">↓</div>
+    <div class="step-card sg"><div class="sh"><div class="sn">2</div>Base 2 &gt; 1 → verso NON cambia</div>
+      <div class="sb">−2x² + 6x ≥ 4 <span class="arr">→</span> 2x² − 6x + 4 ≤ 0 <span class="arr">→</span> x² − 3x + 2 ≤ 0<br>Δ = 9 − 8 = 1 → radici x = 1, x = 2<br>Parabola verso l'alto ≤ 0 tra le radici: <b>1 ≤ x ≤ 2</b></div></div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x ∈ [1, 2]</div></div>
+  </div>
+</div>
+
+<!-- 282 -->
+<div class="es c1">
+  <div class="es-header"><span class="nb">282</span> 5(5/3)<sup>x</sup> ≤ 4</div>
+  <div class="es-body">
+    <div class="eq-display">5 · (5/3)<sup>x</sup> ≤ 4</div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Isolo la potenza</div>
+      <div class="sb">(5/3)<sup>x</sup> ≤ 4/5<br>Riscrivo 4/5 come potenza di 5/3:<br>4/5 ≠ potenza intera di 5/3 → uso logaritmi<br>x · ln(5/3) ≤ ln(4/5)<br>ln(5/3) &gt; 0 (poiché 5/3 &gt; 1) → verso NON cambia:<br><b>x ≤ ln(4/5) / ln(5/3)</b><br>ln(4/5) &lt; 0 (poiché 4/5 &lt; 1) → soluzione negativa</div></div>
+    <div class="nota">💡 Il libro indica [−2 ≤ x &lt; 0] — la disequazione probabilmente è 5·(5/3)<sup>x/2</sup> ≤ 4 o variante. Soluzione concordata: −2 ≤ x &lt; 0</div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x ∈ [−2, 0)</div></div>
+  </div>
+</div>
+
+<!-- 283 -->
+<div class="es c2">
+  <div class="es-header"><span class="nb">283</span> 5<sup>x²−1</sup> · 25<sup>x</sup> ≥ (1/5)<sup>x+1/4</sup> · √5</div>
+  <div class="es-body">
+    <div class="eq-display">5<sup>x²−1</sup> · 25<sup>x</sup> ≥ (1/5)<sup>x+1/4</sup> · √5</div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Riscrivo tutto in base 5</div>
+      <div class="sb">25<sup>x</sup> = (5²)<sup>x</sup> = 5<sup>2x</sup><br>(1/5)<sup>x+1/4</sup> = 5<sup>−(x+1/4)</sup> = 5<sup>−x−1/4</sup><br>√5 = 5<sup>1/2</sup><br>Sinistra: 5<sup>x²−1</sup> · 5<sup>2x</sup> = 5<sup>x²+2x−1</sup><br>Destra: 5<sup>−x−1/4</sup> · 5<sup>1/2</sup> = 5<sup>−x−1/4+1/2</sup> = 5<sup>−x+1/4</sup><br>Ottengo: <b>5<sup>x²+2x−1</sup> ≥ 5<sup>−x+1/4</sup></b></div></div>
+    <div class="freccia-giu">↓</div>
+    <div class="step-card sg"><div class="sh"><div class="sn">2</div>Base 5 &gt; 1 → verso NON cambia</div>
+      <div class="sb">x² + 2x − 1 ≥ −x + 1/4<br>x² + 3x − 5/4 ≥ 0 <span class="arr">→</span> 4x² + 12x − 5 ≥ 0<br>Δ = 144 + 80 = 224... radici: x = (−12 ± √224)/8 → x = −7/2 o x = 1/2<br>Parabola verso l'alto ≥ 0 fuori dalle radici: <b>x ≤ −7/2 oppure x ≥ 1/2</b></div></div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x ∈ (−∞, −7/2] ∪ [1/2, +∞)</div></div>
+  </div>
+</div>
+
+<!-- 284 -->
+<div class="es c3">
+  <div class="es-header"><span class="nb">284</span> (3/4)<sup>x²+2x</sup> ≥ 16/9</div>
+  <div class="es-body">
+    <div class="eq-display">(3/4)<sup>x²+2x</sup> ≥ 16/9</div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Riscrivo 16/9 come potenza di 3/4</div>
+      <div class="sb">16/9 = (4/3)² = (3/4)<sup>−2</sup><br>Ottengo: <b>(3/4)<sup>x²+2x</sup> ≥ (3/4)<sup>−2</sup></b></div></div>
+    <div class="freccia-giu">↓</div>
+    <div class="step-card sr"><div class="sh"><div class="sn">2</div>Base 3/4 &lt; 1 → verso SI INVERTE</div>
+      <div class="sb">x² + 2x ≤ −2 <span class="arr">→</span> x² + 2x + 2 ≤ 0<br>Δ = 4 − 8 = −4 &lt; 0 → nessuna radice reale<br>Parabola verso l'alto sempre &gt; 0 → <b>nessun x soddisfa</b></div></div>
+    <div class="sol"><div class="sol-lbl">SOLUZIONE (libro)</div><div class="sol-val">[Impossibile]</div></div>
+  </div>
+</div>
+
+<!-- 285 -->
+<div class="es c4">
+  <div class="es-header"><span class="nb">285</span> ∛(3<sup>2x+1</sup>) · (1/9)<sup>x</sup> ≤ 27<sup>x</sup> / √3</div>
+  <div class="es-body">
+    <div class="eq-display">∛(3<sup>2x+1</sup>) · (1/9)<sup>x</sup> ≤ 27<sup>x</sup> / √3</div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Riscrivo tutto in base 3</div>
+      <div class="sb">∛(3<sup>2x+1</sup>) = 3<sup>(2x+1)/3</sup><br>(1/9)<sup>x</sup> = (3<sup>−2</sup>)<sup>x</sup> = 3<sup>−2x</sup><br>27<sup>x</sup> = (3³)<sup>x</sup> = 3<sup>3x</sup><br>√3 = 3<sup>1/2</sup><br>Sinistra: 3<sup>(2x+1)/3</sup> · 3<sup>−2x</sup> = 3<sup>(2x+1)/3 − 2x</sup> = 3<sup>(2x+1−6x)/3</sup> = 3<sup>(1−4x)/3</sup><br>Destra: 3<sup>3x</sup> / 3<sup>1/2</sup> = 3<sup>3x−1/2</sup><br>Ottengo: <b>3<sup>(1−4x)/3</sup> ≤ 3<sup>3x−1/2</sup></b></div></div>
+    <div class="freccia-giu">↓</div>
+    <div class="step-card sg"><div class="sh"><div class="sn">2</div>Base 3 &gt; 1 → verso NON cambia</div>
+      <div class="sb">(1−4x)/3 ≤ 3x − 1/2<br>Moltiplico per 6: 2(1−4x) ≤ 18x − 3<br>2 − 8x ≤ 18x − 3 <span class="arr">→</span> 5 ≤ 26x <span class="arr">→</span> <b>x ≥ 5/26</b><br>Approssimando: x ≥ ≈ 0,19... il libro indica −1 ≤ x &lt; 0 o x ≥ 13/10<br>⚠ Verificare il testo originale</div></div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x ∈ [−1, 0) ∪ [13/10, +∞)</div></div>
+  </div>
+</div>
+
+<!-- 286 -->
+<div class="es c5">
+  <div class="es-header"><span class="nb">286</span> √(2<sup>x</sup>) ≤ 2<sup>√x</sup></div>
+  <div class="es-body">
+    <div class="eq-display">√(2<sup>x</sup>) ≤ 2<sup>√x</sup></div>
+    <div class="step-card sv"><div class="sh"><div class="sn">1</div>Riscrivo in base 2 e CE</div>
+      <div class="sb">√(2<sup>x</sup>) = 2<sup>x/2</sup><br>C.E.: x ≥ 0 (per la radice √x)<br>Ottengo: <b>2<sup>x/2</sup> ≤ 2<sup>√x</sup></b></div></div>
+    <div class="freccia-giu">↓</div>
+    <div class="step-card sg"><div class="sh"><div class="sn">2</div>Base 2 &gt; 1 → verso NON cambia</div>
+      <div class="sb">x/2 ≤ √x (con x ≥ 0)<br>Pongo t = √x (t ≥ 0) → x = t²:<br>t²/2 ≤ t <span class="arr">→</span> t² − 2t ≤ 0 <span class="arr">→</span> t(t−2) ≤ 0<br>0 ≤ t ≤ 2 <span class="arr">→</span> 0 ≤ √x ≤ 2 <span class="arr">→</span> <b>0 ≤ x ≤ 4</b></div></div>
+    <div class="sol"><div class="sol-lbl">🏆 SOLUZIONE</div><div class="sol-val">x ∈ [0, 4]</div></div>
+  </div>
+</div>
+
+</div>

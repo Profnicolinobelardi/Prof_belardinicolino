@@ -1,0 +1,427 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { font-family: var(--font-sans); padding: 14px; color: var(--color-text-primary); display: flex; flex-direction: column; gap: 14px; }
+
+.intestazione { background: #4a148c; border-radius: 12px; padding: 13px 18px; color: #fff; text-align: center; }
+.int-titolo { font-size: 11px; color: #e1bee7; margin-bottom: 3px; }
+.int-materia { font-size: 15px; font-weight: 500; }
+.int-linea { height: 1px; background: rgba(255,255,255,0.2); margin: 7px 0; }
+.int-prof { font-size: 11px; color: #ce93d8; }
+
+/* regola grande visiva */
+.regola-grande { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rg-card { border-radius: 10px; padding: 12px; text-align: center; font-size: 13px; line-height: 1.9; border: 2.5px solid; }
+.rg-verde { background: #e8f5e9; border-color: #2e7d32; }
+.rg-rosso { background: #ffebee; border-color: #c62828; }
+.rg-titolo { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+.rg-verde .rg-titolo { color: #1b5e20; }
+.rg-rosso .rg-titolo { color: #b71c1c; }
+.rg-formula { font-size: 16px; font-weight: 500; border-radius: 7px; padding: 5px 8px; margin: 5px 0; }
+.rg-verde .rg-formula { background: #a5d6a7; color: #1b5e20; }
+.rg-rosso .rg-formula { background: #ffcdd2; color: #b71c1c; }
+
+/* parentesi box */
+.par-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.par-card { border-radius: 9px; padding: 10px 12px; font-size: 13px; line-height: 1.85; }
+.par-tonda { background: #fff3e0; border: 2px solid #e65100; }
+.par-quadra { background: #e8f5e9; border: 2px solid #2e7d32; }
+.par-titolo { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.par-tonda .par-titolo { color: #e65100; }
+.par-quadra .par-titolo { color: #2e7d32; }
+
+/* esercizio */
+.es { border-radius: 12px; overflow: hidden; border: 3px solid; }
+.c-viola   { border-color: #6a1b9a; }
+.c-verde   { border-color: #2e7d32; }
+.c-blu     { border-color: #1565c0; }
+
+.es-header { display: flex; align-items: center; gap: 9px; padding: 9px 14px; color: #fff; font-size: 14px; font-weight: 500; }
+.c-viola  .es-header  { background: #6a1b9a; }
+.c-verde  .es-header  { background: #2e7d32; }
+.c-blu    .es-header  { background: #1565c0; }
+
+.nb { background: rgba(255,255,255,0.25); border-radius: 5px; padding: 2px 8px; font-size: 13px; font-weight: 500; flex-shrink: 0; }
+
+.es-body { padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.c-viola  .es-body  { background: #f3e5f5; }
+.c-verde  .es-body  { background: #e8f5e9; }
+.c-blu    .es-body  { background: #e3f2fd; }
+
+.eq-display { border-radius: 8px; padding: 10px 14px; font-size: 22px; font-weight: 500; text-align: center; color: #fff; }
+.c-viola  .eq-display  { background: #6a1b9a; }
+.c-verde  .eq-display  { background: #2e7d32; }
+.c-blu    .eq-display  { background: #1565c0; }
+
+.step-card { background: #fff; border-radius: 9px; overflow: hidden; border-left: 5px solid; margin-bottom: 2px; }
+.step-card .sh { display: flex; align-items: center; gap: 8px; padding: 7px 12px; font-size: 12px; font-weight: 500; }
+.step-card .sb { padding: 8px 14px 10px; font-size: 13px; line-height: 1.9; }
+.sn { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: #fff; flex-shrink: 0; }
+.freccia-giu { text-align: center; font-size: 16px; color: #bbb; margin: -2px 0; }
+
+.sv  { border-color: #6a1b9a; } .sv  .sh { background: #f3e5f5; color: #6a1b9a; } .sv  .sn { background: #6a1b9a; }
+.sg  { border-color: #2e7d32; } .sg  .sh { background: #e8f5e9; color: #2e7d32; } .sg  .sn { background: #2e7d32; }
+.sb2 { border-color: #1565c0; } .sb2 .sh { background: #e3f2fd; color: #1565c0; } .sb2 .sn { background: #1565c0; }
+.sr  { border-color: #c62828; } .sr  .sh { background: #ffebee; color: #c62828; } .sr  .sn { background: #c62828; }
+.so  { border-color: #e65100; } .so  .sh { background: #fff3e0; color: #e65100; } .so  .sn { background: #e65100; }
+
+.nota { background: #fff9c4; border: 2px solid #f9a825; border-radius: 8px; padding: 9px 12px; font-size: 13px; line-height: 1.8; display: flex; gap: 9px; }
+.nota-rossa { background: #ffebee; border: 2px solid #c62828; border-radius: 8px; padding: 9px 12px; font-size: 13px; line-height: 1.8; color: #b71c1c; }
+.nota-verde { background: #e8f5e9; border: 2px solid #2e7d32; border-radius: 8px; padding: 9px 12px; font-size: 13px; line-height: 1.8; color: #1b5e20; }
+
+.tag-ok  { background: #c8e6c9; color: #1b5e20; border-radius: 5px; padding: 3px 9px; font-size: 12px; font-weight: 500; display: inline-block; }
+.tag-no  { background: #ffcdd2; color: #b71c1c; border-radius: 5px; padding: 3px 9px; font-size: 12px; font-weight: 500; display: inline-block; }
+
+.sol { background: #fff9c4; border: 2.5px solid #f9a825; border-radius: 9px; padding: 9px 14px; text-align: center; }
+.sol-lbl { font-size: 10px; color: #f9a825; font-weight: 500; letter-spacing: 1px; }
+.sol-val { font-size: 19px; font-weight: 500; color: #e65100; margin-top: 3px; }
+
+.arr { color: #888; margin: 0 5px; }
+sup { font-size: 0.65em; vertical-align: super; }
+.frac { display: inline-flex; flex-direction: column; align-items: center; font-size: 0.85em; vertical-align: middle; line-height: 1.2; }
+.frac .n { border-bottom: 1.2px solid currentColor; padding: 0 3px; }
+.frac .d { padding: 0 3px; }
+canvas { display: block; }
+</style>
+
+<div class="wrap">
+
+<!-- INTESTAZIONE -->
+<div class="intestazione">
+  <div class="int-titolo">Scheda di matematica · Prof. Belardi Nicolino</div>
+  <div class="int-materia">Disequazioni esponenziali — Pag. 713 n° 251 e 260</div>
+  <div class="int-linea"></div>
+  <div class="int-prof">Esercizi svolti passo per passo</div>
+</div>
+
+<!-- REGOLA VISIVA GRANDE -->
+<div style="background:#fff;border-radius:11px;padding:12px 14px;border:1.5px solid var(--color-border-secondary);">
+  <div style="font-size:12px;font-weight:500;color:#888;text-transform:uppercase;margin-bottom:8px;">⚠️ Ricorda sempre questa regola prima di iniziare</div>
+  <div class="regola-grande">
+    <div class="rg-card rg-verde">
+      <div class="rg-titolo">📈 Base MAGGIORE di 1</div>
+      <div style="font-size:13px;">Es: 2, 3, 5/2, 7…</div>
+      <div class="rg-formula">Il verso NON cambia</div>
+      <div style="font-size:12px;">a<sup>f(x)</sup> &gt; a<sup>g(x)</sup><br>→ f(x) &gt; g(x)</div>
+    </div>
+    <div class="rg-card rg-rosso">
+      <div class="rg-titolo">📉 Base tra 0 e 1</div>
+      <div style="font-size:13px;">Es: 1/2, 2/3, 3/4…</div>
+      <div class="rg-formula">Il verso SI INVERTE !</div>
+      <div style="font-size:12px;">a<sup>f(x)</sup> &gt; a<sup>g(x)</sup><br>→ f(x) &lt; g(x)</div>
+    </div>
+  </div>
+</div>
+
+<!-- PARENTESI -->
+<div style="background:#fff;border-radius:11px;padding:12px 14px;border:1.5px solid var(--color-border-secondary);">
+  <div style="font-size:12px;font-weight:500;color:#888;text-transform:uppercase;margin-bottom:8px;">📏 Come scrivere la soluzione — parentesi tonde o quadre?</div>
+  <div class="par-grid">
+    <div class="par-card par-quadra">
+      <div class="par-titolo">[ ] Parentesi QUADRA</div>
+      <div>Si usa con <b>≥</b> oppure <b>≤</b><br>
+      → il numero è <b>COMPRESO</b><br>
+      → pallino <b>●</b> pieno sulla retta<br><br>
+      Es: x ≥ 2 → <b>[2, +∞)</b><br>
+      Es: x ≤ 2 → <b>(−∞, 2]</b></div>
+    </div>
+    <div class="par-card par-tonda">
+      <div class="par-titolo">( ) Parentesi TONDA</div>
+      <div>Si usa con <b>&gt;</b> oppure <b>&lt;</b><br>
+      → il numero <b>NON è compreso</b><br>
+      → pallino <b>○</b> vuoto sulla retta<br><br>
+      Es: x &gt; 2 → <b>(2, +∞)</b><br>
+      Es: x &lt; 2 → <b>(−∞, 2)</b></div>
+    </div>
+  </div>
+  <div class="nota" style="margin-top:8px;">
+    <span style="font-size:18px;flex-shrink:0;">💡</span>
+    <div><b>∞ ha sempre la parentesi tonda</b> — l'infinito non si raggiunge mai, quindi non può mai essere "compreso".</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ -->
+<!-- ESERCIZIO 251 -->
+<!-- ═══════════════════════════════════ -->
+<div class="es c-viola">
+  <div class="es-header">
+    <span class="nb">251</span>
+    (5/2)<sup>x</sup> ≤ 25/4
+  </div>
+  <div class="es-body">
+
+    <div class="eq-display">(5/2)<sup>x</sup> ≤ 25/4</div>
+
+    <!-- step 1 -->
+    <div class="step-card sv">
+      <div class="sh"><div class="sn">1</div>Riscrivo il numero a destra con la stessa base</div>
+      <div class="sb">
+        Per risolvere la disequazione, ho bisogno di avere la <b>stessa base</b> sia a sinistra che a destra.<br><br>
+        La base a sinistra è <b>5/2</b>.<br>
+        Devo riscrivere <b>25/4</b> come una potenza di 5/2:<br><br>
+        25/4 = (5/2)² &nbsp; <span class="arr">✓</span><br><br>
+        <span style="font-size:11px;color:#888;">← 5² = 25 e 2² = 4, quindi (5/2)² = 25/4</span>
+      </div>
+    </div>
+    <div class="freccia-giu">↓</div>
+
+    <!-- step 2 -->
+    <div class="step-card sb2">
+      <div class="sh"><div class="sn">2</div>Riscrivo la disequazione con la stessa base</div>
+      <div class="sb">
+        (5/2)<sup>x</sup> ≤ (5/2)²
+      </div>
+    </div>
+    <div class="freccia-giu">↓</div>
+
+    <!-- step 3 -->
+    <div class="step-card sg">
+      <div class="sh"><div class="sn">3</div>Elimino le basi — lavoro solo sugli esponenti</div>
+      <div class="sb">
+        Le basi sono uguali (entrambe 5/2) → le posso eliminare.<br>
+        Mi rimane solo una semplice disequazione tra gli esponenti:<br><br>
+        <b style="font-size:15px;">x ≤ 2</b>
+      </div>
+    </div>
+    <div class="freccia-giu">↓</div>
+
+    <!-- step 4 -->
+    <div class="step-card so">
+      <div class="sh"><div class="sn">4</div>Controllo la base: devo invertire il verso?</div>
+      <div class="sb">
+        La base è <b>5/2</b>.<br>
+        5/2 = 2,5 → è <b>maggiore di 1</b><br><br>
+        <span class="tag-ok">✓ Base &gt; 1 → verso NON cambia</span><br><br>
+        La disequazione rimane: <b>x ≤ 2</b>
+      </div>
+    </div>
+    <div class="freccia-giu">↓</div>
+
+    <!-- step 5 -->
+    <div class="step-card sv">
+      <div class="sh"><div class="sn">5</div>Disegno la retta numerica</div>
+      <div class="sb">
+        <canvas id="r251" width="340" height="56" style="width:100%;height:56px;"></canvas>
+        <div style="margin-top:6px;font-size:12px;line-height:1.7;">
+          Il pallino in 2 è <b>pieno ●</b> perché il simbolo è <b>≤</b><br>
+          → il 2 è <b>compreso</b> nella soluzione<br>
+          → si usa la <b>parentesi quadra ]</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="sol">
+      <div class="sol-lbl">🏆 SOLUZIONE n° 251</div>
+      <div class="sol-val">x ∈ (−∞ , 2]</div>
+      <div style="font-size:11px;color:#777;margin-top:3px;">"Tutti i valori di x fino a 2, compreso il 2"</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ -->
+<!-- ESERCIZIO 260 -->
+<!-- ═══════════════════════════════════ -->
+<div class="es c-verde">
+  <div class="es-header">
+    <span class="nb">260</span>
+    (2/3)<sup>x</sup> ≤ 27/8
+  </div>
+  <div class="es-body">
+
+    <div class="eq-display">(2/3)<sup>x</sup> ≤ 27/8</div>
+
+    <div class="nota">
+      <span style="font-size:18px;flex-shrink:0;">📌</span>
+      <div>Stesso procedimento dell'esercizio 251, ma attenzione: la base <b>2/3</b> è minore di 1 → il verso della disequazione si <b>inverte</b>!</div>
+    </div>
+
+    <!-- step 1 -->
+    <div class="step-card sv">
+      <div class="sh"><div class="sn">1</div>Riscrivo il numero a destra con la stessa base</div>
+      <div class="sb">
+        La base a sinistra è <b>2/3</b>.<br>
+        Devo riscrivere <b>27/8</b> come potenza di 2/3:<br><br>
+        27/8 = (3/2)³ <span class="arr">→</span> l'inverso di 2/3 è 3/2<br>
+        (3/2)³ = (2/3)<sup>−3</sup><br><br>
+        <span style="font-size:11px;color:#888;">← ribaltare la frazione = esponente negativo</span>
+      </div>
+    </div>
+    <div class="freccia-giu">↓</div>
+
+    <!-- step 2 -->
+    <div class="step-card sb2">
+      <div class="sh"><div class="sn">2</div>Riscrivo con la stessa base</div>
+      <div class="sb">
+        (2/3)<sup>x</sup> ≤ (2/3)<sup>−3</sup>
+      </div>
+    </div>
+    <div class="freccia-giu">↓</div>
+
+    <!-- step 3 -->
+    <div class="step-card sg">
+      <div class="sh"><div class="sn">3</div>Elimino le basi — lavoro sugli esponenti</div>
+      <div class="sb">
+        Le basi sono uguali → le elimino.<br>
+        Ottengo: x ≤ −3
+      </div>
+    </div>
+    <div class="freccia-giu">↓</div>
+
+    <!-- step 4 -->
+    <div class="step-card sr">
+      <div class="sh"><div class="sn">4</div>Controllo la base — ATTENZIONE: inverto il verso!</div>
+      <div class="sb">
+        La base è <b>2/3</b>.<br>
+        2/3 ≈ 0,66 → è tra 0 e 1 → è <b>minore di 1</b><br><br>
+        <span class="tag-no">⚠️ Base tra 0 e 1 → funzione decrescente → verso SI INVERTE</span><br><br>
+        x ≤ −3 &nbsp;<span class="arr">→ inverto →</span>&nbsp; <b>x ≥ −3</b>
+      </div>
+    </div>
+    <div class="freccia-giu">↓</div>
+
+    <!-- step 5 -->
+    <div class="step-card sv">
+      <div class="sh"><div class="sn">5</div>Disegno la retta numerica</div>
+      <div class="sb">
+        <canvas id="r260" width="340" height="56" style="width:100%;height:56px;"></canvas>
+        <div style="margin-top:6px;font-size:12px;line-height:1.7;">
+          Il pallino in −3 è <b>pieno ●</b> perché il simbolo è <b>≥</b><br>
+          → il −3 è <b>compreso</b> nella soluzione<br>
+          → si usa la <b>parentesi quadra [</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="sol">
+      <div class="sol-lbl">🏆 SOLUZIONE n° 260</div>
+      <div class="sol-val">x ∈ [−3 , +∞)</div>
+      <div style="font-size:11px;color:#777;margin-top:3px;">"Tutti i valori di x da −3 in poi, compreso il −3"</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ -->
+<!-- NOTA 10^x = 1 -->
+<!-- ═══════════════════════════════════ -->
+<div class="es c-blu">
+  <div class="es-header">
+    <span class="nb">★</span>
+    Nota utile — 10<sup>x</sup> = 1
+  </div>
+  <div class="es-body">
+    <div class="eq-display">10<sup>x</sup> = 1</div>
+
+    <div class="step-card sb2">
+      <div class="sh"><div class="sn">!</div>Quando vedi il numero 1 a destra…</div>
+      <div class="sb">
+        Qualsiasi numero elevato a <b>0</b> dà sempre <b>1</b>.<br>
+        Quindi posso sempre scrivere il numero 1 come <b>b⁰</b>, usando la stessa base che ho a sinistra.<br><br>
+        In questo caso:<br>
+        10<sup>x</sup> = 1 = 10⁰<br><br>
+        Stessa base → ugualio gli esponenti:<br>
+        <b>x = 0</b>
+      </div>
+    </div>
+
+    <div class="nota-verde">
+      ✅ <b>Regola da ricordare:</b> quando vedi <b>1</b> nel secondo membro, scrivilo come <b>(base)⁰</b> usando la stessa base che hai a sinistra. Così hai subito la stessa base a destra e a sinistra!
+    </div>
+
+    <div class="sol">
+      <div class="sol-lbl">🏆 SOLUZIONE</div>
+      <div class="sol-val">x = 0</div>
+    </div>
+  </div>
+</div>
+
+<!-- RIEPILOGO FINALE -->
+<div style="background:#fff;border-radius:11px;padding:12px 14px;border:1.5px solid var(--color-border-secondary);">
+  <div style="font-size:12px;font-weight:500;color:#888;text-transform:uppercase;margin-bottom:8px;">🔑 Schema dei 5 passi da seguire sempre</div>
+  <div style="display:flex;flex-direction:column;gap:6px;">
+    <div style="background:#f3e5f5;border-radius:7px;padding:8px 12px;font-size:13px;display:flex;gap:10px;align-items:center;">
+      <div style="background:#6a1b9a;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;">1</div>
+      <div>Riscrivo il secondo membro con la <b>stessa base</b> del primo</div>
+    </div>
+    <div style="background:#e3f2fd;border-radius:7px;padding:8px 12px;font-size:13px;display:flex;gap:10px;align-items:center;">
+      <div style="background:#1565c0;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;">2</div>
+      <div>Ho la stessa base → <b>elimino le basi</b> → lavoro solo sugli esponenti</div>
+    </div>
+    <div style="background:#fff3e0;border-radius:7px;padding:8px 12px;font-size:13px;display:flex;gap:10px;align-items:center;">
+      <div style="background:#e65100;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;">3</div>
+      <div>Controllo la base: è <b>maggiore di 1</b> (verso uguale) o <b>minore di 1</b> (verso invertito)?</div>
+    </div>
+    <div style="background:#e8f5e9;border-radius:7px;padding:8px 12px;font-size:13px;display:flex;gap:10px;align-items:center;">
+      <div style="background:#2e7d32;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;">4</div>
+      <div>Disegno la <b>retta numerica</b> con pallino pieno ● (incluso) o vuoto ○ (escluso)</div>
+    </div>
+    <div style="background:#fff9c4;border-radius:7px;padding:8px 12px;font-size:13px;display:flex;gap:10px;align-items:center;">
+      <div style="background:#f9a825;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;">5</div>
+      <div>Scrivo la soluzione con l'<b>intervallo</b>: [ ] se incluso, ( ) se escluso — ∞ sempre ( )</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function drawRetta(id, labelTxt, verso, incluso, colore) {
+  const canvas = document.getElementById(id);
+  if (!canvas) return;
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth || 340;
+  const H = 56;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const lineC = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)';
+  const textC = isDark ? '#ccc' : '#444';
+
+  const y = H / 2 + 3;
+  const xS = 30, xE = W - 24;
+  const xP = W / 2;
+
+  ctx.strokeStyle = lineC; ctx.lineWidth = 1.5; ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(xS, y); ctx.lineTo(xE, y); ctx.stroke();
+  ctx.fillStyle = lineC;
+  ctx.beginPath(); ctx.moveTo(xE,y); ctx.lineTo(xE-8,y-4); ctx.lineTo(xE-8,y+4); ctx.fill();
+
+  ctx.strokeStyle = lineC; ctx.lineWidth = 0.8;
+  ctx.beginPath(); ctx.moveTo(xP, y-7); ctx.lineTo(xP, y+7); ctx.stroke();
+
+  ctx.font = '12px sans-serif'; ctx.fillStyle = textC;
+  ctx.textAlign = 'center'; ctx.fillText(labelTxt, xP, y+18);
+  ctx.textAlign = 'left';   ctx.fillText('−∞', xS, y+5);
+  ctx.textAlign = 'right';  ctx.fillText('+∞', xE-2, y+5);
+
+  ctx.fillStyle = colore + '28';
+  if (verso === 'sx') ctx.fillRect(xS+16, y-5, xP-xS-16, 10);
+  else ctx.fillRect(xP, y-5, xE-26-xP, 10);
+
+  ctx.fillStyle = colore; ctx.font = 'bold 13px sans-serif'; ctx.textAlign = 'center';
+  if (verso === 'sx') ctx.fillText('◀◀◀', xS+(xP-xS)/2, y+4);
+  else ctx.fillText('▶▶▶', xP+(xE-xP)/2-12, y+4);
+
+  ctx.beginPath(); ctx.arc(xP, y, 6, 0, Math.PI*2);
+  if (incluso) { ctx.fillStyle = colore; ctx.fill(); }
+  else {
+    ctx.fillStyle = isDark ? '#222' : '#fff'; ctx.fill();
+    ctx.strokeStyle = colore; ctx.lineWidth = 2.5; ctx.stroke();
+  }
+
+  const sym = incluso ? (verso==='sx'?'≤':'≥') : (verso==='sx'?'<':'>');
+  ctx.fillStyle = colore; ctx.font = 'bold 11px sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText('x ' + sym + ' ' + labelTxt, xP, y - 13);
+}
+
+window.addEventListener('load', () => {
+  drawRetta('r251', '2',  'sx', true,  '#6a1b9a');
+  drawRetta('r260', '−3', 'dx', true,  '#2e7d32');
+});
+</script>
