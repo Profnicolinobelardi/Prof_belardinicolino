@@ -1,0 +1,514 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preparazione Verifica | Prof. Belardi Nicolino</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Stili per la navigazione a schede */
+    .tabs-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+      justify-content: center;
+      position: sticky;
+      top: 80px;
+      z-index: 100;
+      padding: 10px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .tab-btn {
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #e2e8f0;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .tab-btn:hover { background: rgba(255, 255, 255, 0.1); }
+    
+    .tab-btn.active {
+      background: #f59e0b;
+      border-color: #f59e0b;
+      color: #000;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Stili originali salvaguardati */
+    .wrap { font-family: var(--font-sans, sans-serif); color: #1e293b; display: flex; flex-direction: column; gap: 14px; }
+    .scheda { border-radius: 12px; overflow: hidden; border: 3px solid; background: #fff; }
+    .s1 { border-color: #1565c0; } .s2 { border-color: #2e7d32; } .s3 { border-color: #6a1b9a; }
+    .s4 { border-color: #e65100; } .s5 { border-color: #c62828; } .s6 { border-color: #00796b; }
+
+    .scheda-header { display: flex; align-items: center; gap: 10px; padding: 10px 15px; color: #fff; font-size: 14px; font-weight: 500; }
+    .s1 .scheda-header { background: #1565c0; } .s2 .scheda-header { background: #2e7d32; }
+    .s3 .scheda-header { background: #6a1b9a; } .s4 .scheda-header { background: #e65100; }
+    .s5 .scheda-header { background: #c62828; } .s6 .scheda-header { background: #00796b; }
+
+    .icona { font-size: 17px; width: 32px; height: 32px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .hdx { margin-left: auto; font-size: 9px; opacity: 0.7; font-weight: 400; white-space: nowrap; }
+    .scheda-body { padding: 13px 15px; display: flex; flex-direction: column; gap: 11px; }
+
+    .def-box { background: #fff; border-radius: 9px; padding: 11px 13px; font-size: 13px; line-height: 1.8; border-left: 4px solid; color: #334155; }
+    .s1 .def-box { border-color: #1565c0; } .s2 .def-box { border-color: #2e7d32; }
+    .s3 .def-box { border-color: #6a1b9a; } .s4 .def-box { border-color: #e65100; }
+    .s5 .def-box { border-color: #c62828; } .s6 .def-box { border-color: #00796b; }
+
+    .formula-grande { border-radius: 9px; padding: 11px 14px; font-size: 20px; font-weight: 500; text-align: center; color: #fff; margin: 10px 0; }
+    .s1 .formula-grande { background: #1565c0; } .s2 .formula-grande { background: #2e7d32; }
+    .s3 .formula-grande { background: #6a1b9a; } .s4 .formula-grande { background: #e65100; }
+
+    .nota { background: #fff9c4; border: 1.5px solid #f9a825; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.75; display: flex; gap: 9px; }
+    .nota-rossa { background: #ffebee; border: 1.5px solid #c62828; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.75; color: #b71c1c; }
+    .nota-viola { background: #f3e5f5; border: 1.5px solid #6a1b9a; border-radius: 8px; padding: 9px 12px; font-size: 12px; line-height: 1.75; color: #4a148c; }
+    
+    .sezione-titolo { font-size: 11px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: #888; margin-bottom: 2px; }
+    .tre-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .due-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    @media (max-width: 600px) {
+      .tre-col, .due-col { grid-template-columns: 1fr; }
+    }
+
+    .mini-card { border-radius: 8px; padding: 10px 11px; font-size: 12px; line-height: 1.75; text-align: center; }
+    .mc-blu { background: #e3f2fd; border: 1.5px solid #1565c0; color: #0d47a1; }
+    .mc-verde { background: #e8f5e9; border: 1.5px solid #2e7d32; color: #1b5e20; }
+    .mc-viola { background: #f3e5f5; border: 1.5px solid #6a1b9a; color: #4a148c; }
+    
+    .grafico-box { background: #fff; border-radius: 9px; padding: 12px; border: 1px solid #e2e8f0; }
+    .grafico-label { font-size: 10px; font-weight: 500; color: #888; text-transform: uppercase; margin-bottom: 8px; text-align: center; }
+    
+    .prop-row { background: #fff; border-radius: 9px; padding: 10px 13px; font-size: 13px; line-height: 1.8; border-left: 4px solid #6a1b9a; }
+    .prop-formula { font-size: 16px; font-weight: 500; color: #4a148c; margin: 4px 0 2px; }
+    
+    .eq-box { background: #fff; border-radius: 9px; padding: 10px 13px; font-size: 13px; line-height: 1.85; border-left: 4px solid #e65100; }
+    .eq-display { font-size: 18px; font-weight: 500; color: #e65100; text-align: center; padding: 8px; background: #fff3e0; border-radius: 7px; margin: 5px 0; }
+    .sol-inline { font-size: 15px; font-weight: 500; color: #2e7d32; }
+
+    .step-card { background: #fff; border-radius: 8px; overflow: hidden; border-left: 4px solid; margin-bottom: 3px; }
+    .step-card .sh { display: flex; align-items: center; gap: 8px; padding: 6px 12px; font-size: 11px; font-weight: 500; }
+    .step-card .sb { padding: 7px 13px 9px; font-size: 12px; line-height: 1.85; }
+    .sn { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #fff; flex-shrink: 0; }
+    .sc-blu { border-color: #1565c0; } .sc-blu .sh { background: #e3f2fd; color: #1565c0; } .sc-blu .sn { background: #1565c0; }
+    .sc-ver { border-color: #2e7d32; } .sc-ver .sh { background: #e8f5e9; color: #2e7d32; } .sc-ver .sn { background: #2e7d32; }
+    .sc-ros { border-color: #c62828; } .sc-ros .sh { background: #ffebee; color: #c62828; } .sc-ros .sn { background: #c62828; }
+    .sc-ora { border-color: #e65100; } .sc-ora .sh { background: #fff3e0; color: #e65100; } .sc-ora .sn { background: #e65100; }
+
+    .video-banner { background: #f8fafc; border-radius: 12px; padding: 25px; border-left: 6px solid #00796b; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    .video-title { font-size: 14px; font-weight: 700; color: #64748b; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px; }
+    .video-content { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px; }
+    .video-btn { display: inline-flex; align-items: center; gap: 12px; background: #ff0000; color: #fff; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 16px; transition: all 0.3s; box-shadow: 0 5px 15px rgba(255,0,0,0.3); }
+    .video-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,0,0,0.4); background: #e60000; color: #fff; }
+
+    .ricorda { background: #fff9c4; border: 2px solid #f9a825; border-radius: 9px; padding: 10px 13px; font-size: 12px; line-height: 1.75; display: flex; gap: 9px; margin-top: 10px; }
+
+    sub, sup { font-size: 0.7em; }
+    
+    /* Stili per tabelle dei segni e intersezioni */
+    .sign-chart { width: 100%; border-collapse: collapse; margin: 15px 0; background: #fff; border-radius: 8px; overflow: hidden; }
+    .sign-chart td { padding: 8px; text-align: center; border: 1px solid #e2e8f0; font-family: monospace; font-size: 14px; position: relative; }
+    .sign-chart .header-row td { background: #f8fafc; color: #64748b; font-weight: bold; }
+    .line-cont { border-bottom: 2px solid #2e7d32; display: block; height: 0; width: 100%; margin-top: 5px; }
+    .line-dash { border-bottom: 2px dashed #cbd5e1; display: block; height: 0; width: 100%; margin-top: 5px; }
+    .line-sol { border-bottom: 4px solid #f59e0b; display: block; height: 0; width: 100%; margin-top: 5px; }
+    .step-titolo { 
+      color: #1e293b; 
+      font-weight: bold; 
+      margin-top: 18px; 
+      margin-bottom: 8px; 
+      font-size: 0.95rem; 
+      border-bottom: 1px solid rgba(0,0,0,0.1); 
+      display: block; 
+      width: fit-content;
+      padding-right: 20px;
+    }
+    .step-desc { 
+      margin-bottom: 10px; 
+      line-height: 1.8;
+      display: block;
+    }
+      /* STILI LABORATORIO INTERATTIVO */
+    .split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 15px; }
+    @media (max-width: 900px) { .split-layout { grid-template-columns: 1fr; } }
+    .box-guida, .box-pratica {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 1rem;
+    }
+    .box-guida { border-top: 5px solid #a78bfa; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee; }
+    .box-pratica { border-top: 5px solid #60a5fa; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee; }
+    .box-title { font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    .box-guida .box-title { color: #a78bfa; }
+    .box-pratica .box-title { color: #60a5fa; }
+    .eq-display-lab {
+      background: #f8fafc; border-radius: 8px; padding: 1.5rem;
+      font-size: 1.5rem; text-align: center; color: #1e293b; font-weight: 600;
+      border: 1px solid #e2e8f0;
+    }
+    .step-list { display: flex; flex-direction: column; gap: 0.8rem; font-size: 1rem; }
+    .step-item { padding: 0.8rem 1rem; background: #f8fafc; border-left: 3px solid; border-radius: 0 8px 8px 0; line-height: 1.5; color: #334155; }
+    .box-guida .step-item { border-color: #a78bfa; }
+    .box-pratica .step-item { border-color: #60a5fa; display: none; animation: slideIn 0.4s ease forwards; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+    .btn-aiuto {
+      background: #e0f2fe; border: 1px solid #38bdf8; color: #0369a1;
+      padding: 1rem 1.5rem; border-radius: 12px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: all 0.3s ease; text-align: center; margin-top: 1rem;
+    }
+    .btn-aiuto:hover { background: #bae6fd; }
+    .btn-aiuto:disabled { background: #f1f5f9; border-color: #cbd5e1; color: #94a3b8; cursor: not-allowed; }
+    .soluzione-box {
+      background: #dcfce7; border: 2px solid #22c55e; border-radius: 12px;
+      padding: 1.5rem; text-align: center; color: #166534; font-size: 1.3rem; font-weight: 700;
+      margin-top: 1rem; display: none; animation: slideIn 0.5s ease;
+    }
+    .nav-controls { display: flex; justify-content: space-between; margin-top: 2rem; gap: 1rem; }
+    .nav-btn {
+      background: #fff; border: 1px solid #cbd5e1; color: #334155;
+      padding: 0.8rem 2rem; border-radius: 8px; font-weight: 500; cursor: pointer; transition: 0.3s;
+    }
+    .nav-btn:hover:not(:disabled) { background: #f8fafc; border-color: #94a3b8; }
+    .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .progress-dots { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: #cbd5e1; transition: 0.3s; cursor: pointer; }
+    .dot.active { background: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.5); transform: scale(1.3); }</style>
+
+  <!-- KaTeX per il rendering delle formule matematiche -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}]});"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div style="display:flex; align-items:center;">
+      <a href="index.html" class="nav-brand">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+      <button onclick="window.location.href='login.html'" style="margin-left:15px; background:rgba(239,68,68,0.2); border:1px solid #ef4444; color:#fff; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.85rem; font-weight:600; display:inline-flex; align-items:center; transition:all 0.3s;" onmouseover="this.style.background='#ef4444'" onmouseout="this.style.background='rgba(239,68,68,0.2)'">&#128273; Area Docenti</button>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="matematica.html">Matematica</a>
+      <a href="#" class="active">Preparazione Verifica</a>
+    </div>
+  </nav>
+
+  <div class="container" style="max-width: 1000px;">
+    
+    <div class="header-section">
+      <h1>Preparazione Verifica</h1>
+      <p>Materiale di ripasso riservato per affrontare al meglio la verifica.</p>
+    </div>
+
+    <!-- Navigazione a Schede -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="openTab('t1', this)">Esponenziali e logaritmi</button>
+      <button class="tab-btn" onclick="openTab('t2', this)">Laboratorio Interattivo</button>
+    </div>
+
+    <div class="wrap">
+      
+      <!-- SCHEDA 1 -->
+      <div id="t1" class="tab-content active">
+
+        <!-- ESERCIZIO 1 -->
+        <div class="scheda s4">
+          <div class="scheda-header"><div class="icona">📈</div>ESERCIZIO 1 – Equazioni esponenziali</div>
+          <div class="scheda-body" style="background: #fff3e0;">
+            <div class="def-box" style="border-left-color: #e65100;">
+              <h4 style="color: #e65100; margin-bottom: 8px;">Formula Generale e Regola</h4>
+              Un'equazione esponenziale si presenta nella forma: <b>\(a^{f(x)} = a^{g(x)}\)</b><br>
+              La regola d'oro è: se le basi sono uguali, possiamo uguagliare gli esponenti.<br>
+              Quindi la formula risolutiva è: <b>\(a^{f(x)} = a^{g(x)} \implies f(x) = g(x)\)</b><br>
+              <i style="font-size: 0.9em; color: #555;">(L'obiettivo è sempre fare in modo di avere la stessa base a destra e a sinistra dell'uguale).</i>
+            </div>
+            
+            <div class="sezione-titolo">Esempi Passo Passo:</div>
+            
+            <div class="step-card sc-blu">
+              <div class="sh"><div class="sn">a</div>Esempio: \(2^x = 16\)</div>
+              <div class="sb">
+                <b>Trasforma nella stessa base:</b> Sappiamo che 16 è uguale a \(2^4\).<br>
+                <b>Riscrivi:</b> \(2^x = 2^4\)<br>
+                <b>Uguaglia gli esponenti:</b> \(x = 4\)
+              </div>
+            </div>
+
+            <div class="step-card sc-ver">
+              <div class="sh"><div class="sn">b</div>Esempio: \(3^{x+1} = 27\)</div>
+              <div class="sb">
+                <b>Trasforma nella stessa base:</b> Sappiamo che 27 è \(3^3\).<br>
+                <b>Riscrivi:</b> \(3^{x+1} = 3^3\)<br>
+                <b>Uguaglia gli esponenti:</b> \(x + 1 = 3\)<br>
+                <b>Risolvi:</b> \(x = 3 - 1 \implies x = 2\)
+              </div>
+            </div>
+
+            <div class="step-card sc-ros">
+              <div class="sh"><div class="sn">c</div>Esempio: \(5^{2x} = 1\)</div>
+              <div class="sb">
+                <b>Trasforma nella stessa base:</b> Ricorda che qualsiasi numero elevato a zero fa 1 (\(a^0 = 1\)). Quindi \(1 = 5^0\).<br>
+                <b>Riscrivi:</b> \(5^{2x} = 5^0\)<br>
+                <b>Uguaglia gli esponenti:</b> \(2x = 0 \implies x = 0\)
+              </div>
+            </div>
+
+            <div class="step-card sc-ora">
+              <div class="sh"><div class="sn">d</div>Esempio: \(4^x = 8\)</div>
+              <div class="sb">
+                <b>Trasforma nella stessa base:</b> Qui dobbiamo trasformare entrambe le basi in base 2. Sappiamo che \(4 = 2^2\) e \(8 = 2^3\).<br>
+                <b>Riscrivi:</b> \((2^2)^x = 2^3 \implies 2^{2x} = 2^3\)<br>
+                <b>Uguaglia gli esponenti:</b> \(2x = 3 \implies x = \frac{3}{2}\)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESERCIZIO 2 -->
+        <div class="scheda s5" style="margin-top: 20px;">
+          <div class="scheda-header"><div class="icona">⚖️</div>ESERCIZIO 2 – Disequazioni esponenziali</div>
+          <div class="scheda-body" style="background: #ffebee;">
+            <div class="def-box" style="border-left-color: #c62828;">
+              <h4 style="color: #c62828; margin-bottom: 8px;">Regola Generale</h4>
+              Tutto dipende dalla base \(a\):
+              <ul style="margin-left: 20px; margin-top: 5px;">
+                <li><b>Se \(a > 1\):</b> Il verso della disequazione NON CAMBIA.<br>\(a^{f(x)} > a^{g(x)} \implies f(x) > g(x)\)</li>
+                <li style="margin-top: 8px;"><b>Se \(0 < a < 1\) (es. base 1/2):</b> Il verso della disequazione CAMBIA.<br>\(a^{f(x)} > a^{g(x)} \implies f(x) < g(x)\)</li>
+              </ul>
+            </div>
+
+            <div class="sezione-titolo">Esempi Passo Passo:</div>
+
+            <div class="step-card sc-blu">
+              <div class="sh"><div class="sn">a</div>Esempio con Base > 1: \(2^x > 8\)</div>
+              <div class="sb">
+                <b>Risoluzione:</b> \(2^x > 2^3\). Poiché la base è 2 (maggiore di 1), il verso non cambia: \(x > 3\).<br>
+                <b>Tabella dei segni (o grafico lineare):</b> Tiriamo una linea per i numeri. A destra di 3 mettiamo il segno + (dove la condizione è vera), a sinistra -.<br>
+                <div style="font-family: monospace; background: #f8fafc; padding: 5px; border-radius: 4px; margin: 5px 0;">------- (3) +++++++</div>
+                <b>Intervallo:</b> \((3, +\infty)\)
+              </div>
+            </div>
+
+            <div class="step-card sc-ver">
+              <div class="sh"><div class="sn">b</div>Esempio con Base compresa tra 0 e 1: \((1/2)^x \ge 1/4\)</div>
+              <div class="sb">
+                <b>Risoluzione:</b> Sappiamo che \(1/4 = (1/2)^2\). Quindi: \((1/2)^x \ge (1/2)^2\).<br>
+                Poiché la base è 1/2 (minore di 1), il verso cambia: \(x \le 2\).<br>
+                <b>Tabella dei segni:</b><br>
+                <div style="font-family: monospace; background: #f8fafc; padding: 5px; border-radius: 4px; margin: 5px 0;">+++++++ (2) -------</div>
+                <i>(la soluzione è la parte positiva, a sinistra di 2)</i>.<br>
+                <b>Intervallo:</b> \((-\infty, 2]\) (usiamo la parentesi quadra perché c'è il simbolo di "uguale" \(\ge\)).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ESERCIZIO 3 -->
+        <div class="scheda s1" style="margin-top: 20px;">
+          <div class="scheda-header"><div class="icona">📊</div>ESERCIZIO 3 – Funzioni esponenziali e grafico</div>
+          <div class="scheda-body" style="background: #e3f2fd;">
+            <div class="def-box" style="border-left-color: #1565c0;">
+              <h4 style="color: #1565c0; margin-bottom: 8px;">Regole Generali</h4>
+              La funzione esponenziale è <b>\(y = a^x\)</b>
+              <ul style="margin-left: 20px; margin-top: 5px;">
+                <li>Passa SEMPRE per il punto \((0, 1)\), perché \(a^0 = 1\).</li>
+                <li>L'asintoto orizzontale è l'asse delle \(x\) (retta \(y = 0\)). Significa che il grafico si avvicina sempre di più all'asse \(x\) senza mai toccarlo.</li>
+              </ul>
+            </div>
+
+            <div class="sezione-titolo">Esempi:</div>
+            
+            <div class="due-col">
+              <div class="mini-card mc-blu">
+                <b>a) \(y = 2^x\) (Base > 1)</b><br><br>
+                La curva parte da molto vicino all'asse \(x\) (a sinistra), incrocia l'asse \(y\) in \((0, 1)\) e poi sale rapidissimamente verso l'alto (crescente).
+              </div>
+              <div class="mini-card mc-verde">
+                <b>b) \(y = (1/2)^x\) (Base < 1)</b><br><br>
+                La curva scende da molto in alto (a sinistra), incrocia l'asse \(y\) sempre nel punto \((0, 1)\) e si appiattisce verso destra avvicinandosi all'asse \(x\) (decrescente).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FUNZIONI LOGARITMICHE -->
+        <div class="scheda s2" style="margin-top: 20px;">
+          <div class="scheda-header"><div class="icona">🪵</div>Funzioni logaritmiche</div>
+          <div class="scheda-body" style="background: #e8f5e9;">
+            <div class="def-box" style="border-left-color: #2e7d32;">
+              <h4 style="color: #2e7d32; margin-bottom: 8px;">Regole Generali</h4>
+              La funzione logaritmica <b>\(y = \log_a(x)\)</b> è l'inversa dell'esponenziale.
+              <ul style="margin-left: 20px; margin-top: 5px;">
+                <li>Passa SEMPRE per il punto \((1, 0)\), perché \(\log_a(1) = 0\).</li>
+                <li>L'asintoto verticale è l'asse delle \(y\) (cioè \(x = 0\)).</li>
+                <li>Condizione di esistenza (Dominio): \(x > 0\).</li>
+              </ul>
+            </div>
+
+            <div class="sezione-titolo">I tuoi casi:</div>
+            
+            <div class="due-col">
+              <div class="mini-card mc-verde">
+                <b>a) \(y = \log_2(x)\)</b><br><br>
+                Poiché la base \(2 > 1\), la curva sale dal basso (vicino all'asse \(y\)), passa per \((1, 0)\) e continua a crescere lentamente verso destra.
+              </div>
+              <div class="mini-card mc-blu">
+                <b>b) \(y = \log_{1/2}(x)\)</b><br><br>
+                Poiché la base \(1/2 < 1\), la curva scende dall'alto (vicino all'asse \(y\)), passa per \((1, 0)\) e decresce lentamente verso destra.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROPRIETÀ LOGARITMI -->
+        <div class="scheda s3" style="margin-top: 20px;">
+          <div class="scheda-header"><div class="icona">📐</div>Proprietà logaritmi</div>
+          <div class="scheda-body" style="background: #f3e5f5;">
+            
+            <div class="prop-row">
+              <div style="font-weight: bold; color: #4a148c; margin-bottom: 5px;">Addizione: \(\log_2(3) + \log_2(5)\)</div>
+              <b>Regola generale (Somma di logaritmi = Logaritmo del prodotto):</b><br>
+              \(\log_a(x) + \log_a(y) = \log_a(x \cdot y)\)<br>
+              <b>Soluzione:</b> \(\log_2(3 \cdot 5) = \log_2(15)\)
+            </div>
+
+            <div class="prop-row">
+              <div style="font-weight: bold; color: #4a148c; margin-bottom: 5px;">Sottrazione:</div>
+              Se fosse stato col segno MENO (\(\log_2 3 - \log_2 5\)), la regola sarebbe il quoziente: \(\log_2(3/5)\).
+            </div>
+
+            <div class="prop-row">
+              <div style="font-weight: bold; color: #4a148c; margin-bottom: 5px;">Esponente: \(\log_4(3^2)\)</div>
+              <b>Regola generale (Esponente dell'argomento):</b> \(\log_a(x^b) = b \cdot \log_a(x)\)<br>
+              L'esponente "scende" davanti al logaritmo.<br>
+              <b>Soluzione:</b> \(2 \cdot \log_4(3)\)
+            </div>
+
+            <div class="prop-row">
+              <div style="font-weight: bold; color: #4a148c; margin-bottom: 5px;">Trasformazione di un numero in un logaritmo</div>
+              <b>Regola generale:</b> Un numero \(n\) può essere scritto in qualsiasi base \(a\) usando la formula \(n = \log_a(a^n)\)<br>
+              <b>Soluzione:</b> Scegliendo per esempio la base 10, avremo \(\log_{10}(10^5) = \log_{10}(100000)\)<br>
+              Se scegliamo la base 2, avremo \(\log_2(2^5) = \log_2(32)\)
+            </div>
+
+          </div>
+        </div>
+
+        <!-- EQUAZIONE LOGARITMICA -->
+        <div class="scheda s4" style="margin-top: 20px;">
+          <div class="scheda-header"><div class="icona">✏️</div>Equazione logaritmica</div>
+          <div class="scheda-body" style="background: #fff3e0;">
+            <div class="eq-box">
+              <b>Testo:</b> \(\log_2(2x - 3) = \log_2 2\)
+            </div>
+
+            
+            <div class="step-card sc-ora">
+              <div class="sh"><div class="sn">1</div>Passo 1: Controllo base e forma</div>
+              <div class="sb">
+                Sì, i logaritmi hanno la stessa base (2) e sono "elementari" (uno a destra e uno a sinistra dell'uguale). La regola dice che se \(\log_a f(x) = \log_a g(x)\), allora posso uguagliare gli argomenti: \(f(x) = g(x)\)
+              </div>
+            </div>
+
+            <div class="step-card sc-ros">
+              <div class="sh"><div class="sn">2</div>Passo 2: Condizione di Esistenza (C.E.)</div>
+              <div class="sb">
+                L'argomento del logaritmo deve sempre essere maggiore di zero.<br>
+                \(2x - 3 > 0\)<br>
+                \(2x > 3 \implies x > \frac{3}{2}\)<br>
+                <i>(Questa condizione significa che la soluzione finale, per essere accettabile, dovrà essere più grande di 1,5).</i>
+              </div>
+            </div>
+
+            <div class="step-card sc-blu">
+              <div class="sh"><div class="sn">3</div>Passo 3: Calcolo dell'equazione</div>
+              <div class="sb">
+                Uguagliamo gli argomenti:<br>
+                \(2x - 3 = 2\)<br>
+                Spostiamo il -3 a destra cambiandolo di segno:<br>
+                \(2x = 2 + 3\)<br>
+                \(2x = 5\)<br>
+                Dividiamo per 2: \(x = \frac{5}{2}\)
+              </div>
+            </div>
+
+            <div class="step-card sc-ver">
+              <div class="sh"><div class="sn">4</div>Passo 4: Verifica con la C.E.</div>
+              <div class="sb">
+                La nostra soluzione è \(5/2\) (cioè 2,5). La C.E. ci chiedeva \(x > 3/2\) (cioè \(x > 1,5\)).<br>
+                Poiché 2,5 > 1,5, la soluzione è <b>accettabile</b>.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SCHEDA 2 - LABORATORIO INTERATTIVO -->
+      <div id="t2" class="tab-content">
+        <div class="header-section" style="margin-bottom: 10px; background: #fff; padding: 20px; border-radius: 12px; border-left: 5px solid #38bdf8; text-align: left;">
+          <h2 style="margin-top: 0; color: #0f172a;">Laboratorio Interattivo Guidato</h2>
+          <p style="margin-bottom: 0;">Osserva l'<b>Esempio Guida</b> (tratto dal PDF) a sinistra. Usalo come bussola per risolvere il <b>Tocca a te!</b> a destra. Chiedi un suggerimento passo-passo se ti blocchi.</p>
+        </div>
+
+        <div class="split-layout" id="app-container">
+          <!-- Riquadro 1: Esempio Guida -->
+          <div class="box-guida">
+            <div class="box-title">📘 Esempio Guida</div>
+            <div class="eq-display-lab" id="guida-eq"></div>
+            <div class="step-list" id="guida-steps"></div>
+          </div>
+
+          <!-- Riquadro 2: Tocca a te -->
+          <div class="box-pratica">
+            <div class="box-title">🎯 Tocca a te!</div>
+            <div class="eq-display-lab" id="pratica-eq"></div>
+            <div class="step-list" id="pratica-hints"></div>
+            
+            <button class="btn-aiuto" id="btn-hint" onclick="mostraAiuto()">
+              💡 Mostra un suggerimento
+            </button>
+
+            <div class="soluzione-box" id="soluzione-box">
+              Soluzione: <span id="soluzione-text"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controlli Navigazione -->
+        <div class="nav-controls">
+          <button class="nav-btn" id="btn-prev" onclick="cambiaEsercizio(-1)">&#8592; Precedente</button>
+          <button class="nav-btn" id="btn-next" onclick="cambiaEsercizio(1)">Prossimo &#8594;</button>
+        </div>
+        <div class="progress-dots" id="dots-container"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function openTab(tabId, btn) {
+      const contents = document.getElementsByClassName('tab-content');
+      for (let i = 0; i < contents.length; i++) contents[i].classList.remove('active');
+      const btns = document.getElementsByClassName('tab-btn');
+      for (let i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+  <script src="laboratorio.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio di Funzione | Prof. Belardi Nicolino</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Stili per la navigazione a schede */
+    .tabs-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+      justify-content: center;
+      position: sticky;
+      top: 80px;
+      z-index: 100;
+      padding: 10px;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .tab-btn {
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #e2e8f0;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .tab-btn:hover { background: rgba(255, 255, 255, 0.1); }
+    
+    .tab-btn.active {
+      background: #f59e0b;
+      border-color: #f59e0b;
+      color: #000;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Stili originali salvaguardati */
+    .wrap { font-family: var(--font-sans, sans-serif); color: #1e293b; display: flex; flex-direction: column; gap: 14px; }
+    .scheda { border-radius: 12px; overflow: hidden; border: 3px solid; background: #fff; }
+    .s1 { border-color: #1565c0; } .s2 { border-color: #2e7d32; } .s3 { border-color: #6a1b9a; }
+    .s4 { border-color: #e65100; } .s5 { border-color: #c62828; } .s6 { border-color: #00796b; }
+
+    .scheda-header { display: flex; align-items: center; gap: 10px; padding: 10px 15px; color: #fff; font-size: 14px; font-weight: 500; }
+    .s1 .scheda-header { background: #1565c0; } .s2 .scheda-header { background: #2e7d32; }
+    .s3 .scheda-header { background: #6a1b9a; } .s4 .scheda-header { background: #e65100; }
+    .s5 .scheda-header { background: #c62828; } .s6 .scheda-header { background: #00796b; }
+
+    .icona { font-size: 17px; width: 32px; height: 32px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .scheda-body { padding: 13px 15px; display: flex; flex-direction: column; gap: 11px; }
+
+    .formula-grande { border-radius: 9px; padding: 11px 14px; font-size: 20px; font-weight: 500; text-align: center; color: #fff; margin: 10px 0; background: #1565c0; }
+
+    .step-card { background: #fff; border-radius: 8px; overflow: hidden; border-left: 4px solid; margin-bottom: 3px; }
+    .step-card .sh { display: flex; align-items: center; gap: 8px; padding: 6px 12px; font-size: 14px; font-weight: 600; }
+    .step-card .sb { padding: 7px 13px 12px; font-size: 14px; line-height: 1.85; }
+    .sn { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    
+    .sc-blu { border-color: #1565c0; } .sc-blu .sh { background: #e3f2fd; color: #1565c0; } .sc-blu .sn { background: #1565c0; }
+    .sc-ver { border-color: #2e7d32; } .sc-ver .sh { background: #e8f5e9; color: #2e7d32; } .sc-ver .sn { background: #2e7d32; }
+    .sc-ros { border-color: #c62828; } .sc-ros .sh { background: #ffebee; color: #c62828; } .sc-ros .sn { background: #c62828; }
+    .sc-ora { border-color: #e65100; } .sc-ora .sh { background: #fff3e0; color: #e65100; } .sc-ora .sn { background: #e65100; }
+    
+    /* Personalizzazione di bold e interlinea per migliore lettura */
+    .sb b { color: #334155; font-weight: 700; }
+    .katex-display { margin: 12px 0; }
+  </style>
+
+  <!-- Plotly per i grafici interattivi -->
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\(', right: '\\)', display: false}, {left: '\\[', right: '\\]', display: true}]});"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div style="display:flex; align-items:center;">
+      <a href="index.html" class="nav-brand">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+      <button onclick="window.location.href='login.html'" style="margin-left:15px; background:rgba(239,68,68,0.2); border:1px solid #ef4444; color:#fff; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.85rem; font-weight:600; display:inline-flex; align-items:center; transition:all 0.3s;" onmouseover="this.style.background='#ef4444'" onmouseout="this.style.background='rgba(239,68,68,0.2)'">&#128273; Area Docenti</button>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="matematica.html">Matematica</a>
+      <a href="#" class="active">Studio di Funzione</a>
+    </div>
+  </nav>
+
+  <div class="container" style="max-width: 1000px;">
+    
+    <div class="header-section">
+      <h1>Studio di Funzione</h1>
+      <p>Scheda didattica del Prof. Belardi Nicolino..</p>
+    </div>
+
+    <!-- Navigazione a Schede -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="openTab('t2', this)">$$y = \frac{2x - 5}{x^2 - 4}$$</button>
+      <button class="tab-btn" onclick="openTab('t1', this)">$$y = \frac{2 - x}{x^3}$$</button>
+      <button class="tab-btn" onclick="openTab('t3', this)">$$y = \frac{x^2 + 1}{x}$$</button>
+    </div>
+
+    <div class="wrap">
+      
+      <!-- SCHEDA 1 -->
+      <div id="t1" class="tab-content">
+
+        <div class="scheda s1">
+          <div class="scheda-header"><div class="icona">📐</div>Studio completo della funzione</div>
+          <div class="scheda-body" style="background: #f8fafc;">
+            
+            <div class="formula-grande">$$y = \frac{2 - x}{x^3}$$</div>
+
+            <div class="step-card sc-blu">
+              <div class="sh"><div class="sn">1</div>1. Dominio (Campo di Esistenza)</div>
+              <div class="sb">
+                <b>Cosa rappresenta:</b> L'insieme di tutti i valori della $x$ che hanno "diritto di esistere" all'interno della nostra funzione.<br>
+                <b>Le Criticità:</b> Avendo una frazione, dobbiamo garantire che il denominatore non sia mai uguale a zero (non si può dividere per zero in matematica!). Non abbiamo radici o logaritmi di cui preoccuparci.<br>
+                <b>Calcolo:</b> Prendiamo il denominatore e lo poniamo diverso da zero.<br>
+                $$x^3 \neq 0 \implies x \neq 0$$<br>
+                <b>Risultato:</b> Il dominio è tutto l'insieme dei numeri reali tranne lo zero. Il grafico non passerà mai per $x = 0$ (che corrisponde all'asse verticale $y$).
+              </div>
+            </div>
+
+            <div class="step-card sc-ver">
+              <div class="sh"><div class="sn">2</div>2. Intersezione con gli assi</div>
+              <div class="sb">
+                <b>Cosa rappresenta:</b> Sono i punti in cui la curva "taglia" gli assi del piano cartesiano.<br><br>
+                <b>Intersezione Asse $y$ ($x = 0$):</b><br>
+                Come abbiamo appena visto nel dominio, $x$ non può valere $0$. Quindi non esiste alcuna intersezione con l'asse $y$. La curva non taglierà mai l'asse verticale.<br><br>
+                <b>Intersezione Asse $x$ ($y = 0$):</b><br>
+                Come ricordato prima, quando poniamo una frazione uguale a zero, dobbiamo porre a zero solo il numeratore (perché il denominatore non può valere zero).<br>
+                $$2 - x = 0 \implies x = 2$$<br>
+                <b>Risultato:</b> La curva passa per l'asse orizzontale nel punto $A(2, 0)$.
+              </div>
+            </div>
+
+            <div class="step-card sc-ros">
+              <div class="sh"><div class="sn">3</div>3. Studio del Segno</div>
+              <div class="sb">
+                <b>Cosa indica:</b> Ci permette di cancellare le zone del piano in cui il grafico non passerà, scoprendo se la funzione si trova "sopra" (positiva) o "sotto" (negativa) l'asse orizzontale.<br>
+                <b>Procedimento:</b> Poniamo la funzione maggiore di zero ($f(x) > 0$) e studiamo Numeratore e Denominatore.<br><br>
+                <b>Numeratore $> 0$:</b><br>
+                $$2 - x > 0$$<br>
+                È di primo grado. Spostiamo la $x$ a destra per renderla positiva (o cambiamo i segni e il verso):<br>
+                $$x < 2$$<br><br>
+                <b>Denominatore $> 0$:</b><br>
+                $$x^3 > 0$$<br>
+                Essendo un esponente dispari (il cubo mantiene il segno della base), la disequazione è vera semplicemente per:<br>
+                $$x > 0$$<br><br>
+                <b>Grafico dei segni (N/D):</b><br>
+                Mettiamo a sistema i segni nei vari intervalli:<br>
+                Per $x < 0$: N è $+$, D è $- \implies$ Funzione Negativa (disegnata sotto, cancelliamo sopra).<br>
+                Tra $0$ e $2$: N è $+$, D è $+ \implies$ Funzione Positiva (disegnata sopra, cancelliamo sotto).<br>
+                Per $x > 2$: N è $-$, D è $+ \implies$ Funzione Negativa (disegnata sotto, cancelliamo sopra).
+              </div>
+            </div>
+
+            <div class="step-card sc-ora">
+              <div class="sh"><div class="sn">4</div>4. Asintoti</div>
+              <div class="sb">
+                <b>Asintoti Verticali (Condizione: limiti agli estremi esclusi dal dominio):</b><br>
+                Il dominio esclude $x = 0$. Vogliamo vedere come si comporta la funzione quando si avvicina a quel "muro".<br>
+                $$\lim_{x \to 0} \frac{2 - x}{x^3} = \frac{2 - 0}{0} = \frac{2}{0} = \infty$$<br>
+                <b>Risultato:</b> C'è un asintoto verticale! L'asse delle $y$ (cioè la retta $x = 0$) è il nostro asintoto.<br><br>
+                
+                <b>Asintoti Orizzontali (Condizione: limiti all'infinito):</b><br>
+                Vediamo cosa succede quando $x$ diventa enorme (all'infinito). Prendo le $x$ con l'esponente maggiore al N e al D (nel numeratore prendo $-x$ perché il $2$ è trascurabile rispetto all'infinito):<br>
+                $$\lim_{x \to \infty} \frac{-x}{x^3}$$<br>
+                Semplifico dividendo sopra e sotto per $x$:<br>
+                $$\lim_{x \to \infty} \frac{-1}{x^2} = \frac{-1}{\infty} = 0$$<br>
+                <b>Risultato:</b> C'è un asintoto orizzontale! È l'asse delle $x$, di equazione $y = 0$.<br><br>
+
+                <b>Asintoti Obliqui:</b><br>
+                Visto che c'è già l'asintoto orizzontale (il limite ha dato un numero finito e non infinito), per regola non cerchiamo l'asintoto obliquo.
+              </div>
+            </div>
+
+            <div class="step-card sc-blu">
+              <div class="sh"><div class="sn">5</div>5. Massimi e Minimi (Derivata Prima)</div>
+              <div class="sb">
+                <b>Cosa indicano:</b> I punti in cui la pendenza si azzera e la funzione cambia marcia (da crescente a decrescente = max, viceversa = min).<br><br>
+                <b>Calcolo della derivata $y'$ (Regola della frazione):</b><br>
+                $N' = -1$ (derivata di $2-x$)<br>
+                $D' = 3x^2$ (derivata di $x^3$)<br>
+                $$y' = \frac{(-1)(x^3) - (2 - x)(3x^2)}{(x^3)^2}$$<br>
+                $$y' = \frac{-x^3 - (6x^2 - 3x^3)}{x^6}$$<br>
+                $$y' = \frac{-x^3 - 6x^2 + 3x^3}{x^6} = \frac{2x^3 - 6x^2}{x^6}$$<br>
+                Possiamo raccogliere $x^2$ al numeratore e semplificarlo con il denominatore per facilitarci la vita:<br>
+                $$y' = \frac{x^2(2x - 6)}{x^6} \implies y' = \frac{2x - 6}{x^4}$$<br><br>
+                
+                <b>Studio del segno per le crescenze ($y' \geq 0$):</b><br>
+                Numeratore $\geq 0$: $2x - 6 \geq 0 \implies 2x \geq 6 \implies x \geq 3$.<br>
+                Denominatore $> 0$: $x^4 > 0$. Essendo una potenza pari, è sempre positivo per qualunque valore del dominio ($\forall x \neq 0$).<br><br>
+                
+                <b>Grafico delle pendenze:</b><br>
+                Prima di $0$: $y'$ è negativa $\implies$ decresce.<br>
+                Tra $0$ e $3$: $y'$ è negativa $\implies$ continua a decrescere (dopo l'asintoto).<br>
+                Dopo $3$: $y'$ è positiva $\implies$ cresce.<br><br>
+                
+                <b>Risultato:</b> In $x = 3$ la funzione smette di scendere e inizia a salire. È un Punto di Minimo.<br><br>
+                
+                <b>Calcolo delle coordinate esatte del Minimo:</b><br>
+                Sostituiamo $x=3$ nella funzione iniziale $f(x)$:<br>
+                $$y = \frac{2 - 3}{3^3} = \frac{-1}{27}$$<br>
+                Il punto di minimo ha coordinate: $Min(3, -\frac{1}{27})$.
+              </div>
+            </div>
+
+            <div class="step-card sc-ver">
+              <div class="sh"><div class="sn">6</div>6. Flessi e Concavità (Derivata Seconda)</div>
+              <div class="sb">
+                <b>Cosa indicano:</b> I punti in cui la curva cambia la sua concavità (da "U" a "campana" o viceversa).<br><br>
+                <b>Calcolo della derivata seconda ($y''$):</b><br>
+                Deriviamo la derivata prima semplificata $y' = \frac{2x - 6}{x^4}$.<br>
+                $$y'' = \frac{(2)(x^4) - (2x - 6)(4x^3)}{(x^4)^2}$$<br>
+                $$y'' = \frac{2x^4 - (8x^4 - 24x^3)}{x^8}$$<br>
+                $$y'' = \frac{2x^4 - 8x^4 + 24x^3}{x^8} = \frac{-6x^4 + 24x^3}{x^8}$$<br>
+                Raccogliamo e semplifichiamo $x^3$:<br>
+                $$y'' = \frac{x^3(-6x + 24)}{x^8} \implies y'' = \frac{-6x + 24}{x^5}$$<br><br>
+
+                <b>Procedimento per i Flessi ($y'' \geq 0$):</b><br>
+                Facciamo lo studio del segno della derivata seconda.<br>
+                Numeratore $\geq 0$: $-6x + 24 \geq 0 \implies -6x \geq -24 \implies 6x \leq 24 \implies x \leq 4$.<br>
+                Denominatore $> 0$: $x^5 > 0 \implies x > 0$ (esponente dispari, mantiene il segno).<br><br>
+
+                <b>Grafico della concavità:</b><br>
+                Per $x < 0$: N è $+$, D è $- \implies y''$ è $-$ (Concavità verso il basso "a campana").<br>
+                Tra $0$ e $4$: N è $+$, D è $+ \implies y''$ è $+$ (Concavità verso l'alto "a U").<br>
+                Per $x > 4$: N è $-$, D è $+ \implies y''$ è $-$ (Concavità verso il basso "a campana").<br><br>
+                
+                <b>Risultato:</b> La concavità cambia in due punti: a $0$ (ma lì c'è l'asintoto, la funzione non esiste) e a $4$. Quindi c'è un Punto di Flesso in $x = 4$.<br><br>
+                
+                <b>Calcolo delle coordinate esatte del Flesso:</b><br>
+                Sostituiamo $x=4$ alla $f(x)$ iniziale:<br>
+                $$y = \frac{2 - 4}{4^3} = \frac{-2}{64} = -\frac{1}{32}$$<br>
+                Il punto di flesso ha coordinate: $F(4, -\frac{1}{32})$.
+              </div>
+            </div>
+
+            <!-- GRAFICO RIASSUNTIVO PLOTLY 1 -->
+            <div class="grafico-riassuntivo" style="margin-top: 25px; border-top: 2px dashed #cbd5e1; padding-top: 20px;">
+              <h3 style="color: #1e293b; margin-bottom: 8px; font-size: 1.15rem; font-weight: 700;">📈 Grafico Riassuntivo Interattivo</h3>
+              <p style="font-size: 0.95rem; color: #475569; margin-bottom: 15px; line-height: 1.5;">
+                Esplora il grafico interattivo: le zone grigie rappresentano le <b>aree cancellate</b> dallo studio del segno. La retta rossa tratteggiata (l'asse y) è l'<b>asintoto</b>. Passa col cursore sui punti rossi per vedere le coordinate esatte.
+              </p>
+              <div id="plotly-graph-1" style="width: 100%; height: 500px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SCHEDA 2 -->
+      <div id="t2" class="tab-content active">
+
+        <div class="scheda s2">
+          <div class="scheda-header"><div class="icona">📐</div>Studio completo della funzione</div>
+          <div class="scheda-body" style="background: #f8fafc;">
+            
+            <div class="formula-grande" style="background: #2e7d32;">$$y = \frac{2x - 5}{x^2 - 4}$$</div>
+            
+            <div class="def-box" style="border-left-color: #2e7d32;">
+              Il denominatore non può mai essere uguale a zero (per via del dominio). Pertanto, per trovare dove la funzione si annulla ($y=0$), dobbiamo porre uguale a zero solo il numeratore.Chiarito questo, partiamo!
+            </div>
+
+            <div class="step-card sc-blu">
+              <div class="sh"><div class="sn">1</div>1. Dominio (Campo di Esistenza)</div>
+              <div class="sb">
+                <b>Cosa rappresenta:</b> Il Dominio è l'insieme di tutti i valori della $x$ per i quali la funzione matematica "esiste" e può essere calcolata.<br>
+                <b>Le Criticità:</b> Come hai ricordato tu, bisogna cercare i "punti deboli" della funzione:<br>
+                Se c'è una frazione $\rightarrow$ Denominatore $\neq 0$.<br>
+                Se c'è una radice di indice pari $\rightarrow$ Argomento della radice $\geq 0$.<br>
+                Se c'è un logaritmo $\rightarrow$ Argomento del logaritmo $> 0$.<br>
+                <b>Calcolo:</b> La nostra funzione è fratta, quindi prendiamo il denominatore e lo poniamo diverso da zero:<br>
+                $$x^2 - 4 \neq 0$$<br>
+                Questa è un'equazione di secondo grado pura. Spostiamo il $4$ e mettiamo sotto radice:<br>
+                $$x^2 \neq 4 \implies x \neq \pm 2$$<br>
+                <b>Risultato:</b> Il dominio è tutto l'insieme dei numeri reali tranne $+2$ e $-2$.
+              </div>
+            </div>
+
+            <div class="step-card sc-ver">
+              <div class="sh"><div class="sn">2</div>2. Intersezione con gli assi</div>
+              <div class="sb">
+                <b>Cosa rappresenta:</b> Sono i punti in cui la curva del nostro grafico "taglia" fisicamente la croce formata dall'asse orizzontale ($x$) e verticale ($y$).<br><br>
+                <b>Intersezione Asse $y$ ($x = 0$):</b><br>
+                Sostituiamo $0$ a tutte le $x$ della funzione:<br>
+                $$y = \frac{2(0) - 5}{0^2 - 4} = \frac{-5}{-4} = \frac{5}{4}$$<br>
+                La curva passa per il punto $A(0, \frac{5}{4})$.<br><br>
+                <b>Intersezione Asse $x$ ($y = 0$):</b><br>
+                Poniamo l'intera frazione uguale a zero, il che equivale a porre solo il numeratore a zero:<br>
+                $$2x - 5 = 0 \implies 2x = 5 \implies x = \frac{5}{2}$$<br>
+                La curva passa per il punto $B(\frac{5}{2}, 0)$.
+              </div>
+            </div>
+
+            <div class="step-card sc-ros">
+              <div class="sh"><div class="sn">3</div>3. Studio del Segno</div>
+              <div class="sb">
+                <b>Cosa indica:</b> Ci dice in quali intervalli dell'asse $x$ il grafico si trova "sopra" (positiva) o "sotto" (negativa) l'asse orizzontale. Le zone non verificate si cancellano dal grafico.<br>
+                <b>Procedimento:</b> Poniamo tutta la funzione $f(x) > 0$ e studiamo Numeratore (N) e Denominatore (D) separatamente.<br><br>
+                <b>Numeratore $> 0$:</b><br>
+                $$2x - 5 > 0$$<br>
+                È di primo grado: come hai detto tu, spostiamo il numero a destra e cambiamo segno:<br>
+                $$2x > 5 \implies x > \frac{5}{2}$$<br><br>
+                <b>Denominatore $> 0$:</b><br>
+                $$x^2 - 4 > 0$$<br>
+                È di secondo grado: creiamo l'equazione associata $x^2 - 4 = 0$, le cui soluzioni (trovate nel dominio) sono $x_1 = -2$ e $x_2 = 2$. Immaginando la parabola a forma di "U" (perché la $x^2$ è positiva), la curva è maggiore di zero "all'esterno" di questi due valori.<br>
+                Quindi: $x < -2 \cup x > 2$.<br><br>
+                <b>Grafico dei segni (N/D):</b><br>
+                Incrociando i risultati con la regola dei segni (più per meno, meno per meno...):<br>
+                Per $x < -2$: N è $-$, D è $+ \implies$ Funzione Negativa.<br>
+                Tra $-2$ e $2$: N è $-$, D è $- \implies$ Funzione Positiva.<br>
+                Tra $2$ e $\frac{5}{2}$: N è $-$, D è $+ \implies$ Funzione Negativa.<br>
+                Per $x > \frac{5}{2}$: N è $+$, D è $+ \implies$ Funzione Positiva.
+              </div>
+            </div>
+
+            <div class="step-card sc-ora">
+              <div class="sh"><div class="sn">4</div>4. Asintoti</div>
+              <div class="sb">
+                <b>Asintoti Verticali:</b> Si cercano ai "bordi" del dominio esclusi in precedenza, per vedere se la curva schizza verso l'infinito avvicinandosi ad essi. Facciamo i limiti per $x \to 2$ e $x \to -2$.<br>
+                $$\lim_{x \to 2} \frac{2x - 5}{x^2 - 4} = \frac{2(2) - 5}{2^2 - 4} = \frac{-1}{0} = \infty$$<br>
+                $$\lim_{x \to -2} \frac{2x - 5}{x^2 - 4} = \frac{2(-2) - 5}{(-2)^2 - 4} = \frac{-9}{0} = \infty$$<br>
+                <b>Risultato:</b> Le rette $x = 2$ e $x = -2$ sono asintoti verticali.<br><br>
+                <b>Asintoti Orizzontali:</b> Si vede come si comporta la funzione per $x \to \infty$. Se viene una forma indeterminata $\frac{\infty}{\infty}$, come hai suggerito, si prendono le $x$ con esponente maggiore:<br>
+                $$\lim_{x \to \infty} \frac{2x - 5}{x^2 - 4} \approx \lim_{x \to \infty} \frac{2x}{x^2} = \lim_{x \to \infty} \frac{2}{x} = \frac{2}{\infty} = 0$$<br>
+                <b>Risultato:</b> Poiché viene un numero non infinito, $y = 0$ (cioè l'asse x) è un Asintoto Orizzontale.<br><br>
+                <b>Asintoti Obliqui:</b> C'è una regola d'oro: se c'è l'asintoto orizzontale, NON può esserci quello obliquo. Quindi non serve calcolare $m$ e $q$. Le tue formule ($m = \lim_{x \to \infty} f(x) \cdot \frac{1}{x}$ e $q = \lim_{x \to \infty} [f(x) - mx]$) sono comunque giustissime nel caso in cui il limite orizzontale fosse risultato infinito!
+              </div>
+            </div>
+
+            <div class="step-card sc-blu">
+              <div class="sh"><div class="sn">5</div>5. Massimi e Minimi (Derivata Prima)</div>
+              <div class="sb">
+                <b>Cosa indicano:</b> I punti in cui la pendenza della funzione si annulla e inverte la sua marcia (da cresce a decresce = Massimo; da decresce a cresce = Minimo).<br><br>
+                <b>Specchietto delle derivate necessarie:</b><br>
+                Potenza: $x^n \implies n \cdot x^{n-1}$<br>
+                Costante: $k \implies 0$<br>
+                Costante per funzione: $k \cdot f(x) \implies k \cdot f'(x)$<br>
+                Somma: $f(x) \pm g(x) \implies f'(x) \pm g'(x)$<br>
+                Frazione (Fondamentale qui!): $\frac{f}{g} \implies \frac{f' \cdot g - f \cdot g'}{g^2}$<br><br>
+                <b>Calcolo della derivata $y'$:</b><br>
+                Applicando la regola della frazione:<br>
+                $$y' = \frac{(2)(x^2 - 4) - (2x - 5)(2x)}{(x^2 - 4)^2} = \frac{2x^2 - 8 - 4x^2 + 10x}{(x^2 - 4)^2}$$<br>
+                $$y' = \frac{-2x^2 + 10x - 8}{(x^2 - 4)^2}$$<br><br>
+                <b>Studio del segno ($y' \geq 0$):</b><br>
+                Numeratore $\geq 0$: $-2x^2 + 10x - 8 \geq 0$. Cambiamo segno e verso: $2x^2 - 10x + 8 \leq 0$. Dividiamo tutto per 2 per semplificare: $x^2 - 5x + 4 \leq 0$.<br>
+                Troviamo le radici ($1$ e $4$). È verificata all'interno: $1 \leq x \leq 4$.<br>
+                Denominatore $> 0$: $(x^2 - 4)^2 > 0$. Essendo un quadrato è sempre positivo (esclusi ovviamente i punti fuori dominio $x = \pm 2$).<br><br>
+                <b>Grafico della derivata:</b><br>
+                La funzione decresce fino a $1$, cresce tra $1$ e $4$ (interrotta dall'asintoto in $2$), e decresce dopo $4$.<br>
+                In $x = 1$ c'è un Punto di Minimo.<br>
+                In $x = 4$ c'è un Punto di Massimo.<br><br>
+                <b>Calcolo delle coordinate (y):</b> Sostituiamo le $x$ trovate nella funzione ORIGINALE:<br>
+                Per il Minimo ($x=1$): $y = \frac{2(1)-5}{1^2-4} = \frac{-3}{-3} = 1 \implies \mathbf{Min(1, 1)}$<br>
+                Per il Massimo ($x=4$): $y = \frac{2(4)-5}{4^2-4} = \frac{3}{12} = \frac{1}{4} \implies \mathbf{Max(4, \frac{1}{4})}$
+              </div>
+            </div>
+
+            <div class="step-card sc-ver">
+              <div class="sh"><div class="sn">6</div>6. Flessi e Concavità (Derivata Seconda)</div>
+              <div class="sb">
+                <b>Cosa indicano:</b> Il momento esatto in cui la curva cambia "forma", passando da essere concava ("a U") a convessa ("a campana") o viceversa.<br><br>
+                <b>Calcolo della derivata seconda ($y''$):</b><br>
+                Bisogna derivare la derivata prima appena trovata. È un calcolo molto lungo e complesso algebricamente. Applicando sempre la regola del quoziente e semplificando i termini comuni, si arriva a:<br>
+                $$y'' = \frac{2(2x^3 - 15x^2 + 24x - 20)}{(x^2 - 4)^3}$$<br><br>
+                <b>Procedimento per i Flessi:</b><br>
+                Come hai descritto: si pone $y'' > 0$ e si fa lo studio del segno.<br>
+                Il Numeratore in questo caso specifico è un polinomio di terzo grado che non ammette soluzioni "semplici" (intere). Risolvendolo con metodi avanzati, si scopre che si annulla circa in $x \approx 6.44$.<br>
+                Facendo il grafico dei segni tra N e D, si scopre che la concavità della funzione cambia attraverso gli asintoti e in prossimità di questo punto di flesso.<br>
+                Una volta trovata la $x$ esatta, si sostituisce sempre nella funzione originale iniziale per trovare l'altezza ($y$) a cui disegnare il flesso sul grafico.
+              </div>
+            </div>
+
+            <!-- GRAFICO RIASSUNTIVO PLOTLY -->
+            <div class="grafico-riassuntivo" style="margin-top: 25px; border-top: 2px dashed #cbd5e1; padding-top: 20px;">
+              <h3 style="color: #1e293b; margin-bottom: 8px; font-size: 1.15rem; font-weight: 700;">📈 Grafico Riassuntivo Interattivo</h3>
+              <p style="font-size: 0.95rem; color: #475569; margin-bottom: 15px; line-height: 1.5;">
+                Esplora il grafico interattivo: le zone grigie rappresentano le <b>aree cancellate</b> dallo studio del segno. Le rette rosse tratteggiate sono gli <b>asintoti</b>. Passa col cursore sui punti rossi per vedere le coordinate esatte.
+              </p>
+              <div id="plotly-graph-2" style="width: 100%; height: 500px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SCHEDA 3 -->
+      <div id="t3" class="tab-content">
+        <div class="scheda s3">
+          <div class="scheda-header"><div class="icona">📐</div>Studio completo della funzione</div>
+          <div class="scheda-body" style="background: #f8fafc;">
+            
+            <div class="formula-grande" style="background: #6a1b9a;">$$y = \frac{x^2 + 1}{x}$$</div>
+
+            <div class="step-card sc-blu">
+              <div class="sh"><div class="sn">1</div>1. Dominio (Campo di Esistenza)</div>
+              <div class="sb">
+                <b>Cosa rappresenta:</b> L'insieme dei valori di $x$ per cui la funzione può essere calcolata e disegnata.<br>
+                <b>Le Criticità:</b> Essendo una frazione, l'unico "pericolo" è che il denominatore diventi zero. Non ci sono radici di indice pari né logaritmi.<br>
+                <b>Calcolo:</b> Poniamo il denominatore diverso da zero:<br>
+                $$x \neq 0$$<br>
+                <b>Risultato:</b> Il dominio è tutto $\mathbb{R}$ tranne lo zero. Il grafico sarà spaccato in due e non toccherà mai l'asse verticale.
+              </div>
+            </div>
+
+            <div class="step-card sc-ver">
+              <div class="sh"><div class="sn">2</div>2. Intersezione con gli assi</div>
+              <div class="sb">
+                <b>Cosa rappresenta:</b> I punti di contatto tra la nostra curva e la "croce" degli assi $x$ e $y$.<br><br>
+                <b>Intersezione Asse $y$ ($x = 0$):</b><br>
+                Come abbiamo appena detto nel dominio, $x$ non può mai essere $0$.<br>
+                <b>Risultato:</b> Nessuna intersezione con l'asse $y$.<br><br>
+                <b>Intersezione Asse $x$ ($y = 0$):</b><br>
+                Poniamo a zero solo il numeratore (perché una frazione fa zero solo se si azzera la parte sopra):<br>
+                $$x^2 + 1 = 0 \implies x^2 = -1$$<br>
+                Un numero al quadrato non può mai essere negativo (nei numeri reali)! Quindi questa equazione è impossibile.<br>
+                <b>Risultato:</b> Nessuna intersezione con l'asse $x$. La curva "volerà" senza mai atterrare sugli assi!
+              </div>
+            </div>
+
+            <div class="step-card sc-ros">
+              <div class="sh"><div class="sn">3</div>3. Studio del Segno</div>
+              <div class="sb">
+                <b>Cosa indica:</b> In quali zone del piano la curva passa sopra l'asse $x$ (valori positivi) o sotto l'asse $x$ (valori negativi). Ci permette di "cancellare" le zone vuote dal grafico.<br>
+                <b>Procedimento:</b> Poniamo tutta la $f(x) > 0$.<br><br>
+                <b>Numeratore $> 0$:</b><br>
+                $$x^2 + 1 > 0$$<br>
+                Un numero al quadrato (sempre $\geq 0$) a cui aggiungiamo $1$ sarà sempre strettamente maggiore di zero.<br>
+                <b>Risultato N:</b> Sempre verificato ($\forall x \in \mathbb{R}$).<br><br>
+                <b>Denominatore $> 0$:</b><br>
+                $$x > 0$$<br><br>
+                <b>Grafico dei segni (N/D):</b><br>
+                Per $x < 0$: N è $+$, D è $- \implies$ Funzione Negativa (disegnata sotto, cancello la parte sopra).<br>
+                Per $x > 0$: N è $+$, D è $+ \implies$ Funzione Positiva (disegnata sopra, cancello la parte sotto).
+              </div>
+            </div>
+
+            <div class="step-card sc-ora">
+              <div class="sh"><div class="sn">4</div>4. Asintoti</div>
+              <div class="sb">
+                <b>Asintoti Verticali (limiti nei punti esclusi dal dominio):</b><br>
+                Il dominio ci vieta lo $0$, quindi ci avviciniamo a $0$ per vedere se la curva impenna.<br>
+                $$\lim_{x \to 0} \frac{x^2 + 1}{x} = \frac{0^2 + 1}{0} = \frac{1}{0} = \infty$$<br>
+                <b>Risultato:</b> La retta $x = 0$ (che coincide con l'asse $y$) è un Asintoto Verticale.<br><br>
+                <b>Asintoti Orizzontali (limiti all'infinito):</b><br>
+                Vediamo cosa succede per $x \to \infty$. Prendiamo le potenze maggiori sopra e sotto (il $+1$ non conta nulla rispetto all'infinito):<br>
+                $$\lim_{x \to \infty} \frac{x^2}{x} = \lim_{x \to \infty} x = \infty$$<br>
+                <b>Risultato:</b> Il limite fa infinito, non viene un numero. Quindi non c'è l'asintoto orizzontale.<br><br>
+                <b>Asintoti Obliqui:</b><br>
+                Visto che il limite all'infinito ha dato $\infty$, c'è il via libera per cercare l'asintoto obliquo, che è una retta obliqua del tipo $y = mx + q$.<br>
+                <b>Calcolo di $m$:</b> moltiplico la funzione per $\frac{1}{x}$<br>
+                $$m = \lim_{x \to \infty} \left( \frac{x^2 + 1}{x} \cdot \frac{1}{x} \right) = \lim_{x \to \infty} \frac{x^2 + 1}{x^2} = 1$$<br>
+                <b>Calcolo di $q$:</b> sottraggo alla funzione il pezzo $mx$ appena trovato<br>
+                $$q = \lim_{x \to \infty} \left( \frac{x^2 + 1}{x} - 1x \right) = \lim_{x \to \infty} \frac{x^2 + 1 - x^2}{x} = \lim_{x \to \infty} \frac{1}{x} = 0$$<br>
+                <b>Risultato:</b> L'asintoto obliquo esiste ed è la retta $y = x$ (è la bisettrice del primo e terzo quadrante!).
+              </div>
+            </div>
+
+            <div class="step-card sc-blu">
+              <div class="sh"><div class="sn">5</div>5. Massimi e Minimi (Derivata Prima)</div>
+              <div class="sb">
+                <b>Cosa indicano:</b> I punti in cui la funzione "gira", cambiando da salita a discesa o viceversa.<br><br>
+                <b>Calcolo della derivata $y'$ (Regola della frazione):</b><br>
+                $N' = 2x$, $D' = 1$<br>
+                $$y' = \frac{(2x)(x) - (x^2 + 1)(1)}{x^2} = \frac{2x^2 - x^2 - 1}{x^2}$$<br>
+                $$y' = \frac{x^2 - 1}{x^2}$$<br><br>
+                <b>Studio del segno per le crescenze ($y' \geq 0$):</b><br>
+                Numeratore $\geq 0$: $x^2 - 1 \geq 0$. Equazione associata $x^2 = 1 \implies x = \pm 1$. Essendo una parabola rivolta verso l'alto, i valori sono esterni: $x \leq -1 \cup x \geq 1$.<br>
+                Denominatore $> 0$: $x^2 > 0$. Un quadrato è sempre positivo (tranne in zero, che però è fuori dal dominio).<br><br>
+                <b>Grafico delle pendenze:</b><br>
+                Fino a $-1$: $y'$ è $+$ (sale)<br>
+                Tra $-1$ e $0$: $y'$ è $-$ (scende)<br>
+                Tra $0$ e $1$: $y'$ è $-$ (scende ancora)<br>
+                Dopo $1$: $y'$ è $+$ (sale)<br><br>
+                <b>Risultato:</b> In $x = -1$ c'è un Massimo. In $x = 1$ c'è un Minimo. (Curiosità: il massimo si trova più in basso del minimo! Ma disegnando i due "rami" separati dall'asintoto $x=0$, tutto avrà senso).<br><br>
+                <b>Calcolo coordinate esatte:</b><br>
+                Sostituisco le $x$ nella funzione di partenza $y = \frac{x^2+1}{x}$:<br>
+                $Max(-1)$: $y = \frac{(-1)^2 + 1}{-1} = \frac{2}{-1} = -2 \implies \mathbf{Max(-1, -2)}$<br>
+                $Min(1)$: $y = \frac{1^2 + 1}{1} = \frac{2}{1} = 2 \implies \mathbf{Min(1, 2)}$
+              </div>
+            </div>
+
+            <div class="step-card sc-ver">
+              <div class="sh"><div class="sn">6</div>6. Flessi e Concavità (Derivata Seconda)</div>
+              <div class="sb">
+                <b>Cosa indicano:</b> Punti in cui la curva cambia la sua "pancia" (da concava verso l'alto a concava verso il basso).<br><br>
+                <b>Calcolo della derivata seconda ($y''$):</b><br>
+                Deriviamo la derivata prima $y' = \frac{x^2 - 1}{x^2}$.<br>
+                $$y'' = \frac{(2x)(x^2) - (x^2 - 1)(2x)}{(x^2)^2}$$<br>
+                $$y'' = \frac{2x^3 - (2x^3 - 2x)}{x^4} = \frac{2x^3 - 2x^3 + 2x}{x^4}$$<br>
+                $$y'' = \frac{2x}{x^4} = \frac{2}{x^3}$$<br><br>
+                <b>Procedimento per i Flessi ($y'' \geq 0$):</b><br>
+                Numeratore $\geq 0$: $2 \geq 0$ (Sempre verificato, non c'è la $x$).<br>
+                Denominatore $> 0$: $x^3 > 0 \implies x > 0$ (L'esponente dispari conserva il segno).<br><br>
+                <b>Grafico della concavità:</b><br>
+                Per $x < 0$: $y''$ è $-$ (Concavità verso il basso, a "campana").<br>
+                Per $x > 0$: $y''$ è $+$ (Concavità verso l'alto, a "U").<br><br>
+                <b>Risultato:</b> La concavità cambia in $x=0$. Tuttavia, sappiamo fin dall'inizio che $x=0$ è fuori dal dominio (è l'asintoto verticale), quindi la curva non ci passa fisicamente. Non ci sono punti di flesso. Il ramo di sinistra è tutto concavo verso il basso, quello di destra tutto concavo verso l'alto!
+              </div>
+            </div>
+
+            <!-- GRAFICO RIASSUNTIVO PLOTLY 3 -->
+            <div class="grafico-riassuntivo" style="margin-top: 25px; border-top: 2px dashed #cbd5e1; padding-top: 20px;">
+              <h3 style="color: #1e293b; margin-bottom: 8px; font-size: 1.15rem; font-weight: 700;">📈 Grafico Riassuntivo Interattivo</h3>
+              <p style="font-size: 0.95rem; color: #475569; margin-bottom: 15px; line-height: 1.5;">
+                Esplora il grafico interattivo: le zone grigie rappresentano le <b>aree cancellate</b> dallo studio del segno. Le rette rosse tratteggiate sono gli <b>asintoti</b>. Noterai che l'asintoto obliquo guida i rami della funzione!
+              </p>
+              <div id="plotly-graph-3" style="width: 100%; height: 500px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function openTab(tabId, btn) {
+      const contents = document.getElementsByClassName('tab-content');
+      for (let i = 0; i < contents.length; i++) contents[i].classList.remove('active');
+      const btns = document.getElementsByClassName('tab-btn');
+      for (let i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+      
+      // Forziamo il ridimensionamento dei grafici Plotly per evitare bug visivi al cambio tab
+      if(window.Plotly) {
+        if(tabId === 't1') Plotly.Plots.resize('plotly-graph-1');
+        if(tabId === 't2') Plotly.Plots.resize('plotly-graph-2');
+        if(tabId === 't3') Plotly.Plots.resize('plotly-graph-3');
+      }
+    }
+
+    // Inizializzazione Grafici Plotly
+    document.addEventListener("DOMContentLoaded", function() {
+      // -----------------------------------------------------
+      // GRAFICO 1: y = (2-x)/x^3
+      // -----------------------------------------------------
+      let x1_t1 = [], y1_t1 = [];
+      for(let x=-8; x<=-0.1; x+=0.05) { x1_t1.push(x); y1_t1.push((2-x)/Math.pow(x,3)); }
+      
+      let x2_t1 = [], y2_t1 = [];
+      for(let x=0.1; x<=8; x+=0.05) { x2_t1.push(x); y2_t1.push((2-x)/Math.pow(x,3)); }
+      
+      let trace1_t1 = { x: x1_t1, y: y1_t1, mode: 'lines', line: {color: '#2563eb', width: 3}, name: 'f(x)' };
+      let trace2_t1 = { x: x2_t1, y: y2_t1, mode: 'lines', line: {color: '#2563eb', width: 3}, showlegend: false, hoverinfo: 'none' };
+
+      let points_t1 = {
+        x: [2, 3, 4],
+        y: [0, -0.037, -0.031],
+        mode: 'markers+text',
+        type: 'scatter',
+        name: 'Punti Notevoli',
+        text: ['A (2, 0)', 'Min(3, -1/27)', 'Flesso'],
+        textposition: ['top right', 'bottom center', 'top center'],
+        marker: { size: 10, color: '#ef4444', line: {color: '#fff', width: 2} }
+      };
+
+      let shapes_t1 = [
+        // Asintoto Verticale x=0 (Asse Y)
+        { type: 'line', x0: 0, x1: 0, y0: -5, y1: 5, line: {color: '#dc2626', dash: 'dash', width: 2} },
+        // Asintoto Orizzontale y=0 (Asse X)
+        { type: 'line', x0: -10, x1: 10, y0: 0, y1: 0, line: {color: '#dc2626', dash: 'dash', width: 2} },
+        
+        // Zone Cancellate (Studio Segno)
+        { type: 'rect', x0: -10, x1: 0, y0: 0, y1: 5, fillcolor: 'rgba(0,0,0,0.08)', line: {width: 0} }, // x < 0: Cancello y > 0
+        { type: 'rect', x0: 0, x1: 2, y0: -5, y1: 0, fillcolor: 'rgba(0,0,0,0.08)', line: {width: 0} }, // 0 < x < 2: Cancello y < 0
+        { type: 'rect', x0: 2, x1: 10, y0: 0, y1: 5, fillcolor: 'rgba(0,0,0,0.08)', line: {width: 0} } // x > 2: Cancello y > 0
+      ];
+
+      let layout_t1 = {
+        margin: { l: 40, r: 40, t: 40, b: 40 },
+        xaxis: { range: [-3, 6], zeroline: true, zerolinecolor: '#94a3b8', gridcolor: '#e2e8f0' },
+        yaxis: { range: [-1, 2], zeroline: true, zerolinecolor: '#94a3b8', gridcolor: '#e2e8f0' },
+        shapes: shapes_t1,
+        plot_bgcolor: '#f8fafc',
+        paper_bgcolor: '#ffffff',
+        hovermode: 'closest',
+        showlegend: false
+      };
+
+      Plotly.newPlot('plotly-graph-1', [trace1_t1, trace2_t1, points_t1], layout_t1, {responsive: true, displayModeBar: false});
+
+      // -----------------------------------------------------
+      // GRAFICO 2: y = (2x - 5)/(x^2 - 4)
+      // -----------------------------------------------------
+      let x1 = [], y1 = [];
+      for(let x=-8; x<=-2.1; x+=0.05) { x1.push(x); y1.push((2*x-5)/(x*x - 4)); }
+      
+      let x2 = [], y2 = [];
+      for(let x=-1.9; x<=1.9; x+=0.05) { x2.push(x); y2.push((2*x-5)/(x*x - 4)); }
+      
+      let x3 = [], y3 = [];
+      for(let x=2.1; x<=8; x+=0.05) { x3.push(x); y3.push((2*x-5)/(x*x - 4)); }
+
+      let trace1 = { x: x1, y: y1, mode: 'lines', line: {color: '#2563eb', width: 3}, name: 'f(x)' };
+      let trace2 = { x: x2, y: y2, mode: 'lines', line: {color: '#2563eb', width: 3}, showlegend: false, hoverinfo: 'none' };
+      let trace3 = { x: x3, y: y3, mode: 'lines', line: {color: '#2563eb', width: 3}, showlegend: false, hoverinfo: 'none' };
+
+      let points = {
+        x: [0, 2.5, 1, 4, 6.44],
+        y: [1.25, 0, 1, 0.25, 0.21],
+        mode: 'markers+text',
+        type: 'scatter',
+        name: 'Punti Notevoli',
+        text: ['A (0, 5/4)', 'B (5/2, 0)', 'Min(1, 1)', 'Max(4, 1/4)', 'Flesso'],
+        textposition: ['top right', 'top right', 'bottom center', 'top center', 'top right'],
+        marker: { size: 10, color: '#ef4444', line: {color: '#fff', width: 2} }
+      };
+
+      let shapes = [
+        // Asintoti Verticali
+        { type: 'line', x0: -2, x1: -2, y0: -10, y1: 10, line: {color: '#dc2626', dash: 'dash', width: 2} },
+        { type: 'line', x0: 2, x1: 2, y0: -10, y1: 10, line: {color: '#dc2626', dash: 'dash', width: 2} },
+        // Asintoto Orizzontale
+        { type: 'line', x0: -10, x1: 10, y0: 0, y1: 0, line: {color: '#dc2626', dash: 'dash', width: 2} },
+        
+        // Zone Cancellate (Studio Segno)
+        { type: 'rect', x0: -10, x1: -2, y0: 0, y1: 10, fillcolor: 'rgba(0,0,0,0.08)', line: {width: 0} }, // x < -2: Cancello y > 0
+        { type: 'rect', x0: -2, x1: 2, y0: -10, y1: 0, fillcolor: 'rgba(0,0,0,0.08)', line: {width: 0} }, // -2 < x < 2: Cancello y < 0
+        { type: 'rect', x0: 2, x1: 2.5, y0: 0, y1: 10, fillcolor: 'rgba(0,0,0,0.08)', line: {width: 0} }, // 2 < x < 2.5: Cancello y > 0
+        { type: 'rect', x0: 2.5, x1: 10, y0: -10, y1: 0, fillcolor: 'rgba(0,0,0,0.08)', line: {width: 0} } // x > 2.5: Cancello y < 0
+      ];
+
+      let layout = {
+        margin: { l: 40, r: 40, t: 40, b: 40 },
+        xaxis: { range: [-6, 8], zeroline: true, zerolinecolor: '#94a3b8', gridcolor: '#e2e8f0' },
+        yaxis: { range: [-4, 4], zeroline: true, zerolinecolor: '#94a3b8', gridcolor: '#e2e8f0' },
+        shapes: shapes,
+        plot_bgcolor: '#f8fafc',
+        paper_bgcolor: '#ffffff',
+        hovermode: 'closest',
+        showlegend: false
+      };
+
+      Plotly.newPlot('plotly-graph-2', [trace1, trace2, trace3, points], layout, {responsive: true, displayModeBar: false});
+
+      // -----------------------------------------------------
+      // GRAFICO 3: y = (x^2 + 1)/x
+      // -----------------------------------------------------
+      let x1_t3 = [], y1_t3 = [];
+      for(let x=-8; x<=-0.1; x+=0.05) { x1_t3.push(x); y1_t3.push((x*x + 1)/x); }
+      
+      let x2_t3 = [], y2_t3 = [];
+      for(let x=0.1; x<=8; x+=0.05) { x2_t3.push(x); y2_t3.push((x*x + 1)/x); }
+      
+      let trace1_t3 = { x: x1_t3, y: y1_t3, mode: 'lines', line: {color: '#2563eb', width: 3}, name: 'f(x)' };
+      let trace2_t3 = { x: x2_t3, y: y2_t3, mode: 'lines', line: {color: '#2563eb', width: 3}, showlegend: false, hoverinfo: 'none' };
+
+      let points_t3 = {
+        x: [-1, 1],
+        y: [-2, 2],
+        mode: 'markers+text',
+        type: 'scatter',
+        name: 'Punti Notevoli',
+        text: ['Max(-1, -2)', 'Min(1, 2)'],
+        textposition: ['bottom center', 'top center'],
+        marker: { size: 10, color: '#ef4444', line: {color: '#fff', width: 2} }
+      };
+
+      let shapes_t3 = [
+        // Asintoto Verticale x=0 (Asse Y)
+        { type: 'line', x0: 0, x1: 0, y0: -10, y1: 10, line: {color: '#dc2626', dash: 'dash', width: 2} },
+        // Asintoto Obliquo y=x
+        { type: 'line', x0: -10, x1: 10, y0: -10, y1: 10, line: {color: '#dc2626', dash: 'dash', width: 2} },
+        
+        // Zone Cancellate (Studio Segno)
+        { type: 'rect', x0: -10, x1: 0, y0: 0, y1: 10, fillcolor: 'rgba(0,0,0,0.08)', line: {width: 0} }, // x < 0: Cancello y > 0
+        { type: 'rect', x0: 0, x1: 10, y0: -10, y1: 0, fillcolor: 'rgba(0,0,0,0.08)', line: {width: 0} } // x > 0: Cancello y < 0
+      ];
+
+      let layout_t3 = {
+        margin: { l: 40, r: 40, t: 40, b: 40 },
+        xaxis: { range: [-6, 6], zeroline: true, zerolinecolor: '#94a3b8', gridcolor: '#e2e8f0' },
+        yaxis: { range: [-8, 8], zeroline: true, zerolinecolor: '#94a3b8', gridcolor: '#e2e8f0' },
+        shapes: shapes_t3,
+        plot_bgcolor: '#f8fafc',
+        paper_bgcolor: '#ffffff',
+        hovermode: 'closest',
+        showlegend: false
+      };
+
+      Plotly.newPlot('plotly-graph-3', [trace1_t3, trace2_t3, points_t3], layout_t3, {responsive: true, displayModeBar: false});
+    });
+  </script>
+</body>
+</html>

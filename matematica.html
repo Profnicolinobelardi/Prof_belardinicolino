@@ -56,6 +56,22 @@
         <span class="card-btn" style="border-color: #8b5cf6; color: #8b5cf6;">Inizia lo Studio &rarr;</span>
       </a>
 
+      <!-- Preparazione Verifica -->
+      <a href="#" onclick="checkPassword(event, 'preparazione_verifica.html', 'RGVpcm9jaW5p')" class="glass-card" style="border-top: 5px solid #10b981;">
+        <div class="card-icon">📝</div>
+        <h3 class="card-title">Preparazione Verifica</h3>
+        <p class="card-desc">Materiale riservato per la preparazione alla verifica. (Richiede Password)</p>
+        <span class="card-btn" style="border-color: #10b981; color: #10b981;">Accedi &rarr;</span>
+      </a>
+
+      <!-- Studio di Funzione -->
+      <a href="#" onclick="checkPassword(event, 'studio_funzione.html', 'QmVsZmlnbGlv')" class="glass-card" style="border-top: 5px solid #3b82f6;">
+        <div class="card-icon">📉</div>
+        <h3 class="card-title">Studio di Funzione</h3>
+        <p class="card-desc">Tutte le schede complete per lo studio di funzione. (Richiede Password)</p>
+        <span class="card-btn" style="border-color: #3b82f6; color: #3b82f6;">Analizza &rarr;</span>
+      </a>
+
       <!-- Parabola e Iperbole (Prossimamente) -->
       <a href="prossimamente.html" class="glass-card" style="border-top: 5px solid #64748b; opacity: 0.85;">
         <div class="card-icon">🎢</div>
@@ -66,5 +82,19 @@
 
     </div>
   </div>
+  
+  <script>
+    function checkPassword(e, targetUrl, expectedB64) {
+      e.preventDefault();
+      const pwd = prompt("Inserisci la password di accesso:");
+      if (pwd) {
+        if (btoa(pwd) === expectedB64) {
+          window.location.href = targetUrl;
+        } else {
+          alert("Password non corretta!");
+        }
+      }
+    }
+  </script>
 </body>
 </html>
