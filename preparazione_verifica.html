@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
@@ -272,6 +272,64 @@
                 <b>Uguaglia gli esponenti:</b> \(2x = 3 \implies x = \frac{3}{2}\)
               </div>
             </div>
+
+            <!-- ESERCIZI CON SOLUZIONE COMPLETA -->
+            <div class="sezione-titolo" style="margin-top: 18px;">Per ogni equazione, trova la soluzione:</div>
+
+            <!-- Esercizio a: 4^x = 1/4 -->
+            <!-- Strategia: 1/4 = 4^(-1) → esponente negativo → 4^x = 4^(-1) → x = -1 -->
+            <div class="step-card sc-blu">
+              <div class="sh"><div class="sn">a</div>Esercizio: \(4^x = \dfrac{1}{4}\)</div>
+              <div class="sb">
+                <b>Trasforma nella stessa base:</b> Ricorda che \(\frac{1}{4} = 4^{-1}\) (esponente negativo = reciproco).<br>
+                <b>Riscrivi:</b> \(4^x = 4^{-1}\)<br>
+                <b>Uguaglia gli esponenti:</b> \(x = -1\)
+              </div>
+            </div>
+
+            <!-- Esercizio b: 2^x = 16 -->
+            <!-- Strategia: 16 = 2^4 → 2^x = 2^4 → x = 4 -->
+            <div class="step-card sc-ver">
+              <div class="sh"><div class="sn">b</div>Esercizio: \(2^x = 16\)</div>
+              <div class="sb">
+                <b>Trasforma nella stessa base:</b> Sappiamo che \(16 = 2^4\).<br>
+                <b>Riscrivi:</b> \(2^x = 2^4\)<br>
+                <b>Uguaglia gli esponenti:</b> \(x = 4\)
+              </div>
+            </div>
+
+            <!-- Esercizio c: 9^x = 27 -->
+            <!-- Strategia: 9 = 3^2 e 27 = 3^3 → (3^2)^x = 3^3 → 3^(2x) = 3^3 → 2x = 3 → x = 3/2 -->
+            <div class="step-card sc-ros">
+              <div class="sh"><div class="sn">c</div>Esercizio: \(9^x = 27\)</div>
+              <div class="sb">
+                <b>Trasforma nella stessa base:</b> Entrambe le basi si riducono in base 3. Sappiamo che \(9 = 3^2\) e \(27 = 3^3\).<br>
+                <b>Riscrivi:</b> \((3^2)^x = 3^3 \implies 3^{2x} = 3^3\)<br>
+                <b>Uguaglia gli esponenti:</b> \(2x = 3 \implies x = \dfrac{3}{2}\)
+              </div>
+            </div>
+
+            <!-- Esercizio d: 3^x = ∛(3²) -->
+            <!-- Strategia: ∛(3²) = 3^(2/3) usando la regola √[n](a^m) = a^(m/n) → 3^x = 3^(2/3) → x = 2/3 -->
+            <!-- ESEMPIO 1 a lato: ∛(a²) = a^(2/3) — indice=3, esponente=2 → esponente frazionario 2/3 -->
+            <div class="step-card sc-ora">
+              <div class="sh"><div class="sn">d</div>Esercizio: \(3^x = \sqrt[3]{3^2}\)</div>
+              <div class="sb" style="display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;">
+                <div style="flex:1; min-width: 200px;">
+                  <b>Trasforma la radice in esponente frazionario:</b> Usando la regola \(\sqrt[n]{a^m} = a^{m/n}\), con \(n=3\) e \(m=2\):<br>
+                  \(\sqrt[3]{3^2} = 3^{2/3}\)<br>
+                  <b>Riscrivi:</b> \(3^x = 3^{2/3}\)<br>
+                  <b>Uguaglia gli esponenti:</b> \(x = \dfrac{2}{3}\)
+                </div>
+                <!-- Box "ESEMPIO 1" come nell'immagine originale -->
+                <div style="background:#fff8e1; border:1.5px solid #f9a825; border-radius:8px; padding:9px 13px; font-size:11px; min-width:140px; text-align:center; flex-shrink:0;">
+                  <div style="font-size:9px; font-weight:700; color:#888; letter-spacing:0.5px; margin-bottom:4px;">ESEMPIO 1</div>
+                  <div style="font-size:14px; font-weight:600; color:#e65100;">\(\sqrt[3]{a^2} = a^{2/3}\)</div>
+                  <div style="font-size:10px; color:#555; margin-top:4px;">indice=3, esponente=2 → 2/3</div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -373,33 +431,57 @@
 
         <!-- PROPRIETÀ LOGARITMI -->
         <div class="scheda s3" style="margin-top: 20px;">
-          <div class="scheda-header"><div class="icona">📐</div>Proprietà logaritmi</div>
+          <div class="scheda-header"><div class="icona">📐</div>Proprietà dei Logaritmi</div>
           <div class="scheda-body" style="background: #f3e5f5;">
-            
+
+            <div class="nota-viola">⚠️ <b>Tutte le proprietà sono valide solo se sono rispettate le C.E.</b>: basi positive e diverse da 1, argomenti strettamente positivi.</div>
+
+            <!-- Proprietà 1 -->
             <div class="prop-row">
-              <div style="font-weight: bold; color: #4a148c; margin-bottom: 5px;">Addizione: \(\log_2(3) + \log_2(5)\)</div>
-              <b>Regola generale (Somma di logaritmi = Logaritmo del prodotto):</b><br>
-              \(\log_a(x) + \log_a(y) = \log_a(x \cdot y)\)<br>
-              <b>Soluzione:</b> \(\log_2(3 \cdot 5) = \log_2(15)\)
+              <div class="sezione-titolo">Proprietà 1 — Logaritmo di un prodotto</div>
+              <div class="prop-formula">log<sub>a</sub> b + log<sub>a</sub> c = log<sub>a</sub> (b · c)</div>
+              <div style="font-size:12px;color:#555;">La <b>somma</b> di due logaritmi con la stessa base è uguale a un unico logaritmo che ha per argomento il <b>prodotto</b> degli argomenti.</div>
+              <div style="background:#fff;border-radius:6px;padding:7px 10px;margin-top:6px;font-size:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05);"><b>Esempio:</b> log₂ 4 + log₂ 8 = log₂ (4 · 8) = log₂ 32 = <b>5</b></div>
             </div>
 
+            <!-- Proprietà 2 -->
             <div class="prop-row">
-              <div style="font-weight: bold; color: #4a148c; margin-bottom: 5px;">Sottrazione:</div>
-              Se fosse stato col segno MENO (\(\log_2 3 - \log_2 5\)), la regola sarebbe il quoziente: \(\log_2(3/5)\).
+              <div class="sezione-titolo">Proprietà 2 — Logaritmo di un quoziente</div>
+              <div class="prop-formula">log<sub>a</sub> b − log<sub>a</sub> c = log<sub>a</sub> (b/c)</div>
+              <div style="font-size:12px;color:#555;">La <b>differenza</b> tra due logaritmi con la stessa base è uguale a un unico logaritmo che ha per argomento il <b>quoziente</b> degli argomenti.</div>
+              <div style="background:#fff;border-radius:6px;padding:7px 10px;margin-top:6px;font-size:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05);"><b>Esempio:</b> log₃ 27 − log₃ 9 = log₃ (27 / 9) = log₃ 3 = <b>1</b></div>
             </div>
 
+            <!-- Proprietà 3 -->
             <div class="prop-row">
-              <div style="font-weight: bold; color: #4a148c; margin-bottom: 5px;">Esponente: \(\log_4(3^2)\)</div>
-              <b>Regola generale (Esponente dell'argomento):</b> \(\log_a(x^b) = b \cdot \log_a(x)\)<br>
-              L'esponente "scende" davanti al logaritmo.<br>
-              <b>Soluzione:</b> \(2 \cdot \log_4(3)\)
+              <div class="sezione-titolo">Proprietà 3 — Logaritmo di una potenza</div>
+              <div class="prop-formula">log<sub>a</sub> (b<sup>c</sup>) = c · log<sub>a</sub> b</div>
+              <div style="font-size:12px;color:#555;">Se l'argomento è elevato a un esponente, questo esponente può essere "portato fuori" e <b>moltiplicato</b> per il logaritmo. Utilissima per eliminare frazioni e radici dagli argomenti.</div>
+              <div style="background:#fff;border-radius:6px;padding:7px 10px;margin-top:6px;font-size:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                <b>Esempio 1 (con frazioni):</b><br>
+                log₂ (1/x) = log₂ (x<sup>−1</sup>) = −1 · log₂ x = <b>−log₂ x</b><br><br>
+                <b>Esempio 2 (con radici):</b><br>
+                log₂ ∛(x²) = log₂ (x<sup>2/3</sup>) = <b>(2/3) · log₂ x</b>
+              </div>
             </div>
 
+            <!-- Proprietà 4 -->
             <div class="prop-row">
-              <div style="font-weight: bold; color: #4a148c; margin-bottom: 5px;">Trasformazione di un numero in un logaritmo</div>
-              <b>Regola generale:</b> Un numero \(n\) può essere scritto in qualsiasi base \(a\) usando la formula \(n = \log_a(a^n)\)<br>
-              <b>Soluzione:</b> Scegliendo per esempio la base 10, avremo \(\log_{10}(10^5) = \log_{10}(100000)\)<br>
-              Se scegliamo la base 2, avremo \(\log_2(2^5) = \log_2(32)\)
+              <div class="sezione-titolo">Proprietà 4 — Trasformare un numero in un logaritmo</div>
+              <div class="prop-formula">n = log<sub>a</sub> (a<sup>n</sup>)</div>
+              <div style="font-size:12px;color:#555;">Qualsiasi numero può essere riscritto come logaritmo scegliendo una base a piacere. La regola è: inserire come argomento la <b>base scelta elevata a quel numero</b>.</div>
+              <div style="background:#fff;border-radius:6px;padding:7px 10px;margin-top:6px;font-size:12px;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+                <b>Esempio:</b> il numero 5 scritto come logaritmo in base 2: 5 = log₂ (2⁵)<br>
+                <b>Con il logaritmo naturale:</b> 5 = ln(e⁵)
+              </div>
+            </div>
+
+            <!-- Identità Fondamentale -->
+            <div class="sezione-titolo" style="margin-top:8px;">Identità Fondamentale — Trasformare un numero in una potenza</div>
+            <div class="tre-col">
+              <div class="mini-card mc-blu"><b>Base 2</b><br>5 = 2<sup>log₂ 5</sup></div>
+              <div class="mini-card mc-verde"><b>Base 3</b><br>5 = 3<sup>log₃ 5</sup></div>
+              <div class="mini-card mc-viola"><b>Base e</b><br>5 = e<sup>ln 5</sup></div>
             </div>
 
           </div>

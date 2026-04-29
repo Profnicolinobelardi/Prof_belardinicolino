@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercizi Python | Prof. Belardi Nicolino</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wrap { font-family: var(--font-sans, sans-serif); color: #1e293b; display: flex; flex-direction: column; gap: 24px; }
+
+    /* ── Scheda esercizio ── */
+    .ex-card { border-radius: 14px; overflow: hidden; border: 2px solid #6366f1; background: #fff; }
+    .ex-header { display: flex; align-items: flex-start; gap: 14px; padding: 14px 20px; background: #3730a3; color: #fff; }
+    .ex-num { min-width: 36px; height: 36px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+    .ex-title { font-size: 1rem; font-weight: 700; line-height: 1.4; }
+    .ex-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 16px; background: #eef2ff; }
+
+    /* ── Testo esercizio ── */
+    .testo-box { background: #fff; border-left: 5px solid #6366f1; border-radius: 0 10px 10px 0; padding: 14px 16px; font-size: 13px; line-height: 1.9; color: #1e293b; }
+    .testo-box h4 { color: #3730a3; margin: 0 0 8px 0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ── Sezione logica ── */
+    .logic-section { background: #fff; border-radius: 10px; padding: 14px 16px; border-left: 4px solid #f59e0b; font-size: 13px; line-height: 1.9; color: #334155; }
+    .logic-section h4 { color: #b45309; margin: 0 0 8px 0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ── Sezione elementi Python ── */
+    .py-elements { display: flex; flex-direction: column; gap: 10px; }
+    .py-el { background: #fff; border-radius: 9px; padding: 11px 14px; font-size: 13px; line-height: 1.85; border-left: 4px solid #6366f1; color: #334155; }
+    .py-el .el-title { font-weight: 700; color: #3730a3; margin-bottom: 4px; font-size: 13px; }
+
+    /* ── Blocchi codice dark ── */
+    .code-block { background: #1e293b; border-radius: 10px; overflow: hidden; }
+    .code-label { background: #0f172a; color: #94a3b8; font-size: 11px; font-weight: 600; padding: 6px 14px; letter-spacing: 0.5px; text-transform: uppercase; border-bottom: 1px solid #334155; }
+    .code-block pre { margin: 0; padding: 14px 18px; font-family: 'Courier New', monospace; font-size: 12.5px; line-height: 1.85; color: #e2e8f0; overflow-x: auto; white-space: pre; }
+
+    /* Syntax highlight */
+    .kw  { color: #f472b6; font-weight: 600; }
+    .fn  { color: #60a5fa; }
+    .st  { color: #34d399; }
+    .nm  { color: #fb923c; }
+    .cm  { color: #64748b; font-style: italic; }
+    .va  { color: #e2e8f0; }
+    .op  { color: #f472b6; }
+
+    /* ── Liste ── */
+    .py-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+    .py-list li { font-size: 13px; line-height: 1.8; padding-left: 20px; position: relative; color: #334155; }
+    .py-list li::before { content: "•"; position: absolute; left: 0; color: #6366f1; font-weight: 700; }
+
+    /* ── Tip / Warn ── */
+    .tip-box { background: #fefce8; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 10px 14px; font-size: 12.5px; line-height: 1.8; color: #78350f; }
+
+    /* ── Sezione titoletti interni ── */
+    .inner-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #6366f1; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div style="display:flex; align-items:center;">
+      <a href="index.html" class="nav-brand">Portale Didattico <span style="color:#fff;font-size:0.8rem;display:block;">Prof. Belardi Nicolino</span></a>
+      <button onclick="window.location.href='login.html'" style="margin-left:15px;background:rgba(239,68,68,0.2);border:1px solid #ef4444;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;display:inline-flex;align-items:center;transition:all 0.3s;" onmouseover="this.style.background='#ef4444'" onmouseout="this.style.background='rgba(239,68,68,0.2)'">&#128273; Area Docenti</button>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="informatica.html">💻 Informatica</a>
+      <a href="python_pillole.html">🐍 Python in Pillole</a>
+      <a href="python_esercizi.html" class="active">✏️ Esercizi Python</a>
+    </div>
+  </nav>
+
+  <div class="container" style="max-width:900px;">
+    <div class="header-section">
+      <h1>✏️ Esercizi Python Commentati</h1>
+      <p>Ogni esercizio è accompagnato dal ragionamento logico, dagli elementi Python utilizzati e dal codice completo commentato riga per riga.</p>
+      <div style="display:inline-block; background:rgba(99,102,241,0.15); border:1px solid rgba(99,102,241,0.4); border-radius:8px; padding:6px 14px; font-size:0.8rem; color:#a5b4fc; margin-top:10px; font-weight:600; letter-spacing:0.5px;">📋 Scheda Didattica — Prof. Belardi Nicolino</div>
+    </div>
+
+    <div class="wrap">
+
+      <!-- ══════════════════════════════════════════════════════════════ -->
+      <!-- ESERCIZIO 1 — MEDIA DI TRE VOTI                               -->
+      <!-- ══════════════════════════════════════════════════════════════ -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">1</div>
+          <div class="ex-title">Calcola la media di tre voti (compresi tra 18 e 30) inseriti da tastiera. Se il voto non è valido, chiedilo di nuovo.</div>
+        </div>
+        <div class="ex-body">
+
+          <!-- TESTO ESERCIZIO -->
+          <div class="testo-box">
+            <h4>📄 Testo dell'esercizio</h4>
+            Calcola la <b>media di tre voti</b> inseriti da tastiera.<br>
+            Ogni voto deve essere compreso tra <b>18 e 30</b>, estremi inclusi (quindi 18 e 30 vanno bene).<br><br>
+            Se l'utente inserisce un voto fuori da questo intervallo, il programma deve rifiutarlo e chiedere di nuovo, senza contarlo.
+          </div>
+
+          <!-- RAGIONAMENTO LOGICO -->
+          <div class="logic-section">
+            <h4>🧩 Ragionamento logico dell'esercizio</h4>
+            <b>Obiettivo:</b> Calcolare la media di tre voti inseriti da tastiera.<br>
+            Ogni voto deve essere compreso tra 18 e 30, estremi inclusi.<br><br>
+            <b>Passi logici:</b>
+            <ul class="py-list" style="margin-top:8px;">
+              <li>Devo chiedere tre voti all'utente.</li>
+              <li>Ogni volta che l'utente inserisce un voto:
+                <ul class="py-list" style="margin-top:4px; margin-left:16px;">
+                  <li>se il voto è tra 18 e 30 → lo accetto e lo sommo</li>
+                  <li>se il voto è fuori da questo intervallo → lo rifiuto e chiedo di nuovo (non lo conto)</li>
+                </ul>
+              </li>
+              <li>Tengo: una <b>somma</b> dei voti validi e un <b>contatore</b> di quanti voti validi ho già inserito</li>
+              <li>Quando ho raccolto 3 voti validi, calcolo: <b>media = somma / 3</b></li>
+              <li>Stampo la media finale.</li>
+            </ul>
+          </div>
+
+          <!-- ELEMENTI PYTHON -->
+          <div class="inner-title">🧩 Elementi principali di Python che useremo</div>
+          <div class="py-elements">
+
+            <div class="py-el">
+              <div class="el-title">1. Variabili</div>
+              <ul class="py-list">
+                <li><code>somma</code> → serve per tenere la somma dei voti validi</li>
+                <li><code>cont</code> → serve per contare quanti voti validi abbiamo già inserito</li>
+                <li><code>voto</code> → è il singolo voto inserito dall'utente</li>
+                <li><code>media</code> → è il risultato finale (la media)</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">2. Tipo int</div>
+              <ul class="py-list">
+                <li><b>int</b> significa numero intero (senza virgola)</li>
+                <li>Lo usiamo per i voti perché i voti sono numeri interi (18, 19, 20, …, 30)</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">3. input()</div>
+              <ul class="py-list">
+                <li><code>input()</code> serve per leggere da tastiera</li>
+                <li>Restituisce sempre una <b>stringa</b> (testo)</li>
+                <li>Per trasformarla in numero intero usiamo <code>int(...)</code></li>
+              </ul>
+              <div style="margin-top:8px;">Esempio:</div>
+              <div class="code-block" style="margin-top:6px;">
+                <div class="code-label">Python</div>
+                <pre><span class="va">voto</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Inserisci il voto: "</span>))</pre>
+              </div>
+              <ul class="py-list" style="margin-top:8px;">
+                <li>mostra il messaggio</li>
+                <li>aspetta che l'utente scriva un numero</li>
+                <li>lo converte in intero e lo mette nella variabile <code>voto</code></li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">4. Ciclo while</div>
+              <ul class="py-list">
+                <li><code>while cont &lt;= 3:</code> significa: "ripeti il blocco finché cont è minore o uguale a 3"</li>
+                <li>Lo usiamo per assicurarci di raccogliere <b>3 voti validi</b></li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">5. Operatori di confronto</div>
+              <ul class="py-list">
+                <li><code>18 &lt;= voto &lt;= 30</code> significa: "il voto è maggiore o uguale a 18 <b>e</b> minore o uguale a 30"</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">6. Operatori di assegnazione</div>
+              <ul class="py-list">
+                <li><code>somma = 0</code> → inizializzo la somma a 0</li>
+                <li><code>somma += voto</code> → è uguale a <code>somma = somma + voto</code></li>
+                <li><code>cont = 1</code> → parto dal primo voto</li>
+                <li><code>cont += 1</code> → è uguale a <code>cont = cont + 1</code></li>
+              </ul>
+            </div>
+
+          </div><!-- /py-elements -->
+
+          <!-- CODICE COMMENTATO -->
+          <div class="inner-title">💻 Codice riscritto e commentato riga per riga</div>
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="cm"># Calcoliamo il valore medio di tre voti inseriti da tastiera.</span>
+<span class="cm"># Ogni voto deve essere compreso tra 18 e 30 (inclusi).</span>
+
+<span class="va">somma</span> = <span class="nm">0</span>
+<span class="cm"># Inizializzo la variabile somma a 0.</span>
+<span class="cm"># somma servirà per accumulare (somma = somma + voto) tutti i voti validi.</span>
+<span class="cm"># Parto da 0 perché all'inizio non ho ancora aggiunto nessun voto.</span>
+
+<span class="va">cont</span> = <span class="nm">1</span>
+<span class="cm"># Inizializzo il contatore a 1.</span>
+<span class="cm"># cont rappresenta "il numero del voto" che sto chiedendo (primo, secondo, terzo).</span>
+<span class="cm"># Parto da 1 perché sto per chiedere il primo voto.</span>
+
+<span class="kw">while</span> <span class="va">cont</span> &lt;= <span class="nm">3</span>:
+    <span class="cm"># Il ciclo while ripete il blocco di istruzioni finché la condizione è vera.</span>
+    <span class="cm"># Qui la condizione è: cont &lt;= 3</span>
+    <span class="cm"># Significa: continua a chiedere voti finché non hai inserito 3 voti validi.</span>
+    <span class="cm"># Appena cont diventa 4, la condizione diventa falsa e il ciclo si ferma.</span>
+
+    <span class="va">voto</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Inserisci il voto: "</span>))
+    <span class="cm"># input("Inserisci il voto: ") mostra il messaggio e aspetta che l'utente scriva qualcosa.</span>
+    <span class="cm"># input restituisce una stringa (testo), ad esempio "25".</span>
+    <span class="cm"># int(...) converte quella stringa in un numero intero, ad esempio 25.</span>
+    <span class="cm"># Il valore intero viene memorizzato nella variabile voto.</span>
+
+    <span class="kw">if</span> <span class="nm">18</span> &lt;= <span class="va">voto</span> &lt;= <span class="nm">30</span>:
+        <span class="cm"># Questa è una struttura condizionale if.</span>
+        <span class="cm"># La condizione 18 &lt;= voto &lt;= 30 significa:</span>
+        <span class="cm"># "il voto è maggiore o uguale a 18 E minore o uguale a 30".</span>
+        <span class="cm"># Se il voto è dentro l'intervallo [18, 30], allora il blocco sotto viene eseguito.</span>
+
+        <span class="va">somma</span> += <span class="va">voto</span>
+        <span class="cm"># somma += voto è una forma abbreviata di: somma = somma + voto.</span>
+        <span class="cm"># Aggiungo il voto corrente alla somma totale dei voti validi.</span>
+        <span class="cm"># In questo modo, somma conterrà sempre la somma di tutti i voti validi inseriti finora.</span>
+
+        <span class="va">cont</span> += <span class="nm">1</span>
+        <span class="cm"># cont += 1 è una forma abbreviata di: cont = cont + 1.</span>
+        <span class="cm"># Aumento il contatore di 1 perché ho appena accettato un voto valido.</span>
+        <span class="cm"># Quando cont arriverà a 4, il while si fermerà (perché cont &lt;= 3 sarà falso).</span>
+
+    <span class="kw">else</span>:
+        <span class="cm"># Questo blocco viene eseguito se la condizione dell'if è falsa,</span>
+        <span class="cm"># cioè se il voto NON è compreso tra 18 e 30.</span>
+
+        <span class="fn">print</span>(<span class="st">"Voto non valido"</span>)
+        <span class="cm"># Avviso l'utente che il voto inserito non è valido.</span>
+        <span class="cm"># In questo caso NON aumento cont e NON aggiungo il voto alla somma.</span>
+        <span class="cm"># Quindi il ciclo while chiederà di nuovo un voto per sostituire quello non valido.</span>
+
+<span class="cm"># Quando il while finisce, significa che abbiamo raccolto 3 voti validi.</span>
+<span class="cm"># A questo punto possiamo calcolare la media.</span>
+
+<span class="va">media</span> = <span class="va">somma</span> / <span class="nm">3</span>
+<span class="cm"># Calcolo la media dividendo la somma totale dei voti per 3.</span>
+<span class="cm"># Uso 3 perché l'esercizio richiede la media di tre voti.</span>
+<span class="cm"># Il risultato può essere anche un numero con la virgola (float).</span>
+
+<span class="fn">print</span>(<span class="st">"La media finale è:"</span>, <span class="va">media</span>)
+<span class="cm"># Stampo a schermo la frase "La media finale è:" seguita dal valore della media.</span>
+<span class="cm"># L'alunno vede il risultato del calcolo.</span></pre>
+          </div>
+
+        </div><!-- /ex-body -->
+      </div><!-- /ex-card -->
+
+      <!-- ══════════════════════════════════════════════════════════════ -->
+      <!-- ESERCIZIO 2 — CARTOLERIA: INCASSO E PREZZO MEDIO              -->
+      <!-- ══════════════════════════════════════════════════════════════ -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">2</div>
+          <div class="ex-title">Il titolare di una cartoleria vuole calcolare l'incasso totale della giornata e il prezzo medio degli articoli venduti.</div>
+        </div>
+        <div class="ex-body">
+
+          <!-- TESTO ESERCIZIO -->
+          <div class="testo-box">
+            <h4>📄 Testo dell'esercizio</h4>
+            Il titolare di una cartoleria vuole un programma che calcoli:<br>
+            <ul class="py-list" style="margin-top:8px;">
+              <li>l'<b>incasso totale</b> della giornata</li>
+              <li>il <b>prezzo medio</b> degli articoli venduti</li>
+            </ul><br>
+            L'utente deve dire quanti articoli ha venduto. Poi deve inserire uno alla volta i prezzi di ogni articolo.
+          </div>
+
+          <!-- RAGIONAMENTO LOGICO -->
+          <div class="logic-section">
+            <h4>🧠 Ragionamento logico dell'esercizio</h4>
+            <b>Obiettivo:</b> calcolare l'incasso totale e il prezzo medio degli articoli venduti in una cartoleria.<br><br>
+            <b>✔ Passi logici:</b>
+            <ul class="py-list" style="margin-top:8px;">
+              <li>Chiedo all'utente quanti articoli ha venduto (es. 5 articoli).</li>
+              <li>Devo leggere un prezzo alla volta.</li>
+              <li>Ogni volta che l'utente inserisce un prezzo:
+                <ul class="py-list" style="margin-top:4px; margin-left:16px;">
+                  <li>lo aggiungo alla somma totale</li>
+                  <li>diminuisco il numero degli articoli rimanenti da leggere</li>
+                </ul>
+              </li>
+              <li>Quando ho letto tutti i prezzi:
+                <ul class="py-list" style="margin-top:4px; margin-left:16px;">
+                  <li>calcolo l'incasso totale (è la somma)</li>
+                  <li>calcolo la media: <b>media = somma / n</b></li>
+                </ul>
+              </li>
+              <li>Stampo: l'incasso totale e il prezzo medio.</li>
+            </ul>
+          </div>
+
+          <!-- ELEMENTI PYTHON -->
+          <div class="inner-title">🧩 Elementi principali di Python che useremo</div>
+          <div class="py-elements">
+
+            <div class="py-el">
+              <div class="el-title">1. Variabili</div>
+              <ul class="py-list">
+                <li><code>somma</code> → serve per tenere la somma di tutti i prezzi</li>
+                <li><code>media</code> → sarà il risultato finale</li>
+                <li><code>articoli</code> → quanti articoli devo ancora leggere</li>
+                <li><code>n</code> → serve per ricordare il numero iniziale di articoli</li>
+                <li><code>prezzo</code> → è il singolo prezzo inserito dall'utente</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">2. Tipo int e tipo float</div>
+              <ul class="py-list">
+                <li><b>int</b> → numero intero (es. 5, 10, 20). Lo usiamo per il <b>numero di articoli</b>.</li>
+                <li><b>float</b> → numero con la virgola (es. 2.50, 1.99, 10.00). Lo usiamo per i <b>prezzi</b>, perché i prezzi possono avere i centesimi.</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">3. input()</div>
+              <ul class="py-list">
+                <li><code>input()</code> legge da tastiera e restituisce sempre testo.</li>
+              </ul>
+              <div style="margin-top:8px;">Esempio:</div>
+              <div class="code-block" style="margin-top:6px;">
+                <div class="code-label">Python</div>
+                <pre><span class="va">articoli</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserire numero articoli: "</span>))</pre>
+              </div>
+              <ul class="py-list" style="margin-top:8px;">
+                <li>mostra il messaggio</li>
+                <li>aspetta che l'utente scriva qualcosa</li>
+                <li><code>int(...)</code> trasforma il testo in numero intero</li>
+                <li>assegna il numero alla variabile <code>articoli</code></li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">4. Ciclo while</div>
+              Il ciclo:
+              <div class="code-block" style="margin-top:8px;">
+                <div class="code-label">Python</div>
+                <pre><span class="kw">while</span> <span class="va">articoli</span> &gt; <span class="nm">0</span>:</pre>
+              </div>
+              <ul class="py-list" style="margin-top:8px;">
+                <li>significa: "continua a chiedere prezzi finché ci sono articoli da leggere"</li>
+                <li>ogni volta che leggo un prezzo valido: lo aggiungo alla somma e diminuisco <code>articoli</code> di 1</li>
+                <li>quando <code>articoli</code> diventa 0 → il ciclo finisce</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">5. Operatori di assegnazione</div>
+              <ul class="py-list">
+                <li><code>somma = 0</code> → inizializzo la somma</li>
+                <li><code>somma += prezzo</code> → aggiungo il prezzo alla somma</li>
+                <li><code>articoli -= 1</code> → diminuisco il numero di articoli rimanenti</li>
+                <li><code>media = somma / n</code> → calcolo la media</li>
+              </ul>
+            </div>
+
+          </div><!-- /py-elements -->
+
+          <!-- CODICE COMMENTATO -->
+          <div class="inner-title">💻 Codice riscritto e commentato riga per riga</div>
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="cm"># Il titolare di una cartoleria vuole calcolare:</span>
+<span class="cm"># 1) l'incasso totale della giornata</span>
+<span class="cm"># 2) il prezzo medio degli articoli venduti</span>
+
+<span class="va">media</span> = <span class="nm">0.00</span>
+<span class="cm"># Inizializzo la variabile media a 0.00.</span>
+<span class="cm"># Uso 0.00 perché la media sarà un numero con la virgola (float).</span>
+<span class="cm"># All'inizio non ho ancora calcolato nulla, quindi parto da zero.</span>
+
+<span class="va">somma</span> = <span class="nm">0</span>
+<span class="cm"># Inizializzo la variabile somma a 0.</span>
+<span class="cm"># somma servirà per accumulare tutti i prezzi degli articoli.</span>
+<span class="cm"># Parto da 0 perché all'inizio non ho ancora aggiunto nessun prezzo.</span>
+
+<span class="va">articoli</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserire numero articoli: "</span>))
+<span class="cm"># input("inserire numero articoli: ") mostra il messaggio e aspetta che l'utente scriva qualcosa.</span>
+<span class="cm"># input restituisce una stringa (testo), ad esempio "5".</span>
+<span class="cm"># int(...) converte quella stringa in un numero intero, ad esempio 5.</span>
+<span class="cm"># Il numero viene memorizzato nella variabile articoli.</span>
+<span class="cm"># articoli rappresenta quanti prezzi devo ancora leggere.</span>
+
+<span class="va">n</span> = <span class="va">articoli</span>
+<span class="cm"># Salvo il numero iniziale degli articoli nella variabile n.</span>
+<span class="cm"># Questo è importante perché articoli verrà modificata nel ciclo (articoli -= 1).</span>
+<span class="cm"># n mi serve per calcolare la media alla fine (media = somma / n).</span>
+
+<span class="kw">while</span> <span class="va">articoli</span> &gt; <span class="nm">0</span>:
+    <span class="cm"># Il ciclo while ripete il blocco finché la condizione è vera.</span>
+    <span class="cm"># Qui la condizione è: articoli &gt; 0</span>
+    <span class="cm"># Significa: continua a chiedere prezzi finché ci sono articoli da leggere.</span>
+    <span class="cm"># Ogni volta che leggo un prezzo valido, articoli diminuirà di 1.</span>
+
+    <span class="va">prezzo</span> = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"inserire prezzo articolo: "</span>))
+    <span class="cm"># input("inserire prezzo articolo: ") chiede all'utente di inserire il prezzo.</span>
+    <span class="cm"># input restituisce una stringa, ad esempio "2.50".</span>
+    <span class="cm"># float(...) converte la stringa in un numero con la virgola (float), ad esempio 2.50.</span>
+    <span class="cm"># Il valore viene memorizzato nella variabile prezzo.</span>
+
+    <span class="va">somma</span> += <span class="va">prezzo</span>
+    <span class="cm"># somma += prezzo è una forma abbreviata di: somma = somma + prezzo.</span>
+    <span class="cm"># Aggiungo il prezzo dell'articolo alla somma totale.</span>
+    <span class="cm"># In questo modo somma conterrà sempre l'incasso totale aggiornato.</span>
+
+    <span class="va">articoli</span> -= <span class="nm">1</span>
+    <span class="cm"># articoli -= 1 è una forma abbreviata di: articoli = articoli - 1.</span>
+    <span class="cm"># Diminuisco il numero di articoli rimanenti da leggere.</span>
+    <span class="cm"># Quando articoli diventa 0, il ciclo while si fermerà.</span>
+
+<span class="va">media</span> = <span class="va">somma</span> / <span class="va">n</span>
+<span class="cm"># Calcolo la media dividendo la somma totale dei prezzi per n.</span>
+<span class="cm"># Uso n perché rappresenta il numero iniziale degli articoli venduti.</span>
+<span class="cm"># Il risultato sarà un numero con la virgola (float).</span>
+
+<span class="fn">print</span>(<span class="st">"incasso totale: "</span>, <span class="va">somma</span>)
+<span class="cm"># Stampo l'incasso totale della giornata, cioè la somma di tutti i prezzi.</span>
+
+<span class="fn">print</span>(<span class="st">"media: "</span>, <span class="va">media</span>)
+<span class="cm"># Stampo la media dei prezzi degli articoli venduti.</span></pre>
+          </div>
+
+        </div><!-- /ex-body -->
+      </div><!-- /ex-card -->
+
+      <!-- ══════════════════════════════════════════════════════════════ -->
+      <!-- ESERCIZIO 3 — GIORNALAIO: PREZZO MASSIMO                      -->
+      <!-- ══════════════════════════════════════════════════════════════ -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">3</div>
+          <div class="ex-title">Il giornalaio vuole trovare il prezzo massimo tra tutti i prezzi degli articoli venduti nella giornata.</div>
+        </div>
+        <div class="ex-body">
+
+          <!-- TESTO ESERCIZIO -->
+          <div class="testo-box">
+            <h4>📄 Testo dell'esercizio</h4>
+            Il giornalaio vuole un programma che:<br>
+            <ul class="py-list" style="margin-top:8px;">
+              <li>chiede quanti articoli ha venduto</li>
+              <li>chiede il prezzo di ogni articolo</li>
+              <li>trova il <b>prezzo massimo</b>, cioè il più alto tra quelli inseriti</li>
+            </ul>
+          </div>
+
+          <!-- RAGIONAMENTO LOGICO -->
+          <div class="logic-section">
+            <h4>🧠 Ragionamento logico dell'esercizio</h4>
+            <b>Obiettivo:</b> trovare il prezzo massimo tra tutti i prezzi degli articoli venduti.<br><br>
+            <b>✔ Passi logici:</b>
+            <ul class="py-list" style="margin-top:8px;">
+              <li>Chiedo all'utente quanti articoli vuole inserire.</li>
+              <li>Devo leggere un prezzo alla volta.</li>
+              <li>Ogni volta che l'utente inserisce un prezzo:
+                <ul class="py-list" style="margin-top:4px; margin-left:16px;">
+                  <li>lo confronto con il prezzo massimo trovato finora</li>
+                  <li>se è più grande → diventa il nuovo prezzo massimo</li>
+                </ul>
+              </li>
+              <li>Ripeto finché ho letto tutti gli articoli.</li>
+              <li>Alla fine stampo il prezzo massimo.</li>
+            </ul>
+          </div>
+
+          <!-- ELEMENTI PYTHON -->
+          <div class="inner-title">🧩 Elementi principali di Python che useremo</div>
+          <div class="py-elements">
+
+            <div class="py-el">
+              <div class="el-title">1. Variabili</div>
+              <ul class="py-list">
+                <li><code>prezzo</code> → contiene il prezzo dell'articolo corrente</li>
+                <li><code>prezzomassimo</code> → contiene il prezzo più alto trovato finora</li>
+                <li><code>cont</code> → conta quanti articoli ho già inserito</li>
+                <li><code>articoli</code> → quanti articoli devo leggere in totale</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">2. Tipo int</div>
+              <ul class="py-list">
+                <li>Usiamo <b>int</b> perché il numero degli articoli è un numero intero</li>
+                <li>Il prezzo, in questo esercizio, è trattato come intero (es. 2, 3, 5)</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">3. input()</div>
+              <ul class="py-list">
+                <li><code>input()</code> legge da tastiera e restituisce testo. Per trasformarlo in numero intero usiamo <code>int(input(...))</code></li>
+              </ul>
+              <div style="margin-top:8px;">Esempio:</div>
+              <div class="code-block" style="margin-top:6px;">
+                <div class="code-label">Python</div>
+                <pre><span class="va">prezzo</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserisci il prezzo "</span>))</pre>
+              </div>
+              <ul class="py-list" style="margin-top:8px;">
+                <li>mostra il messaggio</li>
+                <li>aspetta che l'utente scriva un valore</li>
+                <li><code>int()</code> trasforma il testo in numero</li>
+                <li>salva il numero nella variabile <code>prezzo</code></li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">4. Ciclo while</div>
+              Il ciclo:
+              <div class="code-block" style="margin-top:8px;">
+                <div class="code-label">Python</div>
+                <pre><span class="kw">while</span> <span class="va">cont</span> &lt; <span class="va">articoli</span>:</pre>
+              </div>
+              <ul class="py-list" style="margin-top:8px;">
+                <li>significa: "continua finché non hai letto tutti gli articoli"</li>
+                <li>ogni giro: leggo un prezzo, confronto con il massimo, aumento il contatore</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">5. Operatori di confronto</div>
+              <div class="code-block" style="margin-top:6px;">
+                <div class="code-label">Python</div>
+                <pre><span class="kw">if</span> <span class="va">prezzo</span> &gt; <span class="va">prezzomassimo</span>:</pre>
+              </div>
+              <ul class="py-list" style="margin-top:8px;">
+                <li>significa: "se il prezzo è più grande del massimo attuale…"</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">6. Operatori di assegnazione</div>
+              <ul class="py-list">
+                <li><code>prezzomassimo = 0</code> → inizializzo il massimo</li>
+                <li><code>prezzomassimo = prezzo</code> → aggiorno il massimo</li>
+                <li><code>cont = cont + 1</code> → aumento il contatore</li>
+              </ul>
+            </div>
+
+          </div><!-- /py-elements -->
+
+          <!-- CODICE COMMENTATO -->
+          <div class="inner-title">💻 Codice riscritto e commentato riga per riga</div>
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="cm"># Il giornalaio vuole un programma che trovi il prezzo massimo</span>
+<span class="cm"># tra tutti i prezzi degli articoli venduti nella giornata.</span>
+
+<span class="va">prezzo</span> = <span class="nm">0</span>
+<span class="cm"># Inizializzo la variabile prezzo a 0.</span>
+<span class="cm"># prezzo conterrà il valore dell'articolo corrente inserito dall'utente.</span>
+<span class="cm"># Parto da 0 perché ancora non ho letto nessun prezzo.</span>
+
+<span class="va">prezzomassimo</span> = <span class="nm">0</span>
+<span class="cm"># Inizializzo il prezzo massimo a 0.</span>
+<span class="cm"># prezzomassimo servirà per memorizzare il prezzo più alto trovato finora.</span>
+<span class="cm"># Parto da 0 perché non ho ancora confrontato nessun prezzo.</span>
+<span class="cm"># Ogni volta che trovo un prezzo più alto, aggiornerò questa variabile.</span>
+
+<span class="va">cont</span> = <span class="nm">0</span>
+<span class="cm"># Inizializzo il contatore a 0.</span>
+<span class="cm"># cont rappresenta quanti articoli ho già inserito.</span>
+<span class="cm"># Parto da 0 perché non ho ancora letto nessun articolo.</span>
+
+<span class="va">articoli</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserisci n articoli "</span>))
+<span class="cm"># input("inserisci n articoli ") mostra il messaggio e aspetta che l'utente scriva qualcosa.</span>
+<span class="cm"># input restituisce una stringa, ad esempio "5".</span>
+<span class="cm"># int(...) converte la stringa in un numero intero, ad esempio 5.</span>
+<span class="cm"># Il numero viene memorizzato nella variabile articoli.</span>
+<span class="cm"># articoli rappresenta quanti prezzi devo leggere in totale.</span>
+
+<span class="kw">while</span> <span class="va">cont</span> &lt; <span class="va">articoli</span>:
+    <span class="cm"># Il ciclo while ripete il blocco finché la condizione è vera.</span>
+    <span class="cm"># Qui la condizione è: cont &lt; articoli</span>
+    <span class="cm"># Significa: continua a chiedere prezzi finché non hai letto tutti gli articoli.</span>
+    <span class="cm"># Quando cont diventa uguale ad articoli, il ciclo si ferma.</span>
+
+    <span class="va">prezzo</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserisci il prezzo "</span>))
+    <span class="cm"># input("inserisci il prezzo ") chiede all'utente di inserire il prezzo dell'articolo.</span>
+    <span class="cm"># input restituisce una stringa, ad esempio "3".</span>
+    <span class="cm"># int(...) converte la stringa in un numero intero, ad esempio 3.</span>
+    <span class="cm"># Il valore viene memorizzato nella variabile prezzo.</span>
+
+    <span class="kw">if</span> <span class="va">prezzo</span> &gt; <span class="va">prezzomassimo</span>:
+        <span class="cm"># Questa è una struttura condizionale if.</span>
+        <span class="cm"># La condizione prezzo &gt; prezzomassimo significa:</span>
+        <span class="cm"># "il prezzo inserito è maggiore del prezzo massimo trovato finora?"</span>
+        <span class="cm"># Se la condizione è vera, allora aggiorno il prezzo massimo.</span>
+
+        <span class="va">prezzomassimo</span> = <span class="va">prezzo</span>
+        <span class="cm"># Aggiorno il prezzo massimo mettendo dentro prezzomassimo il valore di prezzo.</span>
+        <span class="cm"># In questo modo prezzomassimo conterrà sempre il valore più alto inserito finora.</span>
+
+    <span class="va">cont</span> = <span class="va">cont</span> + <span class="nm">1</span>
+    <span class="cm"># Aumento il contatore di 1.</span>
+    <span class="cm"># Significa che ho letto un articolo in più.</span>
+    <span class="cm"># Quando cont raggiungerà il valore di articoli, il ciclo while si fermerà.</span>
+
+<span class="fn">print</span>(<span class="st">"il prezzo massimo è"</span>, <span class="va">prezzomassimo</span>)
+<span class="cm"># Stampo il prezzo massimo trovato.</span>
+<span class="cm"># L'utente vedrà il valore più alto tra tutti quelli inseriti.</span></pre>
+          </div>
+
+        </div><!-- /ex-body -->
+      </div><!-- /ex-card -->
+
+    </div><!-- /wrap -->
+  </div><!-- /container -->
+</body>
+</html>

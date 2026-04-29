@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python in Pillole | Prof. Belardi Nicolino</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Layout ── */
+    .wrap { font-family: var(--font-sans, sans-serif); color: #1e293b; display: flex; flex-direction: column; gap: 20px; }
+
+    /* ── Sezione blu ── */
+    .py-section { border-radius: 14px; overflow: hidden; border: 2px solid #3b82f6; background: #fff; }
+    .py-header { display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: #1e40af; color: #fff; font-size: 1rem; font-weight: 700; }
+    .py-body { padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; background: #eff6ff; }
+
+    /* ── Testo esplicativo ── */
+    .py-text { font-size: 13px; line-height: 1.85; color: #334155; background: #fff; border-left: 4px solid #3b82f6; border-radius: 8px; padding: 11px 14px; }
+    .py-text b { color: #1e3a8a; }
+
+    /* ── Tip box ── */
+    .tip-box { background: #fefce8; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 10px 14px; font-size: 12.5px; line-height: 1.8; color: #78350f; }
+    .warn-box { background: #fff1f2; border: 1.5px solid #f43f5e; border-radius: 8px; padding: 10px 14px; font-size: 12.5px; line-height: 1.8; color: #9f1239; font-weight: 600; }
+
+    /* ── Blocco codice dark ── */
+    .code-block { background: #1e293b; border-radius: 10px; overflow: hidden; }
+    .code-label { background: #0f172a; color: #94a3b8; font-size: 11px; font-weight: 600; padding: 6px 14px; letter-spacing: 0.5px; text-transform: uppercase; border-bottom: 1px solid #334155; }
+    .code-block pre { margin: 0; padding: 14px 18px; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.7; color: #e2e8f0; overflow-x: auto; }
+    /* Syntax highlight */
+    .kw  { color: #f472b6; font-weight: 600; }   /* keyword: if, while, for, print */
+    .fn  { color: #60a5fa; }                        /* function names */
+    .st  { color: #34d399; }                        /* strings */
+    .nm  { color: #fb923c; }                        /* numbers */
+    .cm  { color: #64748b; font-style: italic; }   /* comments */
+    .va  { color: #e2e8f0; }                        /* variables */
+
+    /* ── Lista puntata ── */
+    .py-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+    .py-list li { font-size: 13px; line-height: 1.8; padding-left: 18px; position: relative; color: #334155; }
+    .py-list li::before { content: "•"; position: absolute; left: 0; color: #3b82f6; font-weight: 700; }
+
+    /* ── Tabella riassunto ── */
+    .riassunto { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border-radius: 10px; overflow: hidden; }
+    .riassunto thead tr { background: #1e40af; color: #fff; }
+    .riassunto thead td { padding: 10px 14px; font-weight: 700; }
+    .riassunto tbody tr:nth-child(even) { background: #eff6ff; }
+    .riassunto tbody tr:nth-child(odd) { background: #fff; }
+    .riassunto tbody td { padding: 9px 14px; border-bottom: 1px solid #e2e8f0; color: #1e293b; }
+    .riassunto tbody td:first-child { font-weight: 600; color: #1e40af; font-family: monospace; }
+
+    /* ── mini-card grid ── */
+    .range-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (max-width: 600px) { .range-grid { grid-template-columns: 1fr; } }
+    .range-card { background: #fff; border: 2px solid #3b82f6; border-radius: 10px; padding: 12px; font-size: 12px; line-height: 1.8; }
+    .range-card .rc-title { font-weight: 700; color: #1e40af; margin-bottom: 6px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div style="display:flex; align-items:center;">
+      <a href="index.html" class="nav-brand">Portale Didattico <span style="color:#fff;font-size:0.8rem;display:block;">Prof. Belardi Nicolino</span></a>
+      <button onclick="window.location.href='login.html'" style="margin-left:15px;background:rgba(239,68,68,0.2);border:1px solid #ef4444;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;display:inline-flex;align-items:center;transition:all 0.3s;" onmouseover="this.style.background='#ef4444'" onmouseout="this.style.background='rgba(239,68,68,0.2)'">&#128273; Area Docenti</button>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="informatica.html">💻 Informatica</a>
+      <a href="python_pillole.html" class="active">🐍 Python in Pillole</a>
+    </div>
+  </nav>
+
+  <div class="container" style="max-width:900px;">
+    <div class="header-section">
+      <h1>📘 Guida Semplice a Python</h1>
+      <p>Per studenti che si avvicinano alla programmazione. Tutto spiegato con parole semplici, esempi pratici e confronti con C++.</p>
+      <div style="display:inline-block; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.4); border-radius:8px; padding:6px 14px; font-size:0.8rem; color:#93c5fd; margin-top:10px; font-weight:600; letter-spacing:0.5px;">📋 Scheda Didattica — Prof. Belardi Nicolino</div>
+    </div>
+
+    <div class="wrap">
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- SEZIONE 1 — VARIABILI                                      -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <div class="py-section">
+        <div class="py-header">🟦 1. Cosa sono le variabili in Python</div>
+        <div class="py-body">
+
+          <div class="py-text">
+            <b>Python</b> è un linguaggio di programmazione moderno e semplice da leggere.<br><br>
+            A differenza di <b>C++</b>, in Python:
+            <ul style="margin: 10px 0 0 20px; line-height: 2;">
+              <li>❌ Non usiamo le <b>parentesi graffe</b> <code style="background:#f1f5f9;padding:1px 5px;border-radius:4px;">{ }</code> per i blocchi di codice — al loro posto usiamo l'<b>indentazione</b> (rientri obbligatori)</li>
+              <li>❌ Non dobbiamo <b>dichiarare il tipo</b> della variabile (niente <code style="background:#f1f5f9;padding:1px 5px;border-radius:4px;">int a;</code>)</li>
+              <li>✅ Dopo ogni condizione o ciclo mettiamo i <b>due punti</b> <code style="background:#f1f5f9;padding:1px 5px;border-radius:4px;">:</code></li>
+              <li>✅ Python capisce da solo che tipo è il valore che assegniamo</li>
+              <li>✅ Il codice è molto più leggibile e vicino all'italiano/inglese</li>
+            </ul>
+          </div>
+
+          <div class="py-text">
+            In Python non serve dichiarare il tipo della variabile (come in C++). La variabile <b>nasce nel momento in cui le assegni un valore</b>.
+          </div>
+
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="va">a</span> = <span class="nm">12</span>
+<span class="va">b</span> = <span class="st">"casa"</span></pre>
+          </div>
+
+          <ul class="py-list">
+            <li><code style="background:#f1f5f9;padding:1px 5px;border-radius:4px;">a</code> contiene un numero → Python capisce da solo che è un <b>intero</b></li>
+            <li><code style="background:#f1f5f9;padding:1px 5px;border-radius:4px;">b</code> contiene testo → Python capisce da solo che è una <b>stringa</b></li>
+          </ul>
+
+          <div class="tip-box">👉 Python capisce il tipo da solo. Tu devi solo scrivere il valore.</div>
+
+          <div class="py-text">
+            <b>Attenzione all'input:</b><br><br>
+            Quando scriviamo:
+          </div>
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="va">x</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserisci un numero --> "</span>))</pre>
+          </div>
+          <div class="py-text">
+            Non stiamo <i>dichiarando</i> la variabile: stiamo dicendo a Python di <b>leggere qualcosa da tastiera</b> (<code>input()</code>), e poi di <b>convertirla in un numero intero</b> (<code>int()</code>) prima di salvarla in <code>x</code>.<br><br>
+            In pratica: "prendi quello che digita l'utente e trattalo come un numero intero".
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- SEZIONE 2 — PRINT                                          -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <div class="py-section">
+        <div class="py-header">🟦 2. La stampa a schermo: print()</div>
+        <div class="py-body">
+
+          <div class="py-text">Per far vedere qualcosa sullo schermo si usa la funzione <b>print()</b>:</div>
+
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="fn">print</span>(<span class="st">"ciao"</span>)</pre>
+          </div>
+
+          <div class="py-text">Puoi stampare numeri, parole, variabili:</div>
+
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="va">a</span> = <span class="nm">12</span>
+<span class="fn">print</span>(<span class="va">a</span>)
+<span class="fn">print</span>(<span class="st">"il valore di a è"</span>, <span class="va">a</span>)</pre>
+          </div>
+
+          <div class="tip-box">👉 Dentro print() puoi mettere più cose separate da virgole e le stamperà tutte di fila con uno spazio.</div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- SEZIONE 3 — INDENTAZIONE                                   -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <div class="py-section">
+        <div class="py-header">🟦 3. Indentazione: cosa significa?</div>
+        <div class="py-body">
+
+          <div class="warn-box">⚠ Questo è IMPORTANTISSIMO in Python.</div>
+
+          <div class="py-text">
+            <b>Indentazione</b> significa "spostare verso destra" una riga di codice usando gli spazi (di solito 4 spazi o un TAB).
+          </div>
+
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="kw">if</span> <span class="va">a</span> &gt; <span class="nm">10</span>:
+    <span class="fn">print</span>(<span class="st">"ciao"</span>)</pre>
+          </div>
+
+          <div class="py-text">
+            La riga <code>print("ciao")</code> è <b>indentata</b> (spostata a destra).<br><br>
+            In Python l'indentazione <b>non è estetica, è obbligatoria</b>. Serve per dire quali istruzioni appartengono a un blocco (<code>if</code>, <code>while</code>, <code>for</code>…).<br><br>
+            Se togli l'indentazione, il programma <b>non funziona</b> e dà errore.
+          </div>
+
+          <div class="tip-box">👉 Dove in C++ usavi le { }, in Python usi i rientri (spazi). È il modo di Python per "raggruppare" le istruzioni.</div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- SEZIONE 4 — IF                                             -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <div class="py-section">
+        <div class="py-header">🟦 4. La struttura condizionale: IF</div>
+        <div class="py-body">
+
+          <div class="py-text">Serve per fare una <b>scelta</b>. Se una condizione è vera, esegue un blocco di istruzioni.</div>
+
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="va">a</span> = <span class="nm">12</span>
+
+<span class="kw">if</span> <span class="va">a</span> &gt; <span class="nm">10</span>:
+    <span class="fn">print</span>(<span class="va">a</span>)
+
+<span class="fn">print</span>(<span class="st">"ciao"</span>)</pre>
+          </div>
+
+          <ul class="py-list">
+            <li>Se <code>a &gt; 10</code> è vera → stampa <code>a</code></li>
+            <li>Poi stampa sempre <code>"ciao"</code> perché è <b>fuori dall'if</b> (non è indentata)</li>
+          </ul>
+
+          <div class="tip-box">👉 L'IF finisce quando finisce l'indentazione. Tutto ciò che non è rientrato è "fuori" dall'if.</div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- SEZIONE 5 — WHILE                                          -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <div class="py-section">
+        <div class="py-header">🟦 5. Il ciclo WHILE</div>
+        <div class="py-body">
+
+          <div class="py-text">Il ciclo <b>while</b> ripete le istruzioni <b>finché la condizione è vera</b>.</div>
+
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="va">a</span> = <span class="nm">12</span>
+
+<span class="kw">while</span> <span class="va">a</span> &gt; <span class="nm">10</span>:
+    <span class="fn">print</span>(<span class="va">a</span>)
+    <span class="va">a</span> -= <span class="nm">1</span>   <span class="cm"># diminuisce di 1 ogni giro</span>
+
+<span class="fn">print</span>(<span class="st">"fine"</span>)</pre>
+          </div>
+
+          <div class="py-text"><b>Cosa succede passo per passo:</b></div>
+          <ul class="py-list">
+            <li>stampa <b>12</b></li>
+            <li>stampa <b>11</b></li>
+            <li>poi <code>a</code> diventa 10 → la condizione <code>a &gt; 10</code> diventa <b>falsa</b></li>
+            <li>il ciclo si ferma</li>
+            <li>stampa <b>"fine"</b></li>
+          </ul>
+
+          <div class="tip-box">👉 Anche qui l'indentazione indica cosa fa parte del ciclo. <code>print("fine")</code> non è indentato → è fuori dal while.</div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- SEZIONE 6 — FOR                                            -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <div class="py-section">
+        <div class="py-header">🟦 6. Il ciclo FOR e la funzione range()</div>
+        <div class="py-body">
+
+          <div class="py-text">
+            Il ciclo <b>for</b> ripete un numero <b>preciso</b> di volte.<br><br>
+            Dentro le parentesi di <code>range()</code> mettiamo fino a tre valori: <b>start</b> (partenza), <b>stop</b> (fine, esclusa) e <b>step</b> (il passo, cioè di quanto aumenta ogni volta).<br>
+            Se si parte da 0 e il passo è 1, si può scrivere in forma semplice con solo il numero finale.
+          </div>
+
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">10</span>):
+    <span class="fn">print</span>(<span class="st">"ciao"</span>)</pre>
+          </div>
+
+          <div class="py-text">Questo stampa <b>"ciao"</b> 10 volte.</div>
+
+          <div class="py-text"><b>🔍 Come funziona range()?</b></div>
+
+          <div class="range-grid">
+            <div class="range-card">
+              <div class="rc-title">✔ range(10)</div>
+              Parte da <b>0</b> e arriva a <b>9</b><br>(10 numeri totali)
+            </div>
+            <div class="range-card">
+              <div class="rc-title">✔ range(5, 12)</div>
+              Parte da <b>5</b> e arriva a <b>11</b><br>(12 è escluso)
+            </div>
+            <div class="range-card">
+              <div class="rc-title">✔ range(0, 101, 1)</div>
+              Parte da <b>0</b>, arriva a <b>100</b>, aumenta di <b>1</b> ogni volta
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- SEZIONE 7 — SOMMA 100 NUMERI                               -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <div class="py-section">
+        <div class="py-header">🟦 7. Esempio: sommare i primi 100 numeri</div>
+        <div class="py-body">
+
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="va">somma</span> = <span class="nm">0</span>
+
+<span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">0</span>, <span class="nm">101</span>, <span class="nm">1</span>):
+    <span class="va">somma</span> += <span class="va">i</span>
+
+<span class="fn">print</span>(<span class="va">somma</span>)</pre>
+          </div>
+
+          <div class="py-text">
+            Il ciclo percorre tutti i numeri da 0 a 100 (101 è escluso) e li aggiunge uno alla volta alla variabile <code>somma</code>.<br>
+            Alla fine <code>print(somma)</code> mostrerà <b>5050</b>.
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- SEZIONE 8 — ESEMPIO COMPLETO                               -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <div class="py-section">
+        <div class="py-header">🟦 8. Esempio completo: somma dei negativi e prodotto dei non negativi</div>
+        <div class="py-body">
+
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="va">somma</span> = <span class="nm">0</span>
+<span class="va">prodotto</span> = <span class="nm">1</span>
+
+<span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">5</span>):
+    <span class="va">x</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserisci un numero --> "</span>))
+
+    <span class="kw">if</span> <span class="va">x</span> &gt;= <span class="nm">0</span>:
+        <span class="va">prodotto</span> = <span class="va">prodotto</span> * <span class="va">x</span>
+    <span class="kw">else</span>:
+        <span class="va">somma</span> = <span class="va">somma</span> + <span class="va">x</span>
+
+<span class="fn">print</span>(<span class="st">"la somma dei valori negativi è"</span>, <span class="va">somma</span>)
+<span class="fn">print</span>(<span class="st">"il prodotto dei valori non negativi è"</span>, <span class="va">prodotto</span>)</pre>
+          </div>
+
+          <div class="py-text"><b>Spiegazione semplice:</b></div>
+          <ul class="py-list">
+            <li>Il programma chiede 5 numeri all'utente (il for gira 5 volte)</li>
+            <li>Se il numero è <b>positivo o zero</b> → lo moltiplica nel <code>prodotto</code></li>
+            <li>Se il numero è <b>negativo</b> → lo aggiunge alla <code>somma</code></li>
+            <li>Alla fine stampa i due risultati</li>
+          </ul>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <!-- SEZIONE 9 — RIASSUNTO                                      -->
+      <!-- ══════════════════════════════════════════════════════════ -->
+      <div class="py-section">
+        <div class="py-header">🟦 9. Riassunto super semplice</div>
+        <div class="py-body">
+          <table class="riassunto">
+            <thead>
+              <tr><td>Concetto</td><td>Spiegazione</td></tr>
+            </thead>
+            <tbody>
+              <tr><td>Variabile</td><td>nasce quando le assegni un valore — non serve dichiararla</td></tr>
+              <tr><td>Tipo</td><td>Python lo capisce da solo (int, str, float…)</td></tr>
+              <tr><td>print()</td><td>serve per mostrare qualcosa a schermo</td></tr>
+              <tr><td>input()</td><td>legge qualcosa digitato dall'utente</td></tr>
+              <tr><td>int()</td><td>converte il valore letto in numero intero</td></tr>
+              <tr><td>if</td><td>fa una scelta: esegue il blocco solo se la condizione è vera</td></tr>
+              <tr><td>while</td><td>ripete finché la condizione è vera</td></tr>
+              <tr><td>for</td><td>ripete un numero preciso di volte con range()</td></tr>
+              <tr><td>indentazione</td><td>spazi obbligatori — dice cosa appartiene a un blocco</td></tr>
+              <tr><td>:</td><td>due punti obbligatori dopo if, while, for</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /wrap -->
+  </div><!-- /container -->
+</body>
+</html>
