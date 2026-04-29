@@ -612,6 +612,185 @@
         </div><!-- /ex-body -->
       </div><!-- /ex-card -->
 
+      <!-- ══════════════════════════════════════════════════════════════ -->
+      <!-- ESERCIZIO 4 — GESTIONE CLASSE: MEDIE E INSUFFICIENZE          -->
+      <!-- ══════════════════════════════════════════════════════════════ -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">4</div>
+          <div class="ex-title">Gestione di una classe di 10 alunni: calcola la media e le insufficienze per ogni alunno e le statistiche totali della classe.</div>
+        </div>
+        <div class="ex-body">
+
+          <!-- TESTO ESERCIZIO -->
+          <div class="testo-box">
+            <h4>📄 Testo dell'esercizio</h4>
+            Gestire una classe di <b>10 alunni</b>. Per ogni alunno il programma deve:<br>
+            <ul class="py-list" style="margin-top:8px;">
+              <li>chiedere quanti voti ha e farli inserire tutti</li>
+              <li>calcolare la <b>media</b> e contare le <b>insufficienze</b> dell'alunno</li>
+            </ul><br>
+            Alla fine, il programma deve mostrare:<br>
+            <ul class="py-list" style="margin-top:8px;">
+              <li>quanti voti insufficienti totali ci sono stati nella classe</li>
+              <li>quanti alunni hanno una media inferiore a 6</li>
+            </ul>
+          </div>
+
+          <!-- RAGIONAMENTO LOGICO -->
+          <div class="logic-section">
+            <h4>🧠 Ragionamento logico dell'esercizio</h4>
+            <b>Obiettivo:</b> gestire medie e insufficienze di una classe intera.<br><br>
+            <b>✔ Passi logici per ogni alunno:</b>
+            <ul class="py-list" style="margin-top:8px;">
+              <li>Chiedo quanti voti ha (es. 4 voti).</li>
+              <li>Inizializzo <code>somma = 0</code> e <code>insuf = 0</code> (insufficienze dell'alunno).</li>
+              <li>Leggo i voti uno alla volta:
+                <ul class="py-list" style="margin-top:4px; margin-left:16px;">
+                  <li>se il voto è &lt; 6 → aumento <code>insuf</code> e aumento <code>insuftot</code> (totale classe)</li>
+                  <li>aggiungo il voto alla somma</li>
+                </ul>
+              </li>
+              <li>Calcolo la media dell'alunno: <b>media = somma / nvoti</b>.</li>
+              <li>Se la media è &lt; 6 → aumento <code>mediainsuf</code> (alunni con media insufficiente).</li>
+            </ul>
+            <b>Alla fine:</b> stampo il totale dei voti insufficienti e degli alunni con media &lt; 6.
+          </div>
+
+          <!-- ELEMENTI PYTHON -->
+          <div class="inner-title">🧩 Elementi principali di Python che useremo</div>
+          <div class="py-elements">
+
+            <div class="py-el">
+              <div class="el-title">1. Variabili</div>
+              <ul class="py-list">
+                <li><code>insuftot</code> → conta TUTTE le insufficienze della classe</li>
+                <li><code>mediainsuf</code> → conta quanti alunni hanno media &lt; 6</li>
+                <li><code>nvoti</code> → quanti voti ha un singolo alunno</li>
+                <li><code>somma</code> → somma dei voti dell'alunno</li>
+                <li><code>insuf</code> → insufficienze dell'alunno</li>
+                <li><code>voto</code> → singolo voto inserito</li>
+                <li><code>media</code> → media dell'alunno</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">2. Tipo int</div>
+              <ul class="py-list">
+                <li>Usiamo <b>int</b> per numero voti, singoli voti e contatori, perché sono numeri interi.</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">3. Ciclo for annidato</div>
+              Il primo ciclo:
+              <div class="code-block" style="margin-top:8px;">
+                <div class="code-label">Python</div>
+                <pre><span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">10</span>):</pre>
+              </div>
+              <ul class="py-list" style="margin-top:8px;">
+                <li>significa: "ripeti questo blocco per 10 alunni"</li>
+              </ul>
+              Il secondo ciclo (dentro al primo):
+              <div class="code-block" style="margin-top:8px;">
+                <div class="code-label">Python</div>
+                <pre><span class="kw">for</span> <span class="va">j</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="va">nvoti</span>):</pre>
+              </div>
+              <ul class="py-list" style="margin-top:8px;">
+                <li>significa: "per ogni alunno, ripeti questo blocco per ogni suo voto"</li>
+              </ul>
+            </div>
+
+            <div class="py-el">
+              <div class="el-title">4. Operatori di assegnazione</div>
+              <ul class="py-list">
+                <li><code>insuf += 1</code> → aumento le insufficienze dell'alunno</li>
+                <li><code>insuftot += 1</code> → aumento le insufficienze totali della classe</li>
+                <li><code>mediainsuf += 1</code> → aumento il numero di alunni con media insufficiente</li>
+              </ul>
+            </div>
+
+          </div><!-- /py-elements -->
+
+          <!-- CODICE COMMENTATO -->
+          <div class="inner-title">💻 Codice riscritto e commentato riga per riga</div>
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="cm"># Programma per una classe di 10 alunni.</span>
+<span class="cm"># Per ogni alunno: chiede voti, calcola la media e conta le insufficienze.</span>
+<span class="cm"># Alla fine mostra le statistiche globali della classe.</span>
+
+<span class="va">insuftot</span> = <span class="nm">0</span>
+<span class="cm"># Inizializzo insuftot a 0.</span>
+<span class="cm"># Questa variabile serve per contare TUTTE le insufficienze della classe.</span>
+<span class="cm"># Parto da 0 perché all'inizio non ho ancora letto nessun voto.</span>
+
+<span class="va">mediainsuf</span> = <span class="nm">0</span>
+<span class="cm"># Inizializzo mediainsuf a 0.</span>
+<span class="cm"># Questa variabile serve per contare quanti alunni hanno una media insufficiente (&lt; 6).</span>
+<span class="cm"># Parto da 0 perché all'inizio non ho ancora calcolato nessuna media.</span>
+
+<span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">10</span>):
+    <span class="cm"># Questo ciclo for si ripete 10 volte, una per ogni alunno.</span>
+    <span class="cm"># i va da 0 a 9, quindi rappresenta l'indice dell'alunno.</span>
+
+    <span class="va">nvoti</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserire numero voti "</span>))
+    <span class="cm"># Chiedo quanti voti ha l'alunno corrente.</span>
+    <span class="cm"># input restituisce una stringa, int(...) la converte in numero intero.</span>
+    <span class="cm"># nvoti contiene il numero di voti che devo leggere per questo alunno.</span>
+
+    <span class="va">somma</span> = <span class="nm">0</span>
+    <span class="cm"># Inizializzo la somma dei voti dell'alunno a 0.</span>
+    <span class="cm"># Viene azzerata per ogni nuovo alunno.</span>
+
+    <span class="va">insuf</span> = <span class="nm">0</span>
+    <span class="cm"># Inizializzo il numero di insufficienze dell'alunno a 0.</span>
+    <span class="cm"># Ogni volta che trovo un voto &lt; 6, aumenterò questa variabile.</span>
+
+    <span class="kw">for</span> <span class="va">j</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="va">nvoti</span>):
+        <span class="cm"># Questo è un ciclo annidato: si ripete nvoti volte per OGNI alunno.</span>
+        <span class="cm"># Serve per leggere tutti i voti di un singolo studente.</span>
+
+        <span class="va">voto</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserire voto "</span>))
+        <span class="cm"># Chiedo all'utente di inserire un voto.</span>
+
+        <span class="kw">if</span> <span class="va">voto</span> &lt; <span class="nm">6</span>:
+            <span class="cm"># Controllo se il voto è insufficiente (minore di 6).</span>
+
+            <span class="va">insuf</span> += <span class="nm">1</span>
+            <span class="cm"># Aumento il numero di insufficienze dell'alunno corrente.</span>
+
+            <span class="va">insuftot</span> += <span class="nm">1</span>
+            <span class="cm"># Aumento anche il numero totale di insufficienze della classe.</span>
+
+        <span class="va">somma</span> += <span class="va">voto</span>
+        <span class="cm"># Aggiungo il voto alla somma totale dei voti dell'alunno.</span>
+
+    <span class="fn">print</span>(<span class="st">"insufficienza alunno: "</span>, <span class="va">insuf</span>)
+    <span class="cm"># Stampo quante insufficienze ha avuto questo alunno specifico.</span>
+
+    <span class="va">media</span> = <span class="va">somma</span> / <span class="va">nvoti</span>
+    <span class="cm"># Calcolo la media dell'alunno dividendo la somma dei voti per il numero dei voti.</span>
+
+    <span class="fn">print</span>(<span class="st">"media alunno: "</span>, <span class="va">media</span>)
+    <span class="cm"># Stampo la media dell'alunno a schermo.</span>
+
+    <span class="kw">if</span> <span class="va">media</span> &lt; <span class="nm">6</span>:
+        <span class="cm"># Controllo se la media finale dell'alunno è insufficiente.</span>
+
+        <span class="va">mediainsuf</span> += <span class="nm">1</span>
+        <span class="cm"># Se la media è &lt; 6, aumento il contatore degli alunni insufficienti della classe.</span>
+
+<span class="fn">print</span>(<span class="st">"numero voti insufficienti totali: "</span>, <span class="va">insuftot</span>)
+<span class="cm"># Quando i due cicli sono finiti, stampo il totale delle insufficienze della classe.</span>
+
+<span class="fn">print</span>(<span class="st">"alunni con media insufficiente:"</span>, <span class="va">mediainsuf</span>)
+<span class="cm"># Stampo quanti alunni su 10 hanno terminato con una media sotto al 6.</span></pre>
+          </div>
+
+        </div><!-- /ex-body -->
+      </div><!-- /ex-card -->
+
     </div><!-- /wrap -->
   </div><!-- /container -->
 </body>
