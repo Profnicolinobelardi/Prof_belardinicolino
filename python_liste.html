@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liste di Python | Prof. Belardi Nicolino</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0e8;
+    --ink: #1a1a1a;
+    --accent: #f59e0b;
+    --accent2: #d45f00;
+    --code-bg: #1e1e2e;
+    --code-fg: #cdd6f4;
+    --rule: #c8bfb0;
+    --card-bg: #fffdf8;
+    --tag-bg: #d45f00;
+    --green: #2a7a4b;
+  }
+ 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+ 
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+ 
+  /* HEADER */
+  .header {
+    border-top: 4px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding: 2rem 0 1.5rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 1rem;
+  }
+ 
+  .header-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.5rem;
+  }
+ 
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+ 
+  .header h1 span { color: var(--accent2); }
+
+  /* TABS */
+  .tabs-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 35px;
+    justify-content: flex-start;
+  }
+  
+  .tab-btn {
+    padding: 12px 24px;
+    background: var(--card-bg);
+    border: 2px solid var(--rule);
+    border-radius: 8px;
+    color: var(--ink);
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .tab-btn:hover { 
+    background: #f0ebe0; 
+  }
+  
+  .tab-btn.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeUp 0.5s ease both; }
+ 
+  /* SECTION */
+  .section {
+    margin-bottom: 3rem;
+  }
+ 
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+ 
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+ 
+  .section-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.1rem 0.5rem;
+    letter-spacing: 0.05em;
+  }
+ 
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+ 
+  .section-body { color: #333; }
+  .section-body p { margin-bottom: 0.9rem; }
+  
+  .intro-box {
+    background: var(--card-bg);
+    border-left: 4px solid var(--accent2);
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  /* BULLET LIST */
+  .item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+  }
+ 
+  .item-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+ 
+  .item-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0.25rem;
+    top: 0.15rem;
+    color: var(--accent2);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  /* CODE */
+  .code-block {
+    background: var(--code-bg);
+    color: var(--code-fg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    padding: 1.1rem 1.25rem;
+    border-radius: 4px;
+    margin: 0.75rem 0 1.5rem 0;
+    overflow-x: auto;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    white-space: pre-wrap;
+  }
+ 
+  .code-block::before {
+    content: 'python';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6c7086;
+  }
+
+  .py-kw  { color: #cba6f7; }
+  .py-str { color: #a6e3a1; }
+  .py-num { color: #fab387; }
+  .py-fn  { color: #89dceb; }
+  .py-cm  { color: #a6adc8; font-style: italic; }
+  .py-var { color: #cdd6f4; }
+  .py-op  { color: #89b4fa; }
+  .py-bool { color: #fab387; }
+
+  /* CALLOUT */
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--card-bg);
+    padding: 0.9rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #444;
+  }
+
+  /* TABLE */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+  }
+  
+  .data-table th, .data-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+  }
+  
+  .data-table th {
+    background: var(--ink);
+    color: var(--bg);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  
+  .data-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--green);
+  }
+  
+  .data-table td:last-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: bold;
+  }
+
+  em { font-style: italic; }
+  strong { font-weight: 600; }
+  /* ESERCIZIO GUIDATO */
+  .guided-container {
+    background: var(--card-bg);
+    border: 2px solid var(--rule);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 4px 4px 0 var(--rule);
+  }
+
+  .guided-header {
+    background: #fff3e0;
+    border-left: 4px solid var(--accent);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .guided-header h3 {
+    margin-top: 0;
+    color: var(--accent2);
+    font-family: 'Syne', sans-serif;
+  }
+
+  .step-card {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: #fff;
+    position: relative;
+  }
+
+  .step-number {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    background: var(--ink);
+    color: var(--bg);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: 2px solid var(--bg);
+  }
+
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--ink);
+    margin-left: 10px;
+  }
+
+  .step-hint {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #166534;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .step-input-area {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--code-fg);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    line-height: 2;
+  }
+
+  .code-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.6;
+  }
+  .code-textarea:focus {
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.1);
+  }
+
+  .step-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .btn-solution {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    transition: all 0.2s;
+  }
+  .btn-solution:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .step-solution {
+    margin-top: 1rem;
+    background: #eef2ff;
+    border-left: 3px solid #6366f1;
+    padding: 1rem;
+    border-radius: 0 4px 4px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    display: none;
+  }
+  .step-solution.show {
+    display: block;
+    animation: fadeInDown 0.3s ease;
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .ex-tabs-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    background: rgba(0,0,0,0.05);
+    padding: 0.5rem;
+    border-radius: 8px;
+    flex-wrap: wrap;
+  }
+  .ex-tab-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .ex-tab-btn.active {
+    background: #fff;
+    color: var(--accent2);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .ex-tab-btn:hover:not(.active) {
+    background: rgba(255,255,255,0.5);
+  }
+</style>
+</head>
+<body>
+  <nav class="navbar">
+    <div style="display:flex; align-items:center;">
+      <a href="index.html" class="nav-brand">Portale Didattico <span style="color: #fff; font-size: 0.8rem; display:block;">Prof. Belardi Nicolino</span></a>
+      <button onclick="window.location.href='login.html'" style="margin-left:15px; background:rgba(239,68,68,0.2); border:1px solid #ef4444; color:#fff; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.85rem; font-weight:600; display:inline-flex; align-items:center; transition:all 0.3s;" onmouseover="this.style.background='#ef4444'" onmouseout="this.style.background='rgba(239,68,68,0.2)'">&#128273; Area Docenti</button>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="informatica.html">Informatica</a>
+      <a href="#" class="active">Liste Python</a>
+    </div>
+  </nav>
+
+<div class="page">
+ 
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="header-label">Appunti · Informatica</div>
+      <h1>Le Liste in<br><span>Python</span></h1>
+      <div style="font-family:'Syne', sans-serif; font-weight: 600; font-size: 1.1rem; color: var(--ink); margin-top: 0.5rem; letter-spacing: -0.01em;">Scheda Didattica Prof. Belardi Nicolino</div>
+    </div>
+  </div>
+
+  <!-- TABS NAV -->
+  <div class="tabs-container">
+    <button class="tab-btn active" onclick="openTab('parte-teorica', this)">Parte Teorica</button>
+    <button class="tab-btn" onclick="openTab('esercizi', this)">Esercizi</button>
+    <button class="tab-btn" onclick="openTab('laboratorio', this)">Laboratorio Interattivo 🧪</button>
+  </div>
+ 
+  <!-- PARTE TEORICA -->
+  <div id="parte-teorica" class="tab-content active">
+    
+    <div class="intro-box">
+      Le <strong>liste in Python</strong> sono come degli scaffali o dei cassetti organizzati, dove puoi riporre più oggetti (i dati) usando un solo nome. Immagina di avere una scatola grande con tanti scompartimenti: invece di creare una variabile diversa per ogni informazione, puoi raccogliere tutto all'interno di una singola lista. Le caratteristiche principali sono la flessibilità, la capacità di contenere tipi di dato diversi e la possibilità di crescere o rimpicciolirsi durante l'esecuzione del programma. Ora le andremo a vedere nello specifico.
+    </div>
+
+    <!-- 0. RIEPILOGO RAPIDO -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">0</span>
+        <span class="section-title">Riepilogo Rapido: Sintassi Essenziale</span>
+      </div>
+      <div class="section-body">
+        
+        <h3 style="margin-top:0.5rem;">Creare una lista</h3>
+        <p>Una lista si crea con le parentesi quadre <code style="font-weight:bold;">[ ]</code>. Può contenere dati di tipo diverso nella stessa struttura.</p>
+        <div class="code-block"><span class="py-var">numeri</span> <span class="py-op">=</span> [<span class="py-num">10</span>, <span class="py-num">20</span>, <span class="py-num">30</span>, <span class="py-num">40</span>, <span class="py-num">50</span>]
+<span class="py-var">mista</span>  <span class="py-op">=</span> [<span class="py-str">"Alice"</span>, <span class="py-num">3.14</span>, <span class="py-bool">True</span>, <span class="py-num">42</span>]
+<span class="py-var">vuota</span>  <span class="py-op">=</span> []</div>
+
+        <h3 style="margin-top:1.5rem;">Accedere agli elementi</h3>
+        <p>Gli indici partono da <strong>0</strong>. Gli indici negativi partono dalla fine della lista.</p>
+        <div class="code-block"><span class="py-var">numeri</span>[<span class="py-num">0</span>]    <span class="py-cm"># -> 10   (primo elemento)</span>
+<span class="py-var">numeri</span>[<span class="py-num">-1</span>]   <span class="py-cm"># -> 50   (ultimo elemento)</span>
+<span class="py-var">numeri</span>[<span class="py-num">1</span>:<span class="py-num">3</span>]  <span class="py-cm"># -> [20, 30]  (slicing: da indice 1 incluso a 3 escluso)</span></div>
+        
+        <div class="callout" style="border-left-color: var(--green);">
+          <strong>Schema visivo degli indici:</strong>
+          <div class="code-block" style="margin-top:0.5rem; margin-bottom:0; background:transparent; padding:0; color:var(--ink); box-shadow:none; font-weight:600;">lista = [a,  b,  c,  d,  e]
+         0   1   2   3   4     <span style="color:#2a7a4b;"># indici positivi</span>
+        -5  -4  -3  -2  -1     <span style="color:#2a7a4b;"># indici negativi</span></div>
+        </div>
+
+        <h3 style="margin-top:1.5rem;">Modificare la lista</h3>
+        <table class="data-table">
+          <tr><th>Operazione</th><th>Codice</th><th>Effetto</th></tr>
+          <tr>
+            <td style="font-family:'Lora', serif; color:var(--ink);">Aggiungere in fondo</td>
+            <td><code style="color:var(--green);">numeri.<span class="py-fn">append</span>(60)</code></td>
+            <td style="color:var(--ink);">[10, 20, 30, 40, 50, 60]</td>
+          </tr>
+          <tr>
+            <td style="font-family:'Lora', serif; color:var(--ink);">Inserire in posizione</td>
+            <td><code style="color:var(--green);">numeri.<span class="py-fn">insert</span>(1, 99)</code></td>
+            <td style="color:var(--ink);">[10, 99, 20, 30, 40, 50]</td>
+          </tr>
+          <tr>
+            <td style="font-family:'Lora', serif; color:var(--ink);">Rimuovere per valore</td>
+            <td><code style="color:var(--green);">numeri.<span class="py-fn">remove</span>(30)</code></td>
+            <td style="color:var(--ink);">[10, 20, 40, 50]</td>
+          </tr>
+          <tr>
+            <td style="font-family:'Lora', serif; color:var(--ink);">Rimuovere per indice</td>
+            <td><code style="color:var(--green);"><span class="py-kw">del</span> numeri[0]</code></td>
+            <td style="color:var(--ink);">[20, 30, 40, 50]</td>
+          </tr>
+          <tr>
+            <td style="font-family:'Lora', serif; color:var(--ink);">Lunghezza</td>
+            <td><code style="color:var(--green);"><span class="py-fn">len</span>(numeri)</code></td>
+            <td style="color:var(--ink);">5</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 1. CARATTERISTICHE PRINCIPALI -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">1</span>
+        <span class="section-title">Caratteristiche Principali</span>
+      </div>
+      <div class="section-body">
+        <h3>Definizione</h3>
+        <p>Le liste in Python si definiscono utilizzando le parentesi quadre <code style="font-family:'IBM Plex Mono', monospace; font-weight:bold;">[ ]</code>.</p>
+        <p><em>Esempio:</em></p>
+        <div class="code-block"><span class="py-var">lista</span> <span class="py-op">=</span> [<span class="py-num">1</span>, <span class="py-num">2</span>, <span class="py-num">3</span>]</div>
+        <p>A differenza di altri linguaggi (come il C/C++, dove si utilizzano gli array monodimensionali o le matrici bidimensionali con vincoli rigidi), le liste in Python sono molto più flessibili e semplici da usare.</p>
+        
+        <h3 style="margin-top:1.5rem;">Tipi di dato misti</h3>
+        <p>All'interno di una singola lista possono coesistere elementi di tipo diverso:</p>
+        <ul class="item-list">
+          <li><strong>interi</strong> &rarr; <span class="py-num" style="background:#1e1e2e; padding:2px 6px; border-radius:3px;">5</span></li>
+          <li><strong>stringhe</strong> &rarr; <span class="py-str" style="background:#1e1e2e; padding:2px 6px; border-radius:3px;">"ciao"</span></li>
+          <li><strong>booleani</strong> &rarr; <span class="py-bool" style="background:#1e1e2e; padding:2px 6px; border-radius:3px;">True</span></li>
+          <li><strong>float</strong> &rarr; <span class="py-num" style="background:#1e1e2e; padding:2px 6px; border-radius:3px;">3.7</span></li>
+        </ul>
+        <p><em>Esempio:</em></p>
+        <div class="code-block"><span class="py-var">lista_mista</span> <span class="py-op">=</span> [<span class="py-str">"mela"</span>, <span class="py-num">12</span>, <span class="py-bool">True</span>, <span class="py-num">4.5</span>]</div>
+        <div class="callout">In C/C++ questo sarebbe impossibile, perché un array deve contenere tutti elementi dello stesso tipo.</div>
+
+        <h3 style="margin-top:1.5rem;">Dinamicità</h3>
+        <p>Non c'è bisogno di dichiarare a priori la grandezza della lista (quanti elementi avrà). Le liste sono dinamiche, cioè:</p>
+        <ul class="item-list">
+          <li>si possono <strong>aggiungere</strong> elementi</li>
+          <li>si possono <strong>togliere</strong> elementi</li>
+          <li>si possono <strong>modificare</strong> elementi</li>
+        </ul>
+        <p><em>Esempio:</em></p>
+        <div class="code-block"><span class="py-var">lista</span> <span class="py-op">=</span> []
+<span class="py-var">lista</span>.<span class="py-fn">append</span>(<span class="py-num">10</span>)
+<span class="py-var">lista</span>.<span class="py-fn">append</span>(<span class="py-str">"ciao"</span>)</div>
+
+        <h3 style="margin-top:1.5rem;">Ordinamento e Indici</h3>
+        <p>Le liste sono insiemi ordinati, cioè ogni elemento ha una posizione precisa. Gli indici <strong>partono da 0</strong>.</p>
+        <p><em>Esempio:</em></p>
+        <div class="code-block"><span class="py-var">lista</span> <span class="py-op">=</span> [<span class="py-str">"a"</span>, <span class="py-str">"b"</span>, <span class="py-str">"c"</span>, <span class="py-str">"d"</span>]</div>
+        <table class="data-table">
+          <tr><th>Elemento</th><th>Indice</th></tr>
+          <tr><td>"a"</td><td>0</td></tr>
+          <tr><td>"b"</td><td>1</td></tr>
+          <tr><td>"c"</td><td>2</td></tr>
+          <tr><td>"d"</td><td>3</td></tr>
+        </table>
+        <p>L’ultimo elemento ha indice <strong>dimensione - 1</strong>.</p>
+
+        <h3 style="margin-top:1.5rem;">Supportano gli indici negativi</h3>
+        <p>Gli indici negativi permettono di partire dalla fine:</p>
+        <ul class="item-list">
+          <li><strong>-1</strong> &rarr; ultimo elemento</li>
+          <li><strong>-2</strong> &rarr; penultimo</li>
+          <li><strong>-3</strong> &rarr; terzultimo</li>
+        </ul>
+        <p><em>Esempio:</em></p>
+        <div class="code-block"><span class="py-var">lista</span> <span class="py-op">=</span> [<span class="py-str">"mela"</span>, <span class="py-str">"pera"</span>, <span class="py-str">"banana"</span>]
+<span class="py-fn">print</span>(<span class="py-var">lista</span>[<span class="py-num">-1</span>])   <span class="py-cm"># stampa "banana"</span></div>
+      </div>
+    </div>
+
+    <!-- 2. CREARE E STAMPARE -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">2</span>
+        <span class="section-title">Creare e Stampare le Liste</span>
+      </div>
+      <div class="section-body">
+        <p>Definire una lista vuota e una lista con elementi:</p>
+        <div class="code-block"><span class="py-cm"># Definire una lista vuota</span>
+<span class="py-var">lista1</span> <span class="py-op">=</span> []
+
+<span class="py-cm"># Definire una lista con elementi misti</span>
+<span class="py-var">lista2</span> <span class="py-op">=</span> [<span class="py-str">"mela"</span>, <span class="py-str">"ciao"</span>, <span class="py-num">3.7</span>, <span class="py-num">15</span>]
+
+<span class="py-cm"># Stampa a video</span>
+<span class="py-fn">print</span>(<span class="py-str">"lista1:"</span>, <span class="py-var">lista1</span>, <span class="py-str">"lista2:"</span>, <span class="py-var">lista2</span>)</div>
+        <div class="callout">🔵 <strong>Nota di confronto:</strong> In Python, la funzione <code style="font-family:'IBM Plex Mono', monospace;">print()</code> stampa direttamente l'intero contenuto della lista. In C o C++ invece, per stampare una lista (array), devi usare un ciclo <code>for</code> e stampare un elemento alla volta.</div>
+      </div>
+    </div>
+
+    <!-- 3. DIMENSIONE -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">3</span>
+        <span class="section-title">Dimensione delle Liste (Funzione len)</span>
+      </div>
+      <div class="section-body">
+        <p>Per sapere quanto è lunga una lista (cioè quanti elementi contiene), si usa la funzione <code style="font-family:'IBM Plex Mono', monospace; font-weight:bold;">len()</code>.</p>
+        <p><em>Esempio:</em></p>
+        <div class="code-block"><span class="py-var">lunghezza1</span> <span class="py-op">=</span> <span class="py-fn">len</span>(<span class="py-var">lista1</span>)
+<span class="py-var">lunghezza2</span> <span class="py-op">=</span> <span class="py-fn">len</span>(<span class="py-var">lista2</span>)
+
+<span class="py-fn">print</span>(<span class="py-str">"dimensione lista1 ="</span>, <span class="py-var">lunghezza1</span>)
+<span class="py-fn">print</span>(<span class="py-str">"dimensione lista2 ="</span>, <span class="py-var">lunghezza2</span>)</div>
+        <p>Per <code style="font-family:'IBM Plex Mono', monospace;">lista2 = ["mela", "ciao", 3.7, 15]</code>, la funzione <code>len</code> restituisce <strong>4</strong>.</p>
+      </div>
+    </div>
+
+    <!-- 4. AGGIUNGERE ELEMENTI -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">4</span>
+        <span class="section-title">Aggiungere Elementi alla Lista</span>
+      </div>
+      <div class="section-body">
+        <h3>A. Inserimento in coda (append)</h3>
+        <p>Il metodo <code style="font-family:'IBM Plex Mono', monospace; font-weight:bold;">append()</code> aggiunge sempre l'elemento alla fine della lista.</p>
+        <div class="code-block"><span class="py-fn">print</span>(<span class="py-str">"Aggiungi elementi in coda"</span>)
+<span class="py-var">lista2</span>.<span class="py-fn">append</span>(<span class="py-str">"3AI"</span>)
+<span class="py-fn">print</span>(<span class="py-str">"lista2 ="</span>, <span class="py-var">lista2</span>)</div>
+        <p><em>Risultato:</em></p>
+        <div class="code-block" style="background:#181825; color:#a6adc8;">[<span class="py-str">"mela"</span>, <span class="py-str">"ciao"</span>, <span class="py-num">3.7</span>, <span class="py-num">15</span>, <span class="py-str">"3AI"</span>]</div>
+
+        <h3 style="margin-top:1.5rem;">B. Inserimento in una posizione specifica (insert)</h3>
+        <p>Il metodo <code style="font-family:'IBM Plex Mono', monospace; font-weight:bold;">insert(indice, valore)</code> inserisce un elemento in una posizione precisa, spostando gli altri in avanti.</p>
+        <div class="code-block"><span class="py-fn">print</span>(<span class="py-str">"Aggiungi elementi in un posto preciso"</span>)
+<span class="py-cm"># Inserisce il numero 24 nella posizione 2 (cioè dopo "ciao")</span>
+<span class="py-var">lista2</span>.<span class="py-fn">insert</span>(<span class="py-num">2</span>, <span class="py-num">24</span>)
+<span class="py-fn">print</span>(<span class="py-str">"lista2 ="</span>, <span class="py-var">lista2</span>)</div>
+        <p><em>Risultato (prima dell’append):</em></p>
+        <div class="code-block" style="background:#181825; color:#a6adc8;">[<span class="py-str">"mela"</span>, <span class="py-str">"ciao"</span>, <span class="py-num">24</span>, <span class="py-num">3.7</span>, <span class="py-num">15</span>]</div>
+      </div>
+    </div>
+
+    <!-- 5. SCORRERE LA LISTA -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">5</span>
+        <span class="section-title">Scorrere la Lista con un Ciclo FOR</span>
+      </div>
+      <div class="section-body">
+        <p>Se hai bisogno di scorrere la lista e agire su un elemento alla volta (ad esempio per stamparli singolarmente), puoi usare un ciclo <code>for</code> combinato con <code style="font-family:'IBM Plex Mono', monospace;">range()</code> e <code style="font-family:'IBM Plex Mono', monospace;">len()</code>.</p>
+        <div class="code-block"><span class="py-cm"># Stampa un elemento alla volta</span>
+<span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-fn">len</span>(<span class="py-var">lista2</span>)):
+    <span class="py-fn">print</span>(<span class="py-var">lista2</span>[<span class="py-var">x</span>])</div>
+        
+        <div class="callout">
+          🔵 <strong>Nota importante:</strong> <code style="font-family:'IBM Plex Mono', monospace;">range(len(lista2))</code> è un’abbreviazione di <code style="font-family:'IBM Plex Mono', monospace;">range(0, len(lista2))</code>. Significa:
+          <ul class="item-list" style="margin-top:0.5rem;">
+            <li>parti da 0</li>
+            <li>arriva fino a <code>len(lista2)</code></li>
+            <li>ma ti fermi prima dell’ultimo numero (come sempre nel range)</li>
+          </ul>
+        </div>
+
+        <div class="callout" style="border-left-color:var(--green);">
+          🔵 <strong>Aggiunta utile: scorrere la lista SENZA indici</strong><br>
+          Python permette anche un modo più semplice:
+          <div class="code-block" style="margin-top:0.5rem; margin-bottom:0;"><span class="py-kw">for</span> <span class="py-var">elemento</span> <span class="py-kw">in</span> <span class="py-var">lista2</span>:
+    <span class="py-fn">print</span>(<span class="py-var">elemento</span>)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. METODI E FUNZIONI IN PYTHON -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">6</span>
+        <span class="section-title">Metodi e Funzioni per le Liste</span>
+      </div>
+      <div class="section-body">
+        <p>La regola d'oro per utilizzare un metodo in Python segue questa sintassi generale:</p>
+        <div class="code-block" style="background:#181825; color:#a6adc8; border-left: 4px solid var(--accent2);"><span class="py-var">NomeVariabile</span>.<span class="py-fn">Metodo</span>(<span class="py-var">argomenti</span>)</div>
+        
+        <h3 style="margin-top:1.5rem;">Panoramica dei Metodi Principali (Modificano la lista originale)</h3>
+        <ul class="item-list">
+          <li><strong>append(x)</strong>: Aggiunge un elemento alla fine della lista.</li>
+          <li><strong>extend(lista)</strong>: Estende la lista aggiungendo tutti gli elementi di un'altra lista.</li>
+          <li><strong>insert(i, x)</strong>: Inserisce un elemento alla posizione specificata <code>i</code>.</li>
+          <li><strong>remove(x)</strong>: Rimuove la prima occorrenza dell'elemento <code>x</code>.</li>
+          <li><strong>pop([i])</strong>: Rimuove e restituisce l'elemento alla posizione <code>i</code> (o l'ultimo se non specificato).</li>
+          <li><strong>sort()</strong>: Ordina gli elementi della lista.</li>
+          <li><strong>reverse()</strong>: Inverte l'ordine degli elementi della lista.</li>
+          <li><strong>clear()</strong>: Rimuove tutti gli elementi dalla lista.</li>
+        </ul>
+
+        <h3 style="margin-top:1.5rem;">Funzioni Integrate Comuni (Lavorano sulla lista)</h3>
+        <ul class="item-list">
+          <li><strong>len(lista)</strong>: Restituisce il numero di elementi presenti.</li>
+          <li><strong>sorted(lista)</strong>: Restituisce una nuova lista ordinata, lasciando intatta l'originale.</li>
+          <li><strong>count(x)</strong>: Conta quante volte il valore <code>x</code> appare nella lista.</li>
+          <li><strong>index(x)</strong>: Restituisce l'indice della prima occorrenza di <code>x</code>.</li>
+        </ul>
+
+        <h3 style="margin-top:1.5rem;">Esempi Pratici sui Metodi</h3>
+        <div class="code-block"><span class="py-cm"># Creazione</span>
+<span class="py-var">frutta</span> <span class="py-op">=</span> [<span class="py-str">'mela'</span>, <span class="py-str">'banana'</span>, <span class="py-str">'mela'</span>]
+
+<span class="py-cm"># Aggiungere</span>
+<span class="py-var">frutta</span>.<span class="py-fn">append</span>(<span class="py-str">'arancia'</span>) <span class="py-cm"># ['mela', 'banana', 'mela', 'arancia']</span>
+
+<span class="py-cm"># Contare</span>
+<span class="py-var">conteggio</span> <span class="py-op">=</span> <span class="py-var">frutta</span>.<span class="py-fn">count</span>(<span class="py-str">'mela'</span>) <span class="py-cm"># Restituisce 2</span>
+
+<span class="py-cm"># Ordinare</span>
+<span class="py-var">frutta</span>.<span class="py-fn">sort</span>() <span class="py-cm"># ['arancia', 'banana', 'mela', 'mela']</span></div>
+
+        <h3 style="margin-top:1.5rem;">Esempi Pratici sulla Rimozione Elementi</h3>
+        <div class="code-block"><span class="py-cm"># Partiamo da una lista esistente</span>
+<span class="py-var">lista2</span> <span class="py-op">=</span> [<span class="py-str">"mela"</span>, <span class="py-str">"ciao"</span>, <span class="py-num">24</span>, <span class="py-num">3.7</span>, <span class="py-num">15</span>, <span class="py-str">"3ai"</span>]
+<span class="py-fn">print</span>(<span class="py-var">lista2</span>)
+
+<span class="py-fn">print</span>(<span class="py-str">"Cancella la prima occorrenza di un certo valore:"</span>)
+<span class="py-var">lista2</span>.<span class="py-fn">remove</span>(<span class="py-num">15</span>)
+<span class="py-fn">print</span>(<span class="py-var">lista2</span>)
+
+<span class="py-fn">print</span>(<span class="py-str">"Rimuovi l'elemento in una certa posizione:"</span>)
+<span class="py-var">elemento</span> <span class="py-op">=</span> <span class="py-var">lista2</span>.<span class="py-fn">pop</span>(<span class="py-num">0</span>)
+<span class="py-fn">print</span>(<span class="py-var">elemento</span>) <span class="py-cm"># Stampa "mela"</span>
+
+<span class="py-fn">print</span>(<span class="py-str">"Svuota la lista:"</span>)
+<span class="py-var">lista2</span>.<span class="py-fn">clear</span>()
+<span class="py-fn">print</span>(<span class="py-str">"lista2 ="</span>, <span class="py-var">lista2</span>)</div>
+      </div>
+    </div>
+
+    <!-- 7. LISTE ANNIDATE -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">7</span>
+        <span class="section-title">Liste Annidate (Liste di Liste)</span>
+      </div>
+      <div class="section-body">
+        <p>Un concetto avanzato e molto utile è la gestione di liste che contengono altre liste come elementi.</p>
+        <p>Prendiamo in esame questa lista complessa:</p>
+        <div class="code-block"><span class="py-var">lista</span> <span class="py-op">=</span> [<span class="py-str">"Ciao"</span>, [<span class="py-num">1</span>, <span class="py-num">2</span>, <span class="py-num">3</span>], [<span class="py-str">"abc"</span>, <span class="py-str">"def"</span>]]</div>
+        
+        <h3 style="margin-top:1.5rem;">Analisi degli elementi</h3>
+        <p>Ricordando che sono liste solo gli elementi racchiusi tra <code>[ ]</code>, notiamo che <strong>non tutti gli elementi</strong> di questa lista principale sono a loro volta delle liste:</p>
+        <ul class="item-list">
+          <li><code>lista[0]</code> è la stringa <span class="py-str">"Ciao"</span> (non è una lista).</li>
+          <li><code>lista[1]</code> è la lista di numeri <code style="font-family:'IBM Plex Mono', monospace; font-weight:bold;">[1, 2, 3]</code> (che possiamo chiamare "lista 1").</li>
+          <li><code>lista[2]</code> è la lista di stringhe <code style="font-family:'IBM Plex Mono', monospace; font-weight:bold;">["abc", "def"]</code> (che possiamo chiamare "lista 2").</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 8. ACCEDERE A SOTTOLISTE -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">8</span>
+        <span class="section-title">Accedere agli elementi delle "Sottoliste"</span>
+      </div>
+      <div class="section-body">
+        <p>Per accedere a un elemento specifico che si trova dentro una lista annidata, devi usare una <strong>doppia parentesi quadra</strong>.</p>
+        <ul class="item-list">
+          <li>La <strong>prima</strong> parentesi quadra indica l'indice della lista principale.</li>
+          <li>La <strong>seconda</strong> parentesi quadra indica l'indice all'interno della sottolista.</li>
+        </ul>
+        <p>Se vogliamo accedere ai numeri della prima sottolista:</p>
+        <div class="code-block"><span class="py-cm"># lista[1] prende l'intera lista [1, 2, 3]</span>
+<span class="py-cm"># Per stampare i singoli numeri al suo interno:</span>
+<span class="py-fn">print</span>(<span class="py-var">lista</span>[<span class="py-num">1</span>][<span class="py-num">0</span>], <span class="py-var">lista</span>[<span class="py-num">1</span>][<span class="py-num">1</span>], <span class="py-var">lista</span>[<span class="py-num">1</span>][<span class="py-num">2</span>])
+
+<span class="py-cm"># Risultato a schermo: 1 2 3</span></div>
+      </div>
+    </div>
+
+    <!-- 9. CICLI FOR SULLE SOTTOLISTE -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">9</span>
+        <span class="section-title">Operazioni Pratiche: I Cicli FOR sulle Sottoliste</span>
+      </div>
+      <div class="section-body">
+        <p>È possibile usare i cicli <code>for</code> per compiere operazioni specifiche sugli elementi interni a una lista complessa.</p>
+        
+        <h3 style="margin-top:1.5rem;">A. Sommare gli elementi di una sottolista numerica</h3>
+        <p>Per sommare i numeri 1, 2, 3 contenuti in <code>lista[1]</code>, si usa un ciclo. <strong>Nota bene:</strong> in Python, per fare una somma cumulativa, devi prima dichiarare una variabile di partenza uguale a zero.</p>
+        <div class="code-block"><span class="py-var">somma</span> <span class="py-op">=</span> <span class="py-num">0</span>                  <span class="py-cm"># Variabile di appoggio iniziale</span>
+
+<span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-var">lista</span>[<span class="py-num">1</span>]:         <span class="py-cm"># Cicla attraverso i numeri [1, 2, 3]</span>
+    <span class="py-var">somma</span> <span class="py-op">+=</span> <span class="py-var">i</span>             <span class="py-cm"># Equivalente a: somma = somma + i</span>
+
+<span class="py-fn">print</span>(<span class="py-str">"La somma è:"</span>, <span class="py-var">somma</span>) <span class="py-cm"># Risultato: 6</span></div>
+
+        <h3 style="margin-top:1.5rem;">B. Ciclare su una stringa (come se fosse una lista)</h3>
+        <p>Se eseguiamo un ciclo direttamente su un elemento stringa, ad esempio scrivendo <code style="font-family:'IBM Plex Mono', monospace;">for j in lista[0]: print(j)</code>, Python leggerà la parola carattere per carattere. Dato che <code>lista[0]</code> è la parola <span class="py-str">"Ciao"</span>, questo ciclo stamperà ogni lettera verticalmente:</p>
+        <div class="code-block"><span class="py-kw">for</span> <span class="py-var">j</span> <span class="py-kw">in</span> <span class="py-var">lista</span>[<span class="py-num">0</span>]:
+    <span class="py-fn">print</span>(<span class="py-var">j</span>)</div>
+        <p><em>Risultato:</em></p>
+        <div class="code-block" style="background:#181825; color:#a6adc8;">C
+i
+a
+o</div>
+      </div>
+    </div>
+
+    <!-- 10. CONTROLLO TIPI -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">10</span>
+        <span class="section-title">Controllo dei Tipi degli Elementi</span>
+      </div>
+      <div class="section-body">
+        <p>Essendo le liste flessibili, possiamo inserire dati di natura diversa. Python ci fornisce metodi pratici per controllare il tipo di ogni elemento, come la funzione <code>type()</code> o la funzione <code>isinstance()</code>.</p>
+        <div class="code-block"><span class="py-var">l</span> <span class="py-op">=</span> [<span class="py-str">"ciao"</span>, <span class="py-num">23</span>, [<span class="py-num">1</span>, <span class="py-num">2</span>, <span class="py-num">3</span>]]
+
+<span class="py-cm"># Visualizza i tipi degli elementi di una lista</span>
+<span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-var">l</span>:
+    <span class="py-fn">print</span>(<span class="py-fn">type</span>(<span class="py-var">x</span>))
+
+<span class="py-fn">print</span>(<span class="py-str">"-----------------"</span>)
+
+<span class="py-cm"># Controlla in modo specifico se un elemento appartiene a una categoria</span>
+<span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-var">l</span>:
+    <span class="py-kw">if</span> <span class="py-fn">isinstance</span>(<span class="py-var">x</span>, <span class="py-fn">list</span>):
+        <span class="py-fn">print</span>(<span class="py-var">x</span>, <span class="py-str">"è una lista"</span>)
+    <span class="py-kw">elif</span> <span class="py-fn">isinstance</span>(<span class="py-var">x</span>, (<span class="py-fn">float</span>, <span class="py-fn">int</span>)):
+        <span class="py-fn">print</span>(<span class="py-var">x</span>, <span class="py-str">"è un numero"</span>)
+    <span class="py-kw">elif</span> <span class="py-fn">isinstance</span>(<span class="py-var">x</span>, <span class="py-fn">str</span>):
+        <span class="py-fn">print</span>(<span class="py-var">x</span>, <span class="py-str">"è una stringa"</span>)</div>
+        
+        <h3 style="margin-top:1.5rem;">Analisi del Codice</h3>
+        <ul class="item-list">
+          <li><strong>type(x)</strong>: Questa funzione restituisce il tipo di dato esatto di una variabile (es. <code style="font-family:'IBM Plex Mono', monospace;">&lt;class 'int'&gt;</code> per un intero, <code style="font-family:'IBM Plex Mono', monospace;">&lt;class 'str'&gt;</code> per una stringa). È utile quando vogliamo semplicemente stampare a schermo o ispezionare "di che pasta è fatto" un elemento.</li>
+          <li><strong>isinstance(x, tipo)</strong>: Questa è la funzione più potente ed usata per i controlli nei programmi reali. Prende due parametri: l'elemento da analizzare e il tipo da verificare (es. <code style="font-family:'IBM Plex Mono', monospace;">list</code>, <code style="font-family:'IBM Plex Mono', monospace;">int</code>, <code style="font-family:'IBM Plex Mono', monospace;">str</code>). Restituisce <strong>True</strong> se l'elemento appartiene a quel tipo, e <strong>False</strong> altrimenti.</li>
+          <li><strong>isinstance(x, (float, int))</strong>: Notiamo che al posto di un singolo tipo, abbiamo passato due tipi tra parentesi <code style="font-family:'IBM Plex Mono', monospace;">(float, int)</code>. Questa è una comodità di Python: permette di chiedere "questo elemento è un float OPPURE un intero?" in una sola riga di codice. Molto comodo per verificare se qualcosa è genericamente un "numero".</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 11. ESEMPIO RIEPILOGATIVO -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">11</span>
+        <span class="section-title">Programma Riepilogativo Completo</span>
+      </div>
+      <div class="section-body">
+        <div class="intro-box">
+          Questo mini-programma raccoglie <strong>tutti i concetti principali</strong> visti finora: la creazione di liste miste, liste annidate, l'uso dei metodi per modificarle, i cicli FOR per esplorarle e i controlli per analizzarne i tipi.
+        </div>
+        <div class="code-block"><span class="py-cm"># ==========================================</span>
+<span class="py-cm"># GESTIONE DI UN MAGAZZINO (Esempio Completo)</span>
+<span class="py-cm"># ==========================================</span>
+
+<span class="py-cm"># 1. Creazione di una lista mista e con una lista annidata</span>
+<span class="py-cm">#    Il magazzino contiene oggetti singoli e liste con [quantità, prezzo unitario]</span>
+<span class="py-var">magazzino</span> <span class="py-op">=</span> [<span class="py-str">"Tastiera"</span>, [<span class="py-num">10</span>, <span class="py-num">45.50</span>], <span class="py-str">"Mouse"</span>, [<span class="py-num">25</span>, <span class="py-num">15.0</span>]]
+
+<span class="py-fn">print</span>(<span class="py-str">"Magazzino iniziale:"</span>, <span class="py-var">magazzino</span>)
+<span class="py-fn">print</span>(<span class="py-str">"Oggetti totali nella lista principale:"</span>, <span class="py-fn">len</span>(<span class="py-var">magazzino</span>))
+<span class="py-fn">print</span>(<span class="py-str">"-"</span> <span class="py-op">*</span> <span class="py-num">30</span>)
+
+<span class="py-cm"># 2. Modificare la lista usando i Metodi</span>
+<span class="py-fn">print</span>(<span class="py-str">"--- AGGIORNAMENTO DATI ---"</span>)
+<span class="py-cm"># Aggiungiamo un nuovo prodotto in fondo (append)</span>
+<span class="py-var">magazzino</span>.<span class="py-fn">append</span>(<span class="py-str">"Monitor"</span>)
+<span class="py-var">magazzino</span>.<span class="py-fn">append</span>([<span class="py-num">5</span>, <span class="py-num">120.0</span>])
+
+<span class="py-cm"># Inseriamo un prodotto all'inizio (insert in posizione 0)</span>
+<span class="py-var">magazzino</span>.<span class="py-fn">insert</span>(<span class="py-num">0</span>, <span class="py-str">"Webcam"</span>)
+<span class="py-var">magazzino</span>.<span class="py-fn">insert</span>(<span class="py-num">1</span>, [<span class="py-num">8</span>, <span class="py-num">35.0</span>])
+
+<span class="py-fn">print</span>(<span class="py-str">"Magazzino aggiornato:"</span>, <span class="py-var">magazzino</span>)
+<span class="py-fn">print</span>(<span class="py-str">"-"</span> <span class="py-op">*</span> <span class="py-num">30</span>)
+
+<span class="py-cm"># 3. Accedere agli elementi e slicing</span>
+<span class="py-fn">print</span>(<span class="py-str">"--- ACCESSO E SLICING ---"</span>)
+<span class="py-fn">print</span>(<span class="py-str">"Primo prodotto:"</span>, <span class="py-var">magazzino</span>[<span class="py-num">0</span>])
+<span class="py-cm"># magazzino[1] è una sottolista [8, 35.0]. Prendo la quantità (indice 0)</span>
+<span class="py-fn">print</span>(<span class="py-str">"Quantità del primo prodotto:"</span>, <span class="py-var">magazzino</span>[<span class="py-num">1</span>][<span class="py-num">0</span>]) 
+<span class="py-fn">print</span>(<span class="py-str">"Ultimo dato (prezzo monitor):"</span>, <span class="py-var">magazzino</span>[<span class="py-num">-1</span>][<span class="py-num">1</span>])
+<span class="py-fn">print</span>(<span class="py-str">"-"</span> <span class="py-op">*</span> <span class="py-num">30</span>)
+
+<span class="py-cm"># 4. Scorrere la lista e Controllo dei Tipi (type / isinstance)</span>
+<span class="py-fn">print</span>(<span class="py-str">"--- ANALISI PRODOTTI ---"</span>)
+<span class="py-var">totale_valore_magazzino</span> <span class="py-op">=</span> <span class="py-num">0</span>
+
+<span class="py-kw">for</span> <span class="py-var">elemento</span> <span class="py-kw">in</span> <span class="py-var">magazzino</span>:
+    <span class="py-cm"># Controllo se l'elemento è una stringa (il nome del prodotto)</span>
+    <span class="py-kw">if</span> <span class="py-fn">isinstance</span>(<span class="py-var">elemento</span>, <span class="py-fn">str</span>):
+        <span class="py-fn">print</span>(<span class="py-str">"Prodotto trovato:"</span>, <span class="py-var">elemento</span>)
+        
+    <span class="py-cm"># Controllo se l'elemento è una lista (contiene quantità e prezzo)</span>
+    <span class="py-kw">elif</span> <span class="py-fn">isinstance</span>(<span class="py-var">elemento</span>, <span class="py-fn">list</span>):
+        <span class="py-var">quantita</span> <span class="py-op">=</span> <span class="py-var">elemento</span>[<span class="py-num">0</span>]
+        <span class="py-var">prezzo</span> <span class="py-op">=</span> <span class="py-var">elemento</span>[<span class="py-num">1</span>]
+        <span class="py-var">valore_stock</span> <span class="py-op">=</span> <span class="py-var">quantita</span> <span class="py-op">*</span> <span class="py-var">prezzo</span>
+        <span class="py-fn">print</span>(<span class="py-str">"  -> In giacenza:"</span>, <span class="py-var">quantita</span>, <span class="py-str">"pezzi. Valore totale:"</span>, <span class="py-var">valore_stock</span>, <span class="py-str">"€"</span>)
+        
+        <span class="py-cm"># Sommo il valore al totale del magazzino</span>
+        <span class="py-var">totale_valore_magazzino</span> <span class="py-op">+=</span> <span class="py-var">valore_stock</span>
+
+<span class="py-fn">print</span>(<span class="py-str">"-"</span> <span class="py-op">*</span> <span class="py-num">30</span>)
+<span class="py-fn">print</span>(<span class="py-str">"Valore totale di tutti i prodotti:"</span>, <span class="py-var">totale_valore_magazzino</span>, <span class="py-str">"€"</span>)
+
+<span class="py-cm"># 5. Estrazione stringhe, Ordinamento e Pulizia (Rimozione finale)</span>
+<span class="py-fn">print</span>(<span class="py-str">"--- PULIZIA E ORDINAMENTO NOMI ---"</span>)
+<span class="py-var">lista_nomi</span> <span class="py-op">=</span> []
+<span class="py-kw">for</span> <span class="py-var">elemento</span> <span class="py-kw">in</span> <span class="py-var">magazzino</span>:
+    <span class="py-kw">if</span> <span class="py-fn">isinstance</span>(<span class="py-var">elemento</span>, <span class="py-fn">str</span>):
+        <span class="py-var">lista_nomi</span>.<span class="py-fn">append</span>(<span class="py-var">elemento</span>) <span class="py-cm"># Estraggo solo le stringhe</span>
+
+<span class="py-var">lista_nomi</span>.<span class="py-fn">sort</span>() <span class="py-cm"># Ordino alfabeticamente la nuova lista di soli nomi</span>
+<span class="py-fn">print</span>(<span class="py-str">"Prodotti ordinati (A-Z):"</span>, <span class="py-var">lista_nomi</span>)
+
+<span class="py-var">magazzino</span>.<span class="py-fn">clear</span>() <span class="py-cm"># Svuoto completamente il magazzino originale</span>
+<span class="py-fn">print</span>(<span class="py-str">"Magazzino svuotato:"</span>, <span class="py-var">magazzino</span>)</div>
+      </div>
+    </div>
+
+  </div> <!-- fine parte teorica -->
+ 
+  <!-- ESERCIZI -->
+  <div id="esercizi" class="tab-content">
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">E</span>
+        <span class="section-title">Esercizi sulle Liste</span>
+      </div>
+      <div class="section-body">
+        
+        <div class="intro-box" style="border-left-color: var(--green);">
+          <strong>🎯 Obiettivo:</strong><br>
+          <ul class="item-list" style="margin-top:0.5rem;">
+            <li>Creare una lista con i primi 100 numeri interi positivi</li>
+            <li>Calcolare la somma di tutti gli elementi</li>
+            <li>Calcolare quanti numeri NON divisibili per 5 ci sono</li>
+            <li>Creare una seconda lista con solo i numeri pari della prima</li>
+          </ul>
+        </div>
+
+        <h3 style="margin-top:2rem;">💻 CODICE COMPLETAMENTE COMMENTATO</h3>
+        <p style="margin-bottom:1rem;">Ecco il codice Python commentato riga per riga per risolvere l'esercizio:</p>
+        
+        <div class="code-block"><span class="py-cm"># Creiamo una lista vuota che poi riempiremo con i primi 100 numeri</span>
+<span class="py-var">lista1</span> <span class="py-op">=</span> []
+
+<span class="py-cm"># Usiamo il ciclo for per inserire i numeri da 1 a 100</span>
+<span class="py-cm"># range(1, 101, 1) significa:</span>
+<span class="py-cm"># start = 1 (parto da 1)</span>
+<span class="py-cm"># stop = 101 (mi fermo prima di 101, quindi arrivo a 100)</span>
+<span class="py-cm"># step = 1 (avanzo di uno alla volta)</span>
+<span class="py-kw">for</span> <span class="py-var">numero</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-num">1</span>, <span class="py-num">101</span>, <span class="py-num">1</span>):
+    <span class="py-cm"># Aggiungo il numero corrente alla lista</span>
+    <span class="py-var">lista1</span>.<span class="py-fn">append</span>(<span class="py-var">numero</span>)
+
+<span class="py-cm"># Ora lista1 contiene i numeri da 1 a 100</span>
+
+
+<span class="py-cm"># -------------------------------</span>
+<span class="py-cm"># 1) SOMMA DI TUTTI GLI ELEMENTI</span>
+<span class="py-cm"># -------------------------------</span>
+
+<span class="py-cm"># Inizializzo la somma a 0 perché sommare parte sempre da zero</span>
+<span class="py-var">somma</span> <span class="py-op">=</span> <span class="py-num">0</span>
+
+<span class="py-cm"># Scorro la lista elemento per elemento</span>
+<span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-var">lista1</span>:
+    <span class="py-cm"># Aggiungo ogni numero alla somma totale</span>
+    <span class="py-var">somma</span> <span class="py-op">=</span> <span class="py-var">somma</span> <span class="py-op">+</span> <span class="py-var">x</span>
+
+<span class="py-cm"># A questo punto la variabile somma contiene la somma dei numeri da 1 a 100</span>
+
+
+<span class="py-cm"># ---------------------------------------------------</span>
+<span class="py-cm"># 2) QUANTI ELEMENTI NON DIVISIBILI PER 5 CI SONO</span>
+<span class="py-cm"># ---------------------------------------------------</span>
+
+<span class="py-cm"># Inizializzo il contatore a 0</span>
+<span class="py-var">non_divisibili</span> <span class="py-op">=</span> <span class="py-num">0</span>
+
+<span class="py-cm"># Scorro la lista</span>
+<span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-var">lista1</span>:
+    <span class="py-cm"># Un numero è divisibile per 5 se il resto della divisione è 0</span>
+    <span class="py-cm"># x % 5 restituisce il resto della divisione di x per 5</span>
+    <span class="py-kw">if</span> <span class="py-var">x</span> <span class="py-op">%</span> <span class="py-num">5</span> <span class="py-op">!=</span> <span class="py-num">0</span>:
+        <span class="py-cm"># Se il resto NON è zero, allora NON è divisibile per 5</span>
+        <span class="py-var">non_divisibili</span> <span class="py-op">=</span> <span class="py-var">non_divisibili</span> <span class="py-op">+</span> <span class="py-num">1</span>
+
+
+<span class="py-cm"># ---------------------------------------------------</span>
+<span class="py-cm"># 3) CREARE UNA SECONDA LISTA CON SOLO I NUMERI PARI</span>
+<span class="py-cm"># ---------------------------------------------------</span>
+
+<span class="py-cm"># Creo una lista vuota che conterrà solo i numeri pari</span>
+<span class="py-var">lista_pari</span> <span class="py-op">=</span> []
+
+<span class="py-cm"># Scorro la lista originale</span>
+<span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-var">lista1</span>:
+    <span class="py-cm"># Un numero è pari se il resto della divisione per 2 è zero</span>
+    <span class="py-kw">if</span> <span class="py-var">x</span> <span class="py-op">%</span> <span class="py-num">2</span> <span class="py-op">==</span> <span class="py-num">0</span>:
+        <span class="py-cm"># Se è pari, lo aggiungo alla seconda lista</span>
+        <span class="py-var">lista_pari</span>.<span class="py-fn">append</span>(<span class="py-var">x</span>)
+
+
+<span class="py-cm"># -------------------------------</span>
+<span class="py-cm"># STAMPA DEI RISULTATI FINALI</span>
+<span class="py-cm"># -------------------------------</span>
+
+<span class="py-fn">print</span>(<span class="py-str">"Somma di tutti gli elementi:"</span>, <span class="py-var">somma</span>)
+<span class="py-fn">print</span>(<span class="py-str">"Elementi NON divisibili per 5:"</span>, <span class="py-var">non_divisibili</span>)
+<span class="py-fn">print</span>(<span class="py-str">"Lista dei numeri pari:"</span>, <span class="py-var">lista_pari</span>)</div>
+
+        <div style="background:var(--card-bg); border: 2px solid var(--ink); border-radius: 8px; padding: 1.5rem; margin-top: 2.5rem; box-shadow: 4px 4px 0 var(--ink);">
+          <h3 style="margin-top:0; color:var(--ink);">📘 SPIEGAZIONI TEORICHE (semplici e concrete)</h3>
+          
+          <div style="margin-top: 1.5rem;">
+            <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">🔵 LISTE</h4>
+            <ul class="item-list">
+              <li>Si creano con le parentesi quadre: <code style="font-weight:bold;">[ ]</code></li>
+              <li>Sono dinamiche: si possono riempire, svuotare, modificare</li>
+              <li>Possono contenere numeri, stringhe, ecc.</li>
+            </ul>
+          </div>
+          
+          <div style="margin-top: 1.5rem;">
+            <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">🔵 FOR + RANGE</h4>
+            <p>Il ciclo:</p>
+            <div class="code-block" style="margin:0.5rem 0;"><span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-var">start</span>, <span class="py-var">stop</span>, <span class="py-var">step</span>):</div>
+            <p>significa:</p>
+            <ul class="item-list">
+              <li><strong>start</strong> &rarr; da dove parto</li>
+              <li><strong>stop</strong> &rarr; dove mi fermo (mi fermo prima di questo numero)</li>
+              <li><strong>step</strong> &rarr; di quanto avanzo ogni volta</li>
+            </ul>
+            <p style="margin-top:0.5rem;"><em>Esempio:</em></p>
+            <div class="code-block" style="margin:0.5rem 0;"><span class="py-fn">range</span>(<span class="py-num">1</span>, <span class="py-num">101</span>, <span class="py-num">1</span>)</div>
+            <p>&rarr; numeri da 1 a 100.</p>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">🔵 APPEND</h4>
+            <p>Serve per aggiungere un elemento alla lista:</p>
+            <div class="code-block" style="margin:0.5rem 0;"><span class="py-var">lista</span>.<span class="py-fn">append</span>(<span class="py-var">x</span>)</div>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">🔵 DIVISIBILITÀ</h4>
+            <p>Un numero è divisibile per 5 se:</p>
+            <div class="code-block" style="margin:0.5rem 0;"><span class="py-var">x</span> <span class="py-op">%</span> <span class="py-num">5</span> <span class="py-op">==</span> <span class="py-num">0</span></div>
+            <p>Se il resto è diverso da zero &rarr; non è divisibile.</p>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">🔵 NUMERI PARI</h4>
+            <p>Un numero è pari se:</p>
+            <div class="code-block" style="margin:0.5rem 0; margin-bottom:0;"><span class="py-var">x</span> <span class="py-op">%</span> <span class="py-num">2</span> <span class="py-op">==</span> <span class="py-num">0</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ESERCIZIO 2 -->
+    <div class="section" style="margin-top:4rem; border-top:2px dashed var(--rule); padding-top:3rem;">
+      <div class="section-header">
+        <span class="section-num" style="background:var(--accent2);">E2</span>
+        <span class="section-title">Ricerca di un Elemento e Indice</span>
+      </div>
+      <div class="section-body">
+        
+        <div class="intro-box" style="border-left-color: var(--accent2);">
+          <strong>🎯 Testo del Problema:</strong><br>
+          <p style="margin-top:0.5rem; margin-bottom:0;">Scrivi un programma che a partire da un elemento e una lista di elementi dica in output se l'elemento passato sia presente o meno. Qualora l'elemento sia presente nella lista, il programma dovrà comunicarci l'indice dell'elemento tramite il metodo <code>index()</code>.</p>
+        </div>
+
+        <h3 style="margin-top:2rem;">✅ VERSIONE 1 — Ricerca con il ciclo FOR + flag "trovato"</h3>
+        <div class="code-block"><span class="py-cm"># Lista di numeri già pronta</span>
+<span class="py-var">lista1</span> <span class="py-op">=</span> [<span class="py-num">2</span>, <span class="py-num">5</span>, <span class="py-num">12</span>, <span class="py-num">8</span>, <span class="py-num">16</span>, <span class="py-num">52</span>, <span class="py-num">500</span>, <span class="py-num">1000</span>, <span class="py-num">65</span>, <span class="py-num">9</span>]
+
+<span class="py-cm"># Calcolo la lunghezza della lista usando len()</span>
+<span class="py-cm"># len() restituisce quanti elementi ci sono nella lista</span>
+<span class="py-var">n</span> <span class="py-op">=</span> <span class="py-fn">len</span>(<span class="py-var">lista1</span>)
+
+<span class="py-cm"># Variabile che useremo come "bandierina" per sapere se l'elemento è stato trovato</span>
+<span class="py-var">trovato</span> <span class="py-op">=</span> <span class="py-bool">False</span>
+
+<span class="py-cm"># Chiedo all'utente quale numero vuole cercare</span>
+<span class="py-cm"># input() legge un testo, int() lo trasforma in numero intero</span>
+<span class="py-var">num</span> <span class="py-op">=</span> <span class="py-fn">int</span>(<span class="py-fn">input</span>(<span class="py-str">"Inserisci l'elemento da controllare --&gt; "</span>))
+
+<span class="py-cm"># Ciclo for per scorrere tutta la lista elemento per elemento</span>
+<span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-var">lista1</span>:
+
+    <span class="py-cm"># Controllo se l'elemento corrente è uguale al numero cercato</span>
+    <span class="py-kw">if</span> <span class="py-var">x</span> <span class="py-op">==</span> <span class="py-var">num</span>:
+
+        <span class="py-cm"># Se sono uguali, allora l'elemento esiste nella lista</span>
+        <span class="py-fn">print</span>(<span class="py-str">"L'elemento esiste"</span>)
+
+        <span class="py-cm"># Uso il metodo index() per sapere in quale posizione si trova</span>
+        <span class="py-var">indice</span> <span class="py-op">=</span> <span class="py-var">lista1</span>.<span class="py-fn">index</span>(<span class="py-var">num</span>)
+
+        <span class="py-fn">print</span>(<span class="py-str">"In posizione:"</span>, <span class="py-var">indice</span>)
+
+        <span class="py-cm"># Segno che l'elemento è stato trovato</span>
+        <span class="py-var">trovato</span> <span class="py-op">=</span> <span class="py-bool">True</span>
+
+<span class="py-cm"># Dopo il ciclo, se trovato è ancora False, significa che non abbiamo trovato nulla</span>
+<span class="py-kw">if</span> <span class="py-var">trovato</span> <span class="py-op">==</span> <span class="py-bool">False</span>:
+    <span class="py-fn">print</span>(<span class="py-str">"Elemento non trovato"</span>)</div>
+
+        <div style="background:var(--card-bg); border: 2px solid var(--ink); border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem; box-shadow: 4px 4px 0 var(--ink);">
+          <h3 style="margin-top:0; color:var(--ink);">📘 SPIEGAZIONE TEORICA (semplice)</h3>
+          
+          <div style="margin-top: 1.5rem;">
+            <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">🔵 Il ciclo FOR</h4>
+            <p>Serve per scorrere una lista elemento per elemento:</p>
+            <div class="code-block" style="margin:0.5rem 0;"><span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-var">lista1</span>:</div>
+            <p>Significa: prendi il primo elemento della lista e chiamalo <code>x</code>, poi il secondo, poi il terzo... fino alla fine.</p>
+          </div>
+          
+          <div style="margin-top: 1.5rem;">
+            <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">🔵 Il metodo index()</h4>
+            <p><code>lista1.index(num)</code> restituisce l'indice (cioè la posizione) del numero cercato. <strong>Ricorda:</strong> gli indici partono da 0.</p>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <h4 style="color: var(--accent2); margin-bottom: 0.5rem;">🔵 La variabile "trovato"</h4>
+            <p>Serve come "bandierina" logica:</p>
+            <ul class="item-list">
+              <li><code>False</code> &rarr; non trovato</li>
+              <li><code>True</code> &rarr; trovato</li>
+            </ul>
+            <p style="margin-top:0.5rem;">Alla fine del programma controlliamo questa bandierina. Se non si è mai alzata (<code style="font-family:'IBM Plex Mono', monospace;">if trovato == False:</code>), significa che l'elemento non c'era.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:3rem;">✅ VERSIONE 2 — Ricerca con l’operatore IN (più semplice ed efficiente)</h3>
+        <div class="code-block"><span class="py-cm"># Lista di numeri</span>
+<span class="py-var">lista1</span> <span class="py-op">=</span> [<span class="py-num">2</span>, <span class="py-num">5</span>, <span class="py-num">12</span>, <span class="py-num">8</span>, <span class="py-num">16</span>, <span class="py-num">52</span>, <span class="py-num">500</span>, <span class="py-num">1000</span>, <span class="py-num">65</span>, <span class="py-num">9</span>]
+
+<span class="py-cm"># Chiedo il numero da cercare</span>
+<span class="py-var">num</span> <span class="py-op">=</span> <span class="py-fn">int</span>(<span class="py-fn">input</span>(<span class="py-str">"Inserisci l'elemento da controllare --&gt; "</span>))
+
+<span class="py-cm"># Controllo direttamente se num è dentro la lista</span>
+<span class="py-cm"># L'operatore in restituisce True se l'elemento è presente</span>
+<span class="py-kw">if</span> <span class="py-var">num</span> <span class="py-kw">in</span> <span class="py-var">lista1</span>:
+
+    <span class="py-fn">print</span>(<span class="py-str">"L'elemento esiste"</span>)
+
+    <span class="py-cm"># index() restituisce la posizione dell'elemento</span>
+    <span class="py-var">indice</span> <span class="py-op">=</span> <span class="py-var">lista1</span>.<span class="py-fn">index</span>(<span class="py-var">num</span>)
+    <span class="py-fn">print</span>(<span class="py-str">"In posizione:"</span>, <span class="py-var">indice</span>)
+
+<span class="py-kw">else</span>:
+    <span class="py-fn">print</span>(<span class="py-str">"L'elemento non è presente nella lista"</span>)</div>
+
+        <div style="background:var(--card-bg); border: 2px solid var(--ink); border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem; box-shadow: 4px 4px 0 var(--ink);">
+          <h3 style="margin-top:0; color:var(--ink);">📘 SPIEGAZIONE TEORICA DEL METODO "IN"</h3>
+          <p>L’operatore speciale di Python:</p>
+          <div class="code-block" style="margin:0.5rem 0;"><span class="py-kw">if</span> <span class="py-var">num</span> <span class="py-kw">in</span> <span class="py-var">lista1</span>:</div>
+          <p>Significa esplicitamente: <strong>"controlla se num è dentro lista1"</strong>. È il modo più semplice, leggibile e veloce per cercare un elemento all'interno di una lista in Python, senza dover per forza usare cicli o variabili bandierina.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ESERCIZIO 3 -->
+    <div class="section" style="margin-top:4rem; border-top:2px dashed var(--rule); padding-top:3rem;">
+      <div class="section-header">
+        <span class="section-num" style="background:var(--accent2);">E3</span>
+        <span class="section-title">Elementi in Posizione Pari</span>
+      </div>
+      <div class="section-body">
+        
+        <div class="intro-box" style="border-left-color: var(--accent2);">
+          <strong>🎯 Testo del Problema:</strong><br>
+          <p style="margin-top:0.5rem; margin-bottom:0;">Data una lista di <code>n</code> interi, con <code>n</code> valore in input, creare un'altra lista contenente solo gli elementi di <strong>posizione pari</strong> della prima lista.</p>
+        </div>
+
+        <div style="background:var(--card-bg); border: 2px solid var(--ink); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; box-shadow: 4px 4px 0 var(--ink);">
+          <h3 style="margin-top:0; color:var(--ink);">🧠 Ragionamento Semplice</h3>
+          <ul class="item-list">
+            <li>L'utente decide quanti numeri inserire &rarr; <code>n</code>.</li>
+            <li>Riempio una lista con <code>n</code> numeri.</li>
+            <li>Creo una seconda lista.</li>
+            <li>Scorro la lista con l'indice <code>i</code>.</li>
+            <li>Se l'indice <code>i</code> è pari (<code>i % 2 == 0</code>), prendo quell'elemento e lo metto nella seconda lista.</li>
+            <li>Alla fine stampo la lista originale e la lista con gli elementi in posizione pari.</li>
+          </ul>
+        </div>
+
+        <h3 style="margin-top:3rem;">💻 Codice Commentato e Spiegato</h3>
+        <div class="code-block"><span class="py-cm"># Chiedo all'utente quanti numeri vuole inserire</span>
+<span class="py-var">n</span> <span class="py-op">=</span> <span class="py-fn">int</span>(<span class="py-fn">input</span>(<span class="py-str">"Quanti numeri vuoi inserire? "</span>))
+
+<span class="py-cm"># Creo una lista vuota che conterrà i numeri inseriti</span>
+<span class="py-var">lista1</span> <span class="py-op">=</span> []
+
+<span class="py-cm"># Uso un ciclo for per inserire n numeri</span>
+<span class="py-cm"># range(0, n, 1) significa:</span>
+<span class="py-cm"># start = 0 (parto da 0)</span>
+<span class="py-cm"># stop = n (mi fermo prima di n)</span>
+<span class="py-cm"># step = 1 (avanzo di uno alla volta)</span>
+<span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-num">0</span>, <span class="py-var">n</span>, <span class="py-num">1</span>):
+    <span class="py-var">x</span> <span class="py-op">=</span> <span class="py-fn">int</span>(<span class="py-fn">input</span>(<span class="py-str">"Inserisci un numero: "</span>))
+    <span class="py-var">lista1</span>.<span class="py-fn">append</span>(<span class="py-var">x</span>)
+
+<span class="py-cm"># Creo una seconda lista vuota che conterrà solo gli elementi in posizione pari</span>
+<span class="py-var">lista_pos_pari</span> <span class="py-op">=</span> []
+
+<span class="py-cm"># Scorro di nuovo la lista usando l'indice</span>
+<span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-num">0</span>, <span class="py-var">n</span>, <span class="py-num">1</span>):
+
+    <span class="py-cm"># Controllo se l'indice è pari</span>
+    <span class="py-cm"># Un numero è pari se il resto della divisione per 2 è zero</span>
+    <span class="py-kw">if</span> <span class="py-var">i</span> <span class="py-op">%</span> <span class="py-num">2</span> <span class="py-op">==</span> <span class="py-num">0</span>:
+        <span class="py-cm"># Se l'indice è pari, prendo l'elemento in quella posizione</span>
+        <span class="py-var">elemento</span> <span class="py-op">=</span> <span class="py-var">lista1</span>[<span class="py-var">i</span>]
+        <span class="py-cm"># Lo aggiungo alla seconda lista</span>
+        <span class="py-var">lista_pos_pari</span>.<span class="py-fn">append</span>(<span class="py-var">elemento</span>)
+
+<span class="py-cm"># Stampo le due liste</span>
+<span class="py-fn">print</span>(<span class="py-str">"Lista originale:"</span>, <span class="py-var">lista1</span>)
+<span class="py-fn">print</span>(<span class="py-str">"Elementi in posizione pari:"</span>, <span class="py-var">lista_pos_pari</span>)</div>
+      </div>
+    </div>
+
+    <!-- ESERCIZIO 4 -->
+    <div class="section" style="margin-top:4rem; border-top:2px dashed var(--rule); padding-top:3rem;">
+      <div class="section-header">
+        <span class="section-num" style="background:var(--accent2);">E4</span>
+        <span class="section-title">Elementi di Valore Dispari</span>
+      </div>
+      <div class="section-body">
+        
+        <div class="intro-box" style="border-left-color: var(--accent2);">
+          <strong>🎯 Testo del Problema:</strong><br>
+          <p style="margin-top:0.5rem; margin-bottom:0;">Data una lista di <code>n</code> interi, con <code>n</code> valore in input, creare un'altra lista contenente solo gli elementi di <strong>valore dispari</strong> della prima lista.</p>
+        </div>
+
+        <div style="background:var(--card-bg); border: 2px solid var(--ink); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; box-shadow: 4px 4px 0 var(--ink);">
+          <h3 style="margin-top:0; color:var(--ink);">🧠 Ragionamento Semplice</h3>
+          <ul class="item-list">
+            <li>L'utente decide quanti numeri inserire.</li>
+            <li>Riempio la lista con questi numeri.</li>
+            <li>Creo una seconda lista.</li>
+            <li>Scorro la lista elemento per elemento.</li>
+            <li>Se il numero è dispari (<code>x % 2 != 0</code>), lo metto nella seconda lista.</li>
+            <li>Alla fine stampo la lista originale e la lista con i numeri dispari.</li>
+          </ul>
+        </div>
+
+        <h3 style="margin-top:3rem;">💻 Codice Commentato e Spiegato</h3>
+        <div class="code-block"><span class="py-cm"># Chiedo quanti numeri vuole inserire l'utente</span>
+<span class="py-var">n</span> <span class="py-op">=</span> <span class="py-fn">int</span>(<span class="py-fn">input</span>(<span class="py-str">"Quanti numeri vuoi inserire? "</span>))
+
+<span class="py-cm"># Creo la lista vuota</span>
+<span class="py-var">lista1</span> <span class="py-op">=</span> []
+
+<span class="py-cm"># Riempio la lista con n numeri</span>
+<span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-num">0</span>, <span class="py-var">n</span>, <span class="py-num">1</span>):
+    <span class="py-var">x</span> <span class="py-op">=</span> <span class="py-fn">int</span>(<span class="py-fn">input</span>(<span class="py-str">"Inserisci un numero: "</span>))
+    <span class="py-var">lista1</span>.<span class="py-fn">append</span>(<span class="py-var">x</span>)
+
+<span class="py-cm"># Creo una seconda lista per contenere solo i numeri dispari</span>
+<span class="py-var">lista_dispari</span> <span class="py-op">=</span> []
+
+<span class="py-cm"># Scorro la lista elemento per elemento</span>
+<span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-var">lista1</span>:
+
+    <span class="py-cm"># Un numero è dispari se il resto della divisione per 2 NON è zero</span>
+    <span class="py-kw">if</span> <span class="py-var">x</span> <span class="py-op">%</span> <span class="py-num">2</span> <span class="py-op">!=</span> <span class="py-num">0</span>:
+        <span class="py-cm"># Se è dispari, lo aggiungo alla lista dei dispari</span>
+        <span class="py-var">lista_dispari</span>.<span class="py-fn">append</span>(<span class="py-var">x</span>)
+
+<span class="py-cm"># Stampo le due liste</span>
+<span class="py-fn">print</span>(<span class="py-str">"Lista originale:"</span>, <span class="py-var">lista1</span>)
+<span class="py-fn">print</span>(<span class="py-str">"Elementi di valore dispari:"</span>, <span class="py-var">lista_dispari</span>)</div>
+      </div>
+    </div>
+
+    <!-- ESERCIZIO 5 -->
+    <div class="section" style="margin-top:4rem; border-top:2px dashed var(--rule); padding-top:3rem;">
+      <div class="section-header">
+        <span class="section-num" style="background:var(--accent2);">E5</span>
+        <span class="section-title">Ricerca Sottostringa senza Metodi Nativi</span>
+      </div>
+      <div class="section-body">
+        
+        <div class="intro-box" style="border-left-color: var(--accent2);">
+          <strong>🎯 Testo del Problema:</strong><br>
+          <p style="margin-top:0.5rem; margin-bottom:0;">Scrivere una funzione <code>cerca(testo, parola)</code> che, data una stringa <code>testo</code> e una stringa <code>parola</code>, restituisce la posizione iniziale della prima occorrenza di <code>parola</code> in <code>testo</code>. Se non c'è alcuna occorrenza restituisce <code>-1</code>. <strong>Vietato l'uso di funzioni di libreria come .find() o .index().</strong></p>
+        </div>
+
+        <div style="background:var(--card-bg); border: 2px solid var(--ink); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; box-shadow: 4px 4px 0 var(--ink);">
+          <h3 style="margin-top:0; color:var(--ink);">🧠 Ragionamento Semplice</h3>
+          <ul class="item-list">
+            <li>Devo cercare una parola dentro un testo.</li>
+            <li>Scorro il testo lettera per lettera (come una "finestra" che scorre).</li>
+            <li>In ogni posizione <code>i</code> del testo, controllo se da lì in poi le lettere coincidono con la parola.</li>
+            <li>Uso un secondo indice <code>j</code> per scorrere le singole lettere della parola.</li>
+            <li>Se tutte le lettere coincidono &rarr; ho trovato la parola &rarr; restituisco la posizione <code>i</code>.</li>
+            <li>Se arrivo alla fine del testo senza trovare nulla &rarr; restituisco <code>-1</code>.</li>
+          </ul>
+        </div>
+
+        <div style="background:var(--card-bg); border: 2px solid var(--ink); border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem; box-shadow: 4px 4px 0 var(--ink);">
+          <h3 style="margin-top:0; color:var(--ink);">🚫 Che significa "non usare funzioni di libreria"?</h3>
+          <p>Significa <strong>NON usare funzioni o metodi già pronti</strong> di Python che risolvono il problema al posto nostro. In questi esercizi, l'obiettivo è imparare a costruire la logica algoritmica "da zero", usando unicamente i cicli (<code>for</code> / <code>while</code>) e le condizioni (<code>if</code> / <code>else</code>).</p>
+          <p style="margin-top:0.5rem;">In pratica, per questo esercizio <strong>NON puoi usare</strong> strumenti comodissimi come:</p>
+          
+          <div style="overflow-x:auto;">
+            <table class="data-table" style="margin-top:1rem; margin-bottom:0;">
+              <tr><th>Cosa è vietato</th><th>Cosa fa in automatico</th></tr>
+              <tr>
+                <td><code>.index(x)</code></td>
+                <td><span style="color:var(--ink);">Trova subito la posizione di un elemento.<br><em>Es:</em> <code>lista.index(5)</code></span></td>
+              </tr>
+              <tr>
+                <td><code>.find(x)</code></td>
+                <td><span style="color:var(--ink);">Cerca una sottostringa e ne restituisce l'indice.<br><em>Es:</em> <code>"ciao".find("a")</code></span></td>
+              </tr>
+              <tr>
+                <td><code>in</code> <span style="font-size:0.8em; font-weight:normal;">(per cercare)</span></td>
+                <td><span style="color:var(--ink);">Operatore logico che dice istantaneamente se un elemento esiste.<br><em>Es:</em> <code>if "a" in "ciao":</code></span></td>
+              </tr>
+              <tr>
+                <td><code>.count(x)</code></td>
+                <td><span style="color:var(--ink);">Conta automaticamente quante volte appare un elemento.<br><em>Es:</em> <code>lista.count(5)</code></span></td>
+              </tr>
+              <tr>
+                <td><code>.split()</code></td>
+                <td><span style="color:var(--ink);">Spezza una frase trasformandola in una lista di singole parole.<br><em>Es:</em> <code>frase.split()</code></span></td>
+              </tr>
+              <tr>
+                <td><code>.replace(x, y)</code></td>
+                <td><span style="color:var(--ink);">Sostituisce un testo con un altro in un solo colpo.<br><em>Es:</em> <code>frase.replace("a", "b")</code></span></td>
+              </tr>
+              <tr>
+                <td><code>max()</code> e <code>min()</code></td>
+                <td><span style="color:var(--ink);">Trovano il valore massimo o minimo senza dover fare confronti manuali.<br><em>Es:</em> <code>max([1, 5, 2])</code></span></td>
+              </tr>
+              <tr>
+                <td><code>sum()</code></td>
+                <td><span style="color:var(--ink);">Somma tutti i numeri di una lista senza usare una variabile accumulatore.<br><em>Es:</em> <code>sum([10, 20])</code></span></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <h3 style="margin-top:3rem;">💻 Codice Commentato e Spiegato</h3>
+        <div class="code-block"><span class="py-cm"># Definisco la funzione cerca che prende due stringhe:</span>
+<span class="py-cm"># testo: la frase o il testo in cui cercare</span>
+<span class="py-cm"># parola: la parola da cercare</span>
+<span class="py-kw">def</span> <span class="py-fn">cerca</span>(<span class="py-var">testo</span>, <span class="py-var">parola</span>):
+
+    <span class="py-cm"># Calcolo la lunghezza del testo e della parola</span>
+    <span class="py-var">len_testo</span> <span class="py-op">=</span> <span class="py-fn">len</span>(<span class="py-var">testo</span>)
+    <span class="py-var">len_parola</span> <span class="py-op">=</span> <span class="py-fn">len</span>(<span class="py-var">parola</span>)
+
+    <span class="py-cm"># Scorro il testo con un indice i</span>
+    <span class="py-cm"># Mi fermo a len_testo - len_parola perché oltre non ci sarebbe spazio per l'intera parola</span>
+    <span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-num">0</span>, <span class="py-var">len_testo</span> <span class="py-op">-</span> <span class="py-var">len_parola</span> <span class="py-op">+</span> <span class="py-num">1</span>, <span class="py-num">1</span>):
+
+        <span class="py-cm"># Suppongo che le lettere coincidano (imposto la mia "bandierina" su True)</span>
+        <span class="py-var">uguali</span> <span class="py-op">=</span> <span class="py-bool">True</span>
+
+        <span class="py-cm"># Scorro la parola con un altro indice j</span>
+        <span class="py-kw">for</span> <span class="py-var">j</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-num">0</span>, <span class="py-var">len_parola</span>, <span class="py-num">1</span>):
+
+            <span class="py-cm"># Confronto la lettera del testo con la lettera della parola</span>
+            <span class="py-cm"># testo[i + j] è la lettera del testo spostata in avanti di j posizioni</span>
+            <span class="py-cm"># parola[j] è la lettera della parola che sto controllando</span>
+            <span class="py-kw">if</span> <span class="py-var">testo</span>[<span class="py-var">i</span> <span class="py-op">+</span> <span class="py-var">j</span>] <span class="py-op">!=</span> <span class="py-var">parola</span>[<span class="py-var">j</span>]:
+                <span class="py-cm"># Se una lettera è diversa, segno che NON sono uguali</span>
+                <span class="py-var">uguali</span> <span class="py-op">=</span> <span class="py-bool">False</span>
+
+        <span class="py-cm"># Se dopo il ciclo interno 'uguali' è ancora True,</span>
+        <span class="py-cm"># significa che tutte le lettere coincidevano</span>
+        <span class="py-kw">if</span> <span class="py-var">uguali</span> <span class="py-op">==</span> <span class="py-bool">True</span>:
+            <span class="py-cm"># Restituisco la posizione iniziale (esce subito dalla funzione)</span>
+            <span class="py-kw">return</span> <span class="py-var">i</span>
+
+    <span class="py-cm"># Se esco dal ciclo for principale senza aver trovato nulla, restituisco -1</span>
+    <span class="py-kw">return</span> <span class="py-num">-1</span>
+
+
+<span class="py-cm"># --- ESEMPIO DI UTILIZZO ---</span>
+<span class="py-var">frase</span> <span class="py-op">=</span> <span class="py-str">"ciao come stai"</span>
+<span class="py-var">p</span> <span class="py-op">=</span> <span class="py-str">"come"</span>
+
+<span class="py-var">pos</span> <span class="py-op">=</span> <span class="py-fn">cerca</span>(<span class="py-var">frase</span>, <span class="py-var">p</span>)
+<span class="py-fn">print</span>(<span class="py-str">"Posizione:"</span>, <span class="py-var">pos</span>)</div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- LABORATORIO INTERATTIVO (ESERCIZIO GUIDATO) -->
+  <div id="laboratorio" class="tab-content">
+    
+    <div class="ex-tabs-container">
+      <button class="ex-tab-btn active" onclick="switchLabEx('guided-ex1', this)">Esercizio 1: Filtra Valori (> 10)</button>
+      <button class="ex-tab-btn" onclick="switchLabEx('guided-ex2', this)">Esercizio 2: Posizioni Pari</button>
+    </div>
+
+    <!-- ESERCIZIO 1: VALORI > 10 -->
+    <div id="guided-ex1" class="guided-container">
+      <div class="guided-header">
+        <h3>🎯 Esercizio 1: Filtra per Valore</h3>
+        <p style="margin-bottom:0;">Scrivere un programma che chiede all'utente <strong>quanti numeri</strong> inserire, riempie una prima lista tramite input, e infine crea una <strong>seconda lista</strong> contenente solo i numeri maggiori di 10.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-title">Chiedi all'utente la quantità di numeri</div>
+        <div class="step-hint">💡 Usa <code>input()</code> per stampare la domanda e <code>int()</code> per trasformare il testo in un intero. Salva il risultato nella variabile <code>n</code>.</div>
+        <div class="step-input-area"><textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea></div>
+        <div class="step-actions"><button class="btn-solution" onclick="toggleSolution('sol-1-1')">Mostra Soluzione</button></div>
+        <div id="sol-1-1" class="step-solution"><span class="py-var">n</span> <span class="py-op">=</span> <span class="py-fn">int</span>(<span class="py-fn">input</span>(<span class="py-str">"Quanti numeri vuoi inserire? "</span>))</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-title">Inizializza la lista di partenza</div>
+        <div class="step-hint">💡 Crea una lista vuota e chiamala <code>lista_numeri</code>.</div>
+        <div class="step-input-area"><textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea></div>
+        <div class="step-actions"><button class="btn-solution" onclick="toggleSolution('sol-1-2')">Mostra Soluzione</button></div>
+        <div id="sol-1-2" class="step-solution"><span class="py-var">lista_numeri</span> <span class="py-op">=</span> []</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-title">Costruisci il ciclo FOR</div>
+        <div class="step-hint">💡 Ripeti l'inserimento <code>n</code> volte usando la funzione <code>range()</code>. Usa <code>i</code> come contatore.</div>
+        <div class="step-input-area"><textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea></div>
+        <div class="step-actions"><button class="btn-solution" onclick="toggleSolution('sol-1-3')">Mostra Soluzione</button></div>
+        <div id="sol-1-3" class="step-solution"><span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-num">0</span>, <span class="py-var">n</span>, <span class="py-num">1</span>):</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <div class="step-title">Aggiungi il numero alla lista</div>
+        <div class="step-hint">💡 All'interno del ciclo, leggi prima il numero (variabile <code>x</code>) tramite input e poi inseriscilo in <code>lista_numeri</code> usando il metodo <code>append()</code>.</div>
+        <div class="step-input-area"><textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..." style="min-height:100px;"></textarea></div>
+        <div class="step-actions"><button class="btn-solution" onclick="toggleSolution('sol-1-4')">Mostra Soluzione</button></div>
+        <div id="sol-1-4" class="step-solution">
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="py-var">x</span> <span class="py-op">=</span> <span class="py-fn">int</span>(<span class="py-fn">input</span>(<span class="py-str">"Inserisci un numero: "</span>))<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="py-var">lista_numeri</span>.<span class="py-fn">append</span>(<span class="py-var">x</span>)
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">5</div>
+        <div class="step-title">Prepara la seconda lista</div>
+        <div class="step-hint">💡 Crea una seconda lista vuota chiamata <code>lista_mag</code> dove salveremo i numeri maggiori di 10.</div>
+        <div class="step-input-area"><textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea></div>
+        <div class="step-actions"><button class="btn-solution" onclick="toggleSolution('sol-1-5')">Mostra Soluzione</button></div>
+        <div id="sol-1-5" class="step-solution"><span class="py-var">lista_mag</span> <span class="py-op">=</span> []</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">6</div>
+        <div class="step-title">Scorri la prima lista</div>
+        <div class="step-hint">💡 Usiamo il ciclo for semplificato. Fai scorrere la variabile <code>x</code> all'interno di <code>lista_numeri</code>.</div>
+        <div class="step-input-area"><textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea></div>
+        <div class="step-actions"><button class="btn-solution" onclick="toggleSolution('sol-1-6')">Mostra Soluzione</button></div>
+        <div id="sol-1-6" class="step-solution"><span class="py-kw">for</span> <span class="py-var">x</span> <span class="py-kw">in</span> <span class="py-var">lista_numeri</span>:</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">7</div>
+        <div class="step-title">Condizione IF e Aggiunta</div>
+        <div class="step-hint">💡 Controlla se il numero <code>x</code> è maggiore di 10. Se sì, aggiungilo a <code>lista_mag</code>.</div>
+        <div class="step-input-area"><textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..." style="min-height:100px;"></textarea></div>
+        <div class="step-actions"><button class="btn-solution" onclick="toggleSolution('sol-1-7')">Mostra Soluzione</button></div>
+        <div id="sol-1-7" class="step-solution">
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="py-kw">if</span> <span class="py-var">x</span> <span class="py-op">&gt;</span> <span class="py-num">10</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="py-var">lista_mag</span>.<span class="py-fn">append</span>(<span class="py-var">x</span>)
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">8</div>
+        <div class="step-title">Stampa il Risultato Finale</div>
+        <div class="step-hint">💡 Finito! Stampa a video il contenuto della seconda lista.</div>
+        <div class="step-input-area"><textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea></div>
+        <div class="step-actions"><button class="btn-solution" onclick="toggleSolution('sol-1-8')">Mostra Soluzione</button></div>
+        <div id="sol-1-8" class="step-solution"><span class="py-fn">print</span>(<span class="py-var">lista_mag</span>)</div>
+      </div>
+    </div>
+
+
+    <!-- ESERCIZIO 2: POSIZIONI PARI -->
+    <div id="guided-ex2" class="guided-container" style="display:none;">
+      <div class="guided-header">
+        <h3>🎯 Esercizio 2: Estrai Posizioni Pari</h3>
+        <p style="margin-bottom:0;">Data una lista di <strong>n</strong> interi inseriti in input, creare un'altra lista contenente solo gli elementi che si trovano in <strong>posizione (indice) pari</strong> della prima lista.</p>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-title">Chiedi all'utente quanti numeri inserire</div>
+        <div class="step-hint">💡 Usa <code>input()</code> per stampare la domanda e <code>int()</code> per trasformare la risposta in un intero. Salva il tutto nella variabile <code>n</code>.</div>
+        <div class="step-input-area">
+          <textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea>
+        </div>
+        <div class="step-actions">
+          <button class="btn-solution" onclick="toggleSolution('sol-2-1')">Mostra Soluzione</button>
+        </div>
+        <div id="sol-2-1" class="step-solution">
+          <span class="py-var">n</span> <span class="py-op">=</span> <span class="py-fn">int</span>(<span class="py-fn">input</span>(<span class="py-str">"Quanti numeri vuoi inserire? "</span>))
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-title">Inizializza la prima lista</div>
+        <div class="step-hint">💡 Crea una lista vuota che si chiama <code>lista1</code>. Ricorda di usare le parentesi quadre vuote.</div>
+        <div class="step-input-area">
+          <textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea>
+        </div>
+        <div class="step-actions">
+          <button class="btn-solution" onclick="toggleSolution('sol-2-2')">Mostra Soluzione</button>
+        </div>
+        <div id="sol-2-2" class="step-solution">
+          <span class="py-var">lista1</span> <span class="py-op">=</span> []
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-title">Riempi la prima lista</div>
+        <div class="step-hint">💡 Crea un ciclo FOR che si ripeta <code>n</code> volte usando <code>range()</code>. Ad ogni iterazione, chiedi in input un intero <code>x</code> e inseriscilo in <code>lista1</code> usando <code>append()</code>.</div>
+        <div class="step-input-area">
+          <textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..." style="min-height:100px;"></textarea>
+        </div>
+        <div class="step-actions">
+          <button class="btn-solution" onclick="toggleSolution('sol-2-3')">Mostra Soluzione</button>
+        </div>
+        <div id="sol-2-3" class="step-solution">
+          <span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-num">0</span>, <span class="py-var">n</span>, <span class="py-num">1</span>):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="py-var">x</span> <span class="py-op">=</span> <span class="py-fn">int</span>(<span class="py-fn">input</span>(<span class="py-str">"Inserisci un numero: "</span>))<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="py-var">lista1</span>.<span class="py-fn">append</span>(<span class="py-var">x</span>)
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <div class="step-title">Crea la seconda lista</div>
+        <div class="step-hint">💡 Ora che la prima lista è carica, crea una seconda lista vuota chiamata <code>lista_pos_pari</code>.</div>
+        <div class="step-input-area">
+          <textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea>
+        </div>
+        <div class="step-actions">
+          <button class="btn-solution" onclick="toggleSolution('sol-2-4')">Mostra Soluzione</button>
+        </div>
+        <div id="sol-2-4" class="step-solution">
+          <span class="py-var">lista_pos_pari</span> <span class="py-op">=</span> []
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step-card">
+        <div class="step-number">5</div>
+        <div class="step-title">Scorri di nuovo tramite indice</div>
+        <div class="step-hint">💡 Per sapere se una posizione è pari, dobbiamo scorrere usando un <em>indice numerico</em>. Crea un ciclo for con variabile <code>i</code> che usa la funzione <code>range()</code> fino a <code>n</code>.</div>
+        <div class="step-input-area">
+          <textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea>
+        </div>
+        <div class="step-actions">
+          <button class="btn-solution" onclick="toggleSolution('sol-2-5')">Mostra Soluzione</button>
+        </div>
+        <div id="sol-2-5" class="step-solution">
+          <span class="py-kw">for</span> <span class="py-var">i</span> <span class="py-kw">in</span> <span class="py-fn">range</span>(<span class="py-num">0</span>, <span class="py-var">n</span>, <span class="py-num">1</span>):
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="step-card">
+        <div class="step-number">6</div>
+        <div class="step-title">Controlla se l'indice è pari</div>
+        <div class="step-hint">💡 All'interno del secondo ciclo, controlla se l'indice <code>i</code> è un numero pari. (Ricorda l'operatore modulo <code>%</code>).</div>
+        <div class="step-input-area">
+          <textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..."></textarea>
+        </div>
+        <div class="step-actions">
+          <button class="btn-solution" onclick="toggleSolution('sol-2-6')">Mostra Soluzione</button>
+        </div>
+        <div id="sol-2-6" class="step-solution">
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="py-kw">if</span> <span class="py-var">i</span> <span class="py-op">%</span> <span class="py-num">2</span> <span class="py-op">==</span> <span class="py-num">0</span>:
+        </div>
+      </div>
+
+      <!-- STEP 7 -->
+      <div class="step-card">
+        <div class="step-number">7</div>
+        <div class="step-title">Estrai e aggiungi l'elemento</div>
+        <div class="step-hint">💡 Se l'IF è vero, salva l'elemento di quella posizione <code>lista1[i]</code> in una variabile e poi aggiungilo a <code>lista_pos_pari</code> usando <code>append()</code>. Fai attenzione all'indentazione!</div>
+        <div class="step-input-area">
+          <textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..." style="min-height:100px;"></textarea>
+        </div>
+        <div class="step-actions">
+          <button class="btn-solution" onclick="toggleSolution('sol-2-7')">Mostra Soluzione</button>
+        </div>
+        <div id="sol-2-7" class="step-solution">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="py-var">elemento</span> <span class="py-op">=</span> <span class="py-var">lista1</span>[<span class="py-var">i</span>]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="py-var">lista_pos_pari</span>.<span class="py-fn">append</span>(<span class="py-var">elemento</span>)
+        </div>
+      </div>
+
+      <!-- STEP 8 -->
+      <div class="step-card">
+        <div class="step-number">8</div>
+        <div class="step-title">Stampa i risultati</div>
+        <div class="step-hint">💡 Finito! Usa due volte la funzione <code>print()</code> per mostrare a video la lista originale e poi quella con le posizioni pari.</div>
+        <div class="step-input-area">
+          <textarea class="code-textarea" placeholder="Scrivi il tuo codice qui..." style="min-height:100px;"></textarea>
+        </div>
+        <div class="step-actions">
+          <button class="btn-solution" onclick="toggleSolution('sol-2-8')">Mostra Soluzione</button>
+        </div>
+        <div id="sol-2-8" class="step-solution">
+          <span class="py-fn">print</span>(<span class="py-str">"Lista originale:"</span>, <span class="py-var">lista1</span>)<br>
+          <span class="py-fn">print</span>(<span class="py-str">"Elementi in posizione pari:"</span>, <span class="py-var">lista_pos_pari</span>)
+        </div>
+      </div>
+
+    </div>
+
+  </div> <!-- fine tab laboratorio -->
+
+</div> <!-- fine page -->
+
+<script>
+  function openTab(tabId, btn) {
+    // Nascondi tutti i contenuti
+    const contents = document.getElementsByClassName('tab-content');
+    for (let i = 0; i < contents.length; i++) {
+      contents[i].classList.remove('active');
+    }
+    // Disattiva tutti i bottoni
+    const btns = document.getElementsByClassName('tab-btn');
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].classList.remove('active');
+    }
+    // Attiva il contenuto e bottone corrente
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggleSolution(id) {
+    const el = document.getElementById(id);
+    if (el.classList.contains('show')) {
+      el.classList.remove('show');
+    } else {
+      el.classList.add('show');
+    }
+  }
+
+  function switchLabEx(exId, btn) {
+    // Hide all guided exercises
+    document.getElementById('guided-ex1').style.display = 'none';
+    document.getElementById('guided-ex2').style.display = 'none';
+    
+    // Remove active styles from buttons
+    const btns = document.getElementsByClassName('ex-tab-btn');
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].classList.remove('active');
+    }
+
+    // Show the selected one
+    document.getElementById(exId).style.display = 'block';
+    
+    // Style the active button
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
