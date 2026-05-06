@@ -73,16 +73,116 @@
       <h1>✏️ Esercizi Python Commentati</h1>
       <p>Ogni esercizio è accompagnato dal ragionamento logico, dagli elementi Python utilizzati e dal codice completo commentato riga per riga.</p>
       <div style="display:inline-block; background:rgba(99,102,241,0.15); border:1px solid rgba(99,102,241,0.4); border-radius:8px; padding:6px 14px; font-size:0.8rem; color:#a5b4fc; margin-top:10px; font-weight:600; letter-spacing:0.5px;">📋 Scheda Didattica — Prof. Belardi Nicolino</div>
+      <div style="margin-top: 20px;">
+        <a href="python_passo_passo.html" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; color: #fff; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.25); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(16, 185, 129, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(16, 185, 129, 0.25)'">
+          🎯 Vai agli Esercizi Guidati (Passo-Passo)
+        </a>
+        <a href="python_passo_passo.html" style="display: inline-flex; align-items: center; gap: 8px; background: #3b82f6; color: #fff; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 1.05rem; box-shadow: 0 4px 6px rgba(59, 130, 246, 0.25); transition: all 0.3s; margin-left: 10px;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(59, 130, 246, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px rgba(59, 130, 246, 0.25)'">
+          📚 Esercizi semplificati
+        </a>
+      </div>
     </div>
 
     <div class="wrap">
 
       <!-- ══════════════════════════════════════════════════════════════ -->
-      <!-- ESERCIZIO 1 — MEDIA DI TRE VOTI                               -->
+      <!-- ESERCIZIO 1 — CONTEGGIO PARI E DISPARI                        -->
       <!-- ══════════════════════════════════════════════════════════════ -->
       <div class="ex-card">
         <div class="ex-header">
           <div class="ex-num">1</div>
+          <div class="ex-title">Calcolare quanti numeri sono pari e quanti sono dispari tra una serie di numeri inseriti dall'utente.</div>
+        </div>
+        <div class="ex-body">
+
+          <div class="testo-box">
+            <h4>📄 Testo dell'esercizio</h4>
+            Scrivi un programa che chieda all'utente quanti numeri vuole inserire.<br>
+            Successivamente, per ogni numero inserito, il programma deve determinare se è <b>pari</b> o <b>dispari</b> e tenere il conto di entrambi.<br>
+            Alla fine, stampa il numero totale di pari e il numero totale di dispari inseriti.
+          </div>
+
+          <div class="logic-section">
+            <h4>🧠 Logica semplice</h4>
+            <ul class="py-list" style="margin-top:8px;">
+              <li>L'utente decide <b>quanti numeri</b> vuole inserire.</li>
+              <li>Prepariamo due contatori (pari e dispari) che partono da <b>zero</b>.</li>
+              <li>Per ogni numero inserito:
+                <ul class="py-list" style="margin-top:4px; margin-left:16px;">
+                  <li>se il numero diviso 2 dà resto 0 → è <b>pari</b>, aumento il contatore dei pari</li>
+                  <li>altrimenti → è <b>dispari</b>, aumento il contatore dei dispari</li>
+                </ul>
+              </li>
+              <li>Alla fine stampo i due contatori finali.</li>
+            </ul>
+          </div>
+
+          <div class="inner-title">🧩 Elementi principali di Python che useremo</div>
+          <div class="py-elements">
+            <div class="py-el">
+              <div class="el-title">1. Contatori</div>
+              <ul class="py-list">
+                <li><code>pari = 0</code> e <code>dispari = 0</code> → inizializzano i conteggi.</li>
+              </ul>
+            </div>
+            <div class="py-el">
+              <div class="el-title">2. Ciclo for</div>
+              <ul class="py-list">
+                <li><code>for i in range(0, quantita, 1):</code> → ripete il blocco di codice per ogni numero da inserire.</li>
+              </ul>
+            </div>
+            <div class="py-el">
+              <div class="el-title">3. Operatore modulo (%)</div>
+              <ul class="py-list">
+                <li><code>x % 2 == 0</code> → calcola il resto della divisione per 2. Se è 0, il numero è pari.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="inner-title">💻 Codice commentato riga per riga</div>
+          <div class="code-block">
+            <div class="code-label">Python</div>
+            <pre><span class="cm"># Chiedo all'utente quanti numeri vuole inserire</span>
+<span class="va">quantita</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Quanti numeri vuoi inserire? "</span>))
+
+<span class="cm"># Contatore dei numeri pari</span>
+<span class="va">pari</span> = <span class="nm">0</span>
+
+<span class="cm"># Contatore dei numeri dispari</span>
+<span class="va">dispari</span> = <span class="nm">0</span>
+
+<span class="cm"># Uso il ciclo for con range per ripetere l'azione:</span>
+<span class="cm"># range(0, quantita, 1) significa:</span>
+<span class="cm"># 0        -> punto di partenza (inizio)</span>
+<span class="cm"># quantita -> fino a quando devo contare (fine)</span>
+<span class="cm"># 1        -> il passo, cioè di quanto vado avanti ogni volta (+1)</span>
+<span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">0</span>, <span class="va">quantita</span>, <span class="nm">1</span>):
+    
+    <span class="cm"># Chiedo un numero all'utente</span>
+    <span class="va">x</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Inserisci un numero: "</span>))
+    
+    <span class="cm"># Controllo se il numero è pari usando l'operatore resto (%)</span>
+    <span class="kw">if</span> <span class="va">x</span> % <span class="nm">2</span> == <span class="nm">0</span>:
+        <span class="cm"># Se il resto è 0, aggiungo 1 al contatore dei pari</span>
+        <span class="va">pari</span> = <span class="va">pari</span> + <span class="nm">1</span>
+    <span class="kw">else</span>:
+        <span class="cm"># Se il resto non è 0, aggiungo 1 al contatore dei dispari</span>
+        <span class="va">dispari</span> = <span class="va">dispari</span> + <span class="nm">1</span>
+
+<span class="cm"># Stampo i risultati finali</span>
+<span class="fn">print</span>(<span class="st">"Numeri pari inseriti:"</span>, <span class="va">pari</span>)
+<span class="fn">print</span>(<span class="st">"Numeri dispari inseriti:"</span>, <span class="va">dispari</span>)</pre>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════ -->
+      <!-- ESERCIZIO 2 — MEDIA DI TRE VOTI                               -->
+      <!-- ══════════════════════════════════════════════════════════════ -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">2</div>
           <div class="ex-title">Calcola la media di tre voti (compresi tra 18 e 30) inseriti da tastiera. Se il voto non è valido, chiedilo di nuovo.</div>
         </div>
         <div class="ex-body">
@@ -254,11 +354,11 @@
       </div><!-- /ex-card -->
 
       <!-- ══════════════════════════════════════════════════════════════ -->
-      <!-- ESERCIZIO 2 — CARTOLERIA: INCASSO E PREZZO MEDIO              -->
+      <!-- ESERCIZIO 3 — CARTOLERIA: INCASSO E PREZZO MEDIO              -->
       <!-- ══════════════════════════════════════════════════════════════ -->
       <div class="ex-card">
         <div class="ex-header">
-          <div class="ex-num">2</div>
+          <div class="ex-num">3</div>
           <div class="ex-title">Il titolare di una cartoleria vuole calcolare l'incasso totale della giornata e il prezzo medio degli articoli venduti.</div>
         </div>
         <div class="ex-body">
@@ -433,11 +533,11 @@
       </div><!-- /ex-card -->
 
       <!-- ══════════════════════════════════════════════════════════════ -->
-      <!-- ESERCIZIO 3 — GIORNALAIO: PREZZO MASSIMO                      -->
+      <!-- ESERCIZIO 4 — GIORNALAIO: PREZZO MASSIMO                      -->
       <!-- ══════════════════════════════════════════════════════════════ -->
       <div class="ex-card">
         <div class="ex-header">
-          <div class="ex-num">3</div>
+          <div class="ex-num">4</div>
           <div class="ex-title">Il giornalaio vuole trovare il prezzo massimo tra tutti i prezzi degli articoli venduti nella giornata.</div>
         </div>
         <div class="ex-body">
@@ -613,11 +713,11 @@
       </div><!-- /ex-card -->
 
       <!-- ══════════════════════════════════════════════════════════════ -->
-      <!-- ESERCIZIO 4 — GESTIONE CLASSE: MEDIE E INSUFFICIENZE          -->
+      <!-- ESERCIZIO 5 — GESTIONE CLASSE: MEDIE E INSUFFICIENZE          -->
       <!-- ══════════════════════════════════════════════════════════════ -->
       <div class="ex-card">
         <div class="ex-header">
-          <div class="ex-num">4</div>
+          <div class="ex-num">5</div>
           <div class="ex-title">Gestione di una classe di 10 alunni: calcola la media e le insufficienze per ogni alunno e le statistiche totali della classe.</div>
         </div>
         <div class="ex-body">
@@ -731,8 +831,8 @@
 <span class="cm"># Parto da 0 perché all'inizio non ho ancora calcolato nessuna media.</span>
 
 <span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">10</span>):
-    <span class="cm"># Questo ciclo for si ripete 10 volte, una per ogni alunno.</span>
-    <span class="cm"># i va da 0 a 9, quindi rappresenta l'indice dell'alunno.</span>
+    <span class="cm"># range(10) significa ripetere questo blocco per 10 volte (una per ogni alunno).</span>
+    <span class="cm"># Il computer conta da 0 a 9.</span>
 
     <span class="va">nvoti</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserire numero voti "</span>))
     <span class="cm"># Chiedo quanti voti ha l'alunno corrente.</span>
@@ -748,8 +848,8 @@
     <span class="cm"># Ogni volta che trovo un voto &lt; 6, aumenterò questa variabile.</span>
 
     <span class="kw">for</span> <span class="va">j</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="va">nvoti</span>):
-        <span class="cm"># Questo è un ciclo annidato: si ripete nvoti volte per OGNI alunno.</span>
-        <span class="cm"># Serve per leggere tutti i voti di un singolo studente.</span>
+        <span class="cm"># Questo è un ciclo annidato: si ripete "nvoti" volte per OGNI alunno.</span>
+        <span class="cm"># range(nvoti) serve per leggere tutti i voti di un singolo studente.</span>
 
         <span class="va">voto</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"inserire voto "</span>))
         <span class="cm"># Chiedo all'utente di inserire un voto.</span>

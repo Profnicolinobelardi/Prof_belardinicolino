@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esercizi Guidati Python | Prof. Belardi Nicolino</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .wrap { font-family: var(--font-sans, sans-serif); color: #1e293b; display: flex; flex-direction: column; gap: 24px; }
+
+    /* ── Scheda esercizio ── */
+    .ex-card { border-radius: 14px; overflow: hidden; border: 2px solid #10b981; background: #fff; }
+    .ex-header { display: flex; align-items: flex-start; gap: 14px; padding: 18px 24px; background: #10b981; color: #fff; }
+    .ex-num { min-width: 40px; height: 40px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
+    .ex-title { font-size: 1.2rem; font-weight: 700; line-height: 1.4; margin-top: 4px; }
+    .ex-body { padding: 24px; display: flex; flex-direction: column; gap: 24px; background: #f0fdf4; }
+
+    /* ── Testo esercizio ── */
+    .testo-box { background: #fff; border-left: 6px solid #10b981; border-radius: 0 12px 12px 0; padding: 18px 22px; font-size: 1.05rem; line-height: 1.8; color: #1e293b; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .testo-box h4 { color: #047857; margin: 0 0 12px 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ── Sezione logica ── */
+    .logic-section { background: #fff; border-radius: 12px; padding: 18px 22px; border-left: 6px solid #f59e0b; font-size: 1.05rem; line-height: 1.8; color: #334155; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .logic-section h4 { color: #b45309; margin: 0 0 12px 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ── Liste ── */
+    .py-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .py-list li { padding-left: 24px; position: relative; }
+    .py-list li::before { content: "✅"; position: absolute; left: 0; font-size: 0.9rem; top: 2px; }
+
+    /* ── Blocchi codice dark ── */
+    .code-block { background: #1e293b; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .code-label { background: #0f172a; color: #94a3b8; font-size: 0.85rem; font-weight: 600; padding: 10px 18px; letter-spacing: 0.5px; text-transform: uppercase; border-bottom: 1px solid #334155; display: flex; align-items: center; gap: 8px; }
+    .code-block pre { margin: 0; padding: 18px 22px; font-family: 'Courier New', monospace; font-size: 1.05rem; line-height: 1.9; color: #e2e8f0; overflow-x: auto; white-space: pre; }
+
+    /* Syntax highlight */
+    .kw  { color: #f472b6; font-weight: 600; }
+    .fn  { color: #60a5fa; }
+    .st  { color: #34d399; }
+    .nm  { color: #fb923c; }
+    .cm  { color: #94a3b8; font-style: italic; }
+    .va  { color: #e2e8f0; }
+
+    .inner-title { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #047857; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    
+    .highlight-word { font-weight: 700; background: rgba(16, 185, 129, 0.15); padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div style="display:flex; align-items:center;">
+      <a href="index.html" class="nav-brand">Portale Didattico <span style="color:#fff;font-size:0.8rem;display:block;">Prof. Belardi Nicolino</span></a>
+      <button onclick="window.location.href='login.html'" style="margin-left:15px;background:rgba(239,68,68,0.2);border:1px solid #ef4444;color:#fff;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;display:inline-flex;align-items:center;transition:all 0.3s;" onmouseover="this.style.background='#ef4444'" onmouseout="this.style.background='rgba(239,68,68,0.2)'">&#128273; Area Docenti</button>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="informatica.html">💻 Informatica</a>
+      <a href="python_pillole.html">🐍 Python in Pillole</a>
+      <a href="python_esercizi.html">✏️ Esercizi Python</a>
+      <a href="python_passo_passo.html" class="active">🎯 Esercizi Guidati</a>
+    </div>
+  </nav>
+
+  <div class="container" style="max-width:900px;">
+    <div class="header-section">
+      <h1>🎯 Esercizi Guidati (Passo-Passo)</h1>
+      <p style="font-size: 1.1rem;">Esercizi spiegati in modo semplice e pratico, un passo alla volta.</p>
+      <div style="display:inline-block; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); border-radius:8px; padding:6px 14px; font-size:0.8rem; color:#10b981; margin-top:10px; font-weight:600; letter-spacing:0.5px;">📋 Laboratorio Pratico — Prof. Belardi Nicolino</div>
+    </div>
+
+    <div class="wrap">
+
+      <!-- ESERCIZIO 1 -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">1</div>
+          <div class="ex-title">Contare quanti numeri sono maggiori di 10</div>
+        </div>
+        <div class="ex-body">
+
+          <div class="testo-box">
+            <h4>📄 Cosa dobbiamo fare?</h4>
+            Dobbiamo creare una scatola (lista) e metterci dentro dei numeri.<br>
+            Poi dobbiamo controllare questi numeri uno ad uno e contare quanti di loro sono <b>più grandi di 10</b>.
+          </div>
+
+          <div class="logic-section">
+            <h4>🧠 Ragionamento Semplice (per l'alunno)</h4>
+            <ul class="py-list">
+              <li><b>La scatola:</b> Creo una lista vuota (una scatola vuota).</li>
+              <li><b>Quanti numeri:</b> Chiedo quanti numeri vuoi inserire.</li>
+              <li><b>Inserimento:</b> Con il ciclo for con <code>range(0, n, 1)</code> inserisco i numeri uno alla volta.</li>
+              <li><b>Controllo:</b> Poi scorro la lista di nuovo con <code>range(0, n, 1)</code>.</li>
+              <li><b>Confronto:</b> Ogni volta controllo se il numero è maggiore di 10.</li>
+              <li><b>Il conto:</b> Se sì, aumento il contatore.</li>
+              <li><b>Risultato:</b> Alla fine stampiamo quanti numeri sono più grandi di 10.</li>
+            </ul>
+          </div>
+
+          <div class="inner-title">💻 Il Codice Facile</div>
+          <div class="code-block">
+            <div class="code-label">🐍 Python</div>
+            <pre><span class="cm"># Creo una lista vuota dove metterò i numeri</span>
+<span class="va">lista</span> = []
+
+<span class="cm"># Chiedo all'alunno quanti numeri vuole inserire</span>
+<span class="va">n</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Quanti numeri vuoi inserire? "</span>))
+
+<span class="cm"># Riempio la lista usando il metodo classico con range</span>
+<span class="cm"># range(0, n, 1) significa:</span>
+<span class="cm"># start = 0 (parto da zero)</span>
+<span class="cm"># stop = n (mi fermo prima di n)</span>
+<span class="cm"># step = 1 (avanzo di uno alla volta)</span>
+<span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">0</span>, <span class="va">n</span>, <span class="nm">1</span>):
+    <span class="va">numero</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Inserisci un numero: "</span>))
+    <span class="va">lista</span>.<span class="fn">append</span>(<span class="va">numero</span>)
+
+<span class="cm"># Contatore dei numeri maggiori di 10</span>
+<span class="va">conta_maggiori</span> = <span class="nm">0</span>
+
+<span class="cm"># Scorro la lista usando di nuovo range e l'indice i</span>
+<span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">0</span>, <span class="va">n</span>, <span class="nm">1</span>):
+
+    <span class="cm"># Prendo l'elemento in posizione i</span>
+    <span class="va">x</span> = <span class="va">lista</span>[<span class="va">i</span>]
+
+    <span class="cm"># Controllo se è maggiore di 10</span>
+    <span class="kw">if</span> <span class="va">x</span> &gt; <span class="nm">10</span>:
+        <span class="va">conta_maggiori</span> = <span class="va">conta_maggiori</span> + <span class="nm">1</span>
+
+<span class="cm"># Stampo il risultato</span>
+<span class="fn">print</span>(<span class="st">"Hai inserito"</span>, <span class="va">conta_maggiori</span>, <span class="st">"numeri maggiori di 10"</span>)</pre>
+          </div>
+
+          <div class="logic-section" style="border-left-color: #3b82f6; background: #eff6ff;">
+            <h4 style="color: #1d4ed8;">📘 Spiegazione Didattica Riga per Riga</h4>
+            <ul class="py-list">
+              <li><b>for i in range(0, n, 1):</b>
+                <ul>
+                  <li>start = 0 → parto dal primo elemento</li>
+                  <li>stop = n → mi fermo prima di n</li>
+                  <li>step = 1 → vado avanti di uno alla volta</li>
+                </ul>
+              </li>
+              <li><b>lista.append(numero):</b> Metto il numero dentro la lista.</li>
+              <li><b>x = lista[i]:</b> Prendo l'elemento in posizione <b>i</b>.</li>
+              <li><b>if x > 10:</b> Controllo se è più grande di 10.</li>
+              <li><b>conta_maggiori = conta_maggiori + 1:</b> Aumento il contatore.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ESERCIZIO 2 -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">2</div>
+          <div class="ex-title">Contare i Numeri Pari e i Numeri Dispari</div>
+        </div>
+        <div class="ex-body">
+
+          <div class="testo-box">
+            <h4>📄 Cosa dobbiamo fare?</h4>
+            Dobbiamo capire quanti numeri <span class="highlight-word">Pari</span> e quanti numeri <span class="highlight-word">Dispari</span> vengono inseriti.<br><br>
+            I numeri <b>Pari</b> finiscono per: 0, 2, 4, 6, 8.<br>
+            I numeri <b>Dispari</b> finiscono per: 1, 3, 5, 7, 9.
+          </div>
+
+          <div class="logic-section">
+            <h4>🧠 Ragionamento Passo-Passo</h4>
+            <ul class="py-list">
+              <li>L'utente decide quanti numeri vuole scrivere (es. vuole inserire 4 numeri).</li>
+              <li>Chiediamo i numeri uno per volta usando un ciclo.</li>
+              <li>Per capire se un numero è <b>Pari</b> c'è una formula fissa che il computer capisce: <b>x % 2 == 0</b>.</li>
+              <li>Se la formula è vera, significa che il numero è Pari. E aggiungiamo 1 alla scatola dei Pari.</li>
+              <li>Se la formula è falsa, il numero è Dispari. E aggiungiamo 1 alla scatola dei Dispari.</li>
+              <li>Alla fine diciamo quanti Pari e Dispari abbiamo trovato.</li>
+            </ul>
+          </div>
+
+          <div class="inner-title">💻 Il Codice Facile</div>
+          <div class="code-block">
+            <div class="code-label">🐍 Python</div>
+            <pre><span class="cm"># Chiedo all'utente quanti numeri totali vuole scrivere</span>
+<span class="va">quantita</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Quanti numeri vuoi inserire? "</span>))
+
+<span class="cm"># Scatola per contare i numeri Pari (parte da 0)</span>
+<span class="va">pari</span> = <span class="nm">0</span>
+
+<span class="cm"># Scatola per contare i numeri Dispari (parte da 0)</span>
+<span class="va">dispari</span> = <span class="nm">0</span>
+
+<span class="cm"># Uso il ciclo for con range per ripetere l'azione:</span>
+<span class="cm"># range(0, quantita, 1) significa:</span>
+<span class="cm"># 0        -> punto di partenza (inizio)</span>
+<span class="cm"># quantita -> fino a quando devo contare (fine)</span>
+<span class="cm"># 1        -> il passo, cioè di quanto vado avanti ogni volta (+1)</span>
+<span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">0</span>, <span class="va">quantita</span>, <span class="nm">1</span>):
+
+    <span class="cm"># Chiedo il numero all'utente</span>
+    <span class="va">x</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Inserisci un numero: "</span>))
+
+    <span class="cm"># Formula fissa per controllare se è Pari</span>
+    <span class="kw">if</span> <span class="va">x</span> % <span class="nm">2</span> == <span class="nm">0</span>:
+        <span class="cm"># È pari! Aggiungo 1 alla scatola dei pari</span>
+        <span class="va">pari</span> = <span class="va">pari</span> + <span class="nm">1</span>
+    <span class="kw">else</span>:
+        <span class="cm"># È dispari! Aggiungo 1 alla scatola dei dispari</span>
+        <span class="va">dispari</span> = <span class="va">dispari</span> + <span class="nm">1</span>
+
+<span class="cm"># Stampo i risultati finali</span>
+<span class="fn">print</span>(<span class="st">"Numeri pari inseriti:"</span>, <span class="va">pari</span>)
+<span class="fn">print</span>(<span class="st">"Numeri dispari inseriti:"</span>, <span class="va">dispari</span>)</pre>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ESERCIZIO 3 -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">3</div>
+          <div class="ex-title">Il Gioco del 5 (Somma e Moltiplicazione)</div>
+        </div>
+        <div class="ex-body">
+
+          <div class="testo-box">
+            <h4>📄 Cosa dobbiamo fare?</h4>
+            Ti daremo <b>6 numeri</b>, uno dopo l'altro.<br><br>
+            Per ogni numero, dobbiamo fare un controllo:<br>
+            - Se il numero <b>supera il 5</b> (per esempio: 6, 7, 8, 9...), lo <span class="highlight-word">aggiungiamo a una somma</span>.<br>
+            - Se il numero <b>arriva fino a 5</b> (per esempio: 1, 2, 3, 4, 5), lo <span class="highlight-word">moltiplichiamo</span>.
+          </div>
+
+          <div class="logic-section">
+            <h4>🧠 Ragionamento Passo-Passo</h4>
+            <ul class="py-list">
+              <li>Iniziamo con una somma che vale 0 e una moltiplicazione (prodotto) che vale 1.</li>
+              <li>Chiediamo 6 numeri all'utente, usando un ciclo.</li>
+              <li>Quando l'utente inserisce un numero, guardiamo se è <b>dal 6 in su</b> usando il simbolo <b>&gt; 5</b>.</li>
+              <li>Se è vero, facciamo una addizione (<b>+</b>).</li>
+              <li>Se invece è falso (cioè il numero è piccolo), facciamo una moltiplicazione (<b>*</b>).</li>
+              <li>Alla fine stampiamo i risultati.</li>
+            </ul>
+          </div>
+
+          <div class="inner-title">💻 Il Codice Facile</div>
+          <div class="code-block">
+            <div class="code-label">🐍 Python</div>
+            <pre><span class="cm"># La somma parte da 0 perché sommare inizia sempre da zero</span>
+<span class="va">somma</span> = <span class="nm">0</span>
+
+<span class="cm"># Il prodotto parte da 1 perché moltiplicare inizia sempre da uno</span>
+<span class="va">prodotto</span> = <span class="nm">1</span>
+
+<span class="cm"># Dobbiamo inserire 6 numeri in totale</span>
+<span class="va">contatore</span> = <span class="nm">6</span>
+
+<span class="cm"># Il ciclo si ripete finché il contatore non arriva a zero</span>
+<span class="kw">while</span> <span class="va">contatore</span> &gt; <span class="nm">0</span>:
+
+    <span class="cm"># Chiedo all'utente di scrivere un numero</span>
+    <span class="va">x</span> = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Inserisci un numero: "</span>))
+
+    <span class="cm"># Controllo: il numero è dal 6 in su? (&gt; 5)</span>
+    <span class="kw">if</span> <span class="va">x</span> &gt; <span class="nm">5</span>:
+        <span class="cm"># Se è dal 6 in su, lo aggiungo alla somma</span>
+        <span class="va">somma</span> = <span class="va">somma</span> + <span class="va">x</span>
+    <span class="kw">else</span>:
+        <span class="cm"># Altrimenti (se è 1, 2, 3, 4, 5), lo moltiplico</span>
+        <span class="va">prodotto</span> = <span class="va">prodotto</span> * <span class="va">x</span>
+
+    <span class="cm"># Tolgo 1 al contatore, perché ho appena letto un numero</span>
+    <span class="va">contatore</span> = <span class="va">contatore</span> - <span class="nm">1</span>
+
+<span class="cm"># Stampo i risultati finali</span>
+<span class="fn">print</span>(<span class="st">"Somma dei numeri dal 6 in su:"</span>, <span class="va">somma</span>)
+<span class="fn">print</span>(<span class="st">"Moltiplicazione dei numeri piccoli:"</span>, <span class="va">prodotto</span>)</pre>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ESERCIZIO 4 -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">4</div>
+          <div class="ex-title">Contare i Voti (Promossi e Bocciati)</div>
+        </div>
+        <div class="ex-body">
+
+          <div class="testo-box">
+            <h4>📄 Cosa dobbiamo fare?</h4>
+            Dobbiamo dividere i voti in due gruppi:<br><br>
+            - <span class="highlight-word">Sufficienti</span>: chi prende dal 6 in su (6, 7, 8, 9, 10). Significa che è Promosso.<br>
+            - <span class="highlight-word">Insufficienti</span>: chi prende dal 5 in giù (1, 2, 3, 4, 5). Significa che è Bocciato.
+          </div>
+
+          <div class="logic-section">
+            <h4>🧠 Ragionamento Passo-Passo</h4>
+            <ul class="py-list">
+              <li>Prima chiediamo quanti voti dobbiamo controllare in totale.</li>
+              <li>Per ogni voto, controlliamo se è dal 6 in su usando <b>&gt;= 6</b>.</li>
+              <li>Se è vero, significa che è Sufficiente. Aggiungiamo 1 ai Sufficienti.</li>
+              <li>Altrimenti, se è falso, significa che è Insufficiente. Aggiungiamo 1 agli Insufficienti.</li>
+              <li>Alla fine stampiamo quanti voti belli e quanti voti brutti ci sono stati.</li>
+            </ul>
+          </div>
+
+          <div class="inner-title">💻 Il Codice Facile</div>
+          <div class="code-block">
+            <div class="code-label">🐍 Python</div>
+            <pre><span class="cm"># Chiedo quanti voti in totale dobbiamo inserire</span>
+<span class="va">quantita</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Quanti voti vuoi inserire? "</span>))
+
+<span class="cm"># Scatola per contare i voti Sufficienti (Promossi)</span>
+<span class="va">sufficienti</span> = <span class="nm">0</span>
+
+<span class="cm"># Scatola per contare i voti Insufficienti (Bocciati)</span>
+<span class="va">insufficienti</span> = <span class="nm">0</span>
+
+<span class="cm"># Uso il ciclo for con range per ripetere l'azione:</span>
+<span class="cm"># range(0, quantita, 1) significa:</span>
+<span class="cm"># 0        -> punto di partenza (inizio)</span>
+<span class="cm"># quantita -> fino a quando devo contare (fine)</span>
+<span class="cm"># 1        -> il passo, cioè di quanto vado avanti ogni volta (+1)</span>
+<span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">0</span>, <span class="va">quantita</span>, <span class="nm">1</span>):
+
+    <span class="cm"># Chiedo di scrivere il voto</span>
+    <span class="va">voto</span> = <span class="fn">float</span>(<span class="fn">input</span>(<span class="st">"Inserisci un voto: "</span>))
+
+    <span class="cm"># Controllo se il voto è dal 6 in su (&gt;= 6)</span>
+    <span class="kw">if</span> <span class="va">voto</span> &gt;= <span class="nm">6</span>:
+        <span class="cm"># Il voto è buono!</span>
+        <span class="va">sufficienti</span> = <span class="va">sufficienti</span> + <span class="nm">1</span>
+    <span class="kw">else</span>:
+        <span class="cm"># Il voto è brutto (dal 5 in giù)</span>
+        <span class="va">insufficienti</span> = <span class="va">insufficienti</span> + <span class="nm">1</span>
+
+<span class="cm"># Stampo i risultati finali</span>
+<span class="fn">print</span>(<span class="st">"Voti sufficienti (dal 6 in su):"</span>, <span class="va">sufficienti</span>)
+<span class="fn">print</span>(<span class="st">"Voti insufficienti (dal 5 in giù):"</span>, <span class="va">insufficienti</span>)</pre>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ESERCIZIO 5 -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">5</div>
+          <div class="ex-title">Creare una Lista di Numeri (La Scatola Magica)</div>
+        </div>
+        <div class="ex-body">
+
+          <div class="testo-box">
+            <h4>📄 Cosa sono le Liste?</h4>
+            Le <b>Liste</b> in Python sono come un cassetto o uno scaffale dove puoi conservare tanti oggetti tutti insieme.<br><br>
+            - Per creare una lista vuota usiamo le parentesi quadre: <b>[ ]</b><br>
+            - Quando vogliamo chiedere all'utente un numero, usiamo la parola <b>input</b>.<br>
+            - Per infilare quel numero dentro la lista usiamo il comando <b>append</b> (che significa proprio "aggiungi in fondo").
+          </div>
+
+          <div class="logic-section">
+            <h4>🧠 Ragionamento Passo-Passo</h4>
+            <ul class="py-list">
+              <li>Prima di tutto prepariamo una scatola vuota (la nostra lista).</li>
+              <li>Chiediamo per 3 volte all'utente di scrivere un numero, usando un ciclo.</li>
+              <li>Ogni volta che l'utente scrive un numero, lo prendiamo e lo buttiamo dentro la scatola usando <b>.append()</b>.</li>
+              <li>Alla fine, apriamo la scatola e mostriamo (stampiamo) tutti i numeri che abbiamo raccolto.</li>
+            </ul>
+          </div>
+
+          <div class="inner-title">💻 Il Codice Facile</div>
+          <div class="code-block">
+            <div class="code-label">🐍 Python</div>
+            <pre><span class="cm"># 1. Preparo la scatola (lista) vuota usando le parentesi quadre</span>
+<span class="va">mia_lista</span> = []
+
+<span class="cm"># 2. Ripeto l'azione per 3 volte usando range:</span>
+<span class="cm"># range(0, 3, 1) significa: parto da 0, mi fermo prima di 3, vado avanti di 1</span>
+<span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">0</span>, <span class="nm">3</span>, <span class="nm">1</span>):
+
+    <span class="cm"># Chiedo un numero all'utente</span>
+    <span class="va">numero</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Scrivi un numero da mettere nella scatola: "</span>))
+
+    <span class="cm"># Metto il numero dentro la scatola usando "append"</span>
+    <span class="va">mia_lista</span>.<span class="fn">append</span>(<span class="va">numero</span>)
+
+<span class="cm"># 3. Stampo tutta la lista per vedere cosa c'è dentro</span>
+<span class="fn">print</span>(<span class="st">"Ecco i numeri che hai inserito:"</span>, <span class="va">mia_lista</span>)</pre>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ESERCIZIO 6 -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">6</div>
+          <div class="ex-title">Lavorare con 100 Numeri (Somma, Pari e Multipli)</div>
+        </div>
+        <div class="ex-body">
+
+          <div class="testo-box">
+            <h4>📄 Cosa dobbiamo fare?</h4>
+            Creeremo una scatola (lista) e la riempiremo in automatico con i <b>numeri da 1 a 100</b>.<br><br>
+            Poi dovremo fare tre cose su questi numeri:<br>
+            1. Calcolare la <span class="highlight-word">somma</span> di tutti i 100 numeri.<br>
+            2. Contare quanti numeri <span class="highlight-word">NON sono multipli di 5</span> (cioè non fanno parte della tabellina del 5).<br>
+            3. Raccogliere tutti i numeri <span class="highlight-word">Pari</span> e metterli in una <b>seconda scatola</b> (una nuova lista).
+          </div>
+
+          <div class="logic-section">
+            <h4>🧠 Ragionamento Passo-Passo</h4>
+            <ul class="py-list">
+              <li><b>Riempire la scatola:</b> Invece di scrivere 100 numeri a mano, usiamo il ciclo <b>for</b> con <b>range(1, 101, 1)</b> che conta da solo da 1 fino a 100, e infiliamo ogni numero nella lista con <b>.append()</b>.</li>
+              <li><b>La Somma:</b> Partiamo da una somma vuota (0). Scorriamo la scatola e aggiungiamo ogni numero uno alla volta.</li>
+              <li><b>I multipli di 5:</b> La formula fissa per la tabellina del 5 è <b>x % 5 == 0</b>. Visto che vogliamo quelli che NON ne fanno parte, usiamo il simbolo diverso: <b>x % 5 != 0</b>.</li>
+              <li><b>Seconda scatola:</b> Prepariamo una scatola vuota per i numeri Pari. Scorriamo i numeri e, se un numero è Pari (<b>x % 2 == 0</b>), lo infiliamo nella nuova scatola con <b>.append()</b>.</li>
+            </ul>
+          </div>
+
+          <div class="inner-title">💻 Il Codice Facile</div>
+          <div class="code-block">
+            <div class="code-label">🐍 Python</div>
+            <pre><span class="cm"># --- FASE 1: CREARE LA LISTA DA 1 A 100 ---</span>
+
+<span class="cm"># Preparo una scatola (lista) vuota</span>
+<span class="va">lista1</span> = []
+
+<span class="cm"># Uso il ciclo for con range per ripetere l'azione:</span>
+<span class="cm"># range(1, 101, 1) significa:</span>
+<span class="cm"># 1   -> punto di partenza (inizio)</span>
+<span class="cm"># 101 -> fino a quando devo contare (fine, si ferma a 100)</span>
+<span class="cm"># 1   -> il passo, cioè di quanto vado avanti ogni volta (+1)</span>
+<span class="kw">for</span> <span class="va">numero</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">1</span>, <span class="nm">101</span>, <span class="nm">1</span>):
+    <span class="cm"># Infilo il numero nella scatola usando append</span>
+    <span class="va">lista1</span>.<span class="fn">append</span>(<span class="va">numero</span>)
+
+<span class="cm"># Ora la "lista1" è piena!</span>
+
+
+<span class="cm"># --- FASE 2: LA SOMMA ---</span>
+
+<span class="cm"># La somma parte da 0</span>
+<span class="va">somma</span> = <span class="nm">0</span>
+
+<span class="cm"># Guardo ogni numero dentro la lista1</span>
+<span class="kw">for</span> <span class="va">x</span> <span class="kw">in</span> <span class="va">lista1</span>:
+    <span class="cm"># Aggiungo il numero alla somma totale</span>
+    <span class="va">somma</span> = <span class="va">somma</span> + <span class="va">x</span>
+
+
+<span class="cm"># --- FASE 3: CONTARE I NUMERI CHE NON SONO NELLA TABELLINA DEL 5 ---</span>
+
+<span class="cm"># Contatore che parte da 0</span>
+<span class="va">non_divisibili</span> = <span class="nm">0</span>
+
+<span class="kw">for</span> <span class="va">x</span> <span class="kw">in</span> <span class="va">lista1</span>:
+    <span class="cm"># Se la formula del 5 NON (!=) è vera...</span>
+    <span class="kw">if</span> <span class="va">x</span> % <span class="nm">5</span> != <span class="nm">0</span>:
+        <span class="cm"># Aggiungo 1 al mio contatore</span>
+        <span class="va">non_divisibili</span> = <span class="va">non_divisibili</span> + <span class="nm">1</span>
+
+
+<span class="cm"># --- FASE 4: CREARE LA SECONDA LISTA PER I PARI ---</span>
+
+<span class="cm"># Preparo una seconda scatola (lista) vuota, solo per i Pari</span>
+<span class="va">lista_pari</span> = []
+
+<span class="kw">for</span> <span class="va">x</span> <span class="kw">in</span> <span class="va">lista1</span>:
+    <span class="cm"># Se il numero è Pari...</span>
+    <span class="kw">if</span> <span class="va">x</span> % <span class="nm">2</span> == <span class="nm">0</span>:
+        <span class="cm"># Lo infilo nella seconda scatola</span>
+        <span class="va">lista_pari</span>.<span class="fn">append</span>(<span class="va">x</span>)
+
+
+<span class="cm"># --- STAMPIAMO I RISULTATI FINALI ---</span>
+
+<span class="fn">print</span>(<span class="st">"Somma di tutti i 100 numeri:"</span>, <span class="va">somma</span>)
+<span class="fn">print</span>(<span class="st">"Quanti NON sono nella tabellina del 5:"</span>, <span class="va">non_divisibili</span>)
+<span class="fn">print</span>(<span class="st">"Ecco la seconda scatola con i Pari:"</span>, <span class="va">lista_pari</span>)</pre>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ESERCIZIO 7 -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">7</div>
+          <div class="ex-title">Unire le Liste e Lavorare con le Parole</div>
+        </div>
+        <div class="ex-body">
+
+          <div class="testo-box">
+            <h4>📄 Cosa dobbiamo fare?</h4>
+            Questo esercizio ha due parti molto divertenti:<br><br>
+            1. <b>Incollare due liste:</b> Abbiamo una lista con i numeri da 0 a 9 e un'altra con i numeri da 10 a 19. Dobbiamo <span class="highlight-word">incollarle insieme</span> per farne una sola lunga.<br>
+            2. <b>Analizzare le parole:</b> Creeremo una lista con tre parole ("sono", "una", "lista"). Chiederemo al computer di dirci <span class="highlight-word">di che tipo sono</span> (cioè se sono testo) e <span class="highlight-word">quanto sono lunghe</span>.
+          </div>
+
+          <div class="logic-section">
+            <h4>🧠 Ragionamento Passo-Passo</h4>
+            <ul class="py-list">
+              <li><b>Incollare:</b> In Python, per unire due liste si usa il simbolo del più (<b>+</b>). È come se mettessimo una lista dopo l'altra.</li>
+              <li><b>Controllo:</b> Se incolliamo 0-9 e 10-19, otteniamo tutti i numeri da 0 a 19. Questo è esattamente quello che fa il comando <b>range(20)</b>.</li>
+              <li><b>Parole e Lunghezza:</b> Mettiamo le tre parole tra virgolette dentro le parentesi quadre. Poi, per ogni parola, usiamo il comando <b>type()</b> che serve a capire di che tipo è un oggetto (nel nostro caso è testo, cioè "stringa") e <b>len()</b> per contare quante lettere ha.</li>
+            </ul>
+          </div>
+
+          <div class="inner-title">💻 Il Codice Facile</div>
+          <div class="code-block">
+            <div class="code-label">🐍 Python</div>
+            <pre><span class="cm"># --- PARTE 1: INCOLLARE DUE LISTE ---</span>
+
+<span class="cm"># range(10) significa creare una sequenza che parte da 0 e arriva a 9</span>
+<span class="va">lista_1</span> = <span class="fn">list</span>(<span class="fn">range</span>(<span class="nm">10</span>))
+
+<span class="cm"># range(10, 20) significa partire da 10 e arrivare fino a 19 (si ferma prima di 20)</span>
+<span class="va">lista_2</span> = <span class="fn">list</span>(<span class="fn">range</span>(<span class="nm">10</span>, <span class="nm">20</span>))
+
+<span class="cm"># Le incollo insieme usando il simbolo +</span>
+<span class="va">lista_completa</span> = <span class="va">lista_1</span> + <span class="va">lista_2</span>
+
+<span class="fn">print</span>(<span class="st">"Lista unita:"</span>, <span class="va">lista_completa</span>)
+<span class="fn">print</span>(<span class="st">"È uguale a range(20)? Sì, contiene i numeri da 0 a 19!"</span>)
+
+
+<span class="cm"># --- PARTE 2: LE PAROLE (STRINGHE) ---</span>
+
+<span class="cm"># Creo una lista con tre parole</span>
+<span class="va">parole</span> = [<span class="st">"sono"</span>, <span class="st">"una"</span>, <span class="st">"lista"</span>]
+
+<span class="cm"># Uso un ciclo per guardare ogni parola</span>
+<span class="kw">for</span> <span class="va">p</span> <span class="kw">in</span> <span class="va">parole</span>:
+    <span class="cm"># type(p) dice al computer di che "famiglia" fa parte l'oggetto</span>
+    <span class="cm"># len(p) conta quante lettere ci sono nella parola</span>
+    <span class="fn">print</span>(<span class="st">"La parola '"</span>, <span class="va">p</span>, <span class="st">"' è di tipo:"</span>, <span class="fn">type</span>(<span class="va">p</span>), <span class="st">"ed è lunga:"</span>, <span class="fn">len</span>(<span class="va">p</span>))</pre>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ESERCIZIO 8 -->
+      <div class="ex-card">
+        <div class="ex-header">
+          <div class="ex-num">8</div>
+          <div class="ex-title">Contare quanti Pari e quanti Dispari</div>
+        </div>
+        <div class="ex-body">
+
+          <div class="testo-box">
+            <h4>📄 Cosa dobbiamo fare?</h4>
+            Dobbiamo creare un programma che ci chiede <b>quanti numeri</b> vogliamo inserire.<br>
+            Poi, per ogni numero che scriviamo, il computer deve capire se è <b>Pari</b> o <b>Dispari</b> e tenere il conto (come se avesse due barattoli per le caramelle).<br>
+            Alla fine ci dirà quanti ne abbiamo messi in tutto.
+          </div>
+
+          <div class="logic-section">
+            <h4>🧠 Ragionamento Passo-Passo</h4>
+            <ul class="py-list">
+              <li><b>La Quantità:</b> Chiediamo all'inizio: "Quanti numeri vuoi controllare?".</li>
+              <li><b>I Contatori:</b> Prepariamo due "barattoli" vuoti: uno chiamato <b>pari</b> e uno chiamato <b>dispari</b>. All'inizio valgono 0.</li>
+              <li><b>Il Ciclo:</b> Usiamo un ciclo <b>for</b> per ripetere la domanda tante volte quante abbiamo deciso.</li>
+              <li><b>Il Controllo:</b> Ogni volta controlliamo il numero con la formula <b>x % 2 == 0</b>.
+                <ul>
+                  <li>Se è vero, aggiungiamo 1 al barattolo dei <b>pari</b>.</li>
+                  <li>Altrimenti, aggiungiamo 1 al barattolo dei <b>dispari</b>.</li>
+                </ul>
+              </li>
+              <li><b>Risultato:</b> Alla fine stampiamo i numeri che abbiamo contato.</li>
+            </ul>
+          </div>
+
+          <div class="inner-title">💻 Il Codice Facile</div>
+          <div class="code-block">
+            <div class="code-label">🐍 Python</div>
+            <pre><span class="cm"># Chiedo quanti numeri vuoi inserire</span>
+<span class="cm"># input() legge il testo, int() lo trasforma in un numero vero</span>
+<span class="va">quantita</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Quanti numeri vuoi inserire? "</span>))
+
+<span class="cm"># Preparo i due barattoli (contatori)</span>
+<span class="va">pari</span> = <span class="nm">0</span>
+<span class="va">dispari</span> = <span class="nm">0</span>
+
+<span class="cm"># Inizia il ciclo che ripete la domanda tante volte:</span>
+<span class="cm"># range(0, quantita, 1) significa:</span>
+<span class="cm"># 0        -> punto di partenza (inizio)</span>
+<span class="cm"># quantita -> fino a quando devo contare (fine)</span>
+<span class="cm"># 1        -> il passo, cioè di quanto vado avanti ogni volta (+1)</span>
+<span class="kw">for</span> <span class="va">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">0</span>, <span class="va">quantita</span>, <span class="nm">1</span>):
+    
+    <span class="cm"># Chiedo un numero</span>
+    <span class="va">x</span> = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st">"Inserisci un numero: "</span>))
+    
+    <span class="cm"># Controllo se è Pari usando il comando % 2</span>
+    <span class="cm"># Se il resto della divisione per 2 è uguale a 0, il numero è Pari</span>
+    <span class="kw">if</span> <span class="va">x</span> % <span class="nm">2</span> == <span class="nm">0</span>:
+        <span class="cm"># Se è Pari, aumento il contatore</span>
+        <span class="va">pari</span> = <span class="va">pari</span> + <span class="nm">1</span>
+    <span class="kw">else</span>:
+        <span class="cm"># Se non è Pari, è Dispari!</span>
+        <span class="va">dispari</span> = <span class="va">dispari</span> + <span class="nm">1</span>
+
+<span class="cm"># Stampo i risultati finali</span>
+<span class="fn">print</span>(<span class="st">"Numeri pari inseriti:"</span>, <span class="va">pari</span>)
+<span class="fn">print</span>(<span class="st">"Numeri dispari inseriti:"</span>, <span class="va">dispari</span>)</pre>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
