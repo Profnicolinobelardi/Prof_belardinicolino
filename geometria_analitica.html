@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geometria Analitica | Prof. Belardi Nicolino</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+  <style>
+    .scheda { border-radius: 16px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+    .scheda-header { padding: 15px 20px; font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .scheda-body { padding: 20px; color: #e2e8f0; }
+    .formula-box { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 15px; margin: 10px 0; border-left: 4px solid #ec4899; }
+    .prop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px; }
+    .prop-card { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 12px; border: 1px solid rgba(255,255,255,0.1); }
+    .prop-title { font-weight: 700; color: #ec4899; margin-bottom: 5px; font-size: 0.9rem; }
+    
+    /* Nuovi stili pulsanti e PDF */
+    .tabs-container { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 30px; }
+    .tab-btn { padding: 10px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(236, 72, 153, 0.3); border-radius: 8px; color: #e2e8f0; cursor: pointer; font-weight: 500; transition: all 0.3s ease; backdrop-filter: blur(5px); text-decoration: none; font-size: 0.9rem; }
+    .tab-btn:hover, .tab-btn.active { background: #ec4899; border-color: #ec4899; color: #fff; box-shadow: 0 0 15px rgba(236, 72, 153, 0.4); }
+    
+    .yt-btn { display: inline-flex; align-items: center; gap: 8px; background: #ff0000; color: #fff; padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: transform 0.2s; }
+    .yt-btn:hover { transform: scale(1.05); background: #cc0000; }
+    
+    .pdf-container { width: 100%; height: 75vh; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 1px solid rgba(255, 255, 255, 0.1); background: #fff; }
+    .materiali-box { margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(255,255,255,0.1); }
+    .materiali-box h4 { margin-bottom: 15px; color: #fff; display: flex; align-items: center; gap: 8px; }
+
+    /* Colori temi */
+    .s-retta { border-top: 5px solid #3b82f6; }
+    .s-retta .scheda-header { background: rgba(59, 130, 246, 0.2); }
+    .s-parabola { border-top: 5px solid #ef4444; }
+    .s-parabola .scheda-header { background: rgba(239, 68, 68, 0.2); }
+    .s-circo { border-top: 5px solid #10b981; }
+    .s-circo .scheda-header { background: rgba(16, 185, 129, 0.2); }
+    .s-ellisse { border-top: 5px solid #f59e0b; }
+    .s-ellisse .scheda-header { background: rgba(245, 158, 11, 0.2); }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div style="display:flex; align-items:center;">
+      <a href="index.html" class="nav-brand">Portale Didattico <span style="color:#fff;font-size:0.8rem;display:block;">Prof. Belardi Nicolino</span></a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">🏠 Portale</a>
+      <a href="matematica.html">📐 Matematica</a>
+      <a href="geometria_analitica.html" class="active">📍 Geometria Analitica</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="header-section">
+      <h1>📍 Rette, Parabole, Circonferenze, Ellisse</h1>
+      <p>Guida completa allo studio delle curve nel piano cartesiano. Definizioni, equazioni fondamentali e proprietà geometriche.</p>
+      <div style="display:inline-block; background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.4); border-radius:8px; padding:6px 14px; font-size:0.8rem; color:#f9a8d4; margin-top:10px; font-weight:600; letter-spacing:0.5px;">📋 Scheda Didattica — Prof. Belardi Nicolino</div>
+      
+      <!-- Pulsanti Materiali -->
+      <div class="tabs-container" style="margin-top: 30px;">
+        <a href="#retta" class="tab-btn">Retta</a>
+        <a href="#parabola" class="tab-btn">Parabola</a>
+        <a href="#circonferenza" class="tab-btn active">Circonferenza</a>
+        <a href="#ellisse" class="tab-btn">Ellisse e Iperbole</a>
+      </div>
+    </div>
+
+    <!-- SEZIONE 1: LA RETTA -->
+    <div id="retta" class="scheda s-retta">
+      <div class="scheda-header" style="justify-content: space-between;">
+        <div style="display:flex; align-items:center; gap:10px;">📏 La Retta nel Piano</div>
+        <a href="https://www.youtube.com/playlist?list=PL-pHwZ1wZBqOj9DVWNphxeRPWw11EvlMI" target="_blank" class="yt-btn">
+          <span style="font-size: 1.2rem;">📺</span> Video Lezioni
+        </a>
+      </div>
+      <div class="scheda-body">
+        <p>La retta è il luogo geometrico dei punti che soddisfano un'equazione di primo grado in due variabili.</p>
+        
+        <div class="prop-grid">
+          <div class="prop-card">
+            <div class="prop-title">Equazione Implicita</div>
+            \[ax + by + c = 0\]
+          </div>
+          <div class="prop-card">
+            <div class="prop-title">Equazione Esplicita</div>
+            \[y = mx + q\]
+            <p style="font-size:0.8rem; margin-top:5px;">\(m\): coefficiente angolare<br>\(q\): ordinata all'origine</p>
+          </div>
+        </div>
+        
+        <div class="formula-box">
+          <strong>Distanza punto-retta:</strong> 
+          \[d = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 + b^2}}\]
+        </div>
+
+        <div class="materiali-box" style="margin-top: 30px;">
+          <h4 style="margin-bottom: 15px;">📄 Dispense e Esercizi: La Retta</h4>
+          <div class="pdf-container">
+            <embed src="La retta nel piano cartesiano.pdf" type="application/pdf" width="100%" height="100%" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEZIONE 2: LA PARABOLA -->
+    <div id="parabola" class="scheda s-parabola">
+      <div class="scheda-header" style="justify-content: space-between;">
+        <div style="display:flex; align-items:center; gap:10px;">🎢 La Parabola</div>
+        <a href="https://www.youtube.com/playlist?list=PL-pHwZ1wZBqPHl0sN-lxACW4WuCfyPais" target="_blank" class="yt-btn">
+          <span style="font-size: 1.2rem;">📺</span> Video Lezioni
+        </a>
+      </div>
+      <div class="scheda-body">
+        <p>Luogo geometrico dei punti equidistanti da un punto fisso (fuoco) e da una retta fissa (direttrice).</p>
+        
+        <div class="formula-box">
+          <strong>Equazione standard (asse verticale):</strong>
+          \[y = ax^2 + bx + c\]
+        </div>
+
+        <div class="prop-grid">
+          <div class="prop-card">
+            <div class="prop-title">Vertice \(V\)</div>
+            \[V\left(-\frac{b}{2a}, -\frac{\Delta}{4a}\right)\]
+          </div>
+          <div class="prop-card">
+            <div class="prop-title">Fuoco \(F\)</div>
+            \[F\left(-\frac{b}{2a}, \frac{1-\Delta}{4a}\right)\]
+          </div>
+          <div class="prop-card">
+            <div class="prop-title">Direttrice</div>
+            \[y = -\frac{1+\Delta}{4a}\]
+          </div>
+        </div>
+
+        <div class="materiali-box" style="margin-top: 30px;">
+          <h4 style="margin-bottom: 15px;">📄 Dispense e Esercizi: La Parabola</h4>
+          <div class="pdf-container">
+            <embed src="parabola.pdf" type="application/pdf" width="100%" height="100%" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEZIONE 3: LA CIRCONFERENZA -->
+    <div id="circonferenza" class="scheda s-circo">
+      <div class="scheda-header" style="justify-content: space-between;">
+        <div style="display:flex; align-items:center; gap:10px;">⭕ La Circonferenza</div>
+        <a href="https://www.youtube.com/playlist?list=PL-pHwZ1wZBqORfK0qlhccZLNF6_ymqDws" target="_blank" class="yt-btn">
+          <span style="font-size: 1.2rem;">📺</span> Video Lezioni
+        </a>
+      </div>
+      <div class="scheda-body">
+        <p>Luogo geometrico dei punti equidistanti da un punto fisso detto Centro.</p>
+        
+        <div class="formula-box">
+          <strong>Equazione canonica:</strong>
+          \[x^2 + y^2 + ax + by + c = 0\]
+        </div>
+
+        <div class="prop-grid">
+          <div class="prop-card">
+            <div class="prop-title">Centro \(C\)</div>
+            \[C\left(-\frac{a}{2}, -\frac{b}{2}\right)\]
+          </div>
+          <div class="prop-card">
+            <div class="prop-title">Raggio \(r\)</div>
+            \[r = \sqrt{\left(\frac{a}{2}\right)^2 + \left(\frac{b}{2}\right)^2 - c}\]
+          </div>
+        </div>
+
+        <div class="materiali-box" style="margin-top: 30px;">
+          <h4 style="margin-bottom: 15px;">📄 Dispense e Esercizi: La Circonferenza</h4>
+          <div class="pdf-container">
+            <embed src="circonferenza.pdf" type="application/pdf" width="100%" height="100%" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEZIONE 4: L'ELLISSE E L'IPERBOLE -->
+    <div id="ellisse" class="scheda s-ellisse">
+      <div class="scheda-header">🌐 Ellisse e Iperbole</div>
+      <div class="scheda-body">
+        <div class="prop-grid">
+          <div>
+            <h4 style="color:#f59e0b; margin-bottom:10px;">L'Ellisse</h4>
+            <div class="prop-card">
+              \[\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1\]
+              <p style="font-size:0.8rem; margin-top:5px;">Somma delle distanze dai fuochi costante.</p>
+            </div>
+          </div>
+          <div>
+            <h4 style="color:#f59e0b; margin-bottom:10px;">L'Iperbole</h4>
+            <div class="prop-card">
+              \[\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1\]
+              <p style="font-size:0.8rem; margin-top:5px;">Differenza delle distanze dai fuochi costante.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="materiali-box">
+          <h4>📁 Materiali Ellisse e Iperbole</h4>
+          <p style="font-size: 0.9rem; color: #94a3b8;">Prossimamente verranno caricati i PDF e le esercitazioni.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Gestione stile pulsanti attivi durante lo scroll
+    window.addEventListener('scroll', () => {
+      let current = "";
+      const sections = document.querySelectorAll('.scheda');
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 120) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('href').includes(current)) {
+          btn.classList.add('active');
+        }
+      });
+    });
+  </script>
