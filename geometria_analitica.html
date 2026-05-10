@@ -54,16 +54,14 @@
 
   <div class="container">
     <div class="header-section">
-      <h1>📍 Rette, Parabole, Circonferenze, Ellisse</h1>
+      <h1>📍 Geometria Analitica</h1>
       <p>Guida completa allo studio delle curve nel piano cartesiano. Definizioni, equazioni fondamentali e proprietà geometriche.</p>
       <div style="display:inline-block; background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.4); border-radius:8px; padding:6px 14px; font-size:0.8rem; color:#f9a8d4; margin-top:10px; font-weight:600; letter-spacing:0.5px;">📋 Scheda Didattica — Prof. Belardi Nicolino</div>
       
-      <!-- Pulsanti Materiali -->
+      <!-- Pulsanti Navigazione Principale -->
       <div class="tabs-container" style="margin-top: 30px;">
-        <a href="#retta" class="tab-btn">Retta</a>
-        <a href="#parabola" class="tab-btn">Parabola</a>
-        <a href="#circonferenza" class="tab-btn active">Circonferenza</a>
-        <a href="#ellisse" class="tab-btn">Ellisse e Iperbole</a>
+        <a href="#retta" class="tab-btn active">📏 La Retta</a>
+        <a href="#coniche" class="tab-btn">🎢 Le Coniche</a>
       </div>
     </div>
 
@@ -104,106 +102,179 @@
       </div>
     </div>
 
-    <!-- SEZIONE 2: LA PARABOLA -->
-    <div id="parabola" class="scheda s-parabola">
-      <div class="scheda-header" style="justify-content: space-between;">
-        <div style="display:flex; align-items:center; gap:10px;">🎢 La Parabola</div>
-        <a href="https://www.youtube.com/playlist?list=PL-pHwZ1wZBqPHl0sN-lxACW4WuCfyPais" target="_blank" class="yt-btn">
-          <span style="font-size: 1.2rem;">📺</span> Video Lezioni
-        </a>
+    <!-- SEZIONE 2: LE CONICHE -->
+    <div id="coniche" class="scheda" style="border-top: 5px solid #ec4899;">
+      <div class="scheda-header" style="background: rgba(236, 72, 153, 0.2);">
+        <div style="display:flex; align-items:center; gap:10px;">🎢 Le Coniche</div>
       </div>
       <div class="scheda-body">
-        <p>Luogo geometrico dei punti equidistanti da un punto fisso (fuoco) e da una retta fissa (direttrice).</p>
-        
-        <div class="formula-box">
-          <strong>Equazione standard (asse verticale):</strong>
-          \[y = ax^2 + bx + c\]
-        </div>
-
-        <div class="prop-grid">
-          <div class="prop-card">
-            <div class="prop-title">Vertice \(V\)</div>
-            \[V\left(-\frac{b}{2a}, -\frac{\Delta}{4a}\right)\]
-          </div>
-          <div class="prop-card">
-            <div class="prop-title">Fuoco \(F\)</div>
-            \[F\left(-\frac{b}{2a}, \frac{1-\Delta}{4a}\right)\]
-          </div>
-          <div class="prop-card">
-            <div class="prop-title">Direttrice</div>
-            \[y = -\frac{1+\Delta}{4a}\]
+        <!-- Introduzione Generale Coniche -->
+        <div style="margin-bottom: 30px;">
+          <p>
+            Le <strong>coniche</strong> (circonferenza, parabola, ellisse, iperbole) sono curve piane ottenute intersecando un cono a due falde con un piano. 
+            Analiticamente sono rappresentabili da equazioni di secondo grado: \[ax^2 + bxy + cy^2 + dx + ey + f = 0\]
+            La loro forma dipende dall'inclinazione del piano rispetto all'asse del cono, generando figure <strong>chiuse</strong> (ellisse, circonferenza) o <strong>aperte</strong> (parabola, iperbole).
+          </p>
+          
+          <div class="formula-box" style="border-left-color: #ec4899; background: rgba(236, 72, 153, 0.1);">
+            <h4 style="color: #f9a8d4; margin-bottom: 10px;">💡 Esempio Pratico: La Torcia (Pila)</h4>
+            <p>Un modo semplice per visualizzare le coniche è proiettare il cono di luce di una torcia su una superficie piana:</p>
+            <ul style="list-style: none; padding-left: 0; font-size: 0.9rem;">
+              <li style="margin-bottom: 5px;">⭕ <strong>Circonferenza:</strong> Tieni la pila perfettamente perpendicolare al muro.</li>
+              <li style="margin-bottom: 5px;">🥚 <strong>Ellisse:</strong> Inclina leggermente la pila; il cerchio si allunga.</li>
+              <li style="margin-bottom: 5px;">🎢 <strong>Parabola:</strong> Inclina la pila finché il bordo del cono di luce è parallelo al muro.</li>
+              <li style="margin-bottom: 5px;">✖️ <strong>Iperbole:</strong> Inclina la pila in modo ancora più netto, intersecando quasi due superfici.</li>
+            </ul>
           </div>
         </div>
 
-        <div class="materiali-box" style="margin-top: 30px;">
-          <h4 style="margin-bottom: 15px;">📄 Dispense e Esercizi: La Parabola</h4>
-          <div class="pdf-container">
-            <embed src="parabola.pdf" type="application/pdf" width="100%" height="100%" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SEZIONE 3: LA CIRCONFERENZA -->
-    <div id="circonferenza" class="scheda s-circo">
-      <div class="scheda-header" style="justify-content: space-between;">
-        <div style="display:flex; align-items:center; gap:10px;">⭕ La Circonferenza</div>
-        <a href="https://www.youtube.com/playlist?list=PL-pHwZ1wZBqORfK0qlhccZLNF6_ymqDws" target="_blank" class="yt-btn">
-          <span style="font-size: 1.2rem;">📺</span> Video Lezioni
-        </a>
-      </div>
-      <div class="scheda-body">
-        <p>Luogo geometrico dei punti equidistanti da un punto fisso detto Centro.</p>
-        
-        <div class="formula-box">
-          <strong>Equazione canonica:</strong>
-          \[x^2 + y^2 + ax + by + c = 0\]
+        <!-- Sotto-navigazione Coniche -->
+        <div class="tabs-container" style="justify-content: flex-start; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">
+          <button onclick="showConica('parabola-content', this)" class="tab-btn active">Parabola</button>
+          <button onclick="showConica('circonferenza-content', this)" class="tab-btn">Circonferenza</button>
+          <button onclick="showConica('ellisse-content', this)" class="tab-btn">Ellisse</button>
+          <button onclick="showConica('iperbole-content', this)" class="tab-btn">Iperbole</button>
         </div>
 
-        <div class="prop-grid">
-          <div class="prop-card">
-            <div class="prop-title">Centro \(C\)</div>
-            \[C\left(-\frac{a}{2}, -\frac{b}{2}\right)\]
-          </div>
-          <div class="prop-card">
-            <div class="prop-title">Raggio \(r\)</div>
-            \[r = \sqrt{\left(\frac{a}{2}\right)^2 + \left(\frac{b}{2}\right)^2 - c}\]
-          </div>
-        </div>
-
-        <div class="materiali-box" style="margin-top: 30px;">
-          <h4 style="margin-bottom: 15px;">📄 Dispense e Esercizi: La Circonferenza</h4>
-          <div class="pdf-container">
-            <embed src="circonferenza.pdf" type="application/pdf" width="100%" height="100%" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SEZIONE 4: L'ELLISSE E L'IPERBOLE -->
-    <div id="ellisse" class="scheda s-ellisse">
-      <div class="scheda-header">🌐 Ellisse e Iperbole</div>
-      <div class="scheda-body">
-        <div class="prop-grid">
-          <div>
-            <h4 style="color:#f59e0b; margin-bottom:10px;">L'Ellisse</h4>
-            <div class="prop-card">
-              \[\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1\]
-              <p style="font-size:0.8rem; margin-top:5px;">Somma delle distanze dai fuochi costante.</p>
+        <!-- CONTENUTO: PARABOLA -->
+        <div id="parabola-content" class="conica-section">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <h3 style="color: #ef4444;">🎢 La Parabola</h3>
+            <div style="display: flex; gap: 10px;">
+              <a href="https://www.youtube.com/watch?v=wKyuoH7Kuac&t=63" target="_blank" class="yt-btn">📺 Video Intro</a>
+              <a href="https://www.youtube.com/watch?v=nZVCgYjj7uU" target="_blank" class="yt-btn">📺 Coniche nel quotidiano</a>
             </div>
           </div>
-          <div>
-            <h4 style="color:#f59e0b; margin-bottom:10px;">L'Iperbole</h4>
+
+          <p>La parabola è definita come il luogo geometrico dei punti equidistanti da un punto fisso (\(F\), Fuoco) e da una retta (\(d\), Direttrice).</p>
+
+          <div class="prop-grid">
             <div class="prop-card">
-              \[\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1\]
-              <p style="font-size:0.8rem; margin-top:5px;">Differenza delle distanze dai fuochi costante.</p>
+              <div class="prop-title">Le Quattro Coniche Fondamentali</div>
+              <p style="font-size: 0.85rem;">Si ottiene quando il piano è parallelo a una generatrice del cono.</p>
+            </div>
+            <div class="prop-card">
+              <div class="prop-title">Equazione Canonica</div>
+              \[y = ax^2 + bx + c\]
+              <p style="font-size: 0.75rem; opacity: 0.8;">(oppure \(x = ay^2 + by + c\))</p>
+            </div>
+          </div>
+
+          <div style="margin-top: 25px;">
+            <h4 style="color: #ef4444; margin-bottom: 15px;">📐 Formule Principali</h4>
+            <div class="prop-grid">
+              <div class="prop-card">
+                <div class="prop-title">Vertice \(V\)</div>
+                \[V\left(-\frac{b}{2a}; -\frac{\Delta}{4a}\right)\]
+              </div>
+              <div class="prop-card">
+                <div class="prop-title">Fuoco \(F\)</div>
+                \[F\left(-\frac{b}{2a}; \frac{1-\Delta}{4a}\right)\]
+              </div>
+              <div class="prop-card">
+                <div class="prop-title">Direttrice</div>
+                \[y = -\frac{1+\Delta}{4a}\]
+              </div>
+              <div class="prop-card">
+                <div class="prop-title">Asse di Simmetria</div>
+                \[x = -\frac{b}{2a}\]
+              </div>
+            </div>
+          </div>
+
+          <!-- ESEMPIO SVOLTO -->
+          <div class="formula-box" style="margin-top: 30px; border-left-color: #ef4444;">
+            <h4 style="color: #ef4444; margin-bottom: 10px;">📝 Esempio Pratico</h4>
+            <p>Studiamo la parabola di equazione: <strong>\(y = -x^2 + 2x + 3\)</strong></p>
+            <div style="font-size: 0.9rem; margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div>
+                <strong>1. Coefficienti:</strong><br>
+                \(a = -1, b = 2, c = 3\)<br>
+                \(\Delta = 2^2 - 4(-1)(3) = 4 + 12 = 16\)
+              </div>
+              <div>
+                <strong>2. Vertice \(V\):</strong><br>
+                \(x_V = -\frac{2}{-2} = 1\)<br>
+                \(y_V = -\frac{16}{-4} = 4 \implies V(1, 4)\)
+              </div>
+              <div>
+                <strong>3. Fuoco \(F\):</strong><br>
+                \(x_F = 1\)<br>
+                \(y_F = \frac{1-16}{-4} = 3.75 \implies F(1, 3.75)\)
+              </div>
+              <div>
+                <strong>4. Direttrice e Asse:</strong><br>
+                \(d: y = -\frac{17}{-4} = 4.25\)<br>
+                Asse: \(x = 1\)
+              </div>
+              <div>
+                <strong>5. Intersezioni:</strong><br>
+                Asse \(y\): \((0, 3)\)<br>
+                Asse \(x\): \((3, 0)\) e \((-1, 0)\)
+              </div>
+            </div>
+          </div>
+
+          <div class="materiali-box" style="margin-top: 30px;">
+            <h4 style="margin-bottom: 15px;">📄 Dispense: La Parabola</h4>
+            <div class="pdf-container">
+              <embed src="parabola.pdf" type="application/pdf" width="100%" height="100%" />
             </div>
           </div>
         </div>
 
-        <div class="materiali-box">
-          <h4>📁 Materiali Ellisse e Iperbole</h4>
-          <p style="font-size: 0.9rem; color: #94a3b8;">Prossimamente verranno caricati i PDF e le esercitazioni.</p>
+        <!-- CONTENUTO: CIRCONFERENZA -->
+        <div id="circonferenza-content" class="conica-section" style="display: none;">
+          <h3 style="color: #10b981; margin-bottom: 20px;">⭕ La Circonferenza</h3>
+          <p>Luogo geometrico dei punti equidistanti da un centro \(C\). Si ottiene quando il piano è perpendicolare all'asse del cono.</p>
+          
+          <div class="formula-box" style="border-left-color: #10b981;">
+            <strong>Equazione Canonica:</strong>
+            \[x^2 + y^2 + ax + by + c = 0\]
+            <p style="font-size: 0.8rem; margin-top: 5px;">(con \(a^2+b^2-4c>0\))</p>
+          </div>
+
+          <div class="prop-grid">
+            <div class="prop-card">
+              <div class="prop-title">Centro \(C\)</div>
+              \[C\left(-\frac{a}{2}, -\frac{b}{2}\right)\]
+            </div>
+            <div class="prop-card">
+              <div class="prop-title">Raggio \(r\)</div>
+              \[r = \sqrt{\left(\frac{a}{2}\right)^2 + \left(\frac{b}{2}\right)^2 - c}\]
+            </div>
+          </div>
+
+          <div class="materiali-box" style="margin-top: 30px;">
+            <h4 style="margin-bottom: 15px;">📄 Dispense: La Circonferenza</h4>
+            <div class="pdf-container">
+              <embed src="circonferenza.pdf" type="application/pdf" width="100%" height="100%" />
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTENUTO: ELLISSE -->
+        <div id="ellisse-content" class="conica-section" style="display: none;">
+          <h3 style="color: #f59e0b; margin-bottom: 20px;">🥚 L'Ellisse</h3>
+          <p>Luogo dei punti per cui è costante la somma delle distanze da due fuochi. Si forma quando il piano è meno inclinato rispetto alla generatrice.</p>
+          
+          <div class="formula-box" style="border-left-color: #f59e0b;">
+            <strong>Equazione Canonica:</strong>
+            \[\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1\]
+          </div>
+          <p style="font-size: 0.9rem; color: #94a3b8;">Materiali e approfondimenti in arrivo.</p>
+        </div>
+
+        <!-- CONTENUTO: IPERBOLE -->
+        <div id="iperbole-content" class="conica-section" style="display: none;">
+          <h3 style="color: #3b82f6; margin-bottom: 20px;">✖️ L'Iperbole</h3>
+          <p>Luogo dei punti per cui è costante la differenza delle distanze da due fuochi. Si genera quando il piano è più inclinato della generatrice.</p>
+          
+          <div class="formula-box" style="border-left-color: #3b82f6;">
+            <strong>Equazione Canonica:</strong>
+            \[\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1\]
+          </div>
+          <p style="font-size: 0.9rem; color: #94a3b8;">Materiali e approfondimenti in arrivo.</p>
         </div>
       </div>
     </div>
@@ -211,7 +282,24 @@
   </div>
 
   <script>
-    // Gestione stile pulsanti attivi durante lo scroll
+    // Funzione per mostrare le sottosezioni delle coniche
+    function showConica(contentId, btn) {
+      // Nascondi tutti i contenuti
+      document.querySelectorAll('.conica-section').forEach(sec => {
+        sec.style.display = 'none';
+      });
+      // Mostra quello selezionato
+      document.getElementById(contentId).style.display = 'block';
+      
+      // Rimuovi active dai pulsanti del contenitore corrente
+      btn.parentElement.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+      });
+      // Aggiungi active al pulsante cliccato
+      btn.classList.add('active');
+    }
+
+    // Gestione stile pulsanti attivi durante lo scroll (Nav principale)
     window.addEventListener('scroll', () => {
       let current = "";
       const sections = document.querySelectorAll('.scheda');
@@ -222,11 +310,16 @@
         }
       });
 
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('href').includes(current)) {
-          btn.classList.add('active');
-        }
-      });
+      // Aggiorna solo i pulsanti della navigazione principale
+      const headerSection = document.querySelector('.header-section');
+      if (headerSection) {
+        headerSection.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.classList.remove('active');
+          if (btn.getAttribute('href').includes(current)) {
+            btn.classList.add('active');
+          }
+        });
+      }
     });
   </script>
+
